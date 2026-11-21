@@ -13,7 +13,7 @@ import {
 export function parse(argv) {
   const words = [],
     options = {},
-    flags = new Set(['sandbox', 'hard', 'deep', 'all-ready', 'rows']);
+    flags = new Set(['sandbox', 'hard', 'deep', 'all-ready', 'rows', 'apply', 'cancel-legacy']);
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg.startsWith('--')) {

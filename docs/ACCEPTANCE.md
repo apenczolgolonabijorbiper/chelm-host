@@ -1,3 +1,46 @@
+# Implementation and verification status — 1.0.0
+
+The owner-hosted remote MCP replacement is implemented on the development branch.
+It targets exact harness **0.10.0**, manifest SHA-256
+`0c4ba9f35e24df0887ceb27457d118b5e4829acef401242cb6818a3034f95031`.
+Worker/runtime configuration contracts are v2; application/read-model remain v1.
+
+Observed on Linux / Node 24 / Python 3.12 during implementation:
+
+- The staged release build passed all **44 Chelm checks** and all **11 harness
+  backend conformance cases**, including purpose-guidance-v2 and profile-install-v1.
+- The staged package includes locked runtime dependencies and passed installer
+  integrity/idempotence/deferred-registration and service-identity smoke checks.
+- Remote tests cover official SDK Streamable HTTP operation, an independent Node
+  stdio bridge process, principal/runtime authorization, JWT signature/issuer/
+  audience/scope/expiry checks, source/policy drift, finalized upload revisions,
+  no-filesystem client cognition fixture, concurrent disjoint analysis, remote
+  integration review, post-CAS receipt recovery, named record-conflict refusal and legacy cutover.
+- Prompts are checked against actual tool names; generic unattended runner prompt
+  delivery is tested with a deterministic external Node process.
+- Local NFR-4 medians from the first successful 1.0 staged build: submit 113 ms,
+  ask 187 ms, status 78 ms. This is an empty-memory synthetic local benchmark,
+  with the documented validator/indexer exclusions, not remote inference speed.
+
+Additional adversarial tests and any later per-build timing are authoritative in
+CI output. No language model was invoked in these synthetic fixtures; model and
+provider quality/latency are not established by them.
+
+External acceptance still required:
+
+- Windows/macOS and Node 22.12 platform results from this branch's CI.
+- Actual Windows Server 2022 IIS HTTPS/ARR proxy deployment of the new MCP service
+  (the existing app-pool subprocess probe is a different check).
+- Two physical machines and your selected IDE/agent CLI with live inference,
+  credentials, issuer/client registration and unattended approval policy.
+- Capacity-scale remote payload, context/token cost and inference measurements.
+
+Configuration and prompts are shipped in docs/REMOTE_WORKERS.md and prompts/.
+No consuming application, private runtime or live server was modified by this work.
+The old records below are historical evidence, not 1.0 platform verification.
+
+---
+
 # Implementation and verification status — 0.2.0
 
 ## VF alignment evidence

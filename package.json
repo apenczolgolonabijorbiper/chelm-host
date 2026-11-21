@@ -1,6 +1,6 @@
 {
   "name": "chelm-host",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -12,7 +12,14 @@
   },
   "bin": {
     "chelm": "bin/chelm.mjs",
-    "chelm-mcp": "bin/chelm-mcp.mjs"
+    "chelm-mcp": "bin/chelm-mcp.mjs",
+    "chelm-serve": "bin/chelm-serve.mjs",
+    "chelm-remote-mcp": "bin/chelm-remote-mcp.mjs"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "jose": "6.2.18",
+    "zod": "4.3.6"
+  }
 }

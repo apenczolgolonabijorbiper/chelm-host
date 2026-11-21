@@ -168,7 +168,7 @@ export function analyze(f, unit, {
   f.write('memory/graph.json', graph);
   f.write(unit.journal_path,
     `# Synthetic cycle\nStarted: ${unit.claimed_at}\nSources reviewed. No language model used. Warnings reviewed: none.\nUnresolved alternatives: none.\nVerification: harness candidate validation.\n` +
-    (unit.guidance ? 'guidance_version: ' + unit.guidance.guidance_identity + '\n' : ''));
+    (unit.guidance ? 'guidance_version: ' + (unit.guidance.guidance_identity ?? unit.guidance_identity) + '\n' : ''));
 }
 export function git(root, ...args) {
   const r = spawnSync('git', ['-C', root, ...args], {

@@ -1,3 +1,5 @@
+> Historical Chelm 0.2 design. Remote-worker, delegation and runtime configuration sections are superseded by [REMOTE_WORKER_CONTRACT.md](REMOTE_WORKER_CONTRACT.md) and [REMOTE_WORKERS.md](REMOTE_WORKERS.md).
+
 # Chelm-host: design specification
 
 | | |

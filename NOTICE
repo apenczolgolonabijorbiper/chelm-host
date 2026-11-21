@@ -1,6 +1,6 @@
-Chelm-host 0.1.0
+Chelm-host 1.0.0
 The Git backend and profile snapshot support are adapted from golem14-harness
-v0.9.1 by apenczolgolonabijorbiper, licensed under Apache-2.0.
+v0.10.0 by apenczolgolonabijorbiper, licensed under Apache-2.0.
 https://github.com/apenczolgolonabijorbiper/golem14-harness
 Modifications are identified in the affected files. Harness validation, indexing,
 retrieval and statistics remain external CLI operations.

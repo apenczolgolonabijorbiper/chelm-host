@@ -97,7 +97,7 @@ try {
       cpus: os.cpus().length,
       node: process.version
     },
-    harness_version: '0.9.1',
+    harness_version: '0.10.0',
     fixture: 'Fresh canonical empty memory; submit 10 synthetic groups, ask once, then status per sample.',
     method: 'Wall time includes CLI startup. NFR-4 excludes measured indexer/validator children; ask retains retrieval time. This is not a capacity benchmark or reference-consumer measurement.',
     commands

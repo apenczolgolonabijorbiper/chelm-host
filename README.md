@@ -1,23 +1,23 @@
 # Chelm-host
 
-Chelm-host is where the Golem lives: a dependency-free local host for
+Chelm-host is where the Golem lives: a local and remote-worker host for
 [Golem XIV Harness](https://github.com/apenczolgolonabijorbiper/golem14-harness).
-Version **0.2.0** implements app, worker, read-model, runtime and delegation
-contracts at version 1, against **harness 0.9.1 exactly**.
+Version **1.0.0** supports **harness 0.10.0 exactly**. App/read-model contracts
+remain v1; worker and runtime configuration contracts are v2.
 
 It supplies intake, conversation records, committed memory views, transactional
-Git processing, worker CLI/MCP, shared-folder delegation, source transfer, request
+Git processing, local worker CLI/MCP, owner-hosted remote MCP workers, source transfer, request
 approval records and runtime administration. It never invokes a language model
 or runs a background scheduler. Executors perform the analysis.
 
 ## Requirements
 
-Node >=22.12, Python >=3.12, Git. No npm/pip installation. Windows, Linux and macOS
+Node >=22.12, Python >=3.12, Git. Release ZIPs include locked Node dependencies. Source checkouts use `npm ci --ignore-scripts`; no pip installation. Windows, Linux and macOS
 are CI targets. Use the same OS identity for a lease owner across worker calls.
 
 ## Install and initialize
 
-Download chelm-host-0.2.0.zip and its adjacent checksum from Releases. Check the
+Download chelm-host-1.0.0.zip and its adjacent checksum from Releases. Check the
 checksum before extraction. Install from the clean extracted chelm-host folder:
 
 ```sh
@@ -62,18 +62,24 @@ never appear there. Each view records its HEAD and generation time. Warnings and
 capacity have a separate metrics timestamp and refresh after commits or refresh.
 Call refresh explicitly after out-of-band instance changes.
 
-## Workers and delegation
+## Local and remote workers
 
-Read [AGENTS.md](AGENTS.md) and [worker contract](docs/CONTRACT_WORKER.md).
-MCP stdio: `node bin/chelm-mcp.mjs --runtime /private/runtime`.
+Local agents use the CLI or stdio MCP server and the [local worker contract](docs/CONTRACT_WORKER.md).
+Remote agents connect to Machine A's authenticated Streamable HTTP MCP endpoint,
+request work, retrieve content, run their own inference and return candidates.
+Chelm validates and publishes on the owner; a shared folder and manual adoption
+are not needed. Remote machines need only MCP and inference access.
 
-Delegation is opt-in in chelm.runtime.json: set delegation.enabled, share_root and
-participants (allowed OS user names). Restrict share ACLs to those participants:
-every offer contains the runtime's full committed memory. Offer up to 20 ready
-observations, take on the executor's machine, process in the returned sandbox,
-return, then adopt on the original runtime. Packages are immutable files and local
-Git bundles, never live shared repositories. A moved head is merged by record ID;
-conflicting summaries need an explicit local integrate work unit.
+Start the owner service with `node bin/chelm-serve.mjs --config service.json`.
+Follow [remote setup](docs/REMOTE_WORKERS.md) for configuration, IIS reverse proxy,
+client credentials, the optional stdio bridge and unattended execution. Use the
+[single-cycle SudoLang prompt](prompts/remote-worker-once.sudo.md),
+[loop prompt](prompts/remote-worker-loop.sudo.md) and
+[integration prompt](prompts/remote-integration.sudo.md).
+
+The old shared-folder delegation operations are removed in 1.0. See the setup
+guide's cutover preflight before replacing 0.2 installations. No harness instance
+reset is required for canonical supported memory.
 
 ## Administration
 
@@ -81,10 +87,13 @@ Use adopt for an existing canonical instance; older layouts/graph schemas must b
 archived and initialized fresh. reset --scope instance archives state and preserves
 valid guidance. Held leases block administrative changes. Upgrade with installer
 --upgrade after pausing executors, then verify. No runtime migration is needed for
-this first release. Later harness versions are refused until explicitly tested.
+this first release. Other harness releases are refused until explicitly tested.
+
+For 0.2 -> 1.0, run the explicit cutover preflight/apply described in the remote
+setup guide before runtime verification. Keep canonical memory intact.
 
 See [app contract](docs/CONTRACT_APP.md), [runtime layout](docs/RUNTIME.md),
-[read views](docs/READ_MODEL.md), [delegation](docs/DELEGATION.md),
+[read views](docs/READ_MODEL.md), [remote worker contract](docs/REMOTE_WORKER_CONTRACT.md),
 [harness integration](docs/HARNESS_INTEGRATION.md), [design](docs/CHELM_HOST_DESIGN.md),
 [acceptance status](docs/ACCEPTANCE.md) and [release notes](docs/RELEASE_NOTES.md).
 
@@ -98,13 +107,13 @@ python3 tools/build-release.py --harness /path/to/golem-harness
 ```
 
 The builder runs all Chelm tests and applicable harness backend conformance before
-creating dist/chelm-host-0.2.0.zip and its .sha256. Releases have one chelm-host/
+creating dist/chelm-host-1.0.0.zip and its .sha256. Releases have one chelm-host/
 folder and an exhaustive RELEASE.json. GitHub Actions performs the same checks
 on Windows, Linux and macOS; a v* tag publishes the validated ZIP and checksum.
 
 Apache-2.0; see [NOTICE](NOTICE) for the backend's harness ancestry.
 
-## Consumer alignment in 0.2.0
+## Prior consumer alignment (0.2.0 history)
 
 This release switches to harness 0.9.1 and its optimized reference Git backend
 and native merge. See [compatibility.json](compatibility.json) and the release

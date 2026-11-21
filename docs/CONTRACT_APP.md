@@ -118,3 +118,5 @@ chunk: <i>/<n>                          (for every group chunk, including 1/1)
 - New refusals: subject_required, subject_conflict, profile_invalid, profile_dirty,
   profile_mismatch. Missing expected profiles produce matches:false in checks and
   profile_mismatch in an enforced worker next.
+
+Explicit `chunks` preserve their boundaries. Each chunk is subject to the same configured or per-group `max_chars` and `oversize` as a line: `refuse` rejects the whole submission before writes; `truncate` retains the first `max_chars - 4` UTF-16 code units followed by `" ..."`. CRLF is normalized before measuring. Option values are validated for both input forms.

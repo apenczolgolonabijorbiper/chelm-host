@@ -1,6 +1,8 @@
+For remote service configuration and cutover from schema 1 see [REMOTE_WORKERS.md](REMOTE_WORKERS.md).
+
 # Runtime
 
-Chelm-host 0.2.0 implements contract version 1. The following requirements are
+Chelm-host 1.0.0 uses runtime configuration schema 2. Remote workers use contract v2. The following requirements are
 from design draft 0.2. See [implementation and verification status](ACCEPTANCE.md)
 for measured checks, platform checks awaiting CI, and deviations.
 
@@ -18,7 +20,7 @@ for measured checks, platform checks awaiting CI, and deviations.
     intake/registry.json        subject -> groups (APP-10)
     conversation/turns.jsonl    conversation (APP-20)
     requests/requests.json      follow-up requests (APP-50)
-    delegation/                 reservations.json, outgoing and incoming package records
+    remote/work/                durable assignments, snapshots, staging and receipts
     read-model/                 published views (section 10)
     state/verify.json           cached verify result (BND-1)
     locks/operation.lock        cross-process operation lock (NFR-6)
@@ -31,7 +33,7 @@ for measured checks, platform checks awaiting CI, and deviations.
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "runtime_id": "4b0f1f2e-6a52-4f7e-9d0e-1d2f3a4b5c6d",
   "label": "real",
   "sandbox": {"resettable": false},
@@ -40,7 +42,7 @@ for measured checks, platform checks awaiting CI, and deviations.
   "intake": {"subject_header": "subject_id", "max_observation_chars": 3500, "max_message_chars": 4000, "question_source": "chelm-conversation", "oversize": "truncate", "kind_sets": {}},
   "conversation": {"tail": 200},
   "requests": {"kinds": [], "max_open_proposed_per_subject": 20, "reason_max_chars": 300},
-  "delegation": {"enabled": false, "share_root": null, "reservation_hours": 8, "participants": []},
+  "remote": {"max_active_work": 1, "assignment_minutes": 30, "max_lifetime_minutes": 480},
   "archive": {"root": "archive"}
 }
 ```
