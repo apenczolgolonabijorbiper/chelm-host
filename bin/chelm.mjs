@@ -80,7 +80,7 @@ export async function run(argv) {
     };
   }
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(fs.realpathSync(process.argv[1])).href) {
   const result = await run(process.argv.slice(2));
   process.stdout.write(JSON.stringify(result.value) + '\n');
   process.exitCode = result.exit;

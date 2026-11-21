@@ -113,3 +113,16 @@ test('CON-1: CLI rejects duplicate/incomplete flags', () => {
   assert.throws(() => parse(['status', '--runtime']));
   assert.throws(() => parse(['status', '--runtime', 'a', '--runtime', 'b']));
 });
+
+test('CON-2: launching a CLI through an OS path alias still emits JSON', async t => {
+  const {spawnSync} = await import('node:child_process');
+  const {source} = await import('./helpers.mjs');
+  const base = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-entry-'));
+  t.after(() => fs.rmSync(base, {recursive:true, force:true}));
+  const alias = path.join(base, 'alias');
+  try { fs.symlinkSync(source, alias, 'dir'); }
+  catch (e) { if (e.code === 'EPERM') return; throw e; }
+  const r = spawnSync(process.execPath, [path.join(alias, 'bin/chelm.mjs'), 'version'], {encoding:'utf8'});
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(JSON.parse(r.stdout).package_version, '0.1.0');
+});

@@ -40,7 +40,7 @@ def build(harness, output=None):
     env = {**os.environ, 'CHELM_HARNESS_ROOT': str(harness),
            'GOLEM_PYTHON': os.environ.get('GOLEM_PYTHON', os.sys.executable)}
     with tempfile.TemporaryDirectory(prefix='chelm-release-') as directory:
-        stage = Path(directory) / 'chelm-host'
+        stage = (Path(directory) / 'chelm-host').resolve()
         for name, data in payload.items():
             target = stage / name
             target.parent.mkdir(parents=True, exist_ok=True)
