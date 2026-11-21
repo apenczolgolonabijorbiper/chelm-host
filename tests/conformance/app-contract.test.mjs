@@ -247,3 +247,26 @@ test('APP-10/34: opaque subject IDs cannot collide with JavaScript object protot
     assert.equal(ok('subject', subject, f.root).kinds.constructor.observed, 1);
   }
 });
+
+
+test('VI-016 explicit chunks enforce bounds and preflight the entire submission', t => {
+  const f = fixture(t);
+  const before = fs.readdirSync(path.join(f.instance, 'inbox'));
+  refuse('record_too_long', 'submit', null, f.root, {subject_id:'VI-016', groups:[
+    {kind:'record',chunks:['short']},
+    {kind:'record',chunks:['x'.repeat(4146)],max_chars:3500,oversize:'refuse'}]});
+  assert.deepEqual(fs.readdirSync(path.join(f.instance, 'inbox')), before);
+  assert.equal(JSON.parse(fs.readFileSync(path.join(f.root,'host/intake/registry.json')))['VI-016'], undefined);
+  const r=ok('submit',null,f.root,{groups:[{kind:'record',chunks:['x'.repeat(4146)],max_chars:3500,oversize:'truncate'}]});
+  const body=f.text('inbox/'+r.groups[0].observation_ids[0]+'.md').split('\n---\n')[1].trim();
+  assert.equal(body,'x'.repeat(3496)+' ...');
+  refuse('input_invalid','submit',null,f.root,{groups:[{kind:'record',chunks:['short'],max_chars:2}]});
+  refuse('input_invalid','submit',null,f.root,{groups:[{kind:'record',chunks:['short'],oversize:'ignore'}]});
+});
+
+test('VI-016 internal conversation intake preserves the entire accepted message',t=>{
+ const f=fixture(t),message='q'.repeat(4000);const result=ok('ask',null,f.root,{text:message});
+ assert.equal(f.text('inbox/'+result.observation_id+'.md').split('\n---\n')[1].trim(),message);
+ const p=path.join(f.root,'chelm.runtime.json'),cfg=JSON.parse(fs.readFileSync(p));cfg.intake.max_message_chars=1;fs.writeFileSync(p,JSON.stringify(cfg));
+ assert.equal(ok('ask',null,f.root,{text:'q'}).ok,true);
+});

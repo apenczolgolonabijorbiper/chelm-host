@@ -3,9 +3,9 @@ on:
   push:
     branches: [master]
     tags: ['v*']
-    paths: ['VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json']
+    paths: ['VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
   pull_request:
-    paths: ['VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json']
+    paths: ['VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
   workflow_dispatch:
 permissions:
   contents: read
@@ -38,14 +38,17 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           repository: apenczolgolonabijorbiper/golem14-harness
-          ref: v0.9.1
+          ref: v0.10.0
           path: harness-src
+          fetch-depth: 0
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: ${{ matrix.node }}
       - uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.12'
+      - name: Install locked runtime dependencies
+        run: npm ci --ignore-scripts
       - name: Materialize pinned harness distribution
         run: python tools/prepare-harness.py --source ../harness-src --destination ../harness-release
       - name: Build with all Chelm and harness backend conformance tests

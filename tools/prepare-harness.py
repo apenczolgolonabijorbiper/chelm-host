@@ -1,4 +1,4 @@
-"""Reconstruct the byte-exact harness 0.9.1 test distribution from its pinned source."""
+"""Reconstruct the byte-exact harness 0.10.0 test distribution from its pinned source."""
 import argparse
 import ast
 import hashlib
@@ -6,12 +6,12 @@ import json
 import subprocess
 from pathlib import Path
 
-EXPECTED = '3471d0bf0f83b4d3756a8aefcbc45a314c372e52bc28d39265d16a1ad2cd7150'
+EXPECTED = '0c4ba9f35e24df0887ceb27457d118b5e4829acef401242cb6818a3034f95031'
 
 
 def prepare(source, destination):
     source, destination = Path(source), Path(destination)
-    assert (source / 'VERSION').read_text().strip() == '0.9.1', 'Wrong harness version'
+    assert (source / 'VERSION').read_text().strip() == '0.10.0', 'Wrong harness version'
     module = ast.parse(subprocess.check_output(['git', '-C', str(source), 'show', 'HEAD:tools/build-release.py']).decode('utf-8'))
     names = next(ast.literal_eval(statement.value) for statement in module.body
                  if isinstance(statement, ast.Assign)
@@ -30,7 +30,14 @@ def prepare(source, destination):
         entries[name] = raw[start:start + size]
         offset = start + size + 1
     entries['AGENTS.md'] = entries.pop('integration/AGENTS.distribution.md')
-    manifest = {'schema_version': 1, 'version': '0.9.1', 'provenance': 'docs/PROVENANCE.md',
+    # The tagged source predates the output-only explorer commit. Reproduce the
+    # release generator against its full Git history, then verify exact bytes.
+    import tempfile, sys
+    with tempfile.TemporaryDirectory() as tmp:
+        page = Path(tmp) / 'architecture-explorer.html'
+        subprocess.run([sys.executable, str(source / 'tools/build-explorer.py'), '--output', str(page)], check=True)
+        entries['docs/architecture-explorer.html'] = page.read_bytes()
+    manifest = {'schema_version': 1, 'version': '0.10.0', 'provenance': 'docs/PROVENANCE.md',
                 'files': {name: hashlib.sha256(data).hexdigest() for name, data in entries.items()}}
     data = (json.dumps(manifest, indent=2, sort_keys=True) + '\n').encode()
     assert hashlib.sha256(data).hexdigest() == EXPECTED, 'Harness release bytes differ'

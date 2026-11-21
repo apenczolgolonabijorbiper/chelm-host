@@ -1,3 +1,33 @@
+# Chelm-host 1.0.0
+
+Replace shared-folder delegation with owner-hosted remote MCP workers. Remote agents
+request work, read immutable snapshots, run their own inference and upload candidates.
+Chelm validates, integrates concurrent candidates with the native harness merge and
+publishes atomically. Assignment IDs and receipts survive reconnects/restarts.
+
+- HTTPS Streamable HTTP MCP service, worker-token and external OAuth/JWT authorization,
+  runtime allowlists, bounded text uploads and server-calculated hashes/offsets.
+- Concurrent disjoint analysis, remote integration work units, local worker coordination,
+  cancellation/pruning and explicit cutover/archive of old delegation state.
+- Server/IIS/client configuration guide, stdio bridge and SudoLang one-cycle/loop/integration
+  prompts. External-process runner passes prompts to an operator-configured agent CLI.
+- VI-016: explicit intake chunks enforce max_chars/oversize; refusal preflights all groups.
+- Exact harness **0.10.0** support: purpose-guidance-v2, purpose-only run snapshots and
+  transactional application profile/purpose source installation.
+
+Breaking changes: worker contract v2 and runtime configuration schema 2; offer/take/
+return/adopt shared-folder delegation removed. App and read-model contracts remain v1,
+including an empty historical delegations view. Run migrate preflight then explicit
+apply; settle or explicitly cancel old offers and drain processing leases first.
+Canonical graph v2/hypotheses v1/vocabulary v2 memory is retained, with no reset or
+harness schema migration. Older unsupported instance formats still require a fresh
+instance and original-source import. No consuming application is upgraded automatically.
+
+Network support adds locked Node runtime dependencies, included in release ZIPs.
+Source builders must run npm ci --ignore-scripts. Inference, private credentials,
+background agent permissions and the chosen CLI/provider remain worker responsibilities.
+See docs/ACCEPTANCE.md for observed checks and outstanding external validation.
+
 # Chelm-host 0.2.0 — 2026-11-21
 
 Implements consumer alignment VF-1 through VF-7. Supported harness versions:

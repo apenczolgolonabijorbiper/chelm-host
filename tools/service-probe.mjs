@@ -104,7 +104,7 @@ try {
     created_at: graph.updated_at
   });
   fs.writeFileSync(path.join(instance, 'memory/graph.json'), JSON.stringify(graph, null, 2) + '\n');
-  fs.writeFileSync(path.join(instance, u.journal_path), '# IIS synthetic cycle\nStarted: ' + u.claimed_at +
+  fs.writeFileSync(path.join(instance, u.journal_path), '# IIS synthetic cycle\nStarted: ' + u.claimed_at + '\nguidance_version: ' + u.guidance.guidance_identity +
     '\nNo language model was used. Source and warnings reviewed; verification by harness candidate validation.\n'
   );
   call(['worker', 'validate'], {

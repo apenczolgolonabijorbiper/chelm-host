@@ -17,9 +17,10 @@ def digest(data):
 
 
 def entries():
-    ignored = {'.git', '.github', 'dist', 'node_modules', '__pycache__'}
+    ignored = {'.git', '.github', '.bin', '__pycache__'}
     return {p.relative_to(ROOT).as_posix(): p.read_bytes()
             for p in sorted(ROOT.rglob('*')) if p.is_file()
+            and p.relative_to(ROOT).parts[0] != 'dist'
             and not any(part in ignored for part in p.relative_to(ROOT).parts)
             and p.name not in {'.gitignore', 'RELEASE.json'}}
 
@@ -28,14 +29,16 @@ def build(harness, output=None):
     harness = Path(harness).resolve()
     version = (ROOT / 'VERSION').read_text().strip()
     output = Path(output or ROOT / 'dist' / f'chelm-host-{version}.zip').resolve()
+    if not (ROOT / 'node_modules/@modelcontextprotocol/sdk/package.json').exists():
+        raise RuntimeError('Run npm ci --ignore-scripts before building the network-capable release')
     payload = entries()
     manifest = {'schema_version': 1, 'version': version,
-                'contracts': {'app': 1, 'worker': 1, 'read_model': 1,
-                              'runtime_config': 1, 'delegation': 1},
-                'harness_supported': '=0.9.1', 'supported_harness_versions': ['0.9.1'],
+                'contracts': {'app': 1, 'worker': 2, 'read_model': 1,
+                              'runtime_config': 2, 'remote_worker': 2},
+                'harness_supported': '=0.10.0', 'supported_harness_versions': ['0.10.0'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',
-                               'harness_release_sha256': '3471d0bf0f83b4d3756a8aefcbc45a314c372e52bc28d39265d16a1ad2cd7150'},
+                               'harness_release_sha256': '0c4ba9f35e24df0887ceb27457d118b5e4829acef401242cb6818a3034f95031'},
                 'files': {name: digest(data) for name, data in payload.items()}}
     payload['RELEASE.json'] = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
     env = {**os.environ, 'CHELM_HARNESS_ROOT': str(harness),
@@ -56,7 +59,7 @@ def build(harness, output=None):
                        cwd=stage, check=True, env=env)
         suite_seconds = time.monotonic() - started
         output.parent.mkdir(parents=True, exist_ok=True)
-        timing = {'platform': os.sys.platform, 'harness_version': '0.9.1', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
+        timing = {'platform': os.sys.platform, 'harness_version': '0.10.0', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
         print('CHELM_TEST_TIMING ' + json.dumps(timing), flush=True)
         (output.parent / ('test-timing-' + os.sys.platform + '.json')).write_text(json.dumps(timing, indent=2) + '\n', encoding='utf-8')
         subprocess.run(['node', str(stage / 'tools/benchmark-host.mjs'), '--harness', str(harness),

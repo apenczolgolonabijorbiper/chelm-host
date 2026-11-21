@@ -7,7 +7,7 @@ import {
 import {
   parse
 } from './chelm.mjs';
-const names = ['next', 'context', 'validate', 'submit', 'renew', 'abandon', 'propose', 'take', 'return'];
+const names = ['next', 'context', 'validate', 'submit', 'renew', 'abandon', 'propose'];
 const executor = {
     type: 'object',
     required: ['id', 'kind', 'model', 'host'],
@@ -151,7 +151,7 @@ export async function handle(message, runtime) {
       },
       serverInfo: {
         name: 'chelm-host',
-        version: '0.2.0'
+        version: '1.0.0'
       },
       instructions: 'Read work_unit.protocol and guidance. Process only in workspace_abs; use validate and submit; abandon on failure.'
     };

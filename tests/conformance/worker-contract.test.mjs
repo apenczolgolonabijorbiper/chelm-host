@@ -109,7 +109,7 @@ test('HAR-10: committed policy change refuses completion and permits explicit re
     executor
   }).work_unit;
   assert.notEqual(reclaimed.run_id, u.run_id);
-  assert.equal(reclaimed.guidance.text, 'New policy. Review source-grounded declarations.');
+  assert(reclaimed.guidance.text.endsWith('New policy. Review source-grounded declarations.'));
   ok('worker', 'abandon', f.root, {
     executor,
     run_id: reclaimed.run_id
@@ -139,7 +139,7 @@ test('WRK-3/4: missing journal and unsafe outputs retain the lease for correctio
   });
   assert(!f.text('memory/processing-lock.json').includes('Never store'));
 });
-test('WRK MCP: initialize, notifications, tools and all nine method round trips', t => {
+test('WRK MCP: initialize, notifications, tools and all seven local method round trips', t => {
   const f = fixture(t);
   const calls = [{
       jsonrpc: '2.0',
@@ -155,7 +155,7 @@ test('WRK MCP: initialize, notifications, tools and all nine method round trips'
       jsonrpc: '2.0',
       id: 2,
       method: 'tools/list'
-    }, ...['next', 'context', 'validate', 'submit', 'renew', 'abandon', 'propose', 'take', 'return']
+    }, ...['next', 'context', 'validate', 'submit', 'renew', 'abandon', 'propose']
     .map((n, i) => ({
       jsonrpc: '2.0',
       id: i + 3,
@@ -175,8 +175,8 @@ test('WRK MCP: initialize, notifications, tools and all nine method round trips'
   });
   assert.equal(r.status, 0, r.stderr);
   const messages = r.stdout.trim().split('\n').map(s => JSON.parse(s));
-  assert.equal(messages.length, 11);
-  assert.equal(messages[0].result.serverInfo.version, '0.2.0');
-  assert.equal(messages[1].result.tools.length, 9);
+  assert.equal(messages.length, 9);
+  assert.equal(messages[0].result.serverInfo.version, '1.0.0');
+  assert.equal(messages[1].result.tools.length, 7);
   for (const reply of messages.slice(2)) assert(reply.result.content[0].text);
 });

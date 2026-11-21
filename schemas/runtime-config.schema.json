@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "runtime_id": {
       "type": "string",
@@ -159,37 +159,6 @@
       ],
       "additionalProperties": false
     },
-    "delegation": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "share_root": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "reservation_hours": {
-          "type": "number",
-          "exclusiveMinimum": 0
-        },
-        "participants": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "enabled",
-        "share_root",
-        "reservation_hours",
-        "participants"
-      ],
-      "additionalProperties": false
-    },
     "archive": {
       "type": "object",
       "properties": {
@@ -220,6 +189,32 @@
         "enforce"
       ],
       "additionalProperties": false
+    },
+    "remote": {
+      "type": "object",
+      "properties": {
+        "max_active_work": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "assignment_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 480
+        },
+        "max_lifetime_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1440
+        }
+      },
+      "required": [
+        "max_active_work",
+        "assignment_minutes",
+        "max_lifetime_minutes"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -232,8 +227,8 @@
     "intake",
     "conversation",
     "requests",
-    "delegation",
-    "archive"
+    "archive",
+    "remote"
   ],
   "additionalProperties": false
 }

@@ -1,6 +1,6 @@
 # Read Model
 
-Chelm-host 0.2.0 implements contract version 1. The following requirements are
+Chelm-host 1.0.0 retains read-model contract version 1. The following requirements are
 from design draft 0.2. See [implementation and verification status](ACCEPTANCE.md)
 for measured checks, platform checks awaiting CI, and deviations.
 
@@ -45,3 +45,5 @@ var json = reader.ReadToEnd();
 An already-open handle sees the old complete file; a later open sees the new one.
 Compare head/generated_at across independently opened views when a consistent
 snapshot matters. Do not retain view handles between requests.
+
+The historical delegations view is empty and summary delegation counts are zero. Use local `remote list` or `status.remote_work` for remote assignment administration.
