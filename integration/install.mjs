@@ -18,6 +18,7 @@ import {
   integrity,
   packageRoot
 } from '../lib/harness.mjs';
+import { installDependencies } from '../lib/dependencies.mjs';
 const begin = '<!-- chelm-host:begin -->',
   end = '<!-- chelm-host:end -->';
 
@@ -29,22 +30,19 @@ function installPackage(dest, source, options) {
     });
     const stage = dest + '.' + randomUUID() + '.tmp';
     fs.mkdirSync(stage);
-    for (const p of ['RELEASE.json', ...Object.keys(source.manifest.files)]) atomic(file(stage, p), fs
-      .readFileSync(file(packageRoot, p)));
-    if (fs.existsSync(dest)) {
-      const old = dest + '.' + randomUUID() + '.old';
-      fs.renameSync(dest, old);
-      try {
-        fs.renameSync(stage, dest);
-      } catch (e) {
-        fs.renameSync(old, dest);
-        throw e;
-      }
-      fs.rmSync(old, {
-        recursive: true
-      });
-    } else fs.renameSync(stage, dest);
-  }
+    try {
+      for (const p of ['RELEASE.json', ...Object.keys(source.manifest.files)]) atomic(file(stage, p), fs
+        .readFileSync(file(packageRoot, p)));
+      if (!options['skip-dependencies']) installDependencies(stage, options);
+      if (fs.existsSync(dest)) {
+        const old = dest + '.' + randomUUID() + '.old';
+        fs.renameSync(dest, old);
+        try { fs.renameSync(stage, dest); }
+        catch (e) { fs.renameSync(old, dest); throw e; }
+        fs.rmSync(old, { recursive: true, maxRetries: 10, retryDelay: 100 });
+      } else fs.renameSync(stage, dest);
+    } finally { fs.rmSync(stage, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 }); }
+  } else if (!options['skip-dependencies']) installDependencies(dest, options);
 }
 
 function resolveHint(repo, hint) {
@@ -163,10 +161,10 @@ try {
   for (let i = 2; i < process.argv.length; i++) {
     const key = process.argv[i].slice(2);
     assert(['repo', 'runtime-hint', 'register-mcp', 'upgrade', 'skip-agent-integration',
-        'defer-agent-integration'
+        'defer-agent-integration', 'skip-dependencies', 'npm-cli'
       ].includes(key), 'usage',
       'Unknown installer option');
-    options[key] = ['register-mcp', 'upgrade', 'skip-agent-integration', 'defer-agent-integration'].includes(
+    options[key] = ['register-mcp', 'upgrade', 'skip-agent-integration', 'defer-agent-integration', 'skip-dependencies'].includes(
       key) ? true : process.argv[++i];
   }
   const result = install(options);

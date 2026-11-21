@@ -1,3 +1,17 @@
+# Packaging follow-up — 1.0.1
+
+Observed locally on Linux / Node 24.22.3: **51/51 host tests and 11/11 harness
+adapter conformance tests passed**, with no skips in the staged release suite.
+The generated ZIP contains 110 files with zero node_modules entries.
+
+The thin release builder restores dependencies from the staged package lockfile
+before running the complete host suite and harness adapter conformance checks.
+Added coverage checks managed-directory integrity, legacy bundled verification,
+locked receipts/idempotence, missing-dependency guidance, local-only installation
+and failed upgrade rollback. Platform CI and IIS evidence for 1.0.0 below remains
+historical until 1.0.1 checks are observed. External two-machine inference acceptance
+remains pending; this packaging change does not establish it.
+
 # Implementation and verification status — 1.0.0
 
 The owner-hosted remote MCP replacement is implemented on the development branch.

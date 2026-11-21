@@ -38,4 +38,4 @@ Remote workers: use docs/REMOTE_WORKER_CONTRACT.md and the shipped SudoLang prom
 Never interpret a remote artifact name as an accessible server filesystem path.
 Remote agents stage allowed output slots and require a committed receipt to report success.
 Shared-folder delegation is retired. Maintain purpose-guidance-v2 binding, including
-purpose-only instances. The installed release includes locked Node dependencies.
+purpose-only instances. The installer restores locked Node dependencies for remote MCP; see README.md for local-only/offline setup.

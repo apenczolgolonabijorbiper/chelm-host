@@ -2,7 +2,7 @@
 
 Chelm-host is where the Golem lives: a local and remote-worker host for
 [Golem XIV Harness](https://github.com/apenczolgolonabijorbiper/golem14-harness).
-Version **1.0.0** supports **harness 0.10.0 exactly**. App/read-model contracts
+Version **1.0.1** supports **harness 0.10.0 exactly**. App/read-model contracts
 remain v1; worker and runtime configuration contracts are v2.
 
 It supplies intake, conversation records, committed memory views, transactional
@@ -12,12 +12,12 @@ or runs a background scheduler. Executors perform the analysis.
 
 ## Requirements
 
-Node >=22.12, Python >=3.12, Git. Release ZIPs include locked Node dependencies. Source checkouts use `npm ci --ignore-scripts`; no pip installation. Windows, Linux and macOS
+Node >=22.12, Python >=3.12, Git. Release ZIPs contain source and the npm lockfile, without node_modules. The installer restores production dependencies for remote MCP using npm (included with standard Node installations). Source checkouts use `npm ci --omit=dev --ignore-scripts`; no pip installation. Windows, Linux and macOS
 are CI targets. Use the same OS identity for a lease owner across worker calls.
 
 ## Install and initialize
 
-Download chelm-host-1.0.0.zip and its adjacent checksum from Releases. Check the
+Download chelm-host-1.0.1.zip and its adjacent checksum from Releases. Check the
 checksum before extraction. Install from the clean extracted chelm-host folder:
 
 ```sh
@@ -25,6 +25,32 @@ node integration/install.mjs --repo /path/to/application --runtime-hint /private
 node /path/to/application/vendor/chelm-host/bin/chelm.mjs verify --harness /path/to/golem-harness
 node /path/to/application/vendor/chelm-host/bin/chelm.mjs init --runtime /private/runtime --harness /path/to/golem-harness
 ```
+
+Installation and `--upgrade` run `npm ci --omit=dev --ignore-scripts` from the
+shipped lockfile before activating the package. This requires registry access or
+a populated npm cache and respects npm proxy/registry settings. A restore failure
+keeps the previous package and agent integration intact. Existing 1.0.0 ZIPs are
+unchanged; upgrades replace their bundled dependencies with restored ones.
+
+For offline/local-only use, add `--skip-dependencies`. Local CLI and local stdio
+MCP workers need no npm packages. Before starting remote MCP or its stdio bridge,
+restore dependencies in the extracted or installed package:
+
+```sh
+node integration/install-dependencies.mjs
+# Repair an existing dependency installation:
+node integration/install-dependencies.mjs --force
+```
+
+The remote bridge machine also needs this setup; direct HTTP MCP clients do not
+need a Chelm package. For air-gapped remote operation, populate npm's cache first
+or provision dependencies on a connected machine using the same lockfile and copy
+the generated node_modules (including its receipt). An empty cache cannot restore
+offline. Use `--npm-cli /path/to/npm-cli.js` or `CHELM_NPM_CLI` if npm discovery
+needs an override. No lifecycle scripts run. Source integrity covers all shipped
+files; npm lockfile integrity checks downloaded dependencies. The generated receipt
+binds direct dependency versions to the lockfile; it does not rehash dependency
+contents on every host verification. `--force` rebuilds them from the lockfile.
 
 On Windows use quoted paths, for example `"C:/Private/Golem runtime"`; the Python
 launcher `py` is the default. Use `--python <executable>` at init to override it.
@@ -107,7 +133,7 @@ python3 tools/build-release.py --harness /path/to/golem-harness
 ```
 
 The builder runs all Chelm tests and applicable harness backend conformance before
-creating dist/chelm-host-1.0.0.zip and its .sha256. Releases have one chelm-host/
+creating dist/chelm-host-1.0.1.zip and its .sha256. Releases have one chelm-host/
 folder and an exhaustive RELEASE.json. GitHub Actions performs the same checks
 on Windows, Linux and macOS; a v* tag publishes the validated ZIP and checksum.
 

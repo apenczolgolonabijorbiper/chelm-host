@@ -36,8 +36,11 @@ node C:/Golem/chelm-host/bin/chelm.mjs refresh --runtime C:/GolemData/MyApp
 ```
 
 For a genuinely new runtime use `init --runtime <new-path> --harness <release>`.
-The host needs Node >=22.12, Python >=3.12 and Git. Release ZIPs include locked
-runtime Node dependencies. Source checkouts require `npm ci --ignore-scripts`.
+The host needs Node >=22.12, Python >=3.12 and Git. Release ZIPs omit node_modules. Run `node integration/install-dependencies.mjs`
+in an extracted package (also on a stdio bridge machine), or use the application
+installer, which restores locked dependencies automatically. npm needs registry
+access or a populated cache. See README.md for offline setup and repair.
+Source checkouts require `npm ci --omit=dev --ignore-scripts`.
 Harness graph v2/hypotheses v1/vocabulary v2 remain unchanged. In-flight old
 guidance leases cannot carry across the 0.10 upgrade. Purpose-only instances now
 receive immutable guidance too. Application source mirrors may include purpose.md;
