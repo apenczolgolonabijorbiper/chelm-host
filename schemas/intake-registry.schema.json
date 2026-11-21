@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kind": {
+          "type": "string"
+        },
+        "content_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "receipt": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string"
+            },
+            "record": {
+              "type": "string"
+            },
+            "revision": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "namespace",
+            "record",
+            "revision"
+          ],
+          "additionalProperties": false
+        },
+        "orphaned": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "ids"
+      ],
+      "additionalProperties": true
+    }
+  }
+}

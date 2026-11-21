@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "runtime_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "data": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated_at",
+    "head",
+    "runtime_id",
+    "data"
+  ],
+  "additionalProperties": true
+}

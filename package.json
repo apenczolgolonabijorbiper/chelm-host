@@ -1,0 +1,1 @@
+{"name":"chelm-host","version":"0.1.0","private":true,"type":"module","engines":{"node":">=22.12.0"},"scripts":{"test":"node --test tests/","build":"python3 tools/build-release.py"},"bin":{"chelm":"bin/chelm.mjs","chelm-mcp":"bin/chelm-mcp.mjs"},"license":"Apache-2.0"}

@@ -1,0 +1,1 @@
+{"mcpServers":{"chelm":{"command":"node","args":["vendor/chelm-host/bin/chelm-mcp.mjs","--runtime","<private-runtime>"]}}}

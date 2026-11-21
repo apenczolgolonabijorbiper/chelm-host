@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "at": {
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "user",
+        "golem"
+      ]
+    },
+    "text": {
+      "type": "string"
+    },
+    "observation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "question_id": {
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "pending",
+        "retrieval",
+        "queued"
+      ]
+    },
+    "matches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "classification": {
+            "type": "string"
+          },
+          "predicates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "quote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "classification",
+          "predicates",
+          "quote"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "at",
+    "role",
+    "text",
+    "observation_id"
+  ],
+  "additionalProperties": false
+}
