@@ -23,7 +23,7 @@
 | Evidence | Result | Interpretation |
 |---|---|---|
 | Consumer-reported Windows, Chelm 0.1.0 / harness 0.7.0 | **27/27 in 11.9 minutes** | Above TST-9's under-10-minute target. Machine/load were not supplied; do not replace this with hosted-runner timing. |
-| 0.2.0 Windows Server 2022 hosted CI | Test timing, NFR-4 samples and actual IIS identity result are published as release JSON evidence | Independent environment; does not certify the consumer's Windows Server 2022 Standard installation or reference-workstation performance. |
+| 0.2.0 Windows Server 2022 hosted CI, harness 0.9.1, alignment run 44913373114 | 34/34 Chelm tests plus 9/9 harness conformance cases in **103.2 seconds**; NFR-4 median submit **378 ms**, ask **517 ms**, status **89 ms** (three samples; maxima 379/518/90 ms) | This runner met the suite/latency targets. The first real IIS probe then exposed libuv identity lookup failing with an unloaded app-pool profile; fixed by the OS SID fallback and covered by a regression test. Final IIS evidence is published separately. Does not certify the consumer's machine. |
 | Local Linux, Node 24, harness 0.9.1, three synthetic NFR-4 samples | Submit median 106 ms (max 112); ask median 191 ms (max 273); status median 70 ms (max 71) | Observed during alignment development. Includes CLI startup; measured indexer/validator children excluded, retrieval included. Small fresh runtime, not capacity-scale. Current per-build samples are authoritative for that build. |
 
 The release builder runs independent test modules with four child processes, then
@@ -41,6 +41,9 @@ through an actual loopback-only IIS .ashx handler, starts Node under the pool
 identity, and verifies package/harness access, Python and Git child processes,
 intake/indexing, owned claim/validate/commit and committed reads/conversation.
 Evidence records the actual identity, OS caption and LoadUserProfile setting.
+When libuv cannot resolve an unloaded Windows profile, actor ownership uses the
+actual Windows SID obtained from whoami.exe; USERNAME/USERDOMAIN are never used
+as an authorization fallback. Ordinary loaded-profile actor names are retained.
 The test uses a temporary site/pool and removes them afterward.
 
 This verifies the generic IIS identity case when CI reports success. IIS Express

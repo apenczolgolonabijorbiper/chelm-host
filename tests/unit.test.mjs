@@ -99,3 +99,44 @@ test('CON-2: launching a CLI through an OS path alias still emits JSON', async t
   assert.equal(r.status, 0, r.stderr);
   assert.equal(JSON.parse(r.stdout).package_version, '0.2.0');
 });
+
+
+test('NFR-1: unloaded Windows profiles use the actual OS SID and fail closed on lookup errors', async () => {
+  const {
+    resolveActor
+  } = await import('../lib/util.mjs');
+  const missing = () => {
+    throw Object.assign(Error('uv_os_get_passwd ENOMEM'), {
+      code: 'ERR_SYSTEM_ERROR'
+    });
+  };
+  const whoami = () => ({
+    status: 0,
+    stdout: '"iis apppool\\synthetic","S-1-5-82-123-456"\r\n'
+  });
+  assert.equal(resolveActor({
+    platform: 'win32',
+    userInfo: missing,
+    whoami
+  }), 'S-1-5-82-123-456');
+  assert.equal(resolveActor({
+    platform: 'win32',
+    userInfo: () => ({
+      username: 'ordinary-user'
+    }),
+    whoami
+  }), 'ordinary-user');
+  assert.throws(() => resolveActor({
+    platform: 'win32',
+    userInfo: missing,
+    whoami: () => ({
+      status: 1,
+      stdout: 'untrusted-name'
+    })
+  }), e => e.code === 'identity_unavailable');
+  assert.throws(() => resolveActor({
+    platform: 'linux',
+    userInfo: missing,
+    whoami
+  }), /ENOMEM/);
+});

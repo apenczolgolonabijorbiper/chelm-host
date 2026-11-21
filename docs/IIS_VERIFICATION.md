@@ -44,3 +44,9 @@ is not evidence of a full IIS application-pool identity run.
 Runtime Git children ignore user/system global Git configuration and hooks;
 instance-local Git configuration remains available. This avoids dependence on
 reading a profile directory that the application-pool identity cannot access.
+
+Without a loaded virtual-account profile, Node/libuv can fail os.userInfo().
+Chelm falls back to the OS security ID from whoami.exe, recording the SID as the
+actor/lease owner. The IIS evidence separately records the Windows principal name.
+Do not configure USERNAME or enable a profile to bypass this check. For delegation
+under such an identity, participants may list that recorded SID.

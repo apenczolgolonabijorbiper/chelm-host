@@ -1,5 +1,8 @@
 // Synthetic filesystem/Git/child-process probe, intended to be launched by the IIS worker.
 import fs from 'node:fs';
+import {
+  actor
+} from '../lib/util.mjs';
 import path from 'node:path';
 import os from 'node:os';
 import {
@@ -103,7 +106,7 @@ try {
   fs.writeFileSync(path.join(instance, 'memory/graph.json'), JSON.stringify(graph, null, 2) + '\n');
   fs.writeFileSync(path.join(instance, u.journal_path), '# IIS synthetic cycle\nStarted: ' + u.claimed_at +
     '\nNo language model was used. Source and warnings reviewed; verification by harness candidate validation.\n'
-    );
+  );
   call(['worker', 'validate'], {
     executor,
     run_id: u.run_id,
@@ -122,7 +125,7 @@ try {
   });
   process.stdout.write(JSON.stringify({
     passed: true,
-    actor: os.userInfo().username,
+    actor: actor(),
     node: process.version,
     platform: process.platform,
     os_release: os.release(),
