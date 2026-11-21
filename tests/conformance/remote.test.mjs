@@ -553,3 +553,30 @@ test('remote assignment preserves CRLF reviewed guidance despite committed Git a
   assert.equal(values['instance/purpose.md'], 'Synthetic purpose.\r\n');
   await run('chelm_abandon_work', workArgs(w));
 });
+
+test('0.10 guidance rejects invalid declarative vocabulary before remote assignment', async (t) => {
+  const f = fixture(t, { profile: true });
+  f.submit();
+  f.write('profiles/vocabulary.json', {
+    schema_version: 2,
+    kinds: ['record'],
+    predicates: ['describes'],
+    single_valued: ['outside']
+  });
+  git(f.instance, 'add', 'profiles/vocabulary.json');
+  git(
+    f.instance,
+    '-c',
+    'user.name=Test',
+    '-c',
+    'user.email=test@local',
+    'commit',
+    '-qm',
+    'invalid policy fixture'
+  );
+  await assert.rejects(
+    call(f)('chelm_request_work', { executor, request_id: randomUUID() }),
+    /Single-valued predicate outside vocabulary/
+  );
+  assert.equal(f.read('memory/processing-lock.json').status, 'idle');
+});
