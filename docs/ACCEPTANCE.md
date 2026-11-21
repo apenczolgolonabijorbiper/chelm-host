@@ -7,7 +7,7 @@ Worker/runtime configuration contracts are v2; application/read-model remain v1.
 
 Observed on Linux / Node 24 / Python 3.12 during implementation:
 
-- The staged release build passed all **44 Chelm checks** and all **11 harness
+- The staged release build passed all **45 Chelm checks** and all **11 harness
   backend conformance cases**, including purpose-guidance-v2 and profile-install-v1.
 - The staged package includes locked runtime dependencies and passed installer
   integrity/idempotence/deferred-registration and service-identity smoke checks.
@@ -15,7 +15,7 @@ Observed on Linux / Node 24 / Python 3.12 during implementation:
   stdio bridge process, principal/runtime authorization, JWT signature/issuer/
   audience/scope/expiry checks, source/policy drift, finalized upload revisions,
   no-filesystem client cognition fixture, concurrent disjoint analysis, remote
-  integration review, post-CAS receipt recovery, named record-conflict refusal and legacy cutover.
+  integration review, post-CAS receipt recovery, named record-conflict refusal, raw CRLF guidance snapshots with Git attributes and legacy cutover.
 - Prompts are checked against actual tool names; generic unattended runner prompt
   delivery is tested with a deterministic external Node process.
 - Local NFR-4 medians from the first successful 1.0 staged build: submit 113 ms,

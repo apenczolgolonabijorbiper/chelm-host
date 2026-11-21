@@ -520,3 +520,36 @@ test('remote moved-head record conflict refuses publication and records an owner
   );
   assert.equal(record.last_error.code, 'merge_conflict');
 });
+
+test('remote assignment preserves CRLF reviewed guidance despite committed Git attributes', async (t) => {
+  const f = fixture(t);
+  f.write('.gitattributes', '*.md text eol=lf\n');
+  git(f.instance, 'add', '.gitattributes');
+  git(
+    f.instance,
+    '-c',
+    'user.name=Test',
+    '-c',
+    'user.email=test@local',
+    'commit',
+    '-qm',
+    'attributes'
+  );
+  const mirror = path.join(f.base, 'reviewed-source');
+  fs.mkdirSync(path.join(mirror, 'profiles'), { recursive: true });
+  fs.writeFileSync(
+    path.join(mirror, 'golem.config.json'),
+    JSON.stringify({ schema_version: 1, profile: { path: 'profiles/core.md' } })
+  );
+  const core = '# Reviewed guidance\r\nPreserve exact bytes. Żółć.\r\n';
+  fs.writeFileSync(path.join(mirror, 'profiles/core.md'), core);
+  fs.writeFileSync(path.join(mirror, 'purpose.md'), 'Synthetic purpose.\r\n');
+  ok('profile', 'install', f.root, undefined, { source: mirror });
+  f.submit();
+  const run = call(f),
+    w = await run('chelm_request_work', { executor, request_id: randomUUID() });
+  const values = await artifacts(run, w);
+  assert.equal(values['profiles/core.md'], core);
+  assert.equal(values['instance/purpose.md'], 'Synthetic purpose.\r\n');
+  await run('chelm_abandon_work', workArgs(w));
+});
