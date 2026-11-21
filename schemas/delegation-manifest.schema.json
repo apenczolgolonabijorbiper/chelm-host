@@ -45,13 +45,13 @@
       }
     },
     "harness_version": {
-      "const": "0.7.0"
+      "const": "0.9.1"
     },
     "harness_release_sha256": {
       "type": "string"
     },
     "chelm_version": {
-      "const": "0.1.0"
+      "const": "0.2.0"
     },
     "offered_by": {
       "type": "string"

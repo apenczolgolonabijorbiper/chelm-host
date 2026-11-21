@@ -1,3 +1,40 @@
+# Chelm-host 0.2.0 — 2026-11-21
+
+Implements consumer alignment VF-1 through VF-7. Supported harness versions:
+**0.9.1 only** (`harness_supported: =0.9.1`).
+
+| Supported harness | Runtime requirements (PKG-14) |
+|---|---|
+| 0.9.1 | Canonical graph v2, hypotheses v1, vocabulary v2. Existing canonical runtimes created under harness 0.7.0/0.8.x/0.9.x retain memory and host state: pause executors, cancel outstanding offers, replace both vendor packages, update harness.root if needed, verify and refresh. No memory migration or reset. Historical layouts/graph v1 require a fresh runtime and original-source import. |
+
+0.2.0 does not run with harness 0.7.0: upgrade the installed harness before using
+this host. Chelm-host 0.1.0 remains the old release for harness 0.7.0. Old delegation
+packages are bound to their original harness release hash and must be completed
+before upgrade or cancelled and offered again. Runtime config remains schema 1;
+new optional fields do not require host-state conversion.
+
+- Git backend re-derived from the 0.9.1 reference: cached tree metadata, batched
+  index updates/recovery checks and safe optional operation timings, retaining
+  Chelm source selectors, policy identity, strict output scope and recovery.
+- Moved-head integration uses harness memory-tool merge and advertises
+  harness-merge; flagged summaries return an integration work unit for review.
+- Adoption supports explicit subject/store mappings and the consumer jobs wrapper;
+  generic filenames cannot silently become subjects.
+- Byte-exact mirrored profile installation, per-file comparison/status and an
+  optional expected-profile drift guard on worker next.
+- Installer can defer all agent integration, preserve agent files untouched and
+  resolve repository-relative runtime hints independently of the MCP client cwd.
+- Windows atomic rename retries are bounded; reader sharing guidance is published.
+- Static synthetic parity fixture, NFR-4 benchmark evidence, actual full IIS
+  app-pool identity probe in Windows Server 2022 CI, and documented host ownership/
+  adoption-recovery state. ZIP, checksum and platform evidence accompany release.
+
+The supplied consumer Windows 0.1.0 result was **27/27 in 11.9 minutes on harness
+0.7.0**, exceeding the TST-9 target. See ACCEPTANCE.md for the qualification of
+that result, the current CI evidence and remaining machine-specific checks.
+
+---
+
 # Chelm-host 0.1.0 — 2026-11-21
 
 First implementation of design draft 0.2, with app/worker/read-model/runtime/

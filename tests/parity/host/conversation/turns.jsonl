@@ -1,0 +1,4 @@
+{"at": "2026-01-01T12:00:00.000Z", "role": "user", "text": "Alice visited Krakow.", "observation_id": "00000000-0000-4000-8000-000000000001", "question_id": ""}
+{"at": "2026-01-01T12:00:00.000Z", "role": "golem", "text": "Retrieval, not analysis.", "observation_id": "00000000-0000-4000-8000-000000000001", "mode": "retrieval", "matches": []}
+{"at": "2026-01-01T12:10:00.000Z", "role": "user", "text": "Confirmed: the visit is completed.", "observation_id": "00000000-0000-4000-8000-000000000003", "question_id": "q-closed"}
+{"at": "2026-01-01T12:10:00.000Z", "role": "golem", "text": "Queued for review.", "observation_id": "00000000-0000-4000-8000-000000000003", "mode": "queued", "matches": []}

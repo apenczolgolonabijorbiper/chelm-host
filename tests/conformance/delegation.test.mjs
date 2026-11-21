@@ -107,7 +107,23 @@ test('DST-32/33: moved-head keyed merge retains both independent analyses', t =>
   const adopted = ok('delegate', 'adopt', f.root, undefined, {
     package: offer.package_id
   });
-  assert.equal(adopted.method, 'keyed-merge');
+  assert.equal(adopted.status, 'integration-required');
+  const unit = adopted.work_unit;
+  assert.equal(unit.method, 'harness-merge');
+  assert(unit.needs_regeneration.includes('memory/index.md'));
+  f.write('memory/index.md', '# Reviewed merged memory\n' + f.read('memory/graph.json').entities.map(e =>
+    e.id + ' ' + e.label).join('\n') + '\n');
+  ok('worker', 'validate', f.root, {
+    executor: unit.executor,
+    run_id: unit.run_id,
+    outputs: unit.outputs
+  });
+  ok('worker', 'submit', f.root, {
+    executor: unit.executor,
+    run_id: unit.run_id,
+    outputs: unit.outputs
+  });
+  assert.equal(ok('delegate', 'list', f.root).packages[0].status, 'adopted');
   assert.equal(ok('read', 'summary', f.root).view.processed, 2);
   assert.equal(ok('read', 'summary', f.root).view.totals.claims, 2);
 });

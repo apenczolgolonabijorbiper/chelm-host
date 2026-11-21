@@ -1,0 +1,15 @@
+{
+  "id": "00000000-0000-4000-8000-000000000003",
+  "source_file": "inbox/00000000-0000-4000-8000-000000000003.md",
+  "sha256": "e892b6dad6d7702ba939761d605880ba0d6a3cefd7a4610515393af0465ec9c4",
+  "recorded_at": "2026-01-01T12:00:00.000Z",
+  "event_date": null,
+  "kind": "question_answer",
+  "text": "Confirmed: the visit is completed.",
+  "interpretation": "not_inferred",
+  "question": {
+    "id": "q-closed",
+    "text": "Was the visit completed?",
+    "source": "parity"
+  }
+}

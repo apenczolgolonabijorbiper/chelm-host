@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-01-01T12:10:00.000Z",
+  "hypotheses": [
+    {
+      "id": "hyp-visit",
+      "statement": "Alice may schedule another visit.",
+      "status": "open",
+      "support": [],
+      "refutation": [],
+      "confidence": 0.4,
+      "updated_at": "2026-01-01T12:10:00.000Z",
+      "confidence_basis": "No next date is recorded.",
+      "model": "synthetic-fixture",
+      "observation_ids": [
+        "00000000-0000-4000-8000-000000000001"
+      ]
+    }
+  ]
+}

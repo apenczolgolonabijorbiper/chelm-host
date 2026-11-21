@@ -1,6 +1,6 @@
 # Read Model
 
-Chelm-host 0.1.0 implements contract version 1. The following requirements are
+Chelm-host 0.2.0 implements contract version 1. The following requirements are
 from design draft 0.2. See [implementation and verification status](ACCEPTANCE.md)
 for measured checks, platform checks awaiting CI, and deviations.
 
@@ -22,3 +22,26 @@ for measured checks, platform checks awaiting CI, and deviations.
 - `RM-6` Regeneration of all views except `warnings.json` for an instance at the harness capacity limits MUST stay under 3 seconds on a current Windows workstation (section 12). `warnings.json` and the summary fields `capacity` and `warning_summary` need harness runs (`validate` and `stats`). The harness's own Linux measurements show full CLI validation taking about 3.7 seconds at 10,000 sources (`docs/CAPACITY_BENCHMARKS.md`; no Windows figure is published). They are therefore refreshed only after commits, adoptions, resets, imports and `refresh` (not after intake or conversation), and their `generated_at` and `head` show their age.
 
 ---
+
+## Windows file sharing and atomic publication (VF-6)
+
+View writers create a temporary sibling and rename it over the old file; they
+never delete the destination to force replacement. On Windows, EPERM, EACCES and
+EBUSY trigger at most eight attempts with bounded exponential waits (10, 20, 40,
+80, 160, 250, 250 ms). Other errors refuse immediately. Exhausted retries leave
+the old view intact and report the original error.
+
+Readers must allow replacement and close handles promptly. In .NET/IIS, use
+FileShare.ReadWrite | FileShare.Delete; File.ReadAllText's default sharing may
+block replacement while open. For example:
+
+```csharp
+using var stream = new FileStream(viewPath, FileMode.Open, FileAccess.Read,
+    FileShare.ReadWrite | FileShare.Delete);
+using var reader = new StreamReader(stream, Encoding.UTF8, true);
+var json = reader.ReadToEnd();
+```
+
+An already-open handle sees the old complete file; a later open sees the new one.
+Compare head/generated_at across independently opened views when a consistent
+snapshot matters. Do not retain view handles between requests.

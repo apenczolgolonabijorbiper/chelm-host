@@ -1,3 +1,66 @@
+# Implementation and verification status — 0.2.0
+
+## VF alignment evidence
+
+- Harness support: **0.9.1 only**, canonical graph v2 / hypotheses v1 / vocabulary
+  v2; byte-exact RELEASE.json SHA-256
+  3471d0bf0f83b4d3756a8aefcbc45a314c372e52bc28d39265d16a1ad2cd7150.
+- The backend is re-derived from the 0.9.1 reference; all nine applicable CLI
+  conformance cases pass locally. A regression test bounds metadata/index Git
+  calls with twelve additional outputs and checks optional safe timing reports.
+- Static TST-5 fixture: tests/parity/instance, host and expected.json cover multiple
+  subjects/kinds, retained corrections, relation claims, hypotheses, open/closed
+  questions, chat events, conversation, requests and journal/subject statistics.
+- Profile mirrors preserve raw config/core/sections/vocabulary bytes (including
+  CRLF and Unicode); tests cover drift/status, enforced no-claim, reserved-path
+  refusal and idempotent installation.
+- Adoption tests cover explicit subjects, generic-filename preflight and jobs.
+  Installer tests cover deferred agent integration and relative MCP hints.
+  Windows retry tests inject EPERM/EACCES/EBUSY and test bounded exhaustion.
+
+## Windows results and latency qualification
+
+| Evidence | Result | Interpretation |
+|---|---|---|
+| Consumer-reported Windows, Chelm 0.1.0 / harness 0.7.0 | **27/27 in 11.9 minutes** | Above TST-9's under-10-minute target. Machine/load were not supplied; do not replace this with hosted-runner timing. |
+| 0.2.0 Windows Server 2022 hosted CI | Test timing, NFR-4 samples and actual IIS identity result are published as release JSON evidence | Independent environment; does not certify the consumer's Windows Server 2022 Standard installation or reference-workstation performance. |
+| Local Linux, Node 24, harness 0.9.1, three synthetic NFR-4 samples | Submit median 106 ms (max 112); ask median 191 ms (max 273); status median 70 ms (max 71) | Observed during alignment development. Includes CLI startup; measured indexer/validator children excluded, retrieval included. Small fresh runtime, not capacity-scale. Current per-build samples are authoritative for that build. |
+
+The release builder runs independent test modules with four child processes, then
+the harness CLI conformance suite. It emits suite duration and the TST-9 target
+comparison. Benchmarks publish all raw samples, environment and exclusion method;
+unmet targets are reported rather than hidden or converted into passing tests.
+Hosted Windows timing does not prove the 11.9-minute consumer run is resolved on
+that machine. Re-run the shipped benchmark there to compare like for like.
+
+## IIS identity verification (NFR-1)
+
+The default target case is full IIS on Windows Server 2022, ApplicationPoolIdentity,
+LoadUserProfile=false, without ASP.NET impersonation. The Windows CI probe runs
+through an actual loopback-only IIS .ashx handler, starts Node under the pool
+identity, and verifies package/harness access, Python and Git child processes,
+intake/indexing, owned claim/validate/commit and committed reads/conversation.
+Evidence records the actual identity, OS caption and LoadUserProfile setting.
+The test uses a temporary site/pool and removes them afterward.
+
+This verifies the generic IIS identity case when CI reports success. IIS Express
+development runs as the developer's Windows identity and can use the same Node
+service probe. Target-server verification still requires running
+tools/Test-IisIdentity.ps1 there; no access to that server was supplied.
+See IIS_VERIFICATION.md for execution and filesystem permissions.
+
+## Remaining boundaries
+
+Exhaustive per-requirement coverage and capacity/reference-machine benchmarks
+remain tracked in issues #2 and #3. The real consuming application's HTTP/export
+acceptance and its Windows Server 2022 Standard configuration are outside these
+synthetic checks. Identity crosswalk, model clients, UI and internal schedulers
+remain outside the release.
+
+---
+
+## Historical 0.1.0 acceptance record
+
 # Implementation and verification status
 
 Version 0.1.0 implements design draft 0.2 against the byte-exact harness 0.7.0

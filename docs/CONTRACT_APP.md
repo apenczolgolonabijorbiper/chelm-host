@@ -1,6 +1,6 @@
 # Contract App
 
-Chelm-host 0.1.0 implements contract version 1. The following requirements are
+Chelm-host 0.2.0 implements contract version 1. The following requirements are
 from design draft 0.2. See [implementation and verification status](ACCEPTANCE.md)
 for measured checks, platform checks awaiting CI, and deviations.
 
@@ -67,7 +67,7 @@ chunk: <i>/<n>                          (for every group chunk, including 1/1)
 
 ### 6.4 Reading
 
-- `APP-30` `read <view>` returns the current content of a read-model view (section 10) and is equivalent to reading the file. `read summary --deep` additionally runs `memory-tool validate` and `memory-tool stats` on the committed snapshot and returns `validate: {ok, message, layout, warning_summary}`, the validator `warnings` (as returned, at most 1,000), and from `stats` the `capacity`, `totals` (0.7.0: `observations, processed, pending, entities, claims, relations, active_claims, open_questions`), `timeline`, `definitions` and `graph_updated_at`, all unchanged. Totals the harness adds later are passed through.
+- `APP-30` `read <view>` returns the current content of a read-model view (section 10) and is equivalent to reading the file. `read summary --deep` additionally runs `memory-tool validate` and `memory-tool stats` on the committed snapshot and returns `validate: {ok, message, layout, warning_summary}`, the validator `warnings` (as returned, at most 1,000), and from `stats` the `capacity`, `totals` (0.9.1: `observations, processed, pending, entities, claims, relations, active_claims, open_questions`), `timeline`, `definitions` and `graph_updated_at`, all unchanged. Totals the harness adds later are passed through.
 - `APP-31` `inspect <metric> [--subject <id>]` returns a table `{title, source, fetched_at, note, columns[], rows[][], total, truncated, text}` with at most 500 rows and at most 400 characters per cell (`truncated` set when cut). Metrics and columns:
   - `inbox`, `pending`: `observation_id, kind, recorded_at, subject_id, processed, first_line` (newest by file write time, at most 500; `first_line` is the first non-empty body line, at most 160 characters; `pending` lists those without a processed ledger row).
   - `evidence`: `observation_id, analyzed, size_kb, written_utc, top_level_keys` (newest first, at most 500; first eight keys).
@@ -75,7 +75,7 @@ chunk: <i>/<n>                          (for every group chunk, including 1/1)
   - `entities`, `claims`: graph records as stored.
   - `relations`: claims whose `object.entity_id` is non-empty, including superseded and retracted ones; columns `id, subject, predicate, object, classification, status`.
   - `hypotheses`: records from `memory/hypotheses.json` (the path reported in `layout.hypotheses_path`); columns `id, statement, status, confidence, support, refutation, updated_at, model` (hypotheses schema 1; arrays joined with `, `).
-  - `warnings` (new; not shown by the consumer today): the validator warnings of the committed snapshot, columns `code, object_id, message`, plus `warning_summary` in `note`. The 0.7.0 codes include `capacity_near_limit`, `multiple_active_values`, `duplicate_external_id`, `dependency_changed`, `duplicate_corroboration`, `unknown_kind`, `unknown_predicate`, `unknown_external_id_scheme` and `unused_entity`. Warnings prompt review and decide nothing (harness rule); the default `text` says so.
+  - `warnings` (new; not shown by the consumer today): the validator warnings of the committed snapshot, columns `code, object_id, message`, plus `warning_summary` in `note`. The 0.9.1 codes include `capacity_near_limit`, `multiple_active_values`, `duplicate_external_id`, `dependency_changed`, `duplicate_corroboration`, `unknown_kind`, `unknown_predicate`, `unknown_external_id_scheme` and `unused_entity`. Warnings prompt review and decide nothing (harness rule); the default `text` says so.
   - `open-questions`: open entries of the question queue.
   - `lease`: rows `field, value` starting with `state` (`held`, `expired` or `idle`, `APP-35`), then each lease field; `note` explains the state.
   - `journals`: one row per journal, newest first (`APP-36`).
@@ -83,7 +83,7 @@ chunk: <i>/<n>                          (for every group chunk, including 1/1)
   - `validation`: `text` is the harness validator output for the committed snapshot.
   - `conversation`: `at, role, text (400 chars), observation_id, mode_or_question`, newest first.
 - `APP-32` `get item <id>`: one graph record by ID; the ID MUST match `^(clm|ent)-<uuid>$`. `get journal <run>.md`: the run name MUST match `^<uuid>\.md$`; returns text (at most 20000 characters). `get observation <uuid> [--subject <id>]`: returns the inbox note, the evidence file and the chat event if present (each at most 60000 characters), whether it is analysed, and, with a subject, the registry group it belongs to (kind, created_at).
-- `APP-33` `context`: input `{query?, entity?, source?, limit?: 20, predicate?, type?, kind?, status?: "active"|"all", hops?: 1..3, expansion_budget?: 1..20000, current?: bool, valid_at?: <UTC ISO>, external_id?: {value, scheme, namespace}}`. It maps one to one to the 0.7.0 `memory-tool context` options (`--query`, `--entity`, `--source`, `--limit`, `--predicate`, `--type`, `--kind`, `--status`, `--hops`, `--expansion-budget`, `--current`, `--valid-at`, `--external-id --scheme --namespace`) and returns the harness result unchanged, including `limits`, `truncated`, `method`, `source_excerpts`, `current_selection`, `current_ties` and `hidden`. `limit` is 1 to 100. Chelm-host checks only shapes and ranges; meaning is the harness's. An empty result does not mean absence (pending or uncollected inputs); the default `text` says so.
+- `APP-33` `context`: input `{query?, entity?, source?, limit?: 20, predicate?, type?, kind?, status?: "active"|"all", hops?: 1..3, expansion_budget?: 1..20000, current?: bool, valid_at?: <UTC ISO>, external_id?: {value, scheme, namespace}}`. It maps one to one to the 0.9.1 `memory-tool context` options (`--query`, `--entity`, `--source`, `--limit`, `--predicate`, `--type`, `--kind`, `--status`, `--hops`, `--expansion-budget`, `--current`, `--valid-at`, `--external-id --scheme --namespace`) and returns the harness result unchanged, including `limits`, `truncated`, `method`, `source_excerpts`, `current_selection`, `current_ties` and `hidden`. `limit` is 1 to 100. Chelm-host checks only shapes and ranges; meaning is the harness's. An empty result does not mean absence (pending or uncollected inputs); the default `text` says so.
 - `APP-34` `subject <id>`: `{groups: [...], kinds: {<kind>: {observed, indexed, analyzed}}, sets: {<name>: {observed, indexed, analyzed}}}`, where `observed` counts the observation IDs in the subject's groups, `indexed` those with an evidence file, `analyzed` those with a processed ledger row. `sets` are named kind sets declared by the application in the runtime configuration (`intake.kind_sets`, for example `{"records": ["profile", "children_digest"], "changes": ["change_digest", "file_digest"]}`). `subject <id> rows --kinds a,b --filter all|indexed|analyzed`: rows `observation_id, kind, sent_at, evidence, analyzed`.
 - `APP-35` Lease state rule: `held` when `status` is `processing` and `expires_at` is later than now; `expired` when `status` is `processing` and `expires_at` has passed; `idle` otherwise. Only `held` makes the runtime busy.
 - `APP-36` Journal row statistics (for each `memory/runs/<run>.md`): `observations` = ledger rows whose `run` equals `memory/runs/<run>.md`; `committed` = the latest `processed_at` among them; `started` = the value after `Started:` in the journal text (blank if absent); `ended` = the journal's commit time in the instance history (today the consumer uses the file's last write time; the commit time is preferred because the read model works from committed state); `duration` = ended minus started; `observation_kinds` = counts of `kind` from the evidence files of those observations; `entities`, `claims`, `relations`, `source_assertions` = graph items citing those observations (entities by `source_ids`, claims by `sources[].observation_id`; `source_assertions` are claims classified `source_assertion`, the consumer's current rule on graph schema 2; it replaced the earlier count of `user_declaration`); `questions_opened` = queue entries whose `source_observation_id` is one of them; `unresolved` = those still open.
@@ -107,3 +107,14 @@ chunk: <i>/<n>                          (for every group chunk, including 1/1)
 - `APP-63` `delegate cancel --package <id>`: releases the reservation; a later result for it is refused.
 
 ---
+
+## New additive operations
+
+- profile install --source MIRROR: byte-exact mirrored guidance installation.
+- profile check|status --source MIRROR: compare selected configuration/files.
+- status.profile.expected: optional expected-profile comparison.
+- adopt --input JSON: intake_stores [{path,subject_id}] mappings; consumer request
+  imports accept {jobs:[...]}. See RUNTIME.md for relative-path semantics.
+- New refusals: subject_required, subject_conflict, profile_invalid, profile_dirty,
+  profile_mismatch. Missing expected profiles produce matches:false in checks and
+  profile_mismatch in an enforced worker next.

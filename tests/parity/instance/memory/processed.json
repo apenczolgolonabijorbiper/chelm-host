@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-01-01T12:10:00.000Z",
+  "observations": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "source_file": "inbox/00000000-0000-4000-8000-000000000001.md",
+      "source_sha256": "46378282745f77f72484d43ceafb9c68477e4d540d7118581dc9b5d2e4116ea2",
+      "status": "processed",
+      "processed_at": "2026-01-01T12:10:00.000Z",
+      "outputs": [
+        "memory/graph.json",
+        "memory/events/chat/00000000-0000-4000-8000-000000000003.json"
+      ],
+      "run": "memory/runs/00000000-0000-4000-8000-000000000900.md"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "source_file": "inbox/00000000-0000-4000-8000-000000000002.md",
+      "source_sha256": "ffde03ddd0f94165432dceaec9005affa42cda1b587123ced47d994c880a51e4",
+      "status": "processed",
+      "processed_at": "2026-01-01T12:10:00.000Z",
+      "outputs": [
+        "memory/graph.json",
+        "memory/events/chat/00000000-0000-4000-8000-000000000003.json"
+      ],
+      "run": "memory/runs/00000000-0000-4000-8000-000000000900.md"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000003",
+      "source_file": "inbox/00000000-0000-4000-8000-000000000003.md",
+      "source_sha256": "e892b6dad6d7702ba939761d605880ba0d6a3cefd7a4610515393af0465ec9c4",
+      "status": "processed",
+      "processed_at": "2026-01-01T12:10:00.000Z",
+      "outputs": [
+        "memory/graph.json",
+        "memory/events/chat/00000000-0000-4000-8000-000000000003.json"
+      ],
+      "run": "memory/runs/00000000-0000-4000-8000-000000000900.md"
+    }
+  ]
+}

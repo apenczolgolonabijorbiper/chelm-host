@@ -176,7 +176,7 @@ test('WRK MCP: initialize, notifications, tools and all nine method round trips'
   assert.equal(r.status, 0, r.stderr);
   const messages = r.stdout.trim().split('\n').map(s => JSON.parse(s));
   assert.equal(messages.length, 11);
-  assert.equal(messages[0].result.serverInfo.version, '0.1.0');
+  assert.equal(messages[0].result.serverInfo.version, '0.2.0');
   assert.equal(messages[1].result.tools.length, 9);
   for (const reply of messages.slice(2)) assert(reply.result.content[0].text);
 });

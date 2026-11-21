@@ -20,6 +20,39 @@ import {
 } from '../lib/harness.mjs';
 const begin = '<!-- chelm-host:begin -->',
   end = '<!-- chelm-host:end -->';
+
+function installPackage(dest, source, options) {
+  if (!fs.existsSync(dest) || options.upgrade && read(file(dest, 'RELEASE.json')).version !== source.manifest
+    .version) {
+    fs.mkdirSync(path.dirname(dest), {
+      recursive: true
+    });
+    const stage = dest + '.' + randomUUID() + '.tmp';
+    fs.mkdirSync(stage);
+    for (const p of ['RELEASE.json', ...Object.keys(source.manifest.files)]) atomic(file(stage, p), fs
+      .readFileSync(file(packageRoot, p)));
+    if (fs.existsSync(dest)) {
+      const old = dest + '.' + randomUUID() + '.old';
+      fs.renameSync(dest, old);
+      try {
+        fs.renameSync(stage, dest);
+      } catch (e) {
+        fs.renameSync(old, dest);
+        throw e;
+      }
+      fs.rmSync(old, {
+        recursive: true
+      });
+    } else fs.renameSync(stage, dest);
+  }
+}
+
+function resolveHint(repo, hint) {
+  assert(typeof hint === 'string' && hint.length && !/[\r\n\0]/.test(hint), 'input_invalid',
+    'Runtime hint must be one line');
+  if (hint === '<private-runtime>') return hint;
+  return path.isAbsolute(hint) ? safeAbs(hint) : file(repo, hint.replaceAll('\\', '/'));
+}
 export function install(options) {
   const source = integrity(packageRoot);
   assert(!source.problems.length, 'package_invalid', 'Source package failed integrity verification');
@@ -40,10 +73,33 @@ export function install(options) {
     if (old.manifest.version === source.manifest.version) assert(JSON.stringify(old.manifest.files) === JSON
       .stringify(source.manifest.files), 'install_conflict', 'Same version has different package bytes');
   }
+  const deferred = options['skip-agent-integration'] || options['defer-agent-integration'];
+  if (deferred) {
+    assert(!options['register-mcp'], 'usage',
+      'MCP registration cannot be combined with deferred agent integration');
+    const hint = options['runtime-hint'] ?? state?.runtime_hint ?? '<private-runtime>';
+    const runtime_path_abs = resolveHint(repo, hint);
+    installPackage(dest, source, options);
+    const next = {
+      ...state,
+      schema_version: 1,
+      version: source.manifest.version,
+      runtime_hint: hint,
+      integration_deferred: true
+    };
+    if (JSON.stringify(state) !== JSON.stringify(next)) write(statePath, next);
+    return {
+      installed_to: dest,
+      integration_deferred: true,
+      runtime_path_abs,
+      messages: ['Agent integration deferred; rerun the installer without the defer/skip flag to install it.']
+    };
+  }
   const hint = options['runtime-hint'] ?? state?.runtime_hint ?? '<private-runtime>',
     block =
     `${begin}\nUse vendor/chelm-host/AGENTS.md for all Golem operations.\nRuntime: ${hint}\nWorker entry: node vendor/chelm-host/bin/chelm.mjs worker next --runtime ${hint} --input -\n${end}`;
   assert(!/[\r\n]/.test(hint), 'input_invalid', 'Runtime hint must be one line');
+  const runtimePath = resolveHint(repo, hint);
   const agentsPath = file(repo, 'AGENTS.md'),
     agents = fs.existsSync(agentsPath) ? fs.readFileSync(agentsPath, 'utf8') : '';
   const start = agents.indexOf(begin),
@@ -68,34 +124,12 @@ export function install(options) {
     'install_conflict', 'Invalid Cursor MCP configuration');
   const server = {
     command: 'node',
-    args: [file(repo, 'vendor/chelm-host/bin/chelm-mcp.mjs'), '--runtime', hint]
+    args: [file(repo, 'vendor/chelm-host/bin/chelm-mcp.mjs'), '--runtime', runtimePath]
   };
   if (options['register-mcp'] && mcp.mcpServers.chelm) assert(state?.mcp_hash === hash(JSON.stringify(mcp
     .mcpServers.chelm)), 'install_conflict', 'Existing chelm MCP server is not managed or was edited');
   // All conflicts are checked above before any package or integration write.
-  if (!fs.existsSync(dest) || options.upgrade && read(file(dest, 'RELEASE.json')).version !== source.manifest
-    .version) {
-    fs.mkdirSync(path.dirname(dest), {
-      recursive: true
-    });
-    const stage = dest + '.' + randomUUID() + '.tmp';
-    fs.mkdirSync(stage);
-    for (const p of ['RELEASE.json', ...Object.keys(source.manifest.files)]) atomic(file(stage, p), fs
-      .readFileSync(file(packageRoot, p)));
-    if (fs.existsSync(dest)) {
-      const old = dest + '.' + randomUUID() + '.old';
-      fs.renameSync(dest, old);
-      try {
-        fs.renameSync(stage, dest);
-      } catch (e) {
-        fs.renameSync(old, dest);
-        throw e;
-      }
-      fs.rmSync(old, {
-        recursive: true
-      });
-    } else fs.renameSync(stage, dest);
-  }
+  installPackage(dest, source, options);
   if (nextAgents !== agents) atomic(agentsPath, nextAgents);
   if (!fs.existsSync(rulePath) || fs.readFileSync(rulePath, 'utf8') !== rule) atomic(rulePath, rule);
   if (options['register-mcp']) {
@@ -107,6 +141,7 @@ export function install(options) {
     schema_version: 1,
     version: source.manifest.version,
     runtime_hint: hint,
+    integration_deferred: false,
     agents_hash: hash(block),
     rule_hash: hash(rule),
     ...(options['register-mcp'] ? {
@@ -119,6 +154,7 @@ export function install(options) {
   return {
     installed_to: dest,
     mcp: server,
+    runtime_path_abs: runtimePath,
     messages: options['register-mcp'] ? [] : ['Add the returned mcp entry to your client configuration.']
   };
 }
@@ -126,9 +162,12 @@ try {
   const options = {};
   for (let i = 2; i < process.argv.length; i++) {
     const key = process.argv[i].slice(2);
-    assert(['repo', 'runtime-hint', 'register-mcp', 'upgrade'].includes(key), 'usage',
+    assert(['repo', 'runtime-hint', 'register-mcp', 'upgrade', 'skip-agent-integration',
+        'defer-agent-integration'
+      ].includes(key), 'usage',
       'Unknown installer option');
-    options[key] = ['register-mcp', 'upgrade'].includes(key) ? true : process.argv[++i];
+    options[key] = ['register-mcp', 'upgrade', 'skip-agent-integration', 'defer-agent-integration'].includes(
+      key) ? true : process.argv[++i];
   }
   const result = install(options);
   process.stdout.write(JSON.stringify({

@@ -9,10 +9,6 @@ import {
   note
 } from '../lib/intake.mjs';
 import {
-  keyed,
-  mergeGraph
-} from '../lib/merge.mjs';
-import {
   relative,
   file,
   tail,
@@ -45,42 +41,6 @@ test('SEC-2: paths reject traversal, drives, reserved Git and links', t => {
   } catch (e) {
     if (e.code !== 'EPERM') throw e;
   }
-});
-test('DST-32: keyed conflicts, removals, append-only entity identifiers and retained claims', () => {
-  const base = [{
-    id: 'e',
-    label: 'a',
-    source_ids: ['a'],
-    external_ids: []
-  }];
-  assert.deepEqual(keyed(base, [{
-    ...base[0],
-    source_ids: ['a', 'b']
-  }], [{
-    ...base[0],
-    source_ids: ['a', 'c']
-  }], 'entities')[0].source_ids, ['a', 'b', 'c']);
-  assert.throws(() => keyed(base, [], base), e => e.code === 'merge_conflict');
-  assert.throws(() => keyed(base, [{
-    ...base[0],
-    label: 'b'
-  }], [{
-    ...base[0],
-    label: 'c'
-  }]), e => e.code === 'merge_conflict');
-  assert.throws(() => keyed([{
-    id: 'c',
-    predicate: 'a',
-    status: 'active'
-  }], [{
-    id: 'c',
-    predicate: 'b',
-    status: 'active'
-  }], [{
-    id: 'c',
-    predicate: 'a',
-    status: 'active'
-  }], 'claims'), e => e.code === 'merge_conflict');
 });
 test('NFR-5: conversation tail reads bounded blocks and preserves UTF-8', t => {
   const p = path.join(fs.realpathSync(os.tmpdir()), 'chelm-tail-' + process.pid);
@@ -115,14 +75,27 @@ test('CON-1: CLI rejects duplicate/incomplete flags', () => {
 });
 
 test('CON-2: launching a CLI through an OS path alias still emits JSON', async t => {
-  const {spawnSync} = await import('node:child_process');
-  const {source} = await import('./helpers.mjs');
+  const {
+    spawnSync
+  } = await import('node:child_process');
+  const {
+    source
+  } = await import('./helpers.mjs');
   const base = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-entry-'));
-  t.after(() => fs.rmSync(base, {recursive:true, force:true}));
+  t.after(() => fs.rmSync(base, {
+    recursive: true,
+    force: true
+  }));
   const alias = path.join(base, 'alias');
-  try { fs.symlinkSync(source, alias, 'dir'); }
-  catch (e) { if (e.code === 'EPERM') return; throw e; }
-  const r = spawnSync(process.execPath, [path.join(alias, 'bin/chelm.mjs'), 'version'], {encoding:'utf8'});
+  try {
+    fs.symlinkSync(source, alias, 'dir');
+  } catch (e) {
+    if (e.code === 'EPERM') return;
+    throw e;
+  }
+  const r = spawnSync(process.execPath, [path.join(alias, 'bin/chelm.mjs'), 'version'], {
+    encoding: 'utf8'
+  });
   assert.equal(r.status, 0, r.stderr);
-  assert.equal(JSON.parse(r.stdout).package_version, '0.1.0');
+  assert.equal(JSON.parse(r.stdout).package_version, '0.2.0');
 });

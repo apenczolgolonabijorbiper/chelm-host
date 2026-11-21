@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-01-01T12:10:00.000Z",
+  "questions": [
+    {
+      "id": "q-closed",
+      "status": "closed",
+      "text": "Was the visit completed?",
+      "source_observation_id": "00000000-0000-4000-8000-000000000001",
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "analysis": {
+        "status": "answered",
+        "source_observation_ids": [
+          "00000000-0000-4000-8000-000000000003"
+        ],
+        "answered_at": "2026-01-01T12:10:00.000Z"
+      }
+    },
+    {
+      "id": "q-open",
+      "status": "open",
+      "text": "When is the next visit?",
+      "source_observation_id": "00000000-0000-4000-8000-000000000002",
+      "created_at": "2026-01-01T12:10:00.000Z",
+      "analysis": {
+        "status": "pending",
+        "source_observation_ids": []
+      }
+    }
+  ]
+}

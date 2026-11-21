@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "harness_supported": "=0.9.1",
+  "supported_harness_versions": [
+    "0.9.1"
+  ],
+  "versions": {
+    "0.9.1": {
+      "graph": 2,
+      "hypotheses": 1,
+      "vocabulary": 2,
+      "layout": "canonical",
+      "runtimes": "Existing canonical instances from harness 0.7.0/0.8.x/0.9.x retain memory and host state. Pause workers, cancel outstanding delegation offers, replace the harness and host packages, update harness.root, verify and refresh. No runtime migration or memory reset. Historical layouts and graph schema 1 require a fresh instance and original-source import."
+    }
+  }
+}

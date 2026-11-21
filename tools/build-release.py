@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import zipfile
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -31,14 +32,15 @@ def build(harness, output=None):
     manifest = {'schema_version': 1, 'version': version,
                 'contracts': {'app': 1, 'worker': 1, 'read_model': 1,
                               'runtime_config': 1, 'delegation': 1},
-                'harness_supported': '=0.7.0',
+                'harness_supported': '=0.9.1', 'supported_harness_versions': ['0.9.1'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',
-                               'harness_release_sha256': '2154ea76f5184afdb76e73f7c15f324bef2a51e2afccd645c231cb75dbdecb80'},
+                               'harness_release_sha256': '3471d0bf0f83b4d3756a8aefcbc45a314c372e52bc28d39265d16a1ad2cd7150'},
                 'files': {name: digest(data) for name, data in payload.items()}}
     payload['RELEASE.json'] = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
     env = {**os.environ, 'CHELM_HARNESS_ROOT': str(harness),
            'GOLEM_PYTHON': os.environ.get('GOLEM_PYTHON', os.sys.executable)}
+    started = time.monotonic()
     with tempfile.TemporaryDirectory(prefix='chelm-release-') as directory:
         stage = (Path(directory) / 'chelm-host').resolve()
         for name, data in payload.items():
@@ -47,10 +49,19 @@ def build(harness, output=None):
             target.write_bytes(data)
         subprocess.run(['node', str(stage / 'bin/chelm.mjs'), 'verify', '--harness', str(harness),
                         '--python', env['GOLEM_PYTHON']], check=True, env=env)
-        subprocess.run(['node', '--test', 'tests/'], cwd=stage, check=True, env=env)
+        tests = [str(p.relative_to(stage)) for p in sorted((stage / 'tests').rglob('*.test.mjs'))]
+        subprocess.run(['node', '--test', '--test-concurrency=4', *tests], cwd=stage, check=True, env=env)
         env['GOLEM_ADAPTER'] = json.dumps(['node', str(stage / 'lib/backend.mjs')])
         subprocess.run(['node', '--test', str(harness / 'adapters/conformance/adapter.test.mjs')],
                        cwd=stage, check=True, env=env)
+        suite_seconds = time.monotonic() - started
+        output.parent.mkdir(parents=True, exist_ok=True)
+        timing = {'platform': os.sys.platform, 'harness_version': '0.9.1', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
+        print('CHELM_TEST_TIMING ' + json.dumps(timing), flush=True)
+        (output.parent / ('test-timing-' + os.sys.platform + '.json')).write_text(json.dumps(timing, indent=2) + '\n', encoding='utf-8')
+        subprocess.run(['node', str(stage / 'tools/benchmark-host.mjs'), '--harness', str(harness),
+                        '--output', str(output.parent / ('benchmark-' + os.sys.platform + '.json'))],
+                       cwd=stage, env=env, check=True)
     # Output is written only after all checks passed.
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix('.zip.tmp')

@@ -20,7 +20,7 @@ jobs:
         include:
           - os: ubuntu-latest
             node: '22.12.0'
-          - os: windows-latest
+          - os: windows-2022
             node: '22.12.0'
           - os: macos-latest
             node: '22.12.0'
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           repository: apenczolgolonabijorbiper/golem14-harness
-          ref: v0.7.0
+          ref: v0.9.1
           path: harness-src
       - uses: actions/setup-node@v7.1.0
         with:
@@ -50,6 +50,18 @@ jobs:
         run: python tools/prepare-harness.py --source ../harness-src --destination ../harness-release
       - name: Build with all Chelm and harness backend conformance tests
         run: python tools/build-release.py --harness ../harness-release
+      - name: Verify default full IIS application pool identity
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/iis-identity.json -InstallPrerequisites
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: chelm-evidence-${{ matrix.os }}-${{ matrix.node }}
+          path: host/dist/*.json
+          if-no-files-found: warn
       - uses: actions/upload-artifact@v7.0.2
         if: matrix.os == 'ubuntu-latest' && matrix.node == '24'
         with:
@@ -68,6 +80,18 @@ jobs:
         with:
           name: chelm-release
           path: dist
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          pattern: chelm-evidence-*
+          path: evidence
+      - name: Collect platform evidence
+        run: |
+          for folder in evidence/*; do
+            for report in "$folder"/*.json; do
+              [[ -f "$report" ]] || continue
+              cp "$report" "dist/$(basename "$folder")-$(basename "$report")"
+            done
+          done
       - name: Publish versioned ZIP and checksum once
         env:
           GH_TOKEN: ${{ github.token }}
@@ -80,5 +104,5 @@ jobs:
           if gh release view "v$version" >/dev/null 2>&1; then
             echo "Release v$version already exists; existing assets remain immutable."
           else
-            gh release create "v$version" --target "$GITHUB_SHA" --title "Chelm-host $version" --notes-file docs/RELEASE_NOTES.md dist/*.zip dist/*.sha256
+            gh release create "v$version" --target "$GITHUB_SHA" --title "Chelm-host $version" --notes-file docs/RELEASE_NOTES.md dist/*.zip dist/*.sha256 dist/*.json
           fi

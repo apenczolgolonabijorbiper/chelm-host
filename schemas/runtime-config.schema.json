@@ -201,6 +201,25 @@
         "root"
       ],
       "additionalProperties": false
+    },
+    "profile_expectation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "enforce": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source",
+        "enforce"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [

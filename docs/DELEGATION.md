@@ -1,6 +1,6 @@
 # Delegation
 
-Chelm-host 0.1.0 implements contract version 1. The following requirements are
+Chelm-host 0.2.0 implements contract version 1. The following requirements are
 from design draft 0.2. See [implementation and verification status](ACCEPTANCE.md)
 for measured checks, platform checks awaiting CI, and deviations.
 
@@ -49,3 +49,22 @@ for measured checks, platform checks awaiting CI, and deviations.
 - `DST-40` A package contains the full committed memory of the runtime (the remote executor needs the graph for retrieval). `delegate offer` MUST state this in its result `messages` the first time per runtime, and `delegation.participants` (OS user names) MUST be non-empty for an offer. File permissions of the share are the application owner's responsibility; Chelm-host documents the required access (participants read and write, nobody else).
 
 ---
+
+## Harness-native moved-head integration in 0.2.0
+
+Chelm advertises harness-merge and always invokes the supported harness's
+`memory-tool merge --base BASE --ours OURS --theirs THEIRS --out OUT` for a moved
+head. All three inputs are private immutable snapshots. Chelm continues to check
+package hashes, source bytes, allowed history, ancestry, unchanged policy and
+fresh ledger/lease state before publication. Packages from a different harness
+release refuse. It does not fall back to an independent merge algorithm.
+
+The harness report and warnings remain in the returned work unit. In particular,
+independently changed graphs require index regeneration even if both branches
+left the old Markdown untouched. A requires_review result creates an integration
+lease and returns status:integration-required, method:harness-merge, flagged
+needs_regeneration paths, executor identity and outputs. Regenerate/review those
+summaries, update the integration journal with the actual executor/model, then
+worker validate and submit. JSON merges never certify summaries automatically.
+A review-free result may complete mechanically. The local backend supplies the
+integration ledger row and released lease; remote journals/events remain exact.

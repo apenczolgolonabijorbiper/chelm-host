@@ -1,0 +1,13 @@
+[
+  {
+    "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "kind": "collect",
+    "subject_id": "REC-A",
+    "reason": "Ask for next date.",
+    "status": "proposed",
+    "created_at": "2026-01-01T12:00:00.000Z",
+    "created_by": "synthetic-fixture",
+    "updated_at": "2026-01-01T12:00:00.000Z",
+    "note": ""
+  }
+]

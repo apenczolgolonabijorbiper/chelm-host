@@ -1,0 +1,36 @@
+{
+  "inbox": 3,
+  "evidence": 3,
+  "processed": 3,
+  "pending_analysis": 0,
+  "hypotheses": 1,
+  "past_answers": 2,
+  "totals": {
+    "sources": 3,
+    "entities": 2,
+    "claims": 3,
+    "relations": 1,
+    "active_claims": 2
+  },
+  "open_question": "q-open",
+  "answer_observation": "00000000-0000-4000-8000-000000000003",
+  "journal": {
+    "observations": 3,
+    "source_assertions": 3,
+    "relations": 1,
+    "questions_opened": 2,
+    "unresolved": 1
+  },
+  "subjects": {
+    "REC-A": {
+      "observed": 2,
+      "indexed": 2,
+      "analyzed": 2
+    },
+    "REC-B": {
+      "observed": 1,
+      "indexed": 1,
+      "analyzed": 1
+    }
+  }
+}

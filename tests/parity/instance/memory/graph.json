@@ -1,0 +1,139 @@
+{
+  "schema_version": 2,
+  "updated_at": "2026-01-01T12:10:00.000Z",
+  "sources": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "path": "inbox/00000000-0000-4000-8000-000000000001.md",
+      "sha256": "46378282745f77f72484d43ceafb9c68477e4d540d7118581dc9b5d2e4116ea2",
+      "recorded_at": "2026-01-01T12:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "path": "inbox/00000000-0000-4000-8000-000000000002.md",
+      "sha256": "ffde03ddd0f94165432dceaec9005affa42cda1b587123ced47d994c880a51e4",
+      "recorded_at": "2026-01-01T12:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000003",
+      "path": "inbox/00000000-0000-4000-8000-000000000003.md",
+      "sha256": "e892b6dad6d7702ba939761d605880ba0d6a3cefd7a4610515393af0465ec9c4",
+      "recorded_at": "2026-01-01T12:00:00.000Z"
+    }
+  ],
+  "entities": [
+    {
+      "id": "ent-00000000-0000-4000-8000-000000000001",
+      "type": "person",
+      "kind": "person",
+      "label": "Alice",
+      "aliases": [],
+      "source_ids": [
+        "00000000-0000-4000-8000-000000000001",
+        "00000000-0000-4000-8000-000000000002",
+        "00000000-0000-4000-8000-000000000003"
+      ],
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "uncertainty": []
+    },
+    {
+      "id": "ent-00000000-0000-4000-8000-000000000002",
+      "type": "place",
+      "kind": "place",
+      "label": "Krakow",
+      "aliases": [
+        "Kraków"
+      ],
+      "source_ids": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "created_at": "2026-01-01T12:00:00.000Z",
+      "uncertainty": []
+    }
+  ],
+  "claims": [
+    {
+      "id": "clm-00000000-0000-4000-8000-000000000001",
+      "subject_id": "ent-00000000-0000-4000-8000-000000000001",
+      "attributed_to_id": "ent-00000000-0000-4000-8000-000000000001",
+      "predicate": "visited",
+      "object": {
+        "entity_id": "ent-00000000-0000-4000-8000-000000000002"
+      },
+      "classification": "source_assertion",
+      "sources": [
+        {
+          "observation_id": "00000000-0000-4000-8000-000000000001",
+          "quote": "Alice visited Krakow."
+        }
+      ],
+      "asserted_at": "2026-01-01T12:00:00.000Z",
+      "valid_time": {
+        "to": null,
+        "expression": null,
+        "precision": "unknown",
+        "from": null
+      },
+      "status": "active",
+      "supersedes": [],
+      "uncertainty": [],
+      "created_at": "2026-01-01T12:00:00.000Z"
+    },
+    {
+      "id": "clm-00000000-0000-4000-8000-000000000002",
+      "subject_id": "ent-00000000-0000-4000-8000-000000000001",
+      "attributed_to_id": "ent-00000000-0000-4000-8000-000000000001",
+      "predicate": "has_state",
+      "object": {
+        "value": "planned"
+      },
+      "classification": "source_assertion",
+      "sources": [
+        {
+          "observation_id": "00000000-0000-4000-8000-000000000001",
+          "quote": "State: planned."
+        }
+      ],
+      "asserted_at": "2026-01-01T12:00:00.000Z",
+      "valid_time": {
+        "to": null,
+        "expression": null,
+        "precision": "unknown",
+        "from": null
+      },
+      "status": "superseded",
+      "supersedes": [],
+      "uncertainty": [],
+      "created_at": "2026-01-01T12:00:00.000Z"
+    },
+    {
+      "id": "clm-00000000-0000-4000-8000-000000000003",
+      "subject_id": "ent-00000000-0000-4000-8000-000000000001",
+      "attributed_to_id": "ent-00000000-0000-4000-8000-000000000001",
+      "predicate": "has_state",
+      "object": {
+        "value": "completed"
+      },
+      "classification": "source_assertion",
+      "sources": [
+        {
+          "observation_id": "00000000-0000-4000-8000-000000000002",
+          "quote": "visit state is completed."
+        }
+      ],
+      "asserted_at": "2026-01-01T12:00:00.000Z",
+      "valid_time": {
+        "to": null,
+        "expression": null,
+        "precision": "unknown",
+        "from": null
+      },
+      "status": "active",
+      "supersedes": [
+        "clm-00000000-0000-4000-8000-000000000002"
+      ],
+      "uncertainty": [],
+      "created_at": "2026-01-01T12:00:00.000Z"
+    }
+  ]
+}

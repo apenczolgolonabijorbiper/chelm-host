@@ -20,7 +20,7 @@ export function parse(argv) {
       const key = arg.slice(2);
       if (!flags.has(key) && !['runtime', 'input', 'harness', 'label', 'instance-path', 'purpose', 'profile',
           'python', 'instance', 'subject-header', 'conversation', 'intake-stores', 'requests', 'scope',
-          'subject', 'kinds', 'filter', 'id', 'status', 'note', 'package'
+          'subject', 'kinds', 'filter', 'id', 'status', 'note', 'package', 'source', 'git'
         ].includes(key)) throw new ChelmError('usage', 'Unknown option: ' + key, {}, 2);
       if (Object.hasOwn(options, key)) throw new ChelmError('usage', 'Duplicate option: ' + key, {}, 2);
       if (flags.has(key)) options[key] = true;

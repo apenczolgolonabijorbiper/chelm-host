@@ -1,0 +1,33 @@
+{
+  "REC-A": [
+    {
+      "key": "record:c1614f88a3917a0c3de3a2175f13cb86cb911bed02b47bfbc47bb79ca0433d6f",
+      "kind": "record",
+      "content_key": "c1614f88a3917a0c3de3a2175f13cb86cb911bed02b47bfbc47bb79ca0433d6f",
+      "ids": [
+        "00000000-0000-4000-8000-000000000001"
+      ],
+      "created_at": "2026-01-01T12:00:00.000Z"
+    },
+    {
+      "key": "change:5bae04d26a7576a0b8e8c72f7019b8b91b61336b3ee7d78643ff845fe45d0d84",
+      "kind": "change",
+      "content_key": "5bae04d26a7576a0b8e8c72f7019b8b91b61336b3ee7d78643ff845fe45d0d84",
+      "ids": [
+        "00000000-0000-4000-8000-000000000002"
+      ],
+      "created_at": "2026-01-01T12:00:00.000Z"
+    }
+  ],
+  "REC-B": [
+    {
+      "key": "question_answer:db8aa624fddc819855ae99e0a33b43ef7cca715e0456dbb2fd33e5934d21dcac",
+      "kind": "question_answer",
+      "content_key": "db8aa624fddc819855ae99e0a33b43ef7cca715e0456dbb2fd33e5934d21dcac",
+      "ids": [
+        "00000000-0000-4000-8000-000000000003"
+      ],
+      "created_at": "2026-01-01T12:00:00.000Z"
+    }
+  ]
+}

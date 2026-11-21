@@ -71,3 +71,69 @@ test('Schemas: runtime and all published read views satisfy the distributed sche
   fs.writeFileSync(configPath, JSON.stringify(cfg));
   refuse('config_invalid', 'status', null, f.root);
 });
+
+test('VF-5: deferred integration leaves agent files untouched and resolves a repository-relative runtime',
+  t => {
+    if (!fs.existsSync(path.join(source, 'RELEASE.json'))) {
+      t.skip('Staged distribution check');
+      return;
+    }
+    const root = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-defer-'));
+    t.after(() => fs.rmSync(root, {
+      recursive: true,
+      force: true,
+      maxRetries: 10,
+      retryDelay: 100
+    }));
+    fs.writeFileSync(path.join(root, 'AGENTS.md'), '# Application instructions\n');
+    const call = (...flags) => spawnSync(process.execPath, [path.join(source, 'integration/install.mjs'),
+      '--repo', root, '--runtime-hint', 'App_Data/golem-runtime', ...flags
+    ], {
+      encoding: 'utf8'
+    });
+    let r = call('--skip-agent-integration');
+    assert.equal(r.status, 0, r.stdout);
+    assert.equal(fs.readFileSync(path.join(root, 'AGENTS.md'), 'utf8'), '# Application instructions\n');
+    assert(!fs.existsSync(path.join(root, '.cursor')));
+    assert.equal(JSON.parse(r.stdout).integration_deferred, true);
+    r = call('--register-mcp');
+    assert.equal(r.status, 0, r.stdout);
+    assert(fs.readFileSync(path.join(root, 'AGENTS.md'), 'utf8').startsWith(
+    '# Application instructions\n'));
+    const mcp = JSON.parse(fs.readFileSync(path.join(root, '.cursor/mcp.json')));
+    assert.equal(mcp.mcpServers.chelm.args.at(-1), path.join(root, 'App_Data/golem-runtime'));
+    const agents = fs.readFileSync(path.join(root, 'AGENTS.md'), 'utf8');
+    r = call('--defer-agent-integration');
+    assert.equal(r.status, 0, r.stdout);
+    assert.equal(fs.readFileSync(path.join(root, 'AGENTS.md'), 'utf8'), agents);
+  });
+
+test('VF-7: packaged service probe completes a synthetic lease under the executing identity', t => {
+  if (!fs.existsSync(path.join(source, 'RELEASE.json'))) {
+    t.skip('Staged distribution check');
+    return;
+  }
+  const base = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-service-'));
+  t.after(() => fs.rmSync(base, {
+    recursive: true,
+    force: true,
+    maxRetries: 10,
+    retryDelay: 100
+  }));
+  const config = path.join(base, 'probe.json');
+  fs.writeFileSync(config, JSON.stringify({
+    runtime: path.join(base, 'runtime'),
+    harness,
+    python: process.env.GOLEM_PYTHON ?? (process.platform === 'win32' ? 'py' : 'python3'),
+    git: 'git'
+  }));
+  const r = spawnSync(process.execPath, [path.join(source, 'tools/service-probe.mjs'), config], {
+    encoding: 'utf8',
+    timeout: 180000
+  });
+  assert.equal(r.status, 0, r.stdout + r.stderr);
+  const value = JSON.parse(r.stdout);
+  assert.equal(value.passed, true);
+  assert.equal(value.processed, 1);
+  assert.equal(value.claims, 1);
+});
