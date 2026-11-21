@@ -55,7 +55,7 @@ export function refuse(code, ...args) {
 export function fixture(t, {
   profile = false
 } = {}) {
-  const base = fs.mkdtempSync(path.join(os.tmpdir(), 'chelm-test-')),
+  const base = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-test-')),
     root = path.join(base, 'runtime');
   t.after(() => fs.rmSync(base, {
     recursive: true,

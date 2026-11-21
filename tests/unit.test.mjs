@@ -31,8 +31,9 @@ test('APP-11/12: parity chunking and byte identity', () => {
 });
 test('SEC-2: paths reject traversal, drives, reserved Git and links', t => {
   for (const p of ['../a', 'a/../b', 'a\\b', 'C:/a', '.git/config', 'x/.GIT/config', '/etc/passwd',
-      'a//b']) assert.throws(() => relative(p));
-  const base = fs.mkdtempSync(path.join(os.tmpdir(), 'chelm-path-'));
+      'a//b'
+    ]) assert.throws(() => relative(p));
+  const base = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-path-'));
   t.after(() => fs.rmSync(base, {
     recursive: true,
     force: true
@@ -82,7 +83,7 @@ test('DST-32: keyed conflicts, removals, append-only entity identifiers and reta
   }], 'claims'), e => e.code === 'merge_conflict');
 });
 test('NFR-5: conversation tail reads bounded blocks and preserves UTF-8', t => {
-  const p = path.join(os.tmpdir(), 'chelm-tail-' + process.pid);
+  const p = path.join(fs.realpathSync(os.tmpdir()), 'chelm-tail-' + process.pid);
   t.after(() => fs.rmSync(p, {
     force: true
   }));
@@ -98,7 +99,7 @@ test('NFR-5: conversation tail reads bounded blocks and preserves UTF-8', t => {
   assert.equal(rows.at(-1).text, 'żółć');
 });
 test('NFR-6: exclusive cross-process operation lock refuses a second caller', async t => {
-  const base = fs.mkdtempSync(path.join(os.tmpdir(), 'chelm-lock-'));
+  const base = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-lock-'));
   t.after(() => fs.rmSync(base, {
     recursive: true,
     force: true

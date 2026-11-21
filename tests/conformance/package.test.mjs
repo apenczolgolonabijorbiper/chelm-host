@@ -25,7 +25,7 @@ test('PKG/INS-1..6: release integrity, installer idempotence and conflict prefli
     return;
   }
   assert.deepEqual(integrity(source).problems, []);
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'chelm-install-'));
+  const root = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-install-'));
   t.after(() => fs.rmSync(root, {
     recursive: true,
     force: true,

@@ -3,6 +3,7 @@ import argparse
 import ast
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 EXPECTED = '2154ea76f5184afdb76e73f7c15f324bef2a51e2afccd645c231cb75dbdecb80'
@@ -11,13 +12,24 @@ EXPECTED = '2154ea76f5184afdb76e73f7c15f324bef2a51e2afccd645c231cb75dbdecb80'
 def prepare(source, destination):
     source, destination = Path(source), Path(destination)
     assert (source / 'VERSION').read_text().strip() == '0.7.0', 'Wrong harness version'
-    module = ast.parse((source / 'tools/build-release.py').read_text())
+    module = ast.parse(subprocess.check_output(['git', '-C', str(source), 'show', 'HEAD:tools/build-release.py']).decode('utf-8'))
     names = next(ast.literal_eval(statement.value) for statement in module.body
                  if isinstance(statement, ast.Assign)
                  and any(isinstance(target, ast.Name) and target.id == 'FILES'
                          for target in statement.targets))
-    entries = {name: (source / name).read_bytes() for name in names}
-    entries['AGENTS.md'] = (source / 'integration/AGENTS.distribution.md').read_bytes()
+    paths = [*names, 'integration/AGENTS.distribution.md']
+    raw = subprocess.check_output(['git', '-C', str(source), 'cat-file', '--batch'],
+                                  input=''.join('HEAD:' + name + '\n' for name in paths).encode())
+    entries, offset = {}, 0
+    for name in paths:
+        end = raw.index(b'\n', offset)
+        fields = raw[offset:end].split()
+        assert len(fields) == 3 and fields[1] == b'blob', 'Invalid Git batch object'
+        size, start = int(fields[2]), end + 1
+        assert raw[start + size:start + size + 1] == b'\n', 'Truncated Git batch'
+        entries[name] = raw[start:start + size]
+        offset = start + size + 1
+    entries['AGENTS.md'] = entries.pop('integration/AGENTS.distribution.md')
     manifest = {'schema_version': 1, 'version': '0.7.0', 'provenance': 'docs/PROVENANCE.md',
                 'files': {name: hashlib.sha256(data).hexdigest() for name, data in entries.items()}}
     data = (json.dumps(manifest, indent=2, sort_keys=True) + '\n').encode()

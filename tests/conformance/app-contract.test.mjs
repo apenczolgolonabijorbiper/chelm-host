@@ -31,7 +31,7 @@ test('APP-10..16/PAR-1..4: intake, exact headers, dedupe, receipt conflict and a
   const text = f.text('inbox/' + r.groups[0].observation_ids[0] + '.md');
   assert.match(text,
     /^---\nid: [a-f0-9-]+\nrecorded_at: .*Z\nkind: record\nsubject_id: REC-1\nchunk: 1\/1\n---\n\nA\nB\n$/
-    );
+  );
   r = ok('submit', null, f.root, {
     subject_id: 'REC-1',
     groups: [{
