@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
-import { startServer } from '../lib/remote-server.mjs';
+import { requireDependencies } from '../lib/dependencies.mjs';
 const at = process.argv.indexOf('--config');
 if (at < 0 || !process.argv[at + 1]) {
   process.stderr.write('Usage: node bin/chelm-serve.mjs --config <service.json>\n');
   process.exitCode = 2;
 } else
   try {
+    requireDependencies();
+    const { startServer } = await import('../lib/remote-server.mjs');
     const server = await startServer(JSON.parse(fs.readFileSync(process.argv[at + 1], 'utf8')));
     process.stderr.write(
       'Chelm remote MCP listening on ' + JSON.stringify(server.address()) + '\n'

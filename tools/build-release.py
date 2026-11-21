@@ -17,7 +17,7 @@ def digest(data):
 
 
 def entries():
-    ignored = {'.git', '.github', '.bin', '__pycache__'}
+    ignored = {'.git', '.github', '.bin', '__pycache__', 'node_modules'}
     return {p.relative_to(ROOT).as_posix(): p.read_bytes()
             for p in sorted(ROOT.rglob('*')) if p.is_file()
             and p.relative_to(ROOT).parts[0] != 'dist'
@@ -29,8 +29,6 @@ def build(harness, output=None):
     harness = Path(harness).resolve()
     version = (ROOT / 'VERSION').read_text().strip()
     output = Path(output or ROOT / 'dist' / f'chelm-host-{version}.zip').resolve()
-    if not (ROOT / 'node_modules/@modelcontextprotocol/sdk/package.json').exists():
-        raise RuntimeError('Run npm ci --ignore-scripts before building the network-capable release')
     payload = entries()
     manifest = {'schema_version': 1, 'version': version,
                 'contracts': {'app': 1, 'worker': 2, 'read_model': 1,
@@ -39,6 +37,7 @@ def build(harness, output=None):
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',
                                'harness_release_sha256': '0c4ba9f35e24df0887ceb27457d118b5e4829acef401242cb6818a3034f95031'},
+                'runtime_dependencies': {'manager': 'npm', 'lockfile': 'package-lock.json'},
                 'files': {name: digest(data) for name, data in payload.items()}}
     payload['RELEASE.json'] = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
     env = {**os.environ, 'CHELM_HARNESS_ROOT': str(harness),
@@ -50,6 +49,7 @@ def build(harness, output=None):
             target = stage / name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(data)
+        subprocess.run(['node', str(stage / 'integration/install-dependencies.mjs')], check=True, env=env)
         subprocess.run(['node', str(stage / 'bin/chelm.mjs'), 'verify', '--harness', str(harness),
                         '--python', env['GOLEM_PYTHON']], check=True, env=env)
         tests = [str(p.relative_to(stage)) for p in sorted((stage / 'tests').rglob('*.test.mjs'))]

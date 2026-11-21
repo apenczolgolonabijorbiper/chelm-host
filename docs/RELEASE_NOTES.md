@@ -1,3 +1,18 @@
+# Chelm-host 1.0.1
+
+Thin ZIP: node_modules is replaced by package.json/package-lock.json. Installation
+and upgrade restore locked production dependencies with npm ci --omit=dev
+--ignore-scripts before activation; restoration failure retains the previous package.
+Use --skip-dependencies for offline/local-only installations, and
+integration/install-dependencies.mjs for later remote MCP setup or --force repair.
+Remote entry points explain the setup command when dependencies are missing.
+
+Harness support remains **0.10.0 exactly**, with canonical graph v2/hypotheses v1/
+vocabulary v2, runtime configuration v2 and worker v2. No runtime migration is
+needed from Chelm-host 1.0.0. npm/registry access or a populated cache is now needed
+for remote dependencies; local CLI/stdio operations need only Node/Python/Git.
+The published 1.0.0 ZIP is unchanged. See README.md for integrity and offline details.
+
 # Chelm-host 1.0.0
 
 Replace shared-folder delegation with owner-hosted remote MCP workers. Remote agents
