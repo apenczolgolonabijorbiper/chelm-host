@@ -7,7 +7,7 @@ Worker/runtime configuration contracts are v2; application/read-model remain v1.
 
 Observed on Linux / Node 24 / Python 3.12 during implementation:
 
-- The staged release build passed all **46 Chelm checks** and all **11 harness
+- The staged release build passed all **47 Chelm checks** and all **11 harness
   backend conformance cases**, including purpose-guidance-v2 and profile-install-v1.
 - The staged package includes locked runtime dependencies and passed installer
   integrity/idempotence/deferred-registration and service-identity smoke checks.

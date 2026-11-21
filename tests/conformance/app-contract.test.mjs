@@ -263,3 +263,10 @@ test('VI-016 explicit chunks enforce bounds and preflight the entire submission'
   refuse('input_invalid','submit',null,f.root,{groups:[{kind:'record',chunks:['short'],max_chars:2}]});
   refuse('input_invalid','submit',null,f.root,{groups:[{kind:'record',chunks:['short'],oversize:'ignore'}]});
 });
+
+test('VI-016 internal conversation intake preserves the entire accepted message',t=>{
+ const f=fixture(t),message='q'.repeat(4000);const result=ok('ask',null,f.root,{text:message});
+ assert.equal(f.text('inbox/'+result.observation_id+'.md').split('\n---\n')[1].trim(),message);
+ const p=path.join(f.root,'chelm.runtime.json'),cfg=JSON.parse(fs.readFileSync(p));cfg.intake.max_message_chars=1;fs.writeFileSync(p,JSON.stringify(cfg));
+ assert.equal(ok('ask',null,f.root,{text:'q'}).ok,true);
+});
