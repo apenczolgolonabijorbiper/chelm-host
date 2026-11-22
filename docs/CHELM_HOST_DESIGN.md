@@ -547,9 +547,9 @@ Each line is a rule the reference consumer relies on today. A parity fixture (se
 - `NFR-7` Atomicity: every host-state file write is temporary file plus rename in the same directory. A crash leaves either the old or the new file.
 - `NFR-8` Recovery: interrupted storage publications follow the harness reference's recovery rules (pending record, `recovery_required`, reconcile only unchanged captured files). `chelm status` reports it; the next state-changing command reconciles or refuses with instructions. Chelm-host never resets the whole working tree.
 - `NFR-9` Idempotency: resubmitting identical groups writes nothing (`APP-12`); `delegate adopt` of an adopted package is a no-op with `already_adopted`.
-- `NFR-10` No network access except Git operations on local bundles and file access to the configured share. No telemetry.
+- `NFR-10` No automatic outbound export of logs/metrics or analytics. Local numeric telemetry and configured inbound authenticated remote MCP with replies are permitted. Shared-folder delegation is retired. See OBSERVABILITY.md.
 - `NFR-11` Determinism: given the same inputs and clock, outputs (including read-model files) are byte-identical, so they can be tested.
-- `NFR-12` Logging: JSON lines `{at, command, runtime_id, actor, outcome, duration_ms, ids, counts}`; never observation text, answers, questions or reasons supplied by agents; rotation at 10 MB keeping 5 files.
+- `NFR-12` Logging: allowlisted JSON lines `{at, command, runtime_id, actor, outcome, duration_ms, ids, counts, executor}` with documented nullable correlation fields, optional numeric phases/git/usage and remote principal/tool extensions. Never source text, answers, questions, agent reasons, credentials or arbitrary errors. Local pure reads are excluded; remote endpoint reads retain audit coverage. Rotation at 10 MB keeping 5 files. See OBSERVABILITY.md for exact fields, coverage and failures.
 
 ## 13. Security
 

@@ -27,6 +27,7 @@ const executor = {
     }
   },
   properties = {
+    usage:{type:'object',additionalProperties:false,properties:{model_ms:{type:['number','null'],minimum:0,maximum:Number.MAX_SAFE_INTEGER},...Object.fromEntries(['input_tokens','output_tokens','cached_input_tokens'].map(k=>[k,{type:['integer','null'],minimum:0,maximum:Number.MAX_SAFE_INTEGER}]))}},
     executor,
     run_id: {
       type: 'string',

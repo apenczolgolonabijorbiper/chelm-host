@@ -102,5 +102,9 @@ test('HTTP token revocation, runtime denial and executor spoofing preserve authe
   delete env.REVOCABLE_TOKEN;
   assert.equal((await fetch(url, { method: 'POST', headers: { Authorization: 'Bearer ' + token } })).status, 401);
   const logs = fs.readFileSync(path.join(f.root, 'host/logs/chelm.jsonl'), 'utf8');
-  for (const secret of [token, 'Private observation marker 923487.', 'spoofed-host']) assert.equal(logs.includes(secret), false);
+  for (const secret of [token, 'Private observation marker 923487.']) assert.equal(logs.includes(secret), false);
+  const events=logs.trim().split('\n').map(s=>JSON.parse(s));
+  const event=events.find(e=>e.command==='remote-worker'&&e.tool==='chelm_request_work');
+  assert.equal(event.principal,'verified-principal');assert.equal(event.executor.host,'spoofed-host');
+  assert.notEqual(event.actor,'spoofed-administrator');assert.notEqual(event.actor,'spoofed-host');
 });
