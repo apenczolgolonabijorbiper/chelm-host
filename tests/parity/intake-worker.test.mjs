@@ -42,10 +42,15 @@ test('PAR-18/19/21/22/23: fixed request/claim bounds, archived baseline and safe
     fs.rmSync(path.join(f.instance, 'evidence', id + '.json'), { force: true });
   }
   ok('index', null, f.root);
+  const claimStarted = Date.now();
   const unit = ok('worker', 'next', f.root, { executor }).work_unit;
+  const claimEnded = Date.now();
   assert.equal(unit.sources.length, expected.max_sources);
   const lease = f.read('memory/processing-lock.json');
-  assert.equal(Date.parse(lease.expires_at) - Date.parse(lease.claimed_at), expected.lease_ms);
+  // Claim and expiry use separate clock reads. Bound the expiry by the actual
+  // command interval instead of requiring millisecond-identical reads.
+  assert(Date.parse(lease.expires_at) >= claimStarted + expected.lease_ms);
+  assert(Date.parse(lease.expires_at) <= claimEnded + expected.lease_ms);
   ok('worker', 'abandon', f.root, { executor, run_id: unit.run_id });
   const reset = ok('reset', null, f.root, undefined, { scope: 'instance' });
   assert.match(path.basename(reset.archived_to), /^instance-\d{8}-\d{6}$/);

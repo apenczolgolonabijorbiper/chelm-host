@@ -25,10 +25,15 @@ const commandVersion = (exe, args) => {
   const r = spawnSync(exe, args, { encoding: 'utf8', timeout: 30000 });
   return r.status === 0 ? (r.stdout || r.stderr).trim() : 'unavailable';
 };
+let benchmarkError;
 try {
   const root = path.join(base, 'runtime');
   await initialize(root, { harness, python: process.env.GOLEM_PYTHON ?? (process.platform === 'win32' ? 'py' : 'python3') });
   const cfg = config(root), inst = cfg.instance.path;
+  // Disposable capacity repositories must not spawn detached maintenance that
+  // can retain Windows directory handles while the benchmark removes them.
+  git(inst, ['config', 'gc.auto', '0']);
+  git(inst, ['config', 'maintenance.auto', 'false']);
   const state = syntheticState(graphLimits.sources, { entities: graphLimits.entities, claims: graphLimits.claims });
   for (const [p, bytes] of state.notes) writeRaw(p, bytes);
   write(file(inst, 'memory/graph.json'), state.graph);
@@ -43,7 +48,11 @@ try {
     n, role: n % 2 ? 'golem' : 'user', text: 'Synthetic żółć 😀 turn ' + n,
     at: '2026-01-01T00:00:00.000Z'
   })).join('\n') + '\n');
-  git(inst, ['add', '-A']);
+  // Bound bulk setup just like the harness capacity fixture: one giant add
+  // can exceed the per-child timeout on Windows disks.
+  const added = [...state.notes.keys(), 'memory/graph.json', 'memory/processed.json', 'memory/runs/baseline.md'];
+  for (let i = 0; i < added.length; i += 256)
+    git(inst, ['add', '--pathspec-from-file=-', '--pathspec-file-nul'], { input: added.slice(i, i + 256).join('\0') + '\0' });
   git(inst, ['-c', 'user.name=Synthetic', '-c', 'user.email=synthetic@local', 'commit', '-qm', 'Synthetic capacity fixture']);
   const trace = path.join(base, 'children.jsonl'); process.env.CHELM_TIMINGS_FILE = trace;
   const rows = [];
@@ -80,7 +89,16 @@ try {
   if (output) { fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true }); fs.writeFileSync(output, JSON.stringify(report, null, 2) + '\n'); }
   process.stdout.write(JSON.stringify(report) + '\n');
   function writeRaw(p, bytes) { const target = file(inst, p); fs.mkdirSync(path.dirname(target), { recursive: true }); fs.writeFileSync(target, bytes); }
+} catch (error) {
+  benchmarkError = error;
+  throw error;
 } finally {
   if (previousTrace === undefined) delete process.env.CHELM_TIMINGS_FILE; else process.env.CHELM_TIMINGS_FILE = previousTrace;
-  fs.rmSync(base, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
+  try {
+    await fs.promises.rm(base, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
+  } catch (cleanupError) {
+    if (!benchmarkError) throw cleanupError;
+    // Never replace the actual benchmark failure with a secondary cleanup error.
+    process.stderr.write('Capacity fixture cleanup failed: ' + cleanupError.code + '\n');
+  }
 }
