@@ -132,3 +132,14 @@ Worker submit accepts optional nullable numeric usage (model_ms, input_tokens,
 output_tokens, cached_input_tokens). Omitted fields remain unknown/null. Remote
 submission retries must retain normalized usage as well as digest/submission ID.
 Existing runtime configurations remain valid; no instance migration is needed.
+
+
+## Coordinated 1.1.0 / harness 0.11.0 release
+
+The supported engine is the published golem14-harness 0.11.0 ZIP with exact pinned
+archive and RELEASE.json hashes in compatibility.json. CI downloads/verifies that
+artifact via tools/prepare-harness.py --version 0.11.0. Source reconstruction is
+not release evidence. Existing canonical Chelm 1.0.2/harness 0.10.0 runtimes need
+no data migration or reset; pause processing, settle assignments/drain leases,
+replace the verified pair, verify and refresh before resuming. Older releases'
+measurements above remain historical evidence, not new-version validation.

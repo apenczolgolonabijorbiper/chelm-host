@@ -33,10 +33,11 @@ def build(harness, output=None):
     manifest = {'schema_version': 1, 'version': version,
                 'contracts': {'app': 1, 'worker': 2, 'read_model': 1,
                               'runtime_config': 2, 'remote_worker': 2},
-                'harness_supported': '=0.10.0', 'supported_harness_versions': ['0.10.0'],
+                'harness_supported': '=0.11.0', 'supported_harness_versions': ['0.11.0'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',
-                               'harness_release_sha256': '0c4ba9f35e24df0887ceb27457d118b5e4829acef401242cb6818a3034f95031'},
+                               'harness_archive_sha256': '2f945cf38166f1878bfd4ea89b9d9ffb187f525269710a61016d0129b02f3ca2',
+                               'harness_release_sha256': 'd130c465688874bceae2f5eb0bb113ddef740c95764256871bda6d51928355e7'},
                 'runtime_dependencies': {'manager': 'npm', 'lockfile': 'package-lock.json'},
                 'files': {name: digest(data) for name, data in payload.items()}}
     payload['RELEASE.json'] = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
@@ -51,6 +52,7 @@ def build(harness, output=None):
             target = stage / name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(data)
+        subprocess.run([os.sys.executable, '-B', str(stage / 'tools/test-prepare-harness.py')], check=True, env=env)
         subprocess.run(['node', str(stage / 'integration/install-dependencies.mjs')], check=True, env=env)
         subprocess.run(['node', str(stage / 'bin/chelm.mjs'), 'verify', '--harness', str(harness),
                         '--python', env['GOLEM_PYTHON']], check=True, env=env)
@@ -61,7 +63,7 @@ def build(harness, output=None):
                        cwd=stage, check=True, env=env)
         suite_seconds = time.monotonic() - started
         output.parent.mkdir(parents=True, exist_ok=True)
-        timing = {'platform': os.sys.platform, 'harness_version': '0.10.0', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
+        timing = {'platform': os.sys.platform, 'harness_version': '0.11.0', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
         print('CHELM_TEST_TIMING ' + json.dumps(timing), flush=True)
         (output.parent / ('test-timing-' + os.sys.platform + '.json')).write_text(json.dumps(timing, indent=2) + '\n', encoding='utf-8')
         subprocess.run(['node', str(stage / 'tools/benchmark-host.mjs'), '--harness', str(harness),

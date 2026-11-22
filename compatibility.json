@@ -1,16 +1,23 @@
 {
   "schema_version": 1,
-  "harness_supported": "=0.10.0",
+  "harness_supported": "=0.11.0",
   "supported_harness_versions": [
-    "0.10.0"
+    "0.11.0"
   ],
   "versions": {
-    "0.10.0": {
+    "0.11.0": {
       "graph": 2,
       "hypotheses": 1,
       "vocabulary": 2,
       "layout": "canonical",
-      "runtimes": "Drain active leases and settle/cancel legacy delegation with 0.2 before cutover. Run migrate preflight then apply to archive legacy host configuration. Canonical memory retained; no harness data reset. Guidance is purpose-guidance-v2, including purpose-only runs."
+      "runtimes": "Existing canonical runtimes from Chelm-host 1.0.2 with harness 0.10.0 retain instance memory and host state. Pause workers, drain/release active leases and settle remote assignments; replace both verified packages, update configured paths if needed, run chelm verify and refresh, then resume. No reset or migration is required. Older incompatible instance formats remain unsupported."
     }
+  },
+  "published_harness": {
+    "version": "0.11.0",
+    "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.11.0",
+    "archive": "golem-cognitive-harness-0.11.0.zip",
+    "archive_sha256": "2f945cf38166f1878bfd4ea89b9d9ffb187f525269710a61016d0129b02f3ca2",
+    "manifest_sha256": "d130c465688874bceae2f5eb0bb113ddef740c95764256871bda6d51928355e7"
   }
 }
