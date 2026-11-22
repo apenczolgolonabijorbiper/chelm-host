@@ -284,3 +284,14 @@ builder passed **74 host tests and 11 harness 0.10.0 conformance cases**, with
 zero failures/skips, plus package verification and the small-fixture benchmark.
 The targeted telemetry/remote-boundaries run passed 12 tests. These results do
 not establish Windows/macOS CI, live IIS or downstream upgraded-runtime acceptance.
+
+
+## Coordinated 1.1.0 / harness 0.11.0 release
+
+The supported engine is the published golem14-harness 0.11.0 ZIP with exact pinned
+archive and RELEASE.json hashes in compatibility.json. CI downloads/verifies that
+artifact via tools/prepare-harness.py --version 0.11.0. Source reconstruction is
+not release evidence. Existing canonical Chelm 1.0.2/harness 0.10.0 runtimes need
+no data migration or reset; pause processing, settle assignments/drain leases,
+replace the verified pair, verify and refresh before resuming. Older releases'
+measurements above remain historical evidence, not new-version validation.

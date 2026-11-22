@@ -78,7 +78,7 @@ try {
   fs.appendFileSync(file(inst, 'capacity-padding'), 'x'); git(inst, ['add', 'capacity-padding']);
   git(inst, ['-c', 'user.name=Synthetic', '-c', 'user.email=synthetic@local', 'commit', '-qm', 'Above tree bound']);
   assert.throws(() => snapshot(inst), { code: 'capacity_exceeded' });
-  const report = { schema_version: 1, recorded_at: new Date().toISOString(), harness_version: '0.10.0',
+  const report = { schema_version: 1, recorded_at: new Date().toISOString(), harness_version: '0.11.0',
     environment: { platform: process.platform, release: os.release(), arch: os.arch(), cpu_model: os.cpus()[0]?.model,
       cpus: os.cpus().length, total_memory_bytes: os.totalmem(), load_average: os.loadavg(), node: process.version,
       python: commandVersion(cfg.harness.python, ['--version']), git: commandVersion(cfg.harness.git, ['--version']) },

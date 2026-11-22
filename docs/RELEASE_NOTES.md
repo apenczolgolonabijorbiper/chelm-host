@@ -1,5 +1,16 @@
-# Unreleased — VI-020 and VI-021
+# Chelm-host 1.1.0 — coordinated harness 0.11.0 release
 
+Supported harness: **0.11.0 exactly**, downloaded from its published release.
+CI validates the ZIP checksum and pinned archive/manifest hashes before extracting
+it; it no longer reconstructs a harness package from a source checkout.
+
+- Add local-only, default-off operation phases and read-path metrics, run/work
+  correlation and nullable executor-reported usage (VP-021).
+- Add a read-only rolling 24-hour status summary. Independent-process metric
+  shards prevent shared-counter overwrites; retention and saturation are explicit.
+- Keep local pure reads lock-free and preserve the existing remote recovery lock.
+- Carry submission usage durably; retries retain normalized usage and never
+  repeat a committed publication. Timings overlap and must not be summed.
 - Define WRK-13 verification pointers, minimum durable completion evidence and
   snapshot identity. Align local/remote instructions and mechanical journals;
   journal verdict text and a self-referential final tree hash are not required.
@@ -11,6 +22,18 @@
 No runtime migration or harness-engine change. Existing historical log records
 are preserved. These source changes do not publish a new release; consumers
 resolve vendor reports after upgrading and checking the resulting package.
+
+
+| Supported harness | Runtime requirements (PKG-14) |
+|---|---|
+| 0.11.0 | Canonical graph v2, hypotheses v1, vocabulary v2; runtime config v2 and worker contract v2. Existing canonical Chelm 1.0.2/harness 0.10.0 runtimes retain memory and host state. Pause executors, settle assignments/drain leases, replace both verified packages, verify and refresh before resuming. No migration or reset. |
+
+Harness 0.10.0 is no longer accepted by this version: upgrade the pair together.
+Telemetry stays private under host/ and defaults off. Read totals cover retained
+process shards (seven-day inactive retention; 10,000-shard cap), not unbounded
+lifetime counts; status aggregates persisted shards and never repairs/writes them.
+The ZIP stays thin: no node_modules, with locked dependency restoration for remote
+MCP during installation. No consuming app or live runtime is upgraded by release.
 
 # Chelm-host 1.0.2 — pending-issue acceptance follow-up
 
