@@ -1,3 +1,60 @@
+# Pending-issue acceptance follow-up — 1.0.2 / 2026-11-22
+
+The follow-up maps **177 declared design IDs**, including PAR-1 through PAR-23,
+to behavioral suites, explicit external checks, superseded rules or deferred
+scope. See REQUIREMENT_COVERAGE.md and requirement-coverage.json. Mapping is
+machine checked; it does not assert that every design clause has an individual
+passing test. Retired mailbox requirements are superseded by remote worker v2.
+
+Observed locally on Linux / Node 24.22.3 / Python 3.12.14 / Git 2.56.1:
+
+- **66/66 staged host tests and 11/11 harness adapter conformance cases passed**
+  with no skips. The staged suite including dependency setup took about 45 seconds.
+- Nine successful local MCP scenarios exercise all seven current local tools,
+  including a real synthetic publication. Remote fixtures use the locked official
+  MCP SDK 1.32.2.
+- Two independent client processes use an HTTP proxy; service kill/restart,
+  idempotent assignment and durable receipt recovery pass. Publication fixture
+  processes are terminated immediately before and after CAS; reconciliation is
+  idempotent and preserves unrelated drafts. Full validated submissions are also
+  killed at both CAS checkpoints; retries yield one ledger row and current app
+  views. Recovery retains its marker until those views are durable. These tests do not exercise every
+  possible power-loss or filesystem interruption window.
+- Upload tests cover UTF-8 byte offsets, supplementary Unicode, incomplete uploads,
+  conflicting/concurrent retries, size/quota refusal, revocation and executor
+  spoofing. Integration tests force another publication and a policy change while
+  review is pending; stale attempts/drafts cannot publish.
+- Static parity memory retains a superseded relation and committed chat answer.
+  Fixed boundary expectations cover lease states, inspection and lookup limits,
+  administrative baseline and guarded hard reset. Protocol fixtures additionally
+  assert exact note/chunk/key bytes, a single indexing pass, retrieval grouping,
+  open-answer headers, source-only export, request/claim bounds, archive naming
+  and actual sandbox recreation. All PAR-1 through PAR-23 have mapped fixtures. Installer upgrade and malformed
+  AGENTS/MCP conflict checks pass without partial mutation.
+- Full harness capacity: 10,000 sources, 5,000 entities, 20,000 claims; 10,000
+  subjects and 100,000 conversation turns. Three regeneration samples were
+  **1591 / 1047 / 982 ms**; deep refresh **5736 / 5426 / 5510 ms**, with validation
+  and statistics reported separately. This Linux machine meets the 3-second
+  regeneration target; reference Windows acceptance is still external.
+- Exact 64 MiB logical trees are accepted and larger trees refused before blob
+  loading, including repeated/deduplicated Git objects. This corrects both an
+  oversized logical-tree loophole and Git framing overhead at the exact limit.
+
+Reports are emitted to dist/: benchmark-*, capacity-*, remote-phases-* and
+ test-timing-*. Remote phase reports separate tools and payload sizes; submit
+includes its mandatory fresh validation/merge/publication. Inference time, provider
+token counts and cost remain null, because no LLM was invoked.
+
+Current CI will repeat platform suites, capacity measurements and the real IIS
+identity probe. Until observed, this paragraph is configuration, not passing
+platform evidence. E-1 through E-4 in EXTERNAL_ACCEPTANCE.md explicitly retain the
+actual IIS HTTPS/ARR target, reference Windows machine, two physical machines
+with the selected inference client, and consumer migration/HTTP smoke checks.
+The read-only remote probe records actual server/SDK discovery without assigning
+work. No live application, runtime or inference provider was modified.
+
+---
+
 # Packaging follow-up — 1.0.1
 
 Observed locally on Linux / Node 24.22.3: **51/51 host tests and 11/11 harness

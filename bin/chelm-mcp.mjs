@@ -151,7 +151,7 @@ export async function handle(message, runtime) {
       },
       serverInfo: {
         name: 'chelm-host',
-        version: '1.0.1'
+        version: '1.0.2'
       },
       instructions: 'Read work_unit.protocol and guidance. Process only in workspace_abs; use validate and submit; abandon on failure.'
     };

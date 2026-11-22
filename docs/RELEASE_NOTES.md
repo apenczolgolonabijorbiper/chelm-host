@@ -1,3 +1,20 @@
+# Chelm-host 1.0.2 — pending-issue acceptance follow-up
+
+- Enforce the 64 MiB committed-tree limit on logical bytes, including duplicate
+  Git objects; allow bounded Git framing at the exact limit.
+- Recover committed app read views before clearing the durable publication
+  marker, including when the service dies after Git CAS.
+- Refuse reversed or duplicate managed AGENTS markers before installer mutation.
+- Add process restart/CAS recovery, Unicode upload, stale integration, successful
+  MCP lifecycle, parity and installer-upgrade conformance coverage.
+- Map every declared requirement and retire obsolete mailbox acceptance scope.
+- Ship host capacity and read-only remote deployment probes, platform capacity
+  reporting and explicit live/reference-machine acceptance procedures.
+
+This follow-up keeps public contracts and exact harness 0.10.0 compatibility.
+Live IIS proxy, selected agent/provider and consuming application acceptance
+remain external; deterministic fixtures do not establish inference performance.
+
 # Chelm-host 1.0.1
 
 Thin ZIP: node_modules is replaced by package.json/package-lock.json. Installation

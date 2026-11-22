@@ -8,16 +8,16 @@
   "totals": {
     "sources": 3,
     "entities": 2,
-    "claims": 3,
-    "relations": 1,
+    "claims": 4,
+    "relations": 2,
     "active_claims": 2
   },
   "open_question": "q-open",
   "answer_observation": "00000000-0000-4000-8000-000000000003",
   "journal": {
     "observations": 3,
-    "source_assertions": 3,
-    "relations": 1,
+    "source_assertions": 4,
+    "relations": 2,
     "questions_opened": 2,
     "unresolved": 1
   },
@@ -32,5 +32,33 @@
       "indexed": 1,
       "analyzed": 1
     }
+  },
+  "retrieval_matches": [
+    {
+      "classification": "source_assertion",
+      "predicates": [
+        "visited"
+      ],
+      "quote": "Alice visited Krakow."
+    },
+    {
+      "classification": "source_assertion",
+      "predicates": [
+        "has_state"
+      ],
+      "quote": "visit state is completed."
+    },
+    {
+      "classification": "source_assertion",
+      "predicates": [
+        "has_state"
+      ],
+      "quote": "State: planned."
+    }
+  ],
+  "export_REC_A": {
+    "observation_count": 2,
+    "missing_notes": 0,
+    "analysed": 2
   }
 }

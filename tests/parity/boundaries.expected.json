@@ -1,0 +1,7 @@
+{
+  "lease": { "idle": "idle", "held": "held", "expired": "expired" },
+  "journal_limit": 20000,
+  "observation_limit": 60000,
+  "inspection_rows": 500,
+  "inspection_cell": 400
+}

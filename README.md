@@ -2,7 +2,7 @@
 
 Chelm-host is where the Golem lives: a local and remote-worker host for
 [Golem XIV Harness](https://github.com/apenczolgolonabijorbiper/golem14-harness).
-Version **1.0.1** supports **harness 0.10.0 exactly**. App/read-model contracts
+Version **1.0.2** supports **harness 0.10.0 exactly**. App/read-model contracts
 remain v1; worker and runtime configuration contracts are v2.
 
 It supplies intake, conversation records, committed memory views, transactional
@@ -17,7 +17,7 @@ are CI targets. Use the same OS identity for a lease owner across worker calls.
 
 ## Install and initialize
 
-Download chelm-host-1.0.1.zip and its adjacent checksum from Releases. Check the
+Download chelm-host-1.0.2.zip and its adjacent checksum from Releases. Check the
 checksum before extraction. Install from the clean extracted chelm-host folder:
 
 ```sh
@@ -133,7 +133,7 @@ python3 tools/build-release.py --harness /path/to/golem-harness
 ```
 
 The builder runs all Chelm tests and applicable harness backend conformance before
-creating dist/chelm-host-1.0.1.zip and its .sha256. Releases have one chelm-host/
+creating dist/chelm-host-1.0.2.zip and its .sha256. Releases have one chelm-host/
 folder and an exhaustive RELEASE.json. GitHub Actions performs the same checks
 on Windows, Linux and macOS; a v* tag publishes the validated ZIP and checksum.
 
@@ -162,3 +162,8 @@ For the default IIS Express development / full IIS Windows Server 2022 deploymen
 case, see [IIS verification](docs/IIS_VERIFICATION.md). Windows CI exercises an
 actual ApplicationPoolIdentity with LoadUserProfile=false and a synthetic
 claim/validate/commit cycle; it does not claim to test the consumer's server.
+
+Acceptance coverage is mapped in [docs/REQUIREMENT_COVERAGE.md](docs/REQUIREMENT_COVERAGE.md).
+Use [docs/EXTERNAL_ACCEPTANCE.md](docs/EXTERNAL_ACCEPTANCE.md) for deployment,
+reference-machine and live inference checks. The shipped capacity benchmark
+creates its own disposable runtime; it does not modify an application runtime.

@@ -1,0 +1,1556 @@
+{
+  "schema_version": 1,
+  "requirements": [
+    {
+      "id": "BND-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "BND-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "BND-3",
+      "status": "external",
+      "evidence": [
+        "docs/EXTERNAL_ACCEPTANCE.md"
+      ],
+      "scope": "Consumer displays all required values using only app contract E-4."
+    },
+    {
+      "id": "BND-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "PKG-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "PKG-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "PKG-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "PKG-4",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "PKG-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "INS-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "INS-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "INS-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "INS-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "INS-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "INS-6",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-10",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-11",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-12",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RT-13",
+      "status": "external",
+      "evidence": [
+        "docs/EXTERNAL_ACCEPTANCE.md"
+      ],
+      "scope": "Consumer configuration and runtime mapping E-4."
+    },
+    {
+      "id": "PKG-10",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "PKG-11",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "PKG-12",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "PKG-13",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "PKG-14",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/package.test.mjs",
+        "tests/dependencies.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "CON-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "CON-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "CON-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "CON-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "CON-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "CON-6",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "CON-7",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-10",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-11",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-12",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-13",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-14",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-15",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-16",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-20",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-21",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-22",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-23",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-24",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-30",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-31",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-32",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-33",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-34",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-35",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-36",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-40",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-41",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-50",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-51",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-52",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "APP-60",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "APP-61",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "APP-62",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "APP-63",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "WRK-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "WRK-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "WRK-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "WRK-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "WRK-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "WRK-6",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "WRK-7",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "WRK-8",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "WRK-9",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "WRK-10",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "WRK-11",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/mcp-success.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Nine successful local MCP scenarios across seven current tools; remote prompt/tool and transport fixtures. Actual LLM prompt semantics remain E-3."
+    },
+    {
+      "id": "WRK-12",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "HAR-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "HAR-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "HAR-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "HAR-4",
+      "status": "behavioral",
+      "evidence": [
+        "tools/build-release.py",
+        "docs/HARNESS_INTEGRATION.md"
+      ],
+      "scope": "Builder invokes all supported harness adapter conformance cases against staged backend."
+    },
+    {
+      "id": "HAR-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "HAR-6",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "HAR-7",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "HAR-8",
+      "status": "behavioral",
+      "evidence": [
+        "tools/benchmark-capacity.mjs",
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs"
+      ],
+      "scope": "Harness-derived capacity fixture, 10,000 subjects, 100,000 turns and exact/over 64 MiB logical tree bounds. Machine-specific timing is E-2."
+    },
+    {
+      "id": "HAR-9",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "HAR-10",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/worker-contract.test.mjs",
+        "tests/conformance/alignment.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "DST-1",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-2",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-3",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-10",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-11",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-12",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-13",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-20",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-21",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-22",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-30",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-31",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-32",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-33",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-34",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "DST-40",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "RM-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RM-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RM-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RM-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RM-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/conformance/app-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "RM-6",
+      "status": "external",
+      "evidence": [
+        "docs/EXTERNAL_ACCEPTANCE.md"
+      ],
+      "scope": "Capacity regeneration below 3 seconds on reference Windows workstation E-2."
+    },
+    {
+      "id": "PAR-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-6",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-7",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-8",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-9",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-10",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-11",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-12",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/boundaries.expected.json"
+      ],
+      "scope": "Static lease/inspection/lookup/admin boundary expectations with executable checks."
+    },
+    {
+      "id": "PAR-13",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/boundaries.expected.json"
+      ],
+      "scope": "Static lease/inspection/lookup/admin boundary expectations with executable checks."
+    },
+    {
+      "id": "PAR-14",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-15",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/boundaries.expected.json"
+      ],
+      "scope": "Static lease/inspection/lookup/admin boundary expectations with executable checks."
+    },
+    {
+      "id": "PAR-16",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-17",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
+    },
+    {
+      "id": "PAR-18",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-19",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-20",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/boundaries.expected.json"
+      ],
+      "scope": "Static lease/inspection/lookup/admin boundary expectations with executable checks."
+    },
+    {
+      "id": "PAR-21",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-22",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "PAR-23",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
+      ],
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
+    },
+    {
+      "id": "NFR-1",
+      "status": "external",
+      "evidence": [
+        "docs/EXTERNAL_ACCEPTANCE.md"
+      ],
+      "scope": "Platform matrix and target IIS identity/proxy checks E-1; desktop Windows 10/11 remains an operator check."
+    },
+    {
+      "id": "NFR-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "NFR-3",
+      "status": "external",
+      "evidence": [
+        "docs/EXTERNAL_ACCEPTANCE.md"
+      ],
+      "scope": "Reference-machine process startup and plain-file timing E-2."
+    },
+    {
+      "id": "NFR-4",
+      "status": "external",
+      "evidence": [
+        "docs/EXTERNAL_ACCEPTANCE.md"
+      ],
+      "scope": "Reference-machine latency measurements E-2."
+    },
+    {
+      "id": "NFR-5",
+      "status": "behavioral",
+      "evidence": [
+        "tools/benchmark-capacity.mjs",
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs"
+      ],
+      "scope": "Harness-derived capacity fixture, 10,000 subjects, 100,000 turns and exact/over 64 MiB logical tree bounds. Machine-specific timing is E-2."
+    },
+    {
+      "id": "NFR-6",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "NFR-7",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "NFR-8",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "NFR-9",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "NFR-10",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "NFR-11",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "NFR-12",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "SEC-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "SEC-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "SEC-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "SEC-4",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "SEC-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "SEC-6",
+      "status": "behavioral",
+      "evidence": [
+        "tests/unit.test.mjs",
+        "tests/conformance/remote-boundaries.test.mjs",
+        "tests/conformance/process-recovery.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "TST-1",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/requirement-map.test.mjs"
+      ],
+      "scope": "Map completeness is machine checked; behavioral mapping is not proof of exhaustive per-clause conformance."
+    },
+    {
+      "id": "TST-2",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/worker-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "TST-3",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/mcp-success.test.mjs",
+        "tests/conformance/remote.test.mjs"
+      ],
+      "scope": "Nine successful local MCP scenarios across seven current tools; remote prompt/tool and transport fixtures. Actual LLM prompt semantics remain E-3."
+    },
+    {
+      "id": "TST-4",
+      "status": "behavioral",
+      "evidence": [
+        "tools/build-release.py",
+        "docs/HARNESS_INTEGRATION.md"
+      ],
+      "scope": "Builder invokes all supported harness adapter conformance cases against staged backend."
+    },
+    {
+      "id": "TST-5",
+      "status": "behavioral",
+      "evidence": [
+        "tests/parity/parity.test.mjs",
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/expected.json"
+      ],
+      "scope": "Static expected fixtures and executable scenarios cover representative behavior for all PAR-1 through PAR-23; not every design clause independently."
+    },
+    {
+      "id": "TST-6",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/worker-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "TST-7",
+      "status": "behavioral",
+      "evidence": [
+        "tests/conformance/app-contract.test.mjs",
+        "tests/conformance/worker-contract.test.mjs"
+      ],
+      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+    },
+    {
+      "id": "TST-8",
+      "status": "superseded",
+      "evidence": [
+        "docs/REMOTE_WORKER_CONTRACT.md"
+      ],
+      "scope": "Retired 0.x interface; worker v2 replaces shared-folder delegation. PKG-4 dependency-free and NFR-10 no-network rules replaced by locked dependencies and authenticated remote HTTP."
+    },
+    {
+      "id": "TST-9",
+      "status": "external",
+      "evidence": [
+        "docs/EXTERNAL_ACCEPTANCE.md"
+      ],
+      "scope": "CI suite timing plus reference Windows workstation run E-2."
+    },
+    {
+      "id": "TST-10",
+      "status": "external",
+      "evidence": [
+        "docs/EXTERNAL_ACCEPTANCE.md"
+      ],
+      "scope": "Consumer HTTP/export and migration smoke E-4."
+    },
+    {
+      "id": "OUT-1",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "OUT-2",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "OUT-3",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "OUT-4",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "OUT-5",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "OUT-6",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "XW-1",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "XW-2",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "XW-3",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "XW-4",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "XW-5",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "XW-6",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "XW-7",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    },
+    {
+      "id": "XW-8",
+      "status": "out-of-scope",
+      "evidence": [
+        "docs/CHELM_HOST_DESIGN.md"
+      ],
+      "scope": "Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference."
+    }
+  ]
+}

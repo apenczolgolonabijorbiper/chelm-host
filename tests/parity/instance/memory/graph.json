@@ -42,7 +42,7 @@
       "kind": "place",
       "label": "Krakow",
       "aliases": [
-        "Kraków"
+        "Krak\u00f3w"
       ],
       "source_ids": [
         "00000000-0000-4000-8000-000000000001"
@@ -74,7 +74,7 @@
         "precision": "unknown",
         "from": null
       },
-      "status": "active",
+      "status": "superseded",
       "supersedes": [],
       "uncertainty": [],
       "created_at": "2026-01-01T12:00:00.000Z"
@@ -131,6 +131,35 @@
       "status": "active",
       "supersedes": [
         "clm-00000000-0000-4000-8000-000000000002"
+      ],
+      "uncertainty": [],
+      "created_at": "2026-01-01T12:00:00.000Z"
+    },
+    {
+      "id": "clm-00000000-0000-4000-8000-000000000004",
+      "subject_id": "ent-00000000-0000-4000-8000-000000000001",
+      "attributed_to_id": "ent-00000000-0000-4000-8000-000000000001",
+      "predicate": "visited",
+      "object": {
+        "entity_id": "ent-00000000-0000-4000-8000-000000000002"
+      },
+      "classification": "source_assertion",
+      "sources": [
+        {
+          "observation_id": "00000000-0000-4000-8000-000000000001",
+          "quote": "Alice visited Krakow."
+        }
+      ],
+      "asserted_at": "2026-01-01T12:00:00.000Z",
+      "valid_time": {
+        "to": null,
+        "expression": null,
+        "precision": "unknown",
+        "from": null
+      },
+      "status": "active",
+      "supersedes": [
+        "clm-00000000-0000-4000-8000-000000000001"
       ],
       "uncertainty": [],
       "created_at": "2026-01-01T12:00:00.000Z"
