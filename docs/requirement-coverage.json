@@ -977,203 +977,208 @@
       "id": "PAR-1",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-2",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-3",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-4",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-5",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-6",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-7",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-8",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-9",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-10",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-11",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-12",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/boundaries.test.mjs"
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/boundaries.expected.json"
       ],
-      "scope": "Fixed expected parity boundaries: leases, inspection limits, IDs/text bounds, admin baseline and guarded sandbox."
+      "scope": "Static lease/inspection/lookup/admin boundary expectations with executable checks."
     },
     {
       "id": "PAR-13",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/boundaries.test.mjs"
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/boundaries.expected.json"
       ],
-      "scope": "Fixed expected parity boundaries: leases, inspection limits, IDs/text bounds, admin baseline and guarded sandbox."
+      "scope": "Static lease/inspection/lookup/admin boundary expectations with executable checks."
     },
     {
       "id": "PAR-14",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-15",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/boundaries.test.mjs"
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/boundaries.expected.json"
       ],
-      "scope": "Fixed expected parity boundaries: leases, inspection limits, IDs/text bounds, admin baseline and guarded sandbox."
+      "scope": "Static lease/inspection/lookup/admin boundary expectations with executable checks."
     },
     {
       "id": "PAR-16",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-17",
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Committed synthetic memory and static counts/history/chat/retrieval/export expectations; open-answer header checks."
     },
     {
       "id": "PAR-18",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-19",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-20",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/boundaries.test.mjs"
+        "tests/parity/boundaries.test.mjs",
+        "tests/parity/boundaries.expected.json"
       ],
-      "scope": "Fixed expected parity boundaries: leases, inspection limits, IDs/text bounds, admin baseline and guarded sandbox."
+      "scope": "Static lease/inspection/lookup/admin boundary expectations with executable checks."
     },
     {
       "id": "PAR-21",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-22",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/boundaries.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Fixed expected parity boundaries: leases, inspection limits, IDs/text bounds, admin baseline and guarded sandbox."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "PAR-23",
       "status": "behavioral",
       "evidence": [
-        "tests/parity/parity.test.mjs",
-        "tests/conformance/app-contract.test.mjs"
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/protocol.expected.json"
       ],
-      "scope": "Mapped behavior suite; not a separate assertion for every clause."
+      "scope": "Static protocol expectations and executable byte/chunk/key, indexing, message, request, archive, worker and sandbox checks."
     },
     {
       "id": "NFR-1",
@@ -1387,9 +1392,11 @@
       "status": "behavioral",
       "evidence": [
         "tests/parity/parity.test.mjs",
+        "tests/parity/intake-worker.test.mjs",
+        "tests/parity/boundaries.test.mjs",
         "tests/parity/expected.json"
       ],
-      "scope": "Static committed history/chat/count fixture plus executable PAR boundary scenarios; see parity map."
+      "scope": "Static expected fixtures and executable scenarios cover representative behavior for all PAR-1 through PAR-23; not every design clause independently."
     },
     {
       "id": "TST-6",

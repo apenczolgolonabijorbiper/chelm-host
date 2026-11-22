@@ -32,5 +32,33 @@
       "indexed": 1,
       "analyzed": 1
     }
+  },
+  "retrieval_matches": [
+    {
+      "classification": "source_assertion",
+      "predicates": [
+        "visited"
+      ],
+      "quote": "Alice visited Krakow."
+    },
+    {
+      "classification": "source_assertion",
+      "predicates": [
+        "has_state"
+      ],
+      "quote": "visit state is completed."
+    },
+    {
+      "classification": "source_assertion",
+      "predicates": [
+        "has_state"
+      ],
+      "quote": "State: planned."
+    }
+  ],
+  "export_REC_A": {
+    "observation_count": 2,
+    "missing_notes": 0,
+    "analysed": 2
   }
 }

@@ -1,0 +1,37 @@
+{
+  "note": {
+    "input": {
+      "observation_id": "00000000-0000-4000-8000-000000000001",
+      "at": "2026-01-01T12:00:00.000Z",
+      "kind": "record",
+      "subject": "REC-A",
+      "subjectHeader": "subject_id",
+      "chunk": "1/1"
+    },
+    "output": "---\nid: 00000000-0000-4000-8000-000000000001\nrecorded_at: 2026-01-01T12:00:00.000Z\nkind: record\nsubject_id: REC-A\nchunk: 1/1\n---\n\n"
+  },
+  "chunks": {
+    "lines": [
+      "abcd",
+      "efgh"
+    ],
+    "max_chars": 8,
+    "output": [
+      "abcd\n",
+      "efgh\n"
+    ]
+  },
+  "content_key": {
+    "kind": "record",
+    "bodies": [
+      "Alice visited Krakow.\nState: planned.\n"
+    ],
+    "value": "3d4c089b7aae79752a0426fd6aa6dd0f1d78dedd1d06d9e3ac06c87906396532"
+  },
+  "indexer_passes_per_submission": 1,
+  "max_message_chars": 4000,
+  "request_limit": 20,
+  "reason_limit": 300,
+  "max_sources": 20,
+  "lease_ms": 900000
+}

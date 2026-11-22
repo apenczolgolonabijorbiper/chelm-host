@@ -8,7 +8,7 @@ passing test. Retired mailbox requirements are superseded by remote worker v2.
 
 Observed locally on Linux / Node 24.22.3 / Python 3.12.14 / Git 2.56.1:
 
-- **64/64 staged host tests and 11/11 harness adapter conformance cases passed**
+- **66/66 staged host tests and 11/11 harness adapter conformance cases passed**
   with no skips. The staged suite including dependency setup took about 45 seconds.
 - Nine successful local MCP scenarios exercise all seven current local tools,
   including a real synthetic publication. Remote fixtures use the locked official
@@ -26,7 +26,10 @@ Observed locally on Linux / Node 24.22.3 / Python 3.12.14 / Git 2.56.1:
   review is pending; stale attempts/drafts cannot publish.
 - Static parity memory retains a superseded relation and committed chat answer.
   Fixed boundary expectations cover lease states, inspection and lookup limits,
-  administrative baseline and guarded hard reset. Installer upgrade and malformed
+  administrative baseline and guarded hard reset. Protocol fixtures additionally
+  assert exact note/chunk/key bytes, a single indexing pass, retrieval grouping,
+  open-answer headers, source-only export, request/claim bounds, archive naming
+  and actual sandbox recreation. All PAR-1 through PAR-23 have mapped fixtures. Installer upgrade and malformed
   AGENTS/MCP conflict checks pass without partial mutation.
 - Full harness capacity: 10,000 sources, 5,000 entities, 20,000 claims; 10,000
   subjects and 100,000 conversation turns. Three regeneration samples were

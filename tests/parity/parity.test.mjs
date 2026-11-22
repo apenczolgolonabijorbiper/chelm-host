@@ -52,4 +52,21 @@ test(
     });
     assert.equal(deep.validate.ok, true);
     assert.equal(deep.totals.claims, expected.totals.claims);
+    assert.equal(summary.graph_updated_at, '2026-01-01T12:10:00.000Z');
+    const exported = ok('export-sources', null, f.root, undefined, { subject: 'REC-A' });
+    for (const [key, value] of Object.entries(expected.export_REC_A)) assert.equal(exported[key], value, key);
+    assert.deepEqual(exported.observations.map(o => o.id), [
+      '00000000-0000-4000-8000-000000000001', '00000000-0000-4000-8000-000000000002'
+    ]);
+    assert(exported.observations.every(o => Object.keys(o).sort().join(',') === 'evidence,id,inbox'));
+    const reply = ok('ask', null, f.root, { text: 'Alice' });
+    assert.equal(reply.mode, 'retrieval');
+    assert.deepEqual([...reply.matches].sort((a,b) => a.quote.localeCompare(b.quote)),
+      [...expected.retrieval_matches].sort((a,b) => a.quote.localeCompare(b.quote)));
+    const answer = ok('answer', null, f.root, { question_id: 'q-open', text: 'Synthetic clarification.' });
+    const answeredNote = f.text('inbox/' + answer.observation_id + '.md');
+    assert.match(answeredNote, /question_id: q-open\n/);
+    assert.match(answeredNote, /question_text: "[^"\n]+"\n/);
+    assert.match(answeredNote, /question_source: chelm-conversation\n/);
+
   });
