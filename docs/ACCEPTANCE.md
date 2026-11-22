@@ -258,3 +258,29 @@ and harness conformance; configured tests/CI alone do not establish platform
 acceptance. Retained-shard counters are bounded, not unbounded lifetime totals;
 reads.json is a materialization and status reads authoritative shards. See
 OBSERVABILITY.md for crash/I/O and saturation limits.
+
+## VI-020 / VI-021 completion checks
+
+Read CONTRACT_WORKER WRK-13 to classify its examples A and B. The journal may
+precede validation and remain unchanged: completed local checks plus a resolvable
+durable completion pointer suffice. A transient submit response must be retained;
+remote receipts alone do not imply retention of all warning diagnostics. Generated
+owner-publication journals and the shipped local/remote prompts follow this rule.
+
+`tests/telemetry.test.mjs` exercises exact baseline log keys on scratch-runtime
+submit, duplicate intake, refresh, invalid input and reset; held-lock read exclusion;
+local/remote no-work executor identity; owned remote reads and cross-owner refusal;
+stale-lock recovery; committed-result/error preservation with unwritable logs;
+actual 10 MiB rotation and independent-process JSONL appends.
+`tests/conformance/remote-boundaries.test.mjs` also checks authenticated HTTP
+success/read/failure events, one endpoint event per invocation, descriptive
+executor provenance and absence of another owner's metadata on refusal.
+Run the full staged builder against the pinned extracted harness 0.10.0 release
+before recording results. Platform CI and a consuming application's upgraded
+runtime acceptance are separate from local package verification.
+
+Observed on 2026-11-22, Linux / Node 24.22.3 / Python 3.12.14: the staged
+builder passed **74 host tests and 11 harness 0.10.0 conformance cases**, with
+zero failures/skips, plus package verification and the small-fixture benchmark.
+The targeted telemetry/remote-boundaries run passed 12 tests. These results do
+not establish Windows/macOS CI, live IIS or downstream upgraded-runtime acceptance.

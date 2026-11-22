@@ -49,6 +49,11 @@ journal and applicable chat events. No arbitrary paths or uploads to policy,
 observations, evidence, leases, ledger or vendor files are allowed. Required
 journals have exact Started/guidance identity lines and actual declared model.
 The host creates ledger entries and retained guidance snapshots itself.
+Journal verification follows [CONTRACT_WORKER.md WRK-13](CONTRACT_WORKER.md):
+record completed local checks, mark host checks pending and name a durable report
+keyed by runtime/work/attempt/submission. Retain actual validation diagnostics,
+returned warnings and the committed receipt there. An unchanged pre-validation
+journal conforms; its own final tree hash belongs outside the candidate.
 
 `chelm_context.filters` uses harness CLI names: query, entity, source, predicate,
 type, kind, status, hops, expansion_budget, current, valid_at, limit, external_id,

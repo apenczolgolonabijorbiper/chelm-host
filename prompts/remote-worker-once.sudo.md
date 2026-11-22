@@ -47,7 +47,9 @@ RemoteGolemWorker {
     Prepare complete contents for changed allowed output slots. Preserve all unrelated existing records.
     Write the journal slot with exact "Started: <claimed_at>" and
     "guidance_version: <guidance_identity>" lines; name actual model, reviewed sources,
-    warnings, unresolved alternatives and verification. Do not claim a check before running it.
+    warnings, unresolved alternatives and completed local checks. Mark host checks pending;
+    point to a durable completion report keyed by runtime/work_id/attempt/submission_id.
+    Follow CONTRACT_WORKER WRK-13; do not claim a check before running it.
     For each output use chelm_stage_output(slot_id, revision=1, offset=0, text, final).
     Keep chunks <= 32768 UTF-8 bytes; use small text pieces when byte size is uncertain.
     Use returned next_offset for the next chunk and final:true only for the last chunk.
@@ -64,6 +66,8 @@ RemoteGolemWorker {
     where allowed and obtain fresh work for a reviewed new analysis.
     If busy: wait for the indicated delay, or stop and report; never tight-loop.
     If unrecoverable: abandon only this worker's active assignment and report the diagnostic.
+    Retain actual check results, receipt HEAD/digest and returned warning details in that report.
+    Do not edit the journal to embed its own final tree hash or final verdict.
     Report committed only after receiving a committed receipt with HEAD.
   }
 }

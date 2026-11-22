@@ -245,3 +245,110 @@ test("remote usage is durable, retry-fenced and correlated with publication run"
   assert.equal(submitted.executor.id, executor.id);
   await run("chelm_work_status", workArgs(w));
 });
+
+const commonKeys = ['at','command','runtime_id','actor','outcome','duration_ms','ids','counts','executor','run_id','work_id','subject_id'].sort();
+const assertCommon = event => {
+  assert.deepEqual(Object.keys(event).sort(), commonKeys);
+  assert.equal(typeof event.runtime_id, 'string');
+  assert.ok(Number.isFinite(event.duration_ms) && event.duration_ms >= 0);
+  assert.equal(typeof event.ids, 'object');
+  assert.equal(typeof event.counts, 'object');
+};
+
+test('VI-021: intake, duplicate, refresh, failure and reset emit the exact baseline envelope; reads stay unlogged', async t => {
+  const f = fixture(t);
+  const input={subject_id:'S-1',groups:[{kind:'record',lines:['SENTINEL_PRIVATE_SOURCE']}]};
+  const result = ok('submit',null,f.root,input);
+  const submitted = logs(f).at(-1);
+  assertCommon(submitted);
+  assert.equal(submitted.counts.written, result.written);
+  assert.equal(submitted.ids.subject_id, 'S-1');
+  ok('submit',null,f.root,input);
+  assert.equal(logs(f).at(-1).counts.written, 0);
+  assert.equal(logs(f).at(-1).counts.skipped_groups, 1);
+  ok('refresh', null, f.root);
+  const before = fs.readFileSync(path.join(f.root, 'host/logs/chelm.jsonl'), 'utf8');
+  // A held operation lock proves these reads neither lock nor emit operation events.
+  fs.writeFileSync(path.join(f.root, 'host/locks/operation.lock'), 'held');
+  for (const [command, sub] of [['read','summary'],['status',null],['conversation',null],['subject','S-1'],['requests','list'],['worker','context']])
+    await execute(command, sub, {runtime:f.root}, {executor});
+  fs.unlinkSync(path.join(f.root, 'host/locks/operation.lock'));
+  assert.equal(fs.readFileSync(path.join(f.root, 'host/logs/chelm.jsonl'), 'utf8'), before);
+  await assert.rejects(execute('submit', null, {runtime:f.root}, {subject_id:'S-1',groups:[]}), {code:'input_invalid'});
+  assert.notEqual(logs(f).at(-1).outcome, 'ok');
+  ok('reset', null, f.root, undefined, {scope:'instance'});
+  for (const event of logs(f)) assertCommon(event);
+  assert.ok(!JSON.stringify(logs(f)).includes('SENTINEL_PRIVATE_SOURCE'));
+});
+
+test('VI-021: local and remote no-work preserve validated executor; rejected ownership exposes none', async t => {
+  const f = fixture(t);
+  assert.equal(ok('worker','next',f.root,{executor:{...executor,extra:'SENTINEL_PRIVATE_EXTRA'}}).status,'no-work');
+  assert.deepEqual(logs(f).at(-1).executor,executor);
+  const run = call(f);
+  assert.equal((await run('chelm_request_work',{executor,request_id:randomUUID()})).status,'no-work');
+  assert.deepEqual(logs(f).at(-1).executor,executor);
+  f.submit();
+  const w = await run('chelm_request_work',{executor,request_id:randomUUID()});
+  const stored=JSON.parse(fs.readFileSync(path.join(f.root,'host/remote/work',w.work_id,'record.json')));
+  assert.equal(logs(f).at(-1).run_id,stored.run_id);
+  await run('chelm_work_status',workArgs(w));
+  assert.deepEqual(logs(f).at(-1).executor,executor);
+  await assert.rejects(call(f,'another-principal')('chelm_work_status',workArgs(w)),{code:'work_not_owned'});
+  assert.equal(logs(f).at(-1).executor,null);
+  assert.deepEqual(logs(f).at(-1).ids,{});
+  assert.ok(!JSON.stringify(logs(f)).includes('SENTINEL_PRIVATE_EXTRA'));
+});
+
+test('VI-021: stale-lock recovery and failed logging preserve committed results and original errors', async t => {
+  const {lock} = await import('../lib/util.mjs');
+  const os = await import('node:os');
+  const f = fixture(t);
+  fs.writeFileSync(path.join(f.root,'host/locks/operation.lock'),JSON.stringify({pid:2147483647,host:os.hostname(),started_at:'2000-01-01T00:00:00Z'}));
+  await lock(f.root,'refresh',async()=>({}));
+  const recovered=logs(f).find(e=>e.command==='stale-lock');
+  assertCommon(recovered);assert.equal(recovered.outcome,'recovered');
+  const p=path.join(f.root,'host/logs/chelm.jsonl');
+  fs.rmSync(p);fs.mkdirSync(p);
+  const result=ok('submit',null,f.root,{subject_id:'S-1',groups:[{kind:'record',lines:['SENTINEL_COMMITTED_WITHOUT_LOG']}]});
+  assert.equal(result.written,1);
+  const original=Object.assign(new Error('SENTINEL_RAW_ERROR'),{code:'input_invalid'});
+  await assert.rejects(lock(f.root,'refresh',async()=>{throw original;}),e=>e===original);
+  assert.equal(ok('subject','S-1',f.root).ok,true);
+});
+
+test('VI-021: actual rotation retains five files and independent process appends remain parseable', async t => {
+  const f=fixture(t), p=path.join(f.root,'host/logs/chelm.jsonl');
+  for(let i=0;i<6;i++){
+    fs.writeFileSync(p,'\n'.repeat(10*1024*1024+1));
+    log(f.root,'refresh','ok');
+    assertCommon(logs(f).at(-1));
+  }
+  for(let i=1;i<=5;i++)assert.ok(fs.existsSync(p+'.'+i));
+  assert.equal(fs.existsSync(p+'.6'),false);
+  const module=pathToFileURL(fileURLToPath(new URL('../lib/util.mjs',import.meta.url))).href;
+  await Promise.all(Array.from({length:8},()=>new Promise((resolve,reject)=>{
+    const child=spawn(process.execPath,['--input-type=module','-e',`import {log} from ${JSON.stringify(module)};for(let i=0;i<20;i++)log(process.argv[1],'refresh','ok');`,f.root],{stdio:'pipe'});
+    child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(Error('append process failed')));
+  })));
+  const events=logs(f);
+  assert.equal(events.length,161);
+  events.forEach(assertCommon);
+});
+
+test('VI-021: all private content classes are excluded on real command, upload and error paths', async t => {
+  const {lock}=await import('../lib/util.mjs');
+  const f=fixture(t);
+  const canaries=Object.fromEntries(['observation','question','answer','reason','candidate','token','raw_error','extra'].map(k=>[k,'PRIVATE_CANARY_'+k.toUpperCase()]));
+  f.submit('S-1',canaries.observation);
+  await execute('ask',null,{runtime:f.root},{text:canaries.question,token:canaries.token});
+  await assert.rejects(execute('answer',null,{runtime:f.root},{question_id:'not-open',text:canaries.answer}),{code:'question_not_open'});
+  const cfgPath=path.join(f.root,'chelm.runtime.json'),cfg=JSON.parse(fs.readFileSync(cfgPath));
+  cfg.requests.kinds=['collect'];fs.writeFileSync(cfgPath,JSON.stringify(cfg));
+  await execute('worker','propose',{runtime:f.root},{executor:{...executor,extra:canaries.extra},kind:'collect',subject_id:'S-1',reason:canaries.reason});
+  const run=call(f),w=await run('chelm_request_work',{executor,request_id:randomUUID()});
+  await run('chelm_stage_output',{...workArgs(w),slot_id:w.output_slots[0].slot_id,revision:1,text:canaries.candidate,final:true});
+  await assert.rejects(lock(f.root,'refresh',async()=>{throw Object.assign(new Error(canaries.raw_error),{code:'input_invalid'});}),{code:'input_invalid'});
+  const text=fs.readFileSync(path.join(f.root,'host/logs/chelm.jsonl'),'utf8');
+  for(const value of Object.values(canaries))assert.equal(text.includes(value),false,value);
+});
