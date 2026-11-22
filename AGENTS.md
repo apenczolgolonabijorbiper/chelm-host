@@ -15,7 +15,9 @@ files. Workers use the CLI worker contract or the equivalent chelm_* MCP tools.
    uncertainty, valid hypotheses and dependency links. Review warnings and
    alternatives each cycle. Keep JSON and Markdown question queues consistent.
 4. Write journal_path with Started: <claimed_at>, sources, changes, warnings
-   reviewed, unresolved alternatives/questions, actual model and verification.
+   reviewed, unresolved alternatives/questions, actual model and completed local
+   checks. Mark host checks pending and name a durable completion record keyed
+   by runtime/run (CONTRACT_WORKER WRK-13); retain submit evidence there afterwards.
    Scripted analysts explicitly state that no language model was used. When
    guidance exists, include guidance_version: <guidance_identity> exactly.
 5. For answered question_answer observations write

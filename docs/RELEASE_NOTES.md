@@ -1,3 +1,17 @@
+# Unreleased — VI-020 and VI-021
+
+- Define WRK-13 verification pointers, minimum durable completion evidence and
+  snapshot identity. Align local/remote instructions and mechanical journals;
+  journal verdict text and a self-referential final tree hash are not required.
+- Complete the merged observability baseline with validated executor identity
+  on remote no-work/refusal paths, exact event shapes, count units and coverage.
+- Add scratch-runtime regressions for intake/duplicates/reset, unlogged reads,
+  executor ownership, stale locks and log I/O failure isolation.
+
+No runtime migration or harness-engine change. Existing historical log records
+are preserved. These source changes do not publish a new release; consumers
+resolve vendor reports after upgrading and checking the resulting package.
+
 # Chelm-host 1.0.2 — pending-issue acceptance follow-up
 
 - Enforce the 64 MiB committed-tree limit on logical bytes, including duplicate

@@ -98,6 +98,10 @@ test('HTTP token revocation, runtime denial and executor spoofing preserve authe
   const work = JSON.parse(response.content[0].text); assert.equal(work.ok, true);
   const stored = JSON.parse(fs.readFileSync(path.join(f.root, 'host/remote/work', work.work_id, 'record.json')));
   assert.equal(stored.principal, 'verified-principal');
+  const read = await client.callTool({name:'chelm_work_status',arguments:workArgs(work)});
+  assert.equal(JSON.parse(read.content[0].text).ok,true);
+  const failed = await client.callTool({name:'chelm_read_artifact',arguments:{...workArgs(work),artifact_id:randomUUID()}});
+  assert.equal(failed.isError,true);
   await assert.rejects(call(f, 'spoofed-administrator')('chelm_work_status', workArgs(work)), { code: 'work_not_owned' });
   delete env.REVOCABLE_TOKEN;
   assert.equal((await fetch(url, { method: 'POST', headers: { Authorization: 'Bearer ' + token } })).status, 401);
@@ -107,4 +111,13 @@ test('HTTP token revocation, runtime denial and executor spoofing preserve authe
   const event=events.find(e=>e.command==='remote-worker'&&e.tool==='chelm_request_work');
   assert.equal(event.principal,'verified-principal');assert.equal(event.executor.host,'spoofed-host');
   assert.notEqual(event.actor,'spoofed-administrator');assert.notEqual(event.actor,'spoofed-host');
+  const endpoint = events.filter(e=>e.command==='remote-worker');
+  assert.equal(endpoint.length,3);
+  const status=endpoint.find(e=>e.tool==='chelm_work_status');
+  const failure=endpoint.find(e=>e.tool==='chelm_read_artifact');
+  assert.equal(status.outcome,'ok');assert.equal(status.executor.id,'spoofed-administrator');
+  assert.notEqual(failure.outcome,'ok');assert.equal(failure.principal,'verified-principal');
+  assert.equal(failure.executor.id,'spoofed-administrator');
+  const denied=events.find(e=>e.principal==='spoofed-administrator'&&e.outcome==='work_not_owned');
+  assert.equal(denied.executor,null);assert.deepEqual(denied.ids,{});
 });

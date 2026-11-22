@@ -60,6 +60,44 @@ and overlap; their durations MUST NOT be added. Timings exclude process startup.
 Instrumentation/log write failures are best-effort and preserve operation errors
 and committed results. An OS/process crash can prevent a final log line.
 
+### Exact event shapes and count units (VI-021)
+
+The required common keys are exactly `at`, `command`, `runtime_id`, `actor`,
+`outcome`, `duration_ms`, `ids`, `counts`, `executor`, `run_id`, `work_id`,
+`subject_id`. `at` is UTC ISO time; duration is nonnegative milliseconds.
+Identifiers are nonempty single-line strings of at most 300 characters.
+`ids` permits only run_id, work_id, subject_id, request_id, question_id,
+observation_id. Counts are nonnegative safe integers, never content or estimates.
+Executor is null or exactly {id, kind, model, host}; arbitrary properties are dropped.
+
+Only these extensions are emitted: `principal` on authenticated remote operations,
+`tool` on remote endpoint events, `usage` when available for a submission,
+and `phases`/`git` when enabled. The endpoint event also uses the common work_id.
+A `stale-lock` maintenance event has the common keys, outcome `recovered`, empty
+ids/counts and null executor/correlation IDs before command metadata is known.
+A busy/refused command uses the same common shape with only validated metadata
+available at the point of refusal. Log I/O failure silently drops that event;
+it does not replace a command error, undo a commit or force a publication retry.
+
+| Operation/result | IDs/counts supplied when available | Units/coverage |
+|---|---|---|
+| submit / ask / answer intake | subject/question/observation IDs from inputs or results; written, skipped_groups, indexed | New notes written, duplicate groups skipped, notes processed by indexer; zero is retained |
+| index / import-sources | indexed / added, present, evidence_added | Actual returned indexing/import counts |
+| worker next | generated run_id; claimed | Claimed source count; no-work has empty counts and validated executor |
+| worker validate / submit | owned run_id; processed when returned | Processed source count, not attempted outputs |
+| worker renew / abandon / propose | known run/request IDs | No invented completion counts |
+| refresh / read summary --deep / reset | available result IDs/counts, otherwise {} | No extra graph scans for logging |
+| remote tool operation / endpoint | owned work/run IDs and authenticated principal | Separate internal operation and endpoint call; status summary excludes endpoint duplicates |
+
+All remaining mutation-dispatch commands use the common envelope and only these
+allowlisted result fields. Local unlogged queries include read without deep,
+status, conversation, subject, requests list, context/worker context, profile
+check/status, inspect, get, export-sources and admin-stats. Lifecycle commands
+version/verify/init/adopt/migrate return before the mutation dispatcher; do not
+infer a complete lifecycle audit from this log. Direct published JSON reads are
+outside host coverage. Optional read counters do not turn these into operation
+log events. Existing historical lines may omit new fields; no migration rewrites them.
+
 ## Executor usage
 
 Local worker submit (CLI/stdio) and remote chelm_submit_candidate accept optional
