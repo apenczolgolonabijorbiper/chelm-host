@@ -215,6 +215,18 @@
         "max_lifetime_minutes"
       ],
       "additionalProperties": false
+    },
+    "observability": {
+      "type": "object",
+      "properties": {
+        "operation_phases": {
+          "type": "boolean"
+        },
+        "read_metrics": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "required": [

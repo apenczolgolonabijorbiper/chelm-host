@@ -120,3 +120,14 @@ chunk: <i>/<n>                          (for every group chunk, including 1/1)
   profile_mismatch in an enforced worker next.
 
 Explicit `chunks` preserve their boundaries. Each chunk is subject to the same configured or per-group `max_chars` and `oversize` as a line: `refuse` rejects the whole submission before writes; `truncate` retains the first `max_chars - 4` UTF-16 code units followed by `" ..."`. CRLF is normalized before measuring. Option values are validated for both input forms.
+
+
+## Local observability additions (VP-021 / VI-021)
+
+See [OBSERVABILITY.md](OBSERVABILITY.md) for the exact operation-log envelope,
+executor/principal/OS identity distinction, optional runtime observability flags,
+lock-free bounded read counters and read-only status.observability summary.
+Worker submit accepts optional nullable numeric usage (model_ms, input_tokens,
+output_tokens, cached_input_tokens). Omitted fields remain unknown/null. Remote
+submission retries must retain normalized usage as well as digest/submission ID.
+Existing runtime configurations remain valid; no instance migration is needed.

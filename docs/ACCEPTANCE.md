@@ -246,3 +246,15 @@ must be passed back on validate/submit.
   preflight checks do not provide a multi-file filesystem transaction across a
   sudden power failure. Retrying a complete submission is content-idempotent.
 
+
+
+## VP-021 / VI-021 validation
+
+The observability implementation adds tests/telemetry.test.mjs for operation
+identity/phase/privacy behavior, nullable usage, concurrent independent-process
+read counters, bounded windows, read-only status, failure isolation, log rotation
+and remote usage retry fencing. Run the package builder to observe staged tests
+and harness conformance; configured tests/CI alone do not establish platform
+acceptance. Retained-shard counters are bounded, not unbounded lifetime totals;
+reads.json is a materialization and status reads authoritative shards. See
+OBSERVABILITY.md for crash/I/O and saturation limits.

@@ -12,3 +12,4 @@ import './conformance/mcp-success.test.mjs';
 import './conformance/requirement-map.test.mjs';
 import './parity/boundaries.test.mjs';
 import './parity/intake-worker.test.mjs';
+import './telemetry.test.mjs';

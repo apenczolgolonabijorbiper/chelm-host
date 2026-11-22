@@ -88,3 +88,14 @@ thought or complete inference transcript is required; journals record concise
 source-grounded decisions, uncertainty and checks.
 
 MCP prompts/get exposes chelm_remote_once, chelm_remote_loop and chelm_remote_integration; each includes the complete base procedure.
+
+
+## Local observability additions (VP-021 / VI-021)
+
+See [OBSERVABILITY.md](OBSERVABILITY.md) for the exact operation-log envelope,
+executor/principal/OS identity distinction, optional runtime observability flags,
+lock-free bounded read counters and read-only status.observability summary.
+Worker submit accepts optional nullable numeric usage (model_ms, input_tokens,
+output_tokens, cached_input_tokens). Omitted fields remain unknown/null. Remote
+submission retries must retain normalized usage as well as digest/submission ID.
+Existing runtime configurations remain valid; no instance migration is needed.
