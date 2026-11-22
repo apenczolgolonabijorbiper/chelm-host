@@ -335,3 +335,20 @@ test('VI-021: actual rotation retains five files and independent process appends
   assert.equal(events.length,161);
   events.forEach(assertCommon);
 });
+
+test('VI-021: all private content classes are excluded on real command, upload and error paths', async t => {
+  const {lock}=await import('../lib/util.mjs');
+  const f=fixture(t);
+  const canaries=Object.fromEntries(['observation','question','answer','reason','candidate','token','raw_error','extra'].map(k=>[k,'PRIVATE_CANARY_'+k.toUpperCase()]));
+  f.submit('S-1',canaries.observation);
+  await execute('ask',null,{runtime:f.root},{text:canaries.question,token:canaries.token});
+  await assert.rejects(execute('answer',null,{runtime:f.root},{question_id:'not-open',text:canaries.answer}),{code:'question_not_open'});
+  const cfgPath=path.join(f.root,'chelm.runtime.json'),cfg=JSON.parse(fs.readFileSync(cfgPath));
+  cfg.requests.kinds=['collect'];fs.writeFileSync(cfgPath,JSON.stringify(cfg));
+  await execute('worker','propose',{runtime:f.root},{executor:{...executor,extra:canaries.extra},kind:'collect',subject_id:'S-1',reason:canaries.reason});
+  const run=call(f),w=await run('chelm_request_work',{executor,request_id:randomUUID()});
+  await run('chelm_stage_output',{...workArgs(w),slot_id:w.output_slots[0].slot_id,revision:1,text:canaries.candidate,final:true});
+  await assert.rejects(lock(f.root,'refresh',async()=>{throw Object.assign(new Error(canaries.raw_error),{code:'input_invalid'});}),{code:'input_invalid'});
+  const text=fs.readFileSync(path.join(f.root,'host/logs/chelm.jsonl'),'utf8');
+  for(const value of Object.values(canaries))assert.equal(text.includes(value),false,value);
+});
