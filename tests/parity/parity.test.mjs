@@ -44,12 +44,12 @@ test(
     for (const [key, value] of Object.entries(expected.journal)) assert.equal(journal[key], value, key);
     for (const [subject, counts] of Object.entries(expected.subjects)) assert.deepEqual(ok('subject',
       subject, f.root).sets.all, counts);
-    assert.equal(ok('inspect', 'relations', f.root).total, 1);
-    assert.equal(ok('inspect', 'claims', f.root).total, 3);
+    assert.equal(ok('inspect', 'relations', f.root).total, expected.totals.relations);
+    assert.equal(ok('inspect', 'claims', f.root).total, expected.totals.claims);
     assert.equal(ok('requests', 'list', f.root).requests[0].status, 'proposed');
     const deep = ok('read', 'summary', f.root, undefined, {
       deep: true
     });
     assert.equal(deep.validate.ok, true);
-    assert.equal(deep.totals.claims, 3);
+    assert.equal(deep.totals.claims, expected.totals.claims);
   });

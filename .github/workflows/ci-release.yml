@@ -53,6 +53,8 @@ jobs:
         run: python tools/prepare-harness.py --source ../harness-src --destination ../harness-release
       - name: Build with all Chelm and harness backend conformance tests
         run: python tools/build-release.py --harness ../harness-release
+      - name: Measure synthetic host capacity and tree bounds
+        run: node tools/benchmark-capacity.mjs --harness ../harness-release --output dist/capacity-${{ runner.os }}.json
       - name: Verify default full IIS application pool identity
         if: runner.os == 'Windows'
         shell: powershell

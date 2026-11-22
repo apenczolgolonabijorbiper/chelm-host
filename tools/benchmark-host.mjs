@@ -87,6 +87,12 @@ try {
       samples: rows
     }];
   }));
+  const startup = Array.from({ length: samples }, () => {
+    const at = performance.now();
+    const r = spawnSync(process.execPath, ['-e', ''], { encoding: 'utf8' });
+    if (r.status !== 0) throw Error('Node startup probe failed');
+    return performance.now() - at;
+  });
   const report = {
     schema_version: 1,
     recorded_at: new Date().toISOString(),
@@ -95,11 +101,17 @@ try {
       os_release: os.release(),
       arch: os.arch(),
       cpus: os.cpus().length,
+      cpu_model: os.cpus()[0]?.model,
+      total_memory_bytes: os.totalmem(),
+      load_average: os.loadavg(),
+      python: spawnSync(python, ['--version'], { encoding: 'utf8' }).stdout?.trim() || 'unavailable',
+      git: spawnSync('git', ['--version'], { encoding: 'utf8' }).stdout?.trim() || 'unavailable',
       node: process.version
     },
     harness_version: '0.10.0',
     fixture: 'Fresh canonical empty memory; submit 10 synthetic groups, ask once, then status per sample.',
     method: 'Wall time includes CLI startup. NFR-4 excludes measured indexer/validator children; ask retains retrieval time. This is not a capacity benchmark or reference-consumer measurement.',
+    node_process_start_ms: startup,
     commands
   };
   if (output) {

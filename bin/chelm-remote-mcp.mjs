@@ -18,14 +18,14 @@ try {
   if (url.protocol !== 'https:' && !['127.0.0.1', 'localhost'].includes(url.hostname))
     throw Error('Remote MCP requires HTTPS');
   if (!token) throw Error('Worker credential environment variable is missing');
-  const remote = new Client({ name: 'chelm-stdio-bridge', version: '1.0.1' });
+  const remote = new Client({ name: 'chelm-stdio-bridge', version: '1.0.2' });
   await remote.connect(
     new StreamableHTTPClientTransport(url, {
       requestInit: { headers: { Authorization: 'Bearer ' + token } }
     })
   );
   const local = new Server(
-    { name: 'chelm-remote-worker', version: '1.0.1' },
+    { name: 'chelm-remote-worker', version: '1.0.2' },
     { capabilities: { tools: {} } }
   );
   local.setRequestHandler(ListToolsRequestSchema, async () => remote.listTools());

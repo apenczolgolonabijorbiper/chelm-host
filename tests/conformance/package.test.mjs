@@ -137,3 +137,34 @@ test('VF-7: packaged service probe completes a synthetic lease under the executi
   assert.equal(value.processed, 1);
   assert.equal(value.claims, 1);
 });
+
+test('installer upgrade replaces old package and refuses managed AGENTS/MCP conflicts before mutation', t => {
+  if (!fs.existsSync(path.join(source, 'RELEASE.json'))) return t.skip('Staged distribution check');
+  const base = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-upgrade-'));
+  t.after(() => fs.rmSync(base, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 }));
+  for (const scenario of ['upgrade', 'edited-block', 'duplicate-end', 'reversed-block', 'mcp-conflict']) {
+    const app = path.join(base, scenario); fs.mkdirSync(app);
+    const invoke = (...args) => spawnSync(process.execPath, [path.join(source, 'integration/install.mjs'),
+      '--repo', app, '--skip-dependencies', '--register-mcp', ...args], { encoding: 'utf8', timeout: 30000 });
+    const result = invoke(); assert.equal(result.status, 0, result.stdout + result.stderr);
+    const agents = path.join(app, 'AGENTS.md'), mcp = path.join(app, '.cursor/mcp.json');
+    const manifest = path.join(app, 'vendor/chelm-host/RELEASE.json'), state = path.join(app, '.chelm-install.json');
+    if (scenario === 'upgrade') {
+      const old = JSON.parse(fs.readFileSync(manifest)); old.version = '0.99.0'; fs.writeFileSync(manifest, JSON.stringify(old));
+      fs.writeFileSync(path.join(app, 'unrelated.txt'), 'Retain application data.');
+      const upgraded = invoke('--upgrade'); assert.equal(upgraded.status, 0, upgraded.stdout);
+      assert.equal(JSON.parse(fs.readFileSync(manifest)).version, JSON.parse(fs.readFileSync(path.join(source, 'RELEASE.json'))).version);
+      assert.deepEqual(integrity(path.join(app, 'vendor/chelm-host')).problems, []);
+      assert.equal(fs.readFileSync(path.join(app, 'unrelated.txt'), 'utf8'), 'Retain application data.');
+      continue;
+    }
+    if (scenario === 'edited-block') fs.writeFileSync(agents, fs.readFileSync(agents, 'utf8').replace('Use vendor/', 'Changed vendor/'));
+    if (scenario === 'duplicate-end') fs.appendFileSync(agents, '\n<!-- chelm-host:end -->\n');
+    if (scenario === 'reversed-block') fs.writeFileSync(agents, '<!-- chelm-host:end -->\n<!-- chelm-host:begin -->\n');
+    if (scenario === 'mcp-conflict') { const value = JSON.parse(fs.readFileSync(mcp)); value.mcpServers.chelm.command = 'unmanaged'; fs.writeFileSync(mcp, JSON.stringify(value)); }
+    const protectedFiles = [agents, mcp, manifest, state], before = protectedFiles.map(p => fs.readFileSync(p));
+    const refused = invoke('--upgrade'); assert.equal(refused.status, 1, refused.stdout);
+    assert.equal(JSON.parse(refused.stdout).error.code, 'install_conflict');
+    protectedFiles.forEach((p, i) => assert.deepEqual(fs.readFileSync(p), before[i]));
+  }
+});

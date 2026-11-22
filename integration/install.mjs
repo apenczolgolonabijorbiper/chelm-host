@@ -102,7 +102,9 @@ export function install(options) {
     agents = fs.existsSync(agentsPath) ? fs.readFileSync(agentsPath, 'utf8') : '';
   const start = agents.indexOf(begin),
     finish = agents.indexOf(end);
-  assert((start < 0) === (finish < 0) && agents.indexOf(begin, start + 1) < 0, 'install_conflict',
+  assert((start < 0) === (finish < 0) &&
+    (start < 0 || finish > start) &&
+    agents.indexOf(begin, start + 1) < 0 && agents.indexOf(end, finish + 1) < 0, 'install_conflict',
     'Malformed managed AGENTS block');
   const existing = start >= 0 ? agents.slice(start, finish + end.length) : null;
   if (existing) assert(state && hash(existing) === state.agents_hash, 'install_conflict',

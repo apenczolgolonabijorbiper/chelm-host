@@ -232,3 +232,18 @@ Prune removes terminal artifacts older than seven days while retaining receipts.
 Service restart preserves snapshots/uploads/attempts/receipts. Restart with the
 same runtime and worker principal. Work expires naturally if no agent renews.
 Do not serve private runtime directories as static IIS content.
+
+## Acceptance evidence
+
+See [EXTERNAL_ACCEPTANCE.md](EXTERNAL_ACCEPTANCE.md) for the target IIS proxy,
+reference workstation, two-machine inference and consumer checks. Run the
+read-only `tools/probe-remote.mjs` from a worker machine to capture actual
+connectivity, discovery and SDK/server versions before using a cognition prompt.
+The probe does not request assignments or invoke inference.
+
+CI runs two independent SDK client processes through an HTTP proxy and restarts
+the owner service between requests. It also kills publication fixture processes
+immediately before and after Git CAS. `remote-phases-<platform>.json` records
+per-tool wall times and JSON payload sizes; inference time, provider token use
+and cost are explicitly unknown. These are deterministic fixtures on one machine.
+They do not certify an IDE/provider, TLS deployment or unattended approval policy.

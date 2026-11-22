@@ -42,6 +42,8 @@ def build(harness, output=None):
     payload['RELEASE.json'] = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
     env = {**os.environ, 'CHELM_HARNESS_ROOT': str(harness),
            'GOLEM_PYTHON': os.environ.get('GOLEM_PYTHON', os.sys.executable)}
+    output.parent.mkdir(parents=True, exist_ok=True)
+    env['CHELM_ACCEPTANCE_REPORT_DIR'] = str(output.parent)
     started = time.monotonic()
     with tempfile.TemporaryDirectory(prefix='chelm-release-') as directory:
         stage = (Path(directory) / 'chelm-host').resolve()
