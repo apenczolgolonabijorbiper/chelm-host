@@ -33,7 +33,7 @@ files. Workers use the CLI worker contract or the equivalent chelm_* MCP tools.
    collection; Chelm-host neither calls a model nor runs a scheduler.
 
 For maintainers: run node --test tests/ with CHELM_HARNESS_ROOT pointing to an
-extracted harness 0.11.0 release, then tools/build-release.py before publishing.
+extracted harness 0.12.0 release, then tools/build-release.py before publishing.
 Keep docs/ACCEPTANCE.md accurate; never equate configured CI with observed results.
 
 Remote workers: use docs/REMOTE_WORKER_CONTRACT.md and the shipped SudoLang prompts.

@@ -33,11 +33,11 @@ def build(harness, output=None):
     manifest = {'schema_version': 1, 'version': version,
                 'contracts': {'app': 1, 'worker': 2, 'read_model': 1,
                               'runtime_config': 2, 'remote_worker': 2, 'cognitive_task': 1},
-                'harness_supported': '=0.11.0', 'supported_harness_versions': ['0.11.0'],
+                'harness_supported': '=0.12.0', 'supported_harness_versions': ['0.12.0'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',
-                               'harness_archive_sha256': '2f945cf38166f1878bfd4ea89b9d9ffb187f525269710a61016d0129b02f3ca2',
-                               'harness_release_sha256': 'd130c465688874bceae2f5eb0bb113ddef740c95764256871bda6d51928355e7'},
+                               'harness_archive_sha256': '9bc17e21d0528e7359006b5bda6c17cce99df3021294e15e2d217d7330627522',
+                               'harness_release_sha256': '52c4fa98a06993bfa4f2504df58a82504e4303a20fd465a09c19140b8d3cfda6'},
                 'runtime_dependencies': {'manager': 'npm', 'lockfile': 'package-lock.json'},
                 'files': {name: digest(data) for name, data in payload.items()}}
     payload['RELEASE.json'] = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
@@ -63,7 +63,7 @@ def build(harness, output=None):
                        cwd=stage, check=True, env=env)
         suite_seconds = time.monotonic() - started
         output.parent.mkdir(parents=True, exist_ok=True)
-        timing = {'platform': os.sys.platform, 'harness_version': '0.11.0', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
+        timing = {'platform': os.sys.platform, 'harness_version': '0.12.0', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
         print('CHELM_TEST_TIMING ' + json.dumps(timing), flush=True)
         (output.parent / ('test-timing-' + os.sys.platform + '.json')).write_text(json.dumps(timing, indent=2) + '\n', encoding='utf-8')
         subprocess.run(['node', str(stage / 'tools/benchmark-host.mjs'), '--harness', str(harness),

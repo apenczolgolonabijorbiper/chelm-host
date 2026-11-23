@@ -6,21 +6,18 @@ ordinary observation workers nor canonical chat events change meaning.
 
 ## Dependency and availability
 
-The supported published pair remains Chelm 1.1.0 / Harness 0.11.0, with the exact
-existing ZIP/manifest hashes in compatibility.json. That Harness lacks cognition.
-Task creation/execution therefore returns `capability_unavailable` on this pair.
-Do not bypass package integrity or install a source checkout into a consuming
-runtime. Existing read APIs and processing keep working.
+The supported pair is Chelm 1.2.0 / published Harness 0.12.0, with exact ZIP and
+manifest hashes in compatibility.json. Production and conformance use that same
+verified package; no source checkout, test engine injection or runtime bypass is
+needed. Required capabilities are cognitive-task-v1, cognitive-context-v1,
+cognitive-result-v1, learning-hypothesis-v1 and hypothesis-unknown-confidence-v1.
+Unsupported packages fail integrity/version checks before task execution.
 
-Development conformance uses the real Harness modules at the exact source commit
-in tests/cognitive-source.json through **function-only test injection**. It is
-neither a production configuration option nor evidence of a supported release.
-Before enabling this feature: publish an authorized Harness release containing
-`cognitive-task-v1`, `cognitive-context-v1`, `cognitive-result-v1`,
-`learning-hypothesis-v1` and `hypothesis-unknown-confidence-v1`; update Chelm's
-published compatibility pins/hashes, verify the entire packaged pair and complete
-the remaining acceptance in COGNITIVE_ACCEPTANCE.md. Publishing is a separate
-owner decision. No application/private runtime is upgraded here.
+Existing canonical 1.1.0/0.11.0 instances retain their data. Pause executors,
+settle assignments/drain leases, replace the complete verified pair, verify and
+refresh before resuming. Do not resume an old assignment after changing its
+pinned engine; reassign it under the new package. No reset or migration is needed.
+No application/private runtime is upgraded by this source change.
 
 ## Responsibilities and authorization
 
@@ -202,8 +199,9 @@ its UX polls task get/list or reads tasks.json directly. Keep private runtime an
 worker credentials outside the public web root; serve only authorized task and
 citation responses. Use existing Windows atomic replacement retries and IIS
 identity procedures. A file read does not start an executor; arrange bounded
-agent invocations externally. Actual execution of these new views on Windows/IIS
-remains a separate acceptance item.
+agent invocations externally. The Windows CI IIS probe completes a cognitive task and checks its result/receipt
+from C#, including atomic replacement while the old view remains open. Observed
+platform results and remaining deployment limits are in COGNITIVE_ACCEPTANCE.md.
 
 Existing operation logs distinguish request_work (queue/snapshot capture), read
 (context/source), stage_output (artifact), validate_candidate (validation) and

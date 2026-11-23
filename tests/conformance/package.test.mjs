@@ -136,6 +136,9 @@ test('VF-7: packaged service probe completes a synthetic lease under the executi
   assert.equal(value.passed, true);
   assert.equal(value.processed, 1);
   assert.equal(value.claims, 1);
+  assert.equal(value.cognitive_task.state, 'completed');
+  assert.equal(value.cognitive_task.read_only_preserved, true);
+  assert.equal(value.cognitive_task.receipt.status, 'committed');
 });
 
 test('installer upgrade replaces old package and refuses managed AGENTS/MCP conflicts before mutation', t => {

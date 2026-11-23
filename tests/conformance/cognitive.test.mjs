@@ -3,17 +3,15 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {z} from 'zod';
-import {fixture,executor,ok,analyze,git,source} from '../helpers.mjs';
+import {fixture,executor,ok,analyze,git,source,harness} from '../helpers.mjs';
 import {taskAction,loadCognitiveEngine,cognitiveCommands} from '../../lib/cognitive.mjs';
 import {remoteCall} from '../../lib/remote.mjs';
 import {remoteToolSchemas} from '../../lib/remote-tools.mjs';
 import {file,read,write,hash} from '../../lib/util.mjs';
-const candidate=process.env.CHELM_COGNITIVE_SOURCE;
-const integration=(name,fn)=>test(name,{skip:!candidate&&'Set CHELM_COGNITIVE_SOURCE to the pinned reviewed Harness source'},fn);
+const integration=test;
 const args=w=>({work_id:w.work_id,attempt:w.attempt});
 async function setup(t){
-  const pin=read(file(source,'tests/cognitive-source.json'));assert.equal(git(candidate,'rev-parse','HEAD'),pin.commit,'Use the pinned Harness source');
-  const f=fixture(t),engine=await loadCognitiveEngine(candidate),hooks={engine};
+  const f=fixture(t),engine=await loadCognitiveEngine(harness),hooks={};
   const task=(op,input)=>taskAction(f.root,op,input,hooks);
   const call=(name,input,principal='worker-b',extra={})=>remoteCall(f.root,principal,name,input,{...hooks,...extra});
   const create=async(input={})=>(await task('create',{idempotency_key:'question-1',text:'Compare the source declarations.',...input})).task;
@@ -60,10 +58,11 @@ test('Cognition tool schemas and dependency-free stdio declarations agree',()=>{
   for(const name of ['cognitive-worker-once.sudo.md','cognitive-worker-resume.sudo.md','cognitive-worker-loop.sudo.md']){const prompt=fs.readFileSync(file(source,'prompts/'+name),'utf8');for(const tool of prompt.match(/\bchelm_[a-z_]+\b/g)??[])assert(remoteToolSchemas[tool],name+': unknown tool '+tool);}
   for(const [op,remote]of Object.entries(cognitiveCommands))assert.deepEqual(defs.find(t=>t.name==='chelm_cognitive_'+op).inputSchema,z.toJSONSchema(remoteToolSchemas[remote],{target:'draft-7'}));
 });
-test('Published 0.11.0 fails closed without changing published compatibility',async t=>{
+test('Published 0.12.0 creates cognition tasks through the production CLI',async t=>{
   const f=fixture(t);
-  await assert.rejects(taskAction(f.root,'create',{idempotency_key:'new',text:'Hello'}),e=>e.code==='capability_unavailable');
-  assert.deepEqual(ok('task','list',f.root).tasks,[]);
+  const created=ok('task','create',f.root,{idempotency_key:'new',text:'Hello'}).task;
+  assert.equal(created.state,'queued');
+  assert.equal(ok('task','list',f.root).tasks[0].task_id,created.task_id);
 });
 integration('Empty inbox lifecycle, exact/conflicting retries, atomic ownership, principal scoping and cancellation',async t=>{
   const f=await setup(t),task=await f.create();
@@ -154,7 +153,7 @@ integration('Independent authenticated MCP client completes and reconnects to th
   const f=await setup(t);ingest(f);const task=await f.create();
   let server,client;
   async function connect(){
-    server=await startServer({port:0,public_url:'http://127.0.0.1/mcp',development:true,runtimes:{app:f.root},auth:{mode:'worker-tokens',workers:[{principal:'worker-b',runtimes:['app'],token_env:'TEST_COGNITIVE_TOKEN'}]}},{env:{TEST_COGNITIVE_TOKEN:'synthetic-conformance-token-not-a-secret'},hooks:{engine:f.engine}});
+    server=await startServer({port:0,public_url:'http://127.0.0.1/mcp',development:true,runtimes:{app:f.root},auth:{mode:'worker-tokens',workers:[{principal:'worker-b',runtimes:['app'],token_env:'TEST_COGNITIVE_TOKEN'}]}},{env:{TEST_COGNITIVE_TOKEN:'synthetic-conformance-token-not-a-secret'}});
     client=new Client({name:'independent-cognitive-client',version:'1'});
     await client.connect(new StreamableHTTPClientTransport(new URL('http://127.0.0.1:'+server.address().port+'/mcp'),{requestInit:{headers:{Authorization:'Bearer synthetic-conformance-token-not-a-secret'}}}));
   }

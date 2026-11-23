@@ -1,3 +1,29 @@
+# Chelm-host 1.2.0 — cognitive tasks / Harness 0.12.0
+
+Supports **Harness 0.12.0 exactly**, using the published ZIP and manifest hashes
+in compatibility.json. Source checkouts do not substitute for this package.
+
+- Add durable task create/get/list/cancel/continue/learning/evidence APIs alongside
+  retrieval-only ask, with immutable local/remote assignments, bounded reads,
+  exact grounded result bytes, receipts and retained snapshot citations.
+- Keep read-only inference free of canonical memory leases. Publish proposed
+  hypotheses only through separately authorized, fresh Harness transactions.
+- Add SudoLang prompts and schema-checked CLI/stdio/HTTP MCP tools, task read
+  views, finite continuation and honest stale/pending/uncertainty metadata.
+- Test cognition against the published package through the production loader;
+  remove the source-only engine checkout and skipped cognition suite.
+- Qualify the .NET 4 assembly identity in the IIS probe. Verify task completion,
+  result/receipt file reading and atomic view replacement under an open C# reader.
+
+| Supported harness | Runtime requirements (PKG-14) |
+|---|---|
+| 0.12.0 | Node 22.12+, Python 3.12+, Git; canonical graph v2, hypotheses v1, vocabulary v2; runtime config v2, worker/remote-worker v2 and cognitive task v1. Existing canonical 1.1.0/0.11.0 instances retain memory and host state: pause workers, settle assignments/drain leases, replace both verified packages, verify and refresh, then reassign work. No reset or migration. |
+
+Chelm 1.2.0 refuses older Harness versions. MCP installations restore locked Node
+dependencies; the ZIP excludes node_modules. See COGNITIVE_ACCEPTANCE.md for
+observed checks, actual-model evidence and deployment limits. Release publication
+and consuming application upgrades remain separate operations.
+
 # Chelm-host 1.1.0 — coordinated harness 0.11.0 release
 
 Supported harness: **0.11.0 exactly**, downloaded from its published release.
@@ -164,14 +190,3 @@ statistics are external CLI calls; vendor directories are never modified.
 
 See ACCEPTANCE.md for verification scope and known limitations. Identity crosswalk,
 model clients, background scheduling and UI are outside this release.
-
-## Unreleased: #25 durable cognitive tasks
-
-Add the task API, immutable cognitive assignments, bounded source/context delivery,
-staged grounded results/receipts, retained citation reads and separately authorized
-hypothesis learning/continuation. New CLI/stdin/MCP tool schemas and SudoLang
-prompts are additive; existing ask/answer/worker semantics remain. Source-backed
-conformance is recorded separately from model/platform/published-pair acceptance.
-The supported published Harness pin remains 0.11.0; task execution stays gated
-until an authorized cognitive Harness release is published and explicitly pinned.
-No release or consuming runtime upgrade is included.

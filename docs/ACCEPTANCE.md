@@ -313,10 +313,9 @@ no data migration or reset; pause processing, settle assignments/drain leases,
 replace the verified pair, verify and refresh before resuming. Older releases'
 measurements above remain historical evidence, not new-version validation.
 
-## #25 cognitive tasks
+## #25 cognitive tasks — 1.2.0 / Harness 0.12.0
 
-See [COGNITIVE_ACCEPTANCE.md](COGNITIVE_ACCEPTANCE.md) for source implementation,
-observed deterministic tests and outstanding model/platform/published-pair gates.
-The 0.11.0 compatibility pin is retained; task execution refuses that release's
-missing cognitive contracts. Do not interpret configured CI or source injection
-as production acceptance or a consuming-runtime upgrade.
+See [COGNITIVE_ACCEPTANCE.md](COGNITIVE_ACCEPTANCE.md) for the current published-pair,
+model and platform evidence. Historical 1.1.0/0.11.0 measurements above remain
+historical. The current production loader and all cognition tests use the exact
+published 0.12.0 package; the development source dependency has been removed.

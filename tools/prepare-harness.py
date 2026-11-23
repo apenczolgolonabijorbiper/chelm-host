@@ -22,7 +22,7 @@ def download(url):
         raise ValueError('Published harness download exceeds 32 MiB')
     return payload
 
-def prepare(destination, version='0.11.0', archive=None):
+def prepare(destination, version='0.12.0', archive=None):
     pinned = json.loads((ROOT / 'compatibility.json').read_text())['published_harness']
     if version != pinned['version']:
         raise ValueError('Unsupported harness release')
@@ -76,7 +76,7 @@ def prepare(destination, version='0.11.0', archive=None):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--destination', required=True, type=Path)
-    parser.add_argument('--version', default='0.11.0')
+    parser.add_argument('--version', default='0.12.0')
     parser.add_argument('--archive', type=Path, help='Offline copy of the same pinned published ZIP')
     args = parser.parse_args()
     prepare(args.destination, args.version, args.archive)

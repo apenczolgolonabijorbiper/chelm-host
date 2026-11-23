@@ -10,7 +10,7 @@ a read-only vendor installation and a private runtime writable by the pool.
 From an elevated Windows PowerShell 5.1 session on a disposable/test server:
 
 ```powershell
-./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-0.2.0.zip `
+./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.2.0.zip `
   -HarnessRoot C:/vendor/golem-harness -Output ./iis-identity.json
 ```
 
@@ -50,3 +50,9 @@ Chelm falls back to the OS security ID from whoami.exe, recording the SID as the
 actor/lease owner. The IIS evidence separately records the Windows principal name.
 Do not configure USERNAME or enable a profile to bypass this check. For delegation
 under such an identity, participants may list that recorded SID.
+
+The 1.2.0 probe also completes a read-only cognitive task, checks its durable
+receipt and reads the completed task view directly in C#. With FileShare.Delete
+it holds the old view open while another Node process runs refresh and atomically
+replaces the file, then checks the replacement binding. This is deterministic
+service integration evidence; it does not claim to invoke a model under IIS.

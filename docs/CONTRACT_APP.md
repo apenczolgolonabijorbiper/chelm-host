@@ -139,5 +139,5 @@ specified in [COGNITIVE_TASKS.md](COGNITIVE_TASKS.md), including defaults, owner
 limits and states. It has its own `contracts.cognitive_task:1` declaration. APP-20
 ask remains retrieval/queued intake, APP-21 answer remains a user's reply to a
 memory question, and task answers never impersonate either observation type.
-Production task execution is gated on a supported published cognitive Harness;
-0.11.0 returns capability_unavailable. Plain task reads do not invoke inference.
+Production task execution uses the verified published Harness 0.12.0 package;
+unsupported versions/integrity changes are refused before execution. Plain task reads do not invoke inference.

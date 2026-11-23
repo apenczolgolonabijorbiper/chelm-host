@@ -36,7 +36,7 @@ try {
   # Paths below are administrator-generated; the endpoint accepts no input or commands.
   $handler = @'
 <%@ WebHandler Language="C#" Class="ChelmProbe" %>
-<%@ Assembly Name="System.Web.Extensions" %>
+<%@ Assembly Name="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 using System;
 using System.Web;
 using System.Diagnostics;
@@ -57,11 +57,27 @@ public class ChelmProbe : IHttpHandler {
     if (process.ExitCode != 0) { context.Response.StatusCode = 500; }
     // Direct file reads permit atomic replacement by concurrent Node writers.
     string taskText;
-    using (var stream = new FileStream(@"TASK_VIEW_PATH", FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
-    using (var reader = new StreamReader(stream)) { taskText = reader.ReadToEnd(); }
-    var taskView = new System.Web.Script.Serialization.JavaScriptSerializer().DeserializeObject(taskText) as Dictionary<string, object>;
+    using (var stream = new FileStream(@"TASK_VIEW_PATH", FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete)) {
+      // Hold the old object open while a fresh Node process atomically replaces it.
+      var refreshInfo = new ProcessStartInfo(@"NODE_EXE", "\"SCRIPT_PATH\" \"CONFIG_PATH\" --refresh");
+      refreshInfo.UseShellExecute = false; refreshInfo.CreateNoWindow = true;
+      refreshInfo.RedirectStandardOutput = true; refreshInfo.RedirectStandardError = true;
+      var refresh = Process.Start(refreshInfo);
+      var refreshOutput = refresh.StandardOutput.ReadToEndAsync();
+      var refreshError = refresh.StandardError.ReadToEndAsync();
+      if (!refresh.WaitForExit(180000)) { refresh.Kill(); throw new Exception("Refresh timed out"); }
+      if (refresh.ExitCode != 0) throw new Exception("Concurrent task view replacement failed");
+      using (var reader = new StreamReader(stream)) { taskText = reader.ReadToEnd(); }
+    }
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+    var taskView = serializer.DeserializeObject(taskText) as Dictionary<string, object>;
     if (taskView == null || !taskView.ContainsKey("data") || !taskView.ContainsKey("head")) throw new Exception("Invalid task view");
-    context.Response.Write("{\"iis_identity\":\"" + HttpUtility.JavaScriptStringEncode(WindowsIdentity.GetCurrent().Name) + "\",\"task_view_read\":true,\"probe\":" + output.Result.Trim() + "}");
+    var rows = taskView["data"] as object[];
+    var row = rows != null && rows.Length == 1 ? rows[0] as Dictionary<string, object> : null;
+    if (row == null || (string)row["state"] != "completed" || row["receipt"] == null) throw new Exception("Completed cognitive task missing");
+    var replacement = serializer.DeserializeObject(File.ReadAllText(@"TASK_VIEW_PATH")) as Dictionary<string, object>;
+    if (replacement == null || (string)replacement["head"] != (string)taskView["head"]) throw new Exception("Replacement view binding changed");
+    context.Response.Write("{\"iis_identity\":\"" + HttpUtility.JavaScriptStringEncode(WindowsIdentity.GetCurrent().Name) + "\",\"task_view_read\":true,\"task_view_replace_while_open\":true,\"probe\":" + output.Result.Trim() + "}");
   }
 }
 '@

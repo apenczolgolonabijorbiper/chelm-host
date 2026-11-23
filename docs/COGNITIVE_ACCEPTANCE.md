@@ -1,76 +1,58 @@
-# Cognitive task acceptance (#25)
+# Cognitive task acceptance (#25) — Chelm 1.2.0 / Harness 0.12.0
 
-Implementation scope: #26 lifecycle, #27 execution, #28 result/read views,
-#29 reviewed learning/continuation, #30 packaged integration and evidence.
-Owner authorized implementation on 2026-11-23. No publication or consuming
-runtime upgrade is included. Issues remain open for their outstanding gates.
+Scope: #26 lifecycle, #27 execution, #28 read views, #29 learning/continuation,
+#30 packaged vendor acceptance. No consuming application/runtime is upgraded.
+
+## Published pair
+
+Production and the full cognition suite use published Harness 0.12.0 from
+compatibility.json. Archive SHA-256:
+`9bc17e21d0528e7359006b5bda6c17cce99df3021294e15e2d217d7330627522`.
+Manifest SHA-256:
+`52c4fa98a06993bfa4f2504df58a82504e4303a20fd465a09c19140b8d3cfda6`.
+No source checkout, engine-injection test setting or skipped cognition cases.
 
 ## Observed versus pending
 
-| Area | Implementation/evidence | Status |
+| Area | Evidence | Status |
 |---|---|---|
-| Durable task API, defaults, idempotency, caller scope | lib/cognitive.mjs; conformance/cognitive.test.mjs | source implementation; Linux conformance observed |
-| No-inbox answering, ownership, finite attempts/cancellation | same; existing runtime operation lock | deterministic acceptance observed |
-| Local and authenticated remote contract | same assignment/output helpers; official independent MCP client reconnect | deterministic acceptance observed |
-| Exact source/citation scope, bounded reads, forged quotes | Harness session/validator plus host retained snapshots/audit | deterministic acceptance observed |
-| Result/receipt crash boundary and retry | one atomic authoritative completion record; fault after commit before projection | deterministic response-loss recovery observed |
-| Strict/current and stale snapshot semantics, concurrent intake/commits | cognitive conformance | deterministic acceptance observed |
-| Authorized/rejected/stale learning; bounded linked continuation | Harness public publishLearning; host application authorization | deterministic acceptance observed |
-| Ordinary intake/ask/answer/observation workers/read views | full existing conformance/parity/regression suite | recorded validation below |
-| Tool/schema/SudoLang alignment | generated local schemas checked against remote Zod tools; prompt tool-name assertions | deterministic checks |
-| Actual LLM multi-source and full semantic cases | no inference in deterministic test executors | pending; scripted tests do not count |
-| Supported published cognition Harness and exact pair hashes | 0.11.0 remains pinned and feature fails closed | pending authorized upstream publication and reviewed pin update |
-| Packaged task execution with published cognition contracts | clean-package tests can exercise only current gated pair + separately injected source | pending published pair |
-| Windows/macOS and .NET/IIS task views | CI matrix configured; direct C# file read added to IIS probe with FileShare.Delete | new platform results pending |
-| IIS Express Windows 11 / full IIS Server 2022 | deployment guidance retains existing transport/identity procedures | actual cognitive runtime acceptance pending |
+| Task lifecycle, idempotency, ownership, cancellation, expiry | cognitive.test.mjs | 11/11 Linux cognition cases pass against published package |
+| Results, receipts, restart/reconnect, exact source reads, scoping | same, including independent authenticated HTTP MCP client | deterministic acceptance passed |
+| Concurrent intake, strict/stale snapshots and guidance changes | same | deterministic acceptance passed |
+| Read-only, rejected/stale/approved learning and finite continuation | same | deterministic acceptance passed |
+| Full clean-package regression | staged release builder | 95/95 host tests, 11/11 Harness backend conformance, 5 preparation checks passed; zero skips |
+| Actual external LLM through CLI and HTTP MCP | evidence/cognition-2026-11-24 | in progress; responses retained separately from scripted tests |
+| Linux/macOS/Windows matrix | PR #42 CI | updated published-pair run pending |
+| IIS identity, completed task/result file read and replacement under open C# reader | Test-IisIdentity.ps1, service-probe.mjs | updated Windows CI result pending |
+| IIS Express on Windows 11 and consumer's full IIS Server 2022 Standard deployment | existing deployment procedures and issue #11 | external deployment validation remains separate; not claimed by hosted CI |
 
-Harness source dependency: exact commit in tests/cognitive-source.json. Tests
-inject the real public core/session/reference adapter functions through a
-function-only seam. No runtime flag, environment bypass, arbitrary executable
-configuration or weakened release-integrity check is provided. The source does
-not masquerade as published Harness 0.11.0.
-
-## Reproduce source conformance
-
-Prepare the pinned published 0.11.0 package with tools/prepare-harness.py. Check out
-the exact source commit from tests/cognitive-source.json separately. Install locked
-Node dependencies, then set CHELM_HARNESS_ROOT to the verified package and
-CHELM_COGNITIVE_SOURCE to that source checkout. Run:
+## Reproduce deterministic acceptance
 
 ```
+python tools/prepare-harness.py --version 0.12.0 --destination ../harness-release
+npm ci --ignore-scripts
+# Set CHELM_HARNESS_ROOT to the absolute verified package directory.
 node --test --test-concurrency=4 tests/conformance/cognitive.test.mjs
-node --test --test-concurrency=4 tests/
-python tools/build-release.py --harness /absolute/path/to/verified-harness
+python tools/build-release.py --harness ../harness-release
 ```
 
-Without CHELM_COGNITIVE_SOURCE the candidate-dependent cases explicitly skip;
-the published-package capability-refusal and tool-schema checks still run. CI
-checks out the exact source SHA and runs these cases across its platform matrix.
-This is configured coverage until the corresponding jobs have actually passed.
+The clean Linux package validation/conformance stage took 53.3 seconds on
+Node 24.22.3 / Python 3.12.14; benchmarks and ZIP creation are additional.
+Scripted tests and the IIS service probe do not invoke a language model.
+Model semantic acceptance is independent of schema/digest/citation integrity.
 
-For full LLM acceptance, first pin a published cognition Harness. Use its
-COGNITIVE_CONFORMANCE.md fixtures/rubric and record a separate semantic verdict
-for each case, actual requested/observed model identity/configuration, versions,
-result/citation receipts and unknown cost/token values as null. Exercise the same
-application/worker workflow over CLI/stdio and remote MCP from a clean install,
-with no pending inbox. Include multi-source/as-of/conflict/identity/missing-data
-cases, rejected/approved learning, observation-backed collection and bounded
-continuation. Integrity validation is not entailment or correctness assessment.
+## Model evidence and measurement limits
 
-Operation logs report queue/snapshot capture, read/context, artifact staging,
-validation and publication command durations separately. Result elapsed_ms is
-invocation wall time and cannot be advertised as measured inference latency.
-There is no unsupported performance/token/cost promise.
+The actual Work executor receives bounded task/context/source artifacts through
+Chelm's public CLI or an independently authenticated official MCP HTTP client.
+Retain original response bytes before validation/review, exact inputs, hashes,
+result/citation receipts, model/configuration unknowns and a separate semantic
+verdict/reason for each case. Test fixtures are synthetic; observation seeding
+is deterministic and is not counted as model inference. The same Work agent
+subsequently reviews its responses; no independent model review is claimed.
 
-## Validation record
-
-A clean staged Linux package build passed 95/95 Chelm tests, 11/11 published
-Harness adapter conformance cases and the builder's five preparation tests,
-including installer/integrity and existing process-crash recovery. The
-validation/conformance stage took approximately 60 seconds (no inference).
-The ZIP was built for review only and was not published. See the implementation
-PR for final observed results. Focused
-Linux development conformance: 11 passed, including independent authenticated
-HTTP client reconnection, 2026-11-23. This was deterministic transport/lifecycle
-execution; no language model was invoked by those workers. Windows/macOS results,
-full model-semantic acceptance and the published cognition pair remain open.
+Operation logs retain queue/snapshot, context/source, staging, validation and
+publication durations separately. Result elapsed_ms includes executor wall time;
+it is not measured inference latency. Actual inference tokens, cost and model
+settings unavailable to Work remain null, never inferred from prose or synthetic
+counters. No performance promise follows from these fixtures.

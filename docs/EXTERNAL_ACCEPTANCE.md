@@ -37,7 +37,7 @@ Do not put tokens in service JSON or SudoLang prompts.
 
 ## E-2: Reference workstation performance
 
-On the reference Windows workstation, use the exact supported, verified harness 0.11.0:
+On the reference Windows workstation, use the exact supported, verified harness 0.12.0:
 
 ```powershell
 node tools/benchmark-host.mjs --harness C:/Golem/harness --samples 5 --output benchmark-reference.json
