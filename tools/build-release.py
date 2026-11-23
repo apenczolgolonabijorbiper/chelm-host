@@ -69,6 +69,9 @@ def build(harness, output=None):
         subprocess.run(['node', str(stage / 'tools/benchmark-host.mjs'), '--harness', str(harness),
                         '--output', str(output.parent / ('benchmark-' + os.sys.platform + '.json'))],
                        cwd=stage, env=env, check=True)
+        subprocess.run(['node', str(stage / 'tools/benchmark-telemetry.mjs'), '--harness', str(harness),
+                        '--output', str(output.parent / ('telemetry-' + os.sys.platform + '.json'))],
+                       cwd=stage, env=env, check=True)
     # Output is written only after all checks passed.
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix('.zip.tmp')

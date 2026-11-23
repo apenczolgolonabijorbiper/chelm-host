@@ -13,4 +13,5 @@ import './conformance/requirement-map.test.mjs';
 import './parity/boundaries.test.mjs';
 import './parity/intake-worker.test.mjs';
 import './telemetry.test.mjs';
+import './telemetry-acceptance.test.mjs';
 import './conformance/release-pair.test.mjs';
