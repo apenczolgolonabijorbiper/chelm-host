@@ -16,3 +16,5 @@ import './telemetry.test.mjs';
 import './telemetry-acceptance.test.mjs';
 import './issue11-acceptance.test.mjs';
 import './conformance/release-pair.test.mjs';
+
+import './conformance/cognitive.test.mjs';

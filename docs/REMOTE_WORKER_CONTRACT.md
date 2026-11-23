@@ -104,3 +104,13 @@ Worker submit accepts optional nullable numeric usage (model_ms, input_tokens,
 output_tokens, cached_input_tokens). Omitted fields remain unknown/null. Remote
 submission retries must retain normalized usage as well as digest/submission ID.
 Existing runtime configurations remain valid; no instance migration is needed.
+
+## Cognitive task binding v1
+
+Use `chelm_request_work` with `work_kind:cognitive`, then the existing ownership,
+artifact, upload, renew, status and submit tools. `chelm_cognitive_read` adds
+idempotent round/context/source/receipt operations with host-retained delivery
+receipts. Full schemas/defaults and local aliases: COGNITIVE_TASKS.md. Remote MCP
+publishes `chelm_cognitive_once`, `chelm_cognitive_resume`, `chelm_cognitive_loop`
+SudoLang prompts. Runtime/principal remain endpoint/authentication properties,
+not fields in tool arguments. Existing observation request defaults are retained.

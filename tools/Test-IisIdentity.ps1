@@ -36,9 +36,12 @@ try {
   # Paths below are administrator-generated; the endpoint accepts no input or commands.
   $handler = @'
 <%@ WebHandler Language="C#" Class="ChelmProbe" %>
+<%@ Assembly Name="System.Web.Extensions" %>
 using System;
 using System.Web;
 using System.Diagnostics;
+using System.IO;
+using System.Collections.Generic;
 using System.Security.Principal;
 public class ChelmProbe : IHttpHandler {
   public bool IsReusable { get { return false; } }
@@ -52,10 +55,17 @@ public class ChelmProbe : IHttpHandler {
     var error = process.StandardError.ReadToEndAsync();
     if (!process.WaitForExit(180000)) { process.Kill(); throw new Exception("Probe timed out"); }
     if (process.ExitCode != 0) { context.Response.StatusCode = 500; }
-    context.Response.Write("{\"iis_identity\":\"" + HttpUtility.JavaScriptStringEncode(WindowsIdentity.GetCurrent().Name) + "\",\"probe\":" + output.Result.Trim() + "}");
+    // Direct file reads permit atomic replacement by concurrent Node writers.
+    string taskText;
+    using (var stream = new FileStream(@"TASK_VIEW_PATH", FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+    using (var reader = new StreamReader(stream)) { taskText = reader.ReadToEnd(); }
+    var taskView = new System.Web.Script.Serialization.JavaScriptSerializer().DeserializeObject(taskText) as Dictionary<string, object>;
+    if (taskView == null || !taskView.ContainsKey("data") || !taskView.ContainsKey("head")) throw new Exception("Invalid task view");
+    context.Response.Write("{\"iis_identity\":\"" + HttpUtility.JavaScriptStringEncode(WindowsIdentity.GetCurrent().Name) + "\",\"task_view_read\":true,\"probe\":" + output.Result.Trim() + "}");
   }
 }
 '@
+  $handler = $handler.Replace('TASK_VIEW_PATH', (Join-Path $privateRoot 'runtime/host/read-model/tasks.json').Replace('"','""'))
   $handler = $handler.Replace('NODE_EXE',$nodeExe.Replace('"','""')).Replace('SCRIPT_PATH',$script.Replace('\','\\')).Replace('CONFIG_PATH',$settingsPath.Replace('\','\\'))
   [System.IO.File]::WriteAllText((Join-Path $webRoot 'probe.ashx'),$handler,[System.Text.UTF8Encoding]::new($false))
   [System.IO.File]::WriteAllText((Join-Path $webRoot 'web.config'),'<configuration><system.web><identity impersonate="false"/><compilation targetFramework="4.8"/><httpRuntime targetFramework="4.8" executionTimeout="240"/></system.web></configuration>')

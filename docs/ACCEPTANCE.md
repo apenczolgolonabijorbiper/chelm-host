@@ -312,3 +312,11 @@ not release evidence. Existing canonical Chelm 1.0.2/harness 0.10.0 runtimes nee
 no data migration or reset; pause processing, settle assignments/drain leases,
 replace the verified pair, verify and refresh before resuming. Older releases'
 measurements above remain historical evidence, not new-version validation.
+
+## #25 cognitive tasks
+
+See [COGNITIVE_ACCEPTANCE.md](COGNITIVE_ACCEPTANCE.md) for source implementation,
+observed deterministic tests and outstanding model/platform/published-pair gates.
+The 0.11.0 compatibility pin is retained; task execution refuses that release's
+missing cognitive contracts. Do not interpret configured CI or source injection
+as production acceptance or a consuming-runtime upgrade.

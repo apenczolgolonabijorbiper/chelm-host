@@ -168,3 +168,10 @@ Acceptance coverage is mapped in [docs/REQUIREMENT_COVERAGE.md](docs/REQUIREMENT
 Use [docs/EXTERNAL_ACCEPTANCE.md](docs/EXTERNAL_ACCEPTANCE.md) for deployment,
 reference-machine and live inference checks. The shipped capacity benchmark
 creates its own disposable runtime; it does not modify an application runtime.
+
+Durable memory-backed questions have an additive `task` API and bounded local /
+remote cognitive-worker binding. See [COGNITIVE_TASKS.md](docs/COGNITIVE_TASKS.md)
+and [COGNITIVE_ACCEPTANCE.md](docs/COGNITIVE_ACCEPTANCE.md). The currently pinned
+published Harness 0.11.0 lacks these contracts, so new task execution fails with
+`capability_unavailable`; source conformance is not published-pair support.
+Existing retrieval-only `ask` and observation processing keep their semantics.

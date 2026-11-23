@@ -131,3 +131,13 @@ Worker submit accepts optional nullable numeric usage (model_ms, input_tokens,
 output_tokens, cached_input_tokens). Omitted fields remain unknown/null. Remote
 submission retries must retain normalized usage as well as digest/submission ID.
 Existing runtime configurations remain valid; no instance migration is needed.
+
+## Cognitive task API v1 (additive)
+
+The explicit `task create/get/list/cancel/continue/learning/evidence` contract is
+specified in [COGNITIVE_TASKS.md](COGNITIVE_TASKS.md), including defaults, ownership,
+limits and states. It has its own `contracts.cognitive_task:1` declaration. APP-20
+ask remains retrieval/queued intake, APP-21 answer remains a user's reply to a
+memory question, and task answers never impersonate either observation type.
+Production task execution is gated on a supported published cognitive Harness;
+0.11.0 returns capability_unavailable. Plain task reads do not invoke inference.

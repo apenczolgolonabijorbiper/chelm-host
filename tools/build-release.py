@@ -32,7 +32,7 @@ def build(harness, output=None):
     payload = entries()
     manifest = {'schema_version': 1, 'version': version,
                 'contracts': {'app': 1, 'worker': 2, 'read_model': 1,
-                              'runtime_config': 2, 'remote_worker': 2},
+                              'runtime_config': 2, 'remote_worker': 2, 'cognitive_task': 1},
                 'harness_supported': '=0.11.0', 'supported_harness_versions': ['0.11.0'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',

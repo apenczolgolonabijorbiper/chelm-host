@@ -47,3 +47,20 @@ Compare head/generated_at across independently opened views when a consistent
 snapshot matters. Do not retain view handles between requests.
 
 The historical delegations view is empty and summary delegation counts are zero. Use local `remote list` or `status.remote_work` for remote assignment administration.
+
+## Cognitive tasks
+
+`tasks.json` is an additive schema v1 projection of durable task/assignment
+records, with runtime_id, generated_at and head. Rows contain state, attempt
+history, result, receipt, answered_binding, current_snapshot_id, stale and a
+separate learning state. needs_input/failed/cancelled are never completed answers.
+`conversation` exposes `cognitive_tasks` separately from legacy messages/answers.
+Rows with results refer to the answer's snapshot, not latest evidence. Applications
+resolve citations with `task evidence`; missing retention is explicit.
+
+A crash after atomic result publication may leave this cached view behind.
+`task get` recovers from authoritative files and reports read_view_refresh_pending;
+`refresh` rebuilds projections. Plain reads never refresh, spawn children, validate
+or start inference. Concurrent readers see complete individual JSON files; there
+is no transactional multi-file view generation guarantee. On Windows/.NET use
+FileShare.ReadWrite | FileShare.Delete to permit atomic file replacement.

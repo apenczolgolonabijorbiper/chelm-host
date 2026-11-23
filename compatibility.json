@@ -19,5 +19,17 @@
     "archive": "golem-cognitive-harness-0.11.0.zip",
     "archive_sha256": "2f945cf38166f1878bfd4ea89b9d9ffb187f525269710a61016d0129b02f3ca2",
     "manifest_sha256": "d130c465688874bceae2f5eb0bb113ddef740c95764256871bda6d51928355e7"
+  },
+  "cognitive_tasks": {
+    "contract": 1,
+    "status": "awaiting-supported-published-harness",
+    "required_capabilities": [
+      "cognitive-task-v1",
+      "cognitive-context-v1",
+      "cognitive-result-v1",
+      "learning-hypothesis-v1"
+    ],
+    "source_acceptance_pin": "tests/cognitive-source.json",
+    "production_enabled": false
   }
 }

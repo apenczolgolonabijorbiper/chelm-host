@@ -164,3 +164,14 @@ statistics are external CLI calls; vendor directories are never modified.
 
 See ACCEPTANCE.md for verification scope and known limitations. Identity crosswalk,
 model clients, background scheduling and UI are outside this release.
+
+## Unreleased: #25 durable cognitive tasks
+
+Add the task API, immutable cognitive assignments, bounded source/context delivery,
+staged grounded results/receipts, retained citation reads and separately authorized
+hypothesis learning/continuation. New CLI/stdin/MCP tool schemas and SudoLang
+prompts are additive; existing ask/answer/worker semantics remain. Source-backed
+conformance is recorded separately from model/platform/published-pair acceptance.
+The supported published Harness pin remains 0.11.0; task execution stays gated
+until an authorized cognitive Harness release is published and explicitly pinned.
+No release or consuming runtime upgrade is included.

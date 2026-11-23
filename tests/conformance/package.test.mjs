@@ -58,7 +58,7 @@ test('PKG/INS-1..6: release integrity, installer idempotence and conflict prefli
 test('Schemas: runtime and all published read views satisfy the distributed schemas', t => {
   const f = fixture(t);
   for (const name of ['summary', 'observations', 'subjects', 'questions', 'answers', 'journals',
-      'warnings', 'requests', 'delegations'
+      'warnings', 'requests', 'delegations', 'tasks'
     ]) {
     const schema = JSON.parse(fs.readFileSync(path.join(source, 'schemas/read-model/' + name +
       '.schema.json')));

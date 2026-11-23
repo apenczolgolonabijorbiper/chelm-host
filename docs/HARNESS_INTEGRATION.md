@@ -27,3 +27,9 @@ Chelm-host calls the harness exactly as the reference consumer does today. It al
 - `HAR-10` Policy changes and leases: when `commit` fails because the selected policy changed during the lease, Chelm-host returns `policy_changed` and releases the lease with a fixed safe reason. Unlike other validation failures, the draft outputs are not restored. The result offers a re-claim of the same sources (`claim --ids`, when they are still ready) with a new run ID and the new guidance. The executor must re-check its drafts against the new guidance, write the journal for the new run (with the new `guidance_version` line), and submit again (`WRK-4`).
 
 ---
+
+Cognitive task integration consumes only public Harness core/session validators
+and the reference adapter's openCognition/publishLearning methods. Source
+acceptance is pinned in tests/cognitive-source.json; the published 0.11.0 support
+claim and integrity hashes are unchanged. See COGNITIVE_ACCEPTANCE.md for the
+release dependency and COGNITIVE_TASKS.md for authorization and snapshot rules.
