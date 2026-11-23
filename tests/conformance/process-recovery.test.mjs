@@ -46,7 +46,8 @@ function rpc(child) {
 test('two independent HTTP clients through proxy survive service kill/restart and lost receipts', async t => {
   const f = fixture(t); f.submit('A'); f.submit('B', 'Second process source.');
   const p = path.join(f.root, 'chelm.runtime.json'), cfg = JSON.parse(fs.readFileSync(p));
-  cfg.remote.max_active_work = 2; fs.writeFileSync(p, JSON.stringify(cfg));
+  cfg.remote.max_active_work = 2; cfg.observability = {operation_phases:true,read_metrics:false};
+  fs.writeFileSync(p, JSON.stringify(cfg));
   const tokenA = 'process-a-test-only-01234567890123456789', tokenB = 'process-b-test-only-01234567890123456789';
   const serviceConfig = path.join(f.base, 'service.json');
   fs.writeFileSync(serviceConfig, JSON.stringify({ port: 0, public_url: 'http://127.0.0.1/mcp', development: true,
@@ -113,11 +114,18 @@ test('two independent HTTP clients through proxy survive service kill/restart an
   assert.equal(integration.status, 'integration-required');
   assert.equal((await finish(b, integration.work_unit)).status, 'committed');
   assert.equal(f.read('memory/graph.json').claims.length, 2);
+    const operations = fs.readFileSync(path.join(f.root,'host/logs/chelm.jsonl'),'utf8').trim().split('\n').map(JSON.parse);
+    const publication = operations.filter(e=>e.command==='remote chelm_submit_candidate'&&e.phases?.publication)
+      .map(e=>({work_id:e.work_id,run_id:e.run_id,publication_ms:e.phases.publication.elapsed_ms,
+        validator_ms:e.phases.validator?.elapsed_ms??null}));
+    assert.ok(publication.length>=2);
+    assert.ok(publication.every(e=>Number.isFinite(e.publication_ms)&&e.publication_ms>=0));
   if (process.env.CHELM_ACCEPTANCE_REPORT_DIR) {
-    const report = { schema_version: 1, platform: process.platform, node: process.version,
+    const report = { schema_version: 2, platform: process.platform, node: process.version,
       fixture: 'Two deterministic external SDK clients, one HTTP proxy and restarted owner service on the same machine; no language model.',
       method: 'Per-tool wall time and JSON payload bytes; excludes HTTP headers. Validate is measured separately. Submit includes mandatory fresh validation, merge and owner publication; it is not pure Git latency.',
-      inference_ms: null, input_tokens: null, output_tokens: null, billed_cost: null, samples };
+      publication_scope:'Owner tree assembly and successful Git CAS, excluding post-CAS receipt/view reconciliation. Validator phases can overlap other stages; do not sum.',
+      publication, inference_ms: null, input_tokens: null, output_tokens: null, billed_cost: null, samples };
     fs.mkdirSync(process.env.CHELM_ACCEPTANCE_REPORT_DIR, { recursive: true });
     fs.writeFileSync(path.join(process.env.CHELM_ACCEPTANCE_REPORT_DIR, 'remote-phases-' + process.platform + '.json'), JSON.stringify(report, null, 2) + '\n');
   }
