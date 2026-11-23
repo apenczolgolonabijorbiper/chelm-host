@@ -16,6 +16,16 @@ from the automated fixtures. Do not upgrade an application for this check.
   it, verify the ZIP against its adjacent `.sha256`, then extract the nested
   `chelm-host-1.1.0.zip`. This acceptance candidate contains the additional tools;
   the older published 1.1.0 asset does not. Record the artifact's CI revision.
+- After unpacking `chelm-release.zip` into Downloads/chelm-release, on A:
+
+```powershell
+$Archive = 'C:/Users/YOUR_USER/Downloads/chelm-release/chelm-host-1.1.0.zip'
+$Expected = ((Get-Content "$Archive.sha256" -Raw).Trim() -split '\s+')[0]
+if ((Get-FileHash $Archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne $Expected) { throw 'ZIP checksum mismatch' }
+if (Test-Path C:/GolemAcceptance/chelm-host) { throw 'Choose a fresh test folder' }
+Expand-Archive -LiteralPath $Archive -DestinationPath C:/GolemAcceptance
+```
+
 - Install the exact published harness 0.11.0 on A. With Python available:
 
 ```powershell
@@ -81,6 +91,13 @@ Application Request Routing Cache -> Server Proxy Settings -> Enable proxy.
 Changing ARR proxy settings is server-wide; use a test server or review the effect
 on existing sites. Do not disable certificate validation on B.
 
+On the dedicated test server, these explicit commands set those proxy options
+(they apply server-wide):
+
+```powershell
+& "$env:windir/system32/inetsrv/appcmd.exe" set config -section:system.webServer/proxy /enabled:true /preserveHostHeader:true /commit:apphost
+```
+
 Put this `web.config` in the dedicated test site's web root:
 
 ```xml
@@ -109,11 +126,11 @@ how you started/restarted it. Record that this was a foreground service smoke;
 it does not verify unattended service-supervisor recovery. Do not claim that case
 unless you actually configure and test the supervisor.
 
-If the actual target's pool-identity check has not been run, use the original
-verified **published** ZIP for this independent probe in elevated PowerShell:
+If the actual target's pool-identity check has not been run, use the same
+checksum-verified candidate ZIP for this independent probe in elevated PowerShell:
 
 ```powershell
-& "$Pkg/tools/Test-IisIdentity.ps1" -HostZip C:/Downloads/chelm-host-1.1.0.zip -HarnessRoot C:/GolemAcceptance/golem-harness -Output C:/GolemAcceptance/results/iis-identity.json
+& "$Pkg/tools/Test-IisIdentity.ps1" -HostZip $Archive -HarnessRoot C:/GolemAcceptance/golem-harness -Output C:/GolemAcceptance/results/iis-identity.json
 ```
 
 This creates/removes its own temporary site/pool and private synthetic instance.
