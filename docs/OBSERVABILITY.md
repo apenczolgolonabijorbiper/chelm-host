@@ -60,6 +60,14 @@ and overlap; their durations MUST NOT be added. Timings exclude process startup.
 Instrumentation/log write failures are best-effort and preserve operation errors
 and committed results. An OS/process crash can prevent a final log line.
 
+The opt-in remote `publication` phase records owner tree assembly through the
+successful Git compare-and-swap, before receipt/read-view reconciliation. It does
+not include earlier candidate validation or later read-view validation. It is
+absent if publication never reaches that checkpoint; absence is not zero. The
+overall submit duration still includes validation/merge/reconciliation. Use
+tools/acceptance-mcp.mjs for content-free per-tool wall times/JSON byte counts and
+tools/issue11-acceptance.mjs collect for owner phases; see ISSUE_11_ACCEPTANCE.md.
+
 ### Exact event shapes and count units (VI-021)
 
 The required common keys are exactly `at`, `command`, `runtime_id`, `actor`,

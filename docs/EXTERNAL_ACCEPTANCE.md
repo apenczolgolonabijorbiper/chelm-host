@@ -4,6 +4,9 @@ Use this checklist after the automated suites. These checks require the owner's
 server, reference workstation, consuming application or inference credentials.
 A passing synthetic process fixture does not complete this checklist.
 
+For copyable A/B commands, a disposable fixture, measured MCP bridge and the exact
+files to return, use [the issue #11 operator runbook](ISSUE_11_ACCEPTANCE.md).
+
 ## E-1: Windows/IIS HTTPS service
 
 Follow REMOTE_WORKERS.md to install the persistent loopback service and IIS ARR
@@ -34,7 +37,7 @@ Do not put tokens in service JSON or SudoLang prompts.
 
 ## E-2: Reference workstation performance
 
-On the reference Windows workstation, use an extracted verified harness 0.10.0:
+On the reference Windows workstation, use the exact supported, verified harness 0.11.0:
 
 ```powershell
 node tools/benchmark-host.mjs --harness C:/Golem/harness --samples 5 --output benchmark-reference.json

@@ -1,6 +1,6 @@
 # Configure remote cognitive workers
 
-Machine A hosts the application, Chelm 1.0 and verified harness **0.10.0**. Machine
+Machine A hosts the application, Chelm 1.1 and verified harness **0.11.0**. Machine
 B needs an MCP-capable agent and inference access. Native HTTP clients need no
 Chelm, harness, Python, Git, SMB share or access to files on A. The optional stdio
 bridge needs Node and this package's shipped dependencies on B, but no harness.
@@ -28,7 +28,7 @@ node C:/Golem/chelm-host/bin/chelm.mjs migrate --runtime C:/GolemData/MyApp --ap
 The last two commands are alternatives. Cutover archives old local host metadata
 and configuration, never deletes share contents, and leaves memory commits intact.
 It writes runtime configuration schema 2 with remote worker defaults. Update
-`harness.root` to the verified 0.10.0 folder. Then:
+`harness.root` to the verified 0.11.0 folder. Then:
 
 ```powershell
 node C:/Golem/chelm-host/bin/chelm.mjs verify --runtime C:/GolemData/MyApp
@@ -42,7 +42,7 @@ installer, which restores locked dependencies automatically. npm needs registry
 access or a populated cache. See README.md for offline setup and repair.
 Source checkouts require `npm ci --omit=dev --ignore-scripts`.
 Harness graph v2/hypotheses v1/vocabulary v2 remain unchanged. In-flight old
-guidance leases cannot carry across the 0.10 upgrade. Purpose-only instances now
+guidance leases cannot carry across an upgrade. Purpose-only instances now
 receive immutable guidance too. Application source mirrors may include purpose.md;
 `profile install --source <reviewed-source>` uses native transactional lifecycle.
 
