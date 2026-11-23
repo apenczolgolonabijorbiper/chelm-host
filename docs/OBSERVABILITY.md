@@ -166,3 +166,32 @@ The previous HTTP privacy test excluded a declared executor host altogether.
 VI-021 explicitly adds that descriptive field, so the updated test verifies it
 while ensuring the authenticated principal/OS actor are never replaced by it.
 Credentials and observation content remain excluded.
+
+## Reproducible overhead and scale measurements
+
+Run `node tools/benchmark-telemetry.mjs --harness PATH --output REPORT.json`.
+The release builder also emits `telemetry-<platform>.json` into dist. Reports
+separate warmed in-process application reads (100 per mode, alternating order,
+excluding CLI startup) from isolated aggregation processes. Each scale process
+records three aggregations, materialization/cap refusal, disk bytes and observed
+RSS/heap. Scenarios use 1, 16 and 128 full-window shards, and 10,000 sparse shards.
+The sparse cap case is explicitly not a fully populated cap memory certification.
+
+Observed Linux / Node 24.22.3 acceptance measurement on 2026-11-23:
+
+| Shards | Samples per shard | Aggregation range | Metrics disk | Observed peak RSS through materialization |
+|---|---|---|---|---|
+| 1 | 1,000 | 0.62–1.67 ms | 49,153 bytes | 47.9 MB |
+| 16 | 1,000 | 7.74–16.51 ms | 786,870 bytes | 56.5 MB |
+| 128 | 1,000 | 98.30–105.31 ms | 6,390,342 bytes | 143.0 MB |
+| 10,000 | 1 | 170.34–238.33 ms | 1,368,890 bytes | 131.3 MB |
+
+Small-fixture read p50 was 0.516 ms off / 1.042 ms on (+0.526 ms). These figures
+characterize this synthetic run, not Windows or a reference consumer workstation.
+Aggregation scans retained shards and temporarily holds their samples before
+selecting the last 1,000; the output window does not cap aggregation memory at
+1,000 samples. Even 128 full-window shards consumed about 143 MB process RSS and
+materialization took about 184 ms. High independent-process churn is expensive;
+metrics remain opt-in. The finite shard/file/sample limits are not a promise that
+every fully populated cap fits an arbitrary machine. No new performance target
+is introduced; existing Windows RM-6 misses remain tracked separately.

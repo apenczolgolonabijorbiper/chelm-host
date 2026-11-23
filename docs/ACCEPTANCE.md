@@ -259,6 +259,23 @@ acceptance. Retained-shard counters are bounded, not unbounded lifetime totals;
 reads.json is a materialization and status reads authoritative shards. See
 OBSERVABILITY.md for crash/I/O and saturation limits.
 
+Final acceptance coverage for harness tracker #60 lives in
+`tests/telemetry-acceptance.test.mjs`. It checks enabled refresh/submit/failure
+phases, disabled fields and overlapping operation-context isolation. Independent
+processes deterministically pause before summary replacement, publish in reverse
+order, and are killed before shard persistence or after stale summary publication.
+Restarted processes retain persisted counts and repair the cached summary; lost
+unpersisted samples are not invented. Retention, malformed shards, the actual
+10,000-shard cap and the 1,000-sample window are exercised without hardware timing
+assertions. These tests supplement, rather than replace, the existing 16-process
+read test and protocol/remote recovery suites.
+
+The release builder runs `tools/benchmark-telemetry.mjs` and emits
+`dist/telemetry-<platform>.json` with alternating warmed read-metrics off/on
+measurements, raw timings, disk bytes, RSS/heap and isolated aggregation scenarios.
+See `OBSERVABILITY.md` for measured scale limitations. A CI run passes only after
+these measurements complete; reports remain evidence, not latency guarantees.
+
 ## VI-020 / VI-021 completion checks
 
 Read CONTRACT_WORKER WRK-13 to classify its examples A and B. The journal may
