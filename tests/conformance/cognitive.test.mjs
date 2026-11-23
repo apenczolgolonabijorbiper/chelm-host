@@ -189,3 +189,13 @@ integration('Read-only/rejected/stale learning and policy drift cannot publish i
   f.write('instance/purpose.md','Second committed policy.');git(f.instance,'add','instance/purpose.md');git(f.instance,'-c','user.name=Test','-c','user.email=test@local','commit','-qm','second policy');
   await assert.rejects(f.call('chelm_cognitive_read',{...args(w3),operation:'context',request_id:'policy'}),e=>e.code==='policy_changed');
 });
+
+
+integration('Exhausted cognition budgets return stable errors while leaving memory untouched',async t=>{
+  const f=await setup(t),task=await f.create({limits:{rounds:1}}),w=await f.next(task.task_id);
+  const before=git(f.instance,'rev-parse','HEAD');
+  await f.call('chelm_cognitive_read',{...args(w),request_id:'round-1',operation:'round'});
+  await assert.rejects(f.call('chelm_cognitive_read',{...args(w),request_id:'round-2',operation:'round'}),e=>e.code==='budget');
+  assert.equal(git(f.instance,'rev-parse','HEAD'),before);
+  assert.equal(ok('status',null,f.root).lease.state,'idle');
+});

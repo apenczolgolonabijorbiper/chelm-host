@@ -64,13 +64,13 @@ There is no unsupported performance/token/cost promise.
 
 ## Validation record
 
-A clean staged Linux package build passed 94/94 Chelm tests, 11/11 published
+A clean staged Linux package build passed 95/95 Chelm tests, 11/11 published
 Harness adapter conformance cases and the builder's five preparation tests,
 including installer/integrity and existing process-crash recovery. The
-validation/conformance stage took approximately 55 seconds (no inference).
+validation/conformance stage took approximately 60 seconds (no inference).
 The ZIP was built for review only and was not published. See the implementation
-PR for final observed results. Initial focused
-Linux development conformance: 10 passed, including independent authenticated
+PR for final observed results. Focused
+Linux development conformance: 11 passed, including independent authenticated
 HTTP client reconnection, 2026-11-23. This was deterministic transport/lifecycle
 execution; no language model was invoked by those workers. Windows/macOS results,
 full model-semantic acceptance and the published cognition pair remain open.
