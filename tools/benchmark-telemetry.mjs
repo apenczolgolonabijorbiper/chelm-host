@@ -25,7 +25,7 @@ const sizes = dir => {
 
 if (args.includes('--scenario')) {
   const count=Number(option('--scenario')), samples=count===10000?1:1000;
-  const root=fs.mkdtempSync(path.join(os.tmpdir(),'chelm-telemetry-scale-'));
+  const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'chelm-telemetry-scale-'));
   try {
     const dir=path.join(root,'host/metrics/read-shards');fs.mkdirSync(dir,{recursive:true});
     const at=Date.now();
@@ -46,7 +46,7 @@ if (args.includes('--scenario')) {
   } finally {fs.rmSync(root,{recursive:true,force:true,maxRetries:10,retryDelay:100});}
 } else {
   if(!args.includes('--harness')||!args.includes('--output'))throw Error('Use --harness PATH --output FILE');
-  const base=fs.mkdtempSync(path.join(os.tmpdir(),'chelm-telemetry-benchmark-'));
+  const base=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'chelm-telemetry-benchmark-'));
   try {
     const root=path.join(base,'runtime');
     const init=spawnSync(process.execPath,[path.join(source,'bin/chelm.mjs'),'init','--runtime',root,

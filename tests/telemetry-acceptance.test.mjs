@@ -76,7 +76,7 @@ test('VP-021 overlapping operation contexts isolate successful and failing phase
 });
 
 function root(t) {
-  const p = fs.mkdtempSync(path.join(os.tmpdir(), 'chelm-metrics-acceptance-'));
+  const p = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'chelm-metrics-acceptance-'));
   t.after(() => fs.rmSync(p, {recursive:true, force:true, maxRetries:10, retryDelay:100}));
   return p;
 }
