@@ -28,20 +28,22 @@ def entries():
 def build(harness, output=None, provider_harness=None):
     provider_harness = Path(provider_harness or os.environ.get("CHELM_PROVIDER_HARNESS_ROOT", "")).resolve()
     if not (provider_harness / "RELEASE.json").is_file():
-        raise ValueError("--provider-harness must name the exact integrity-checked provider development package")
+        raise ValueError("--provider-harness must name the exact integrity-checked published provider package")
     harness = Path(harness).resolve()
     version = (ROOT / 'VERSION').read_text().strip()
+    compatibility = json.loads((ROOT / 'compatibility.json').read_text())
+    published = compatibility['published_harness']
     output = Path(output or ROOT / 'dist' / f'chelm-host-{version}.zip').resolve()
     payload = entries()
     manifest = {'schema_version': 1, 'version': version,
                 'contracts': {'app': 1, 'worker': 2, 'read_model': 1,
                               'runtime_config': 2, 'remote_worker': 2, 'cognitive_task': 1, 'memory_worker': 3, 'provider_runtime_config': 3},
                 'provider_integration': json.loads((ROOT / 'provider-compatibility.json').read_text()),
-                'harness_supported': '=0.12.0', 'supported_harness_versions': ['0.12.0'],
+                'harness_supported': compatibility['harness_supported'], 'supported_harness_versions': compatibility['supported_harness_versions'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',
-                               'harness_archive_sha256': '9bc17e21d0528e7359006b5bda6c17cce99df3021294e15e2d217d7330627522',
-                               'harness_release_sha256': '52c4fa98a06993bfa4f2504df58a82504e4303a20fd465a09c19140b8d3cfda6'},
+                               'harness_archive_sha256': published['archive_sha256'],
+                               'harness_release_sha256': published['manifest_sha256']},
                 'runtime_dependencies': {'manager': 'npm', 'lockfile': 'package-lock.json'},
                 'files': {name: digest(data) for name, data in payload.items()}}
     payload['RELEASE.json'] = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
@@ -78,7 +80,7 @@ def build(harness, output=None, provider_harness=None):
                        cwd=stage, check=True, env=env)
         suite_seconds = time.monotonic() - started
         output.parent.mkdir(parents=True, exist_ok=True)
-        timing = {'platform': os.sys.platform, 'harness_version': '0.12.0', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
+        timing = {'platform': os.sys.platform, 'harness_version': '0.13.0', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
         print('CHELM_TEST_TIMING ' + json.dumps(timing), flush=True)
         (output.parent / ('test-timing-' + os.sys.platform + '.json')).write_text(json.dumps(timing, indent=2) + '\n', encoding='utf-8')
         subprocess.run(['node', str(stage / 'tools/benchmark-host.mjs'), '--harness', str(harness),

@@ -38,8 +38,8 @@ config-2 runtimes.
    collection; Chelm-host neither calls a model nor runs a scheduler.
 
 For maintainers: run node --test tests/ with CHELM_HARNESS_ROOT pointing to an
-extracted harness 0.12.0 release, then tools/build-release.py --harness PUBLISHED --provider-harness PROVIDER
-before publishing. Provider package preparation and current release gates are in
+extracted harness 0.13.0 release, then tools/build-release.py --harness PUBLISHED --provider-harness PROVIDER
+before publishing. Provider package preparation and published pair acceptance are in
 docs/MEMORY_PROVIDERS.md.
 Keep docs/ACCEPTANCE.md accurate; never equate configured CI with observed results.
 

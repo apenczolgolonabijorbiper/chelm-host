@@ -2,7 +2,7 @@
 
 Chelm-host is where the Golem lives: a local and remote-worker host for
 [Golem XIV Harness](https://github.com/apenczolgolonabijorbiper/golem14-harness).
-Version **1.2.0** supports **harness 0.12.0 exactly**. App/read-model contracts
+Version **1.3.0** supports **harness 0.13.0 exactly**. App/read-model contracts
 remain v1; worker and runtime configuration contracts are v2.
 
 It supplies intake, conversation records, committed memory views, transactional
@@ -17,7 +17,7 @@ are CI targets. Use the same OS identity for a lease owner across worker calls.
 
 ## Install and initialize
 
-Download chelm-host-1.2.0.zip and its adjacent checksum from Releases. Check the
+Download chelm-host-1.3.0.zip and its adjacent checksum from Releases. Check the
 checksum before extraction. Install from the clean extracted chelm-host folder:
 
 ```sh
@@ -127,14 +127,14 @@ See [app contract](docs/CONTRACT_APP.md), [runtime layout](docs/RUNTIME.md),
 
 ```sh
 # Download the exact published, checksum-pinned harness package.
-python3 tools/prepare-harness.py --version 0.12.0 --destination ../harness-release
+python3 tools/prepare-harness.py --version 0.13.0 --destination ../harness-release
 export CHELM_HARNESS_ROOT=../harness-release
 node --test tests/
 python3 tools/build-release.py --harness "$CHELM_HARNESS_ROOT"
 ```
 
 The builder runs all Chelm tests and applicable harness backend conformance before
-creating dist/chelm-host-1.2.0.zip and its .sha256. Releases have one chelm-host/
+creating dist/chelm-host-1.3.0.zip and its .sha256. Releases have one chelm-host/
 folder and an exhaustive RELEASE.json. GitHub Actions performs the same checks
 on Windows, Linux and macOS; a v* tag publishes the validated ZIP and checksum.
 
@@ -172,7 +172,7 @@ creates its own disposable runtime; it does not modify an application runtime.
 Durable memory-backed questions have an additive `task` API and bounded local /
 remote cognitive-worker binding. See [COGNITIVE_TASKS.md](docs/COGNITIVE_TASKS.md)
 and [COGNITIVE_ACCEPTANCE.md](docs/COGNITIVE_ACCEPTANCE.md). The pinned published
-Harness 0.12.0 provides these contracts. The same verified package is used for
+Harness 0.13.0 provides these contracts. The same verified package is used for
 production loading and the full cognition test suite.
 Existing retrieval-only `ask` and observation processing keep their semantics.
 
@@ -181,8 +181,8 @@ Existing retrieval-only `ask` and observation processing keep their semantics.
 Phase A adds opt-in host-owned JSON/Git provider selection, bounded local/remote
 reads and semantic change sets through memory worker contract 3. Existing memory
 is audited and preserved byte-for-byte when selecting it. This integration uses
-an exact unpublished Harness development package: the published 0.12.0 pin
-remains intact, and paired release acceptance is pending. See
+the published Harness 0.13.0 package, with the same archive and manifest pins for
+config-2 and config-3 runtimes. See
 [provider setup and ownership](docs/MEMORY_PROVIDERS.md) and
 [observed acceptance evidence](docs/MEMORY_PROVIDER_ACCEPTANCE.md). Optional
 SQLite and migration are separate follow-on work; neither is enabled here.

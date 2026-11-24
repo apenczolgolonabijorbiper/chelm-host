@@ -1,3 +1,9 @@
+Current supported pair: Chelm 1.3.0 / published Harness 0.13.0. The full
+cognition suite is rerun by the provider-pair release checks; current package
+pins and deployment evidence are described in MEMORY_PROVIDER_ACCEPTANCE.md.
+The 1.2.0 / 0.12.0 observations below remain historical, including the original
+actual-Work response and its immutable hashes.
+
 # Cognitive task acceptance (#25) — Chelm 1.2.0 / Harness 0.12.0
 
 Scope: #26 lifecycle, #27 execution, #28 read views, #29 learning/continuation,

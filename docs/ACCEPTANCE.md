@@ -326,3 +326,19 @@ See [MEMORY_PROVIDER_ACCEPTANCE.md](MEMORY_PROVIDER_ACCEPTANCE.md) for separate
 observed results, exact unpublished Harness identity, package/platform gates and
 capacity limits. Existing checks above describe config-2 behavior and do not
 prove provider-mode IIS or published-pair acceptance.
+
+## #32 / #34 published provider pair — 1.3.0 / Harness 0.13.0
+
+Current release qualification uses one exact published Harness archive across
+config-2 and config-3, downloaded and integrity-checked on every platform. The
+full staged builder retains host, provider and backend conformance results;
+capacity reports preserve the explicit >100 MB refusal. Windows release gating
+adds real config-3 full-IIS/ApplicationPoolIdentity and IIS Express/interactive
+processes, semantic memory publication and receipt recovery, read-only cognition
+and C# view-reader recovery. Each mode retains separate JSON and package hashes.
+
+See MEMORY_PROVIDER_ACCEPTANCE.md and the finalization PR/checks for observed
+runs. Older sections record historical implementation evidence. Hosted IIS
+Express runs use Server 2022; actual consumer Windows 11/Standard server checks
+are separate. Optional SQLite #35 and migration #36 remain open and disabled;
+no consumer instance was reset, migrated or upgraded by this release work.

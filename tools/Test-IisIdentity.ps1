@@ -4,15 +4,19 @@ param(
   [Parameter(Mandatory=$true)][string]$HostZip,
   [Parameter(Mandatory=$true)][string]$HarnessRoot,
   [string]$Output = 'iis-identity.json',
-  [switch]$InstallPrerequisites
+  [switch]$InstallPrerequisites,
+  [switch]$MemoryProvider,
+  [ValidateSet('FullIis','IisExpress')][string]$Mode = 'FullIis'
 )
 $ErrorActionPreference = 'Stop'
-if ($InstallPrerequisites) {
+if ($Mode -eq 'FullIis' -and $InstallPrerequisites) {
   $features = Install-WindowsFeature Web-Server,Web-Asp-Net45 -IncludeManagementTools
   if (!$features.Success) { throw 'IIS/ASP.NET role installation failed' }
 }
-Import-Module WebAdministration
-Start-Service W3SVC
+if ($Mode -eq 'FullIis') {
+  Import-Module WebAdministration
+  Start-Service W3SVC
+}
 $probeId = [guid]::NewGuid().ToString('N')
 $pool = "ChelmProbe-$probeId"
 $site = "ChelmProbe-$probeId"
@@ -24,12 +28,13 @@ $nodeExe = (Get-Command node).Source
 $pythonExe = (Get-Command python).Source
 $gitExe = (Get-Command git).Source
 $destination = [System.IO.Path]::GetFullPath($Output)
+$expressProcess = $null
 try {
   New-Item -ItemType Directory -Path $webRoot,$privateRoot -Force | Out-Null
   Expand-Archive -LiteralPath ([System.IO.Path]::GetFullPath($HostZip)) -DestinationPath $probeRoot
   $package = Join-Path $probeRoot 'chelm-host'
   Copy-Item -LiteralPath ([System.IO.Path]::GetFullPath($HarnessRoot)) -Destination (Join-Path $probeRoot 'golem-harness') -Recurse
-  $settings = @{ runtime=(Join-Path $privateRoot 'runtime'); harness=(Join-Path $probeRoot 'golem-harness'); python=$pythonExe; git=$gitExe }
+  $settings = @{ runtime=(Join-Path $privateRoot 'runtime'); harness=(Join-Path $probeRoot 'golem-harness'); python=$pythonExe; git=$gitExe; provider=[bool]$MemoryProvider }
   $settingsPath = Join-Path $probeRoot 'probe-config.json'
   [System.IO.File]::WriteAllText($settingsPath,($settings | ConvertTo-Json),[System.Text.UTF8Encoding]::new($false))
   $script = Join-Path $package 'tools/service-probe.mjs'
@@ -107,24 +112,48 @@ public class ChelmProbe : IHttpHandler {
   $handler = $handler.Replace('NODE_EXE',$nodeExe.Replace('"','""')).Replace('SCRIPT_PATH',$script.Replace('\','\\')).Replace('CONFIG_PATH',$settingsPath.Replace('\','\\'))
   [System.IO.File]::WriteAllText((Join-Path $webRoot 'probe.ashx'),$handler,[System.Text.UTF8Encoding]::new($false))
   [System.IO.File]::WriteAllText((Join-Path $webRoot 'web.config'),'<configuration><system.web><identity impersonate="false"/><compilation targetFramework="4.8"/><httpRuntime targetFramework="4.8" executionTimeout="240"/></system.web></configuration>')
-  New-WebAppPool -Name $pool | Out-Null
-  Set-ItemProperty "IIS:\AppPools\$pool" -Name 'processModel.identityType' -Value 'ApplicationPoolIdentity'
-  Set-ItemProperty "IIS:\AppPools\$pool" -Name 'processModel.loadUserProfile' -Value $false
-  & icacls.exe $probeRoot /grant "IIS AppPool\${pool}:(OI)(CI)RX" /T /Q | Out-Null
-  if ($LASTEXITCODE -ne 0) { throw 'Could not grant read/execute access to the probe package' }
-  & icacls.exe $privateRoot /grant "IIS AppPool\${pool}:(OI)(CI)M" /T /Q | Out-Null
-  if ($LASTEXITCODE -ne 0) { throw 'Could not grant runtime modify access' }
-  New-Website -Name $site -PhysicalPath $webRoot -IPAddress '127.0.0.1' -Port $port -ApplicationPool $pool | Out-Null
-  if ((Get-WebAppPoolState -Name $pool).Value -ne 'Started') { Start-WebAppPool $pool }
-  $response = Invoke-RestMethod -Uri "http://127.0.0.1:$port/probe.ashx" -TimeoutSec 240
-  if (!$response.probe.passed -or $response.iis_identity -ne "IIS APPPOOL\$pool") { throw 'The probe did not execute successfully as ApplicationPoolIdentity' }
-  $poolState = Get-Item "IIS:\AppPools\$pool"
-  $evidence = @{ recorded_at=[DateTime]::UtcNow.ToString('o'); os=(Get-CimInstance Win32_OperatingSystem).Caption; identity_type=[string]$poolState.processModel.identityType; load_user_profile=[bool]$poolState.processModel.loadUserProfile; result=$response }
+  if ($Mode -eq 'FullIis') {
+    New-WebAppPool -Name $pool | Out-Null
+    Set-ItemProperty "IIS:\AppPools\$pool" -Name 'processModel.identityType' -Value 'ApplicationPoolIdentity'
+    Set-ItemProperty "IIS:\AppPools\$pool" -Name 'processModel.loadUserProfile' -Value $false
+    & icacls.exe $probeRoot /grant "IIS AppPool\${pool}:(OI)(CI)RX" /T /Q | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw 'Could not grant read/execute access to the probe package' }
+    & icacls.exe $privateRoot /grant "IIS AppPool\${pool}:(OI)(CI)M" /T /Q | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw 'Could not grant runtime modify access' }
+    New-Website -Name $site -PhysicalPath $webRoot -IPAddress '127.0.0.1' -Port $port -ApplicationPool $pool | Out-Null
+    if ((Get-WebAppPoolState -Name $pool).Value -ne 'Started') { Start-WebAppPool $pool }
+    $expectedIdentity = "IIS APPPOOL\$pool"
+    $poolState = Get-Item "IIS:\AppPools\$pool"
+    $identityType = [string]$poolState.processModel.identityType
+    $profileLoaded = [bool]$poolState.processModel.loadUserProfile
+  } else {
+    $expressExe = Join-Path $env:ProgramFiles 'IIS Express/iisexpress.exe'
+    if (!(Test-Path $expressExe)) { throw 'IIS Express must be installed for the Express acceptance path' }
+    $expressProcess = Start-Process -FilePath $expressExe -ArgumentList "/path:`"$webRoot`"","/port:$port",'/clr:v4.0','/systray:false' -PassThru -RedirectStandardOutput (Join-Path $probeRoot 'express.stdout') -RedirectStandardError (Join-Path $probeRoot 'express.stderr')
+    $expectedIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+    $identityType = 'InteractiveDeveloper'
+    $profileLoaded = $null
+    [System.IO.File]::WriteAllText((Join-Path $webRoot 'ready.txt'),'ready')
+    # Wait only for the static file; never repeat the mutating synthetic probe.
+    $ready = $false
+    for ($attempt=0; $attempt -lt 30; $attempt++) {
+      try { Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:$port/ready.txt" -TimeoutSec 1 | Out-Null; $ready=$true; break } catch {}
+      if ($expressProcess.HasExited) { throw ('IIS Express exited: '+(Get-Content (Join-Path $probeRoot 'express.stderr') -Raw)) }
+      Start-Sleep -Milliseconds 500
+    }
+    if (!$ready) { throw 'IIS Express did not become ready' }
+  }
+  $probeHost = if ($Mode -eq 'FullIis') { '127.0.0.1' } else { 'localhost' }
+  $response = Invoke-RestMethod -Uri "http://${probeHost}:$port/probe.ashx" -TimeoutSec 240
+  if (!$response.probe.passed -or $response.iis_identity -ne $expectedIdentity) { throw 'The probe did not execute successfully as the expected Windows identity' }
+  if ($MemoryProvider -and (!$response.probe.memory_provider.semantic_only -or $response.probe.memory_provider.worker_contract -ne 3)) { throw 'Provider-mode semantic acceptance missing' }
+  $evidence = @{ recorded_at=[DateTime]::UtcNow.ToString('o'); os=(Get-CimInstance Win32_OperatingSystem).Caption; host_archive_sha256=(Get-FileHash -Algorithm SHA256 -LiteralPath $HostZip).Hash.ToLowerInvariant(); mode=$Mode; provider_mode=[bool]$MemoryProvider; identity_type=$identityType; load_user_profile=$profileLoaded; result=$response }
   New-Item -ItemType Directory -Path ([System.IO.Path]::GetDirectoryName($destination)) -Force | Out-Null
   [System.IO.File]::WriteAllText($destination,($evidence | ConvertTo-Json -Depth 10),[System.Text.UTF8Encoding]::new($false))
   Write-Host ($evidence | ConvertTo-Json -Depth 10)
 } finally {
-  if (Test-Path "IIS:\Sites\$site") { Remove-Website $site }
-  if (Test-Path "IIS:\AppPools\$pool") { Stop-WebAppPool $pool -ErrorAction SilentlyContinue; Remove-WebAppPool $pool }
+  if ($expressProcess -and !$expressProcess.HasExited) { Stop-Process -Id $expressProcess.Id -Force; $expressProcess.WaitForExit() }
+  if ($Mode -eq 'FullIis' -and (Test-Path "IIS:\Sites\$site")) { Remove-Website $site }
+  if ($Mode -eq 'FullIis' -and (Test-Path "IIS:\AppPools\$pool")) { Stop-WebAppPool $pool -ErrorAction SilentlyContinue; Remove-WebAppPool $pool }
   if (Test-Path $probeRoot) { Remove-Item -LiteralPath $probeRoot -Recurse -Force }
 }

@@ -1,8 +1,28 @@
 # Memory provider Phase A acceptance (#32–#34)
 
-The architecture implementation is prepared for review. Published-pair/platform
-acceptance remains open: the merged provider API has not yet been published as a
-Harness release. No SQLite, migration, consumer upgrade or new release is claimed.
+Chelm 1.3.0 pairs with published Harness 0.13.0. The exact archive and manifest
+identities are in `compatibility.json` and `provider-compatibility.json`; both
+runtime modes consume identical release bytes on every platform. The staged
+builder runs all host regressions, the unmodified vendor provider suite against
+Chelm's own store and the reference backend conformance suite.
+
+Release validation retains platform JSON artifacts and separate config-2 full-IIS,
+config-3 full-IIS and config-3 IIS Express observations, including package hashes,
+Windows principal, provider receipt and completed read-only cognition. Publication
+is gated on the whole successful matrix. These are synthetic vendor tests on
+hosted Server 2022; no consumer Windows 11 or Standard server run is implied.
+See the finalization PR and its checks for observed results, and the release
+assets for retained platform/deployment JSON reports.
+
+SQLite, migration and live consumer upgrade are not part of Phase A. The Work
+extraction below remains its original immutable response and separate semantic
+verdict; subsequent deterministic checks do not count as further LLM trials.
+
+## Historical implementation evidence
+
+The following observations and development pin document PR #43 before the
+provider contract had a published version. They are retained as provenance and
+are superseded for runtime/CI selection by the published 0.13.0 pins above.
 
 ## Exact package identities
 
@@ -51,22 +71,22 @@ allocation or combined parent/child RSS. JSON costs remain whole-store costs.
 The graph over 100 MB is outside the supported envelope; it is not a successful
 capacity test.
 
-## Remaining acceptance gates
+## Published-pair acceptance procedure
 
-1. PR platform jobs must pass on Windows 2022, macOS and supported Linux/Node
-   baselines using the exact development package. Configured jobs are not an
-   observed result; link their completed runs when available.
-2. Publish the provider-enabled Harness, then pin the new published version,
-   archive and manifest hashes in host compatibility, downloader, CI and runtime
-   negotiation. Rerun the packaged pair. Do not silently replace the published
-   0.12.0 bytes or claim that version number alone proves this API exists.
-3. Retain provider-mode default full-IIS and IIS Express deployment observations.
-   Existing config-2 identity checks do not prove provider-mode acceptance.
-4. Close #34 / Phase A only when those remaining gates have supporting evidence.
-   The optional SQLite and verified migration issues #35/#36 remain separately
-   scoped and disabled. No live provider switch or migration is implied.
+1. Download the exact published 0.13.0 archive; check archive, manifest, inventory
+   and all payload hashes before use. No source build substitutes for the ZIP.
+2. Run the staged package builder, all host/provider/backend conformance cases
+   and synthetic capacity benchmarks on Windows 2022, macOS and Linux with the
+   supported Node baselines. Keep per-platform reports.
+3. Run `Test-IisIdentity.ps1` once in config-2/full IIS, once with
+   `-MemoryProvider`, and once with `-MemoryProvider -Mode IisExpress`. Retain
+   each identity and receipt independently. Require semantic-only memory changes,
+   committed readback, audit success, read-only cognition and C# reader recovery.
+4. Accept Phase A / #34 / #32 only after the observed runs pass. Optional SQLite
+   #35 and migration #36 remain open and disabled, with independent future gates.
 
-The implementation may be reviewed/merged independently of authorizing a new
-release. CI refuses to publish a new host version while the provider package is
-marked unpublished. Consumer-server execution is not available in this session;
-no server identity or deployment result has been invented.
+The earlier merged implementation at `3d98ee0359497cd1b5edf998d04e9887fe949bb0`
+already passed [platform run 45405713235](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45405713235)
+and [config-2 full-IIS run 45405713271](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45405713271).
+Those observations do not substitute for the new published-pair/provider-mode
+checks. Timings and RSS retain the limitations documented above.

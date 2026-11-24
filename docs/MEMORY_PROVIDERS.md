@@ -1,12 +1,11 @@
 # Host-owned memory providers
 
-Implementation for #32 / #33; Phase A acceptance is tracked by #34. The JSON/Git
-provider is implemented and opt-in for vendor development. The merged Harness
-provider API is **not present in the published 0.12.0 ZIP**. Its exact unpublished
-build is pinned separately in `provider-compatibility.json`. This is not a new
-supported published package pair. Normal config-2 runtimes keep the published
-package pin in `compatibility.json` unchanged. No release or consumer migration
-is performed by this change.
+Chelm 1.3.0 supports host-owned JSON/Git provider selection with published
+Harness 0.13.0. Config-2 and config-3 runtimes use the identical verified archive
+and manifest, pinned in `compatibility.json` and `provider-compatibility.json`.
+Source builds cannot substitute for the release. Provider selection is explicit;
+no consumer runtime is automatically changed. Optional SQLite/migration work
+remains separately gated by #35/#36 and is not enabled.
 
 ## Ownership and integration
 
@@ -58,20 +57,19 @@ it remains separately authorized by the application.
 
 ## Explicit selection without rewriting knowledge
 
-For vendor checks, first build the exact pinned source into a separate package:
+Download and verify the exact published package before selecting it:
 
 ```sh
-python tools/prepare-provider-harness.py --source /checkout/golem14-harness --destination /tmp/provider-package
-node bin/chelm.mjs memory upgrade --runtime /private/runtime --harness /tmp/provider-package/golem-harness
-node bin/chelm.mjs memory upgrade --runtime /private/runtime --harness /tmp/provider-package/golem-harness --apply
+python tools/prepare-harness.py --version 0.13.0 --destination /vendor/golem-harness
+node bin/chelm.mjs memory upgrade --runtime /private/runtime --harness /vendor/golem-harness
+node bin/chelm.mjs memory upgrade --runtime /private/runtime --harness /vendor/golem-harness --apply
 node bin/chelm.mjs memory status --runtime /private/runtime
 ```
 
-The source checkout must be clean with full history at the exact commit in the development pin.
-Development package identity pins each supported platform manifest and every payload hash;
-the observed Windows variant differs only in the generated architecture explorer. ZIP
-compression may vary by platform and its observed archive hash is reported.
-Published package downloads still require their exact archive hash.
+`prepare-provider-harness.py --destination PATH` delegates to the same published
+package verifier and requires the provider and normal release pins to agree.
+All platforms consume the same ZIP bytes; no per-platform manifest substitutions
+or rebuilt source packages are accepted.
 The first upgrade command only audits/plans. Apply requires no active lease,
 assignment, dirty instance files or unresolved publication recovery. It audits the
 existing immutable snapshot, saves the original config and exact file hashes in
@@ -126,21 +124,21 @@ logical snapshot budget remain 64 MiB. A synthetic graph over 100 MB is a refusa
 case, not supported capacity. Agent output size and host peak RSS are different
 measurements; an abstract API does not remove host whole-store costs.
 
-Build both package paths and run the builder with `--provider-harness`:
+Use the same verified package for both test paths:
 
 ```sh
-CHELM_PROVIDER_HARNESS_ROOT=/tmp/provider-package/golem-harness node --test tests/
-python tools/build-release.py --harness /tmp/published/golem-harness --provider-harness /tmp/provider-package/golem-harness
-node tools/benchmark-provider.mjs --harness /tmp/published/golem-harness --provider-harness /tmp/provider-package/golem-harness --output provider.json
+CHELM_HARNESS_ROOT=/vendor/golem-harness CHELM_PROVIDER_HARNESS_ROOT=/vendor/golem-harness node --test tests/
+python tools/build-release.py --harness /vendor/golem-harness --provider-harness /vendor/golem-harness
+node tools/benchmark-provider.mjs --harness /vendor/golem-harness --provider-harness /vendor/golem-harness --output provider.json
 ```
 
-CI checks the same source/package pin on Linux, Windows and macOS. The builder
-runs provider conformance against Chelm's transactional store, full regressions,
-local/HTTP MCP and cognition checks from the staged host package. A new release
-is blocked while `production_enabled` is false. Publish the provider-enabled
-Harness first, replace the development pin with its published version/archive/
-manifest hashes, update supported compatibility and CI download pins, then rerun
-paired/platform acceptance. Never relabel the current 0.12.0 archive.
+CI downloads that archive on Linux, Windows and macOS and runs conformance from
+the staged host package. Windows release gating includes the legacy config-2
+full-IIS probe, a config-3 full-IIS ApplicationPoolIdentity probe and an actual
+IIS Express process under the runner's interactive identity. Each retains its
+own JSON evidence. This is vendor-run deployment evidence on Server 2022, not a
+claim about a consumer's Windows 11 workstation or Standard server. A new host
+release requires every platform and deployment check to pass.
 
 See `MEMORY_PROVIDER_ACCEPTANCE.md` for observed evidence and remaining gates.
 Phase A is independently scoped from optional SQLite #35 and migration #36.

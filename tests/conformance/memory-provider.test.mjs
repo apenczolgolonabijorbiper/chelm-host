@@ -12,7 +12,7 @@ import {remoteCall} from '../../lib/remote.mjs';
 import {createAdapter} from '../../lib/backend.mjs';
 import {snapshot,hash} from '../../lib/util.mjs';
 const candidateHarness=process.env.CHELM_PROVIDER_HARNESS_ROOT;
-const providerTest=(name,fn)=>test(name,{skip:!candidateHarness?'Set CHELM_PROVIDER_HARNESS_ROOT to the exact provider development package':false},fn);
+const providerTest=(name,fn)=>test(name,{skip:!candidateHarness?'Set CHELM_PROVIDER_HARNESS_ROOT to the published provider package':false},fn);
 function upgrade(f){return ok('memory','upgrade',f.root,undefined,{harness:candidateHarness,apply:true});}
 const args=w=>({work_id:w.work_id,attempt:w.attempt});
 async function changes(run,w){
@@ -184,9 +184,9 @@ test('retained Work inference response is immutable and separately reviewed',()=
  assert.equal(response.operations.filter(o=>o.op==='add_claim').length,2);
  assert.equal(JSON.parse(fs.readFileSync(path.join(dir,'semantic-verdict.json'))).independent,false);
 });
-providerTest('Windows provider pin changes only the generated presentation, never runtime bytes',()=>{
- const pin=JSON.parse(fs.readFileSync(path.join(source,'provider-compatibility.json'))),original=fs.readFileSync(path.join(candidateHarness,'RELEASE.json'),'utf8');
- const canonical=original.replace(pin.explorer_sha256_by_platform.win32,pin.explorer_sha256_by_platform.default);
- assert.equal(hash(canonical),pin.manifest_sha256);
- assert.equal(hash(canonical.replace(pin.explorer_sha256_by_platform.default,pin.explorer_sha256_by_platform.win32)),pin.manifest_sha256_by_platform.win32);
+providerTest('all platforms use the identical published provider manifest',()=>{
+ const pin=JSON.parse(fs.readFileSync(path.join(source,'provider-compatibility.json')));
+ assert.equal(pin.status,'published');assert.equal(pin.production_enabled,true);
+ assert.equal(hash(fs.readFileSync(path.join(candidateHarness,'RELEASE.json'))),pin.manifest_sha256);
+ assert.equal(pin.manifest_sha256,JSON.parse(fs.readFileSync(path.join(source,'compatibility.json'))).published_harness.manifest_sha256);
 });

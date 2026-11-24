@@ -1,6 +1,6 @@
-Provider integration API 2 is opt-in and pinned to an unpublished development package; see [MEMORY_PROVIDERS.md](MEMORY_PROVIDERS.md). Published config-2 support below remains exact 0.12.0.
+Provider integration API 2 is opt-in and pinned to the published 0.13.0 package; see [MEMORY_PROVIDERS.md](MEMORY_PROVIDERS.md). Config-2 and config-3 use the same verified release.
 
-Current integration: exact 0.12.0, purpose-guidance-v2 for every run (including purpose-only). `profile install` uses the native transactional source lifecycle; profile mirrors can include purpose.md. See REMOTE_WORKERS.md for cutover.
+Current integration: exact 0.13.0, purpose-guidance-v2 for every run (including purpose-only). `profile install` uses the native transactional source lifecycle; profile mirrors can include purpose.md. See REMOTE_WORKERS.md for cutover.
 
 # Harness Integration
 
@@ -32,7 +32,7 @@ Chelm-host calls the harness exactly as the reference consumer does today. It al
 
 ---
 
-Cognitive task integration consumes public Harness 0.12.0 core/session validators
+Cognitive task integration consumes public Harness 0.13.0 core/session validators
 and the reference adapter's openCognition/publishLearning methods from the exact
 verified published ZIP. The same production loader is exercised by local and
 HTTP MCP conformance; no source checkout or engine injection is needed.

@@ -10,12 +10,12 @@ import {hash} from '../../lib/util.mjs';
 
 test('release pair pins the published harness identity and exercises its new command surface',t=>{
  const compatibility=JSON.parse(fs.readFileSync(path.join(source,'compatibility.json'))),pin=compatibility.published_harness;
- assert.equal(pin.version,'0.12.0');assert.equal(version().package_version,'1.2.0');assert.equal(version().harness_supported,'=0.12.0');
+ assert.equal(pin.version,'0.13.0');assert.equal(version().package_version,'1.3.0');assert.equal(version().harness_supported,'=0.13.0');
  assert.equal(hash(fs.readFileSync(path.join(harness,'RELEASE.json'))),pin.manifest_sha256);
  assert.equal(verifyHarness({harness:{root:harness}}).manifest.version,pin.version);
  const f=fixture(t),result=spawnSync(process.execPath,[path.join(harness,'processor/memory-tool.mjs'),'validate','--root',f.instance,'--timings','true'],{encoding:'utf8'});
  assert.equal(result.status,0,result.stderr);const value=JSON.parse(result.stdout);assert.equal(value.valid,true);assert.ok(value.timings.phases.schema.elapsed_ms>=0);
- assert.equal(ok('read','summary',f.root).view.harness_version,'0.12.0');
+ assert.equal(ok('read','summary',f.root).view.harness_version,'0.13.0');
 });
 
 test('the coordinated host refuses unsupported versions and changed manifest identity',t=>{

@@ -10,7 +10,7 @@ a read-only vendor installation and a private runtime writable by the pool.
 From an elevated Windows PowerShell 5.1 session on a disposable/test server:
 
 ```powershell
-./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.2.0.zip `
+./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.0.zip `
   -HarnessRoot C:/vendor/golem-harness -Output ./iis-identity.json
 ```
 
@@ -30,16 +30,29 @@ not need the caller's PATH or profile. Do not grant Modify to vendor directories
 For application read-view handles, use FileShare.ReadWrite | FileShare.Delete,
 as documented in READ_MODEL.md.
 
-To check the same operations under an IIS Express/developer identity, run
-`node tools/service-probe.mjs settings.json` as that identity with:
+Provider mode is an additional independent probe; use the published 0.13.0
+Harness for all commands:
 
-```json
-{"runtime":"C:/Private/chelm-probe","harness":"C:/vendor/golem-harness","python":"C:/Python312/python.exe","git":"C:/Program Files/Git/cmd/git.exe"}
+```powershell
+./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.0.zip `
+  -HarnessRoot C:/vendor/golem-harness -MemoryProvider -Output ./iis-provider.json
+./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.0.zip `
+  -HarnessRoot C:/vendor/golem-harness -MemoryProvider -Mode IisExpress `
+  -Output ./iis-express-provider.json
 ```
 
-The runtime must be absent. It contains only synthetic test data and is kept for
-inspection when the Node probe is run directly. A successful interactive probe
-is not evidence of a full IIS application-pool identity run.
+The Express path requires an installed IIS Express executable in Program Files.
+It launches a real IIS Express process and the same C# handler under the current
+interactive Windows identity; it then stops the process and removes its temporary
+files. Hosted CI exercises it on Windows Server 2022. Windows 11 and a consumer's
+actual server remain distinct deployment checks. The provider probe selects
+config-3, reads bounded protocol/evidence pages, stages only changes.json, validates,
+publishes and recovers its receipt, audits memory, completes read-only cognition
+and checks concurrent C# view-reader recovery. No model is invoked.
+
+For direct Node-only diagnosis, run `node tools/service-probe.mjs settings.json`
+with absolute `runtime`, `harness`, `python` and `git` paths and `provider:true`.
+This keeps the synthetic runtime for inspection but is not an IIS deployment test.
 
 Runtime Git children ignore user/system global Git configuration and hooks;
 instance-local Git configuration remains available. This avoids dependence on

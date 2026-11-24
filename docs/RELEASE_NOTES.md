@@ -1,6 +1,29 @@
-Unreleased provider architecture work (#32): see MEMORY_PROVIDERS.md and
-MEMORY_PROVIDER_ACCEPTANCE.md. No new version, published package-pair support,
-SQLite enablement or consumer migration is asserted.
+# Chelm-host 1.3.0 — host-owned memory providers / Harness 0.13.0
+
+Supports **published Harness 0.13.0 exactly**. Both runtime modes use the same
+verified ZIP/manifest pins. No unpublished source package is used in CI or runtime.
+
+- Select the JSON/Git provider explicitly through audited config-3 setup without
+  changing existing instance bytes or Git HEAD. Config-2 remains available.
+- Give local/stdio/authenticated HTTP workers bounded snapshot reads and semantic
+  changes through memory-worker v3, with source/policy/lease/CAS fences, atomic
+  completion receipts and recovery. Agents do not read or rewrite the graph.
+- Derive app views, cognition and portable export through the public provider API.
+- Gate publication on the complete platform matrix and config-3 full-IIS plus
+  IIS Express semantic processing, cognition, receipts and C# reader recovery.
+
+Pause executors and drain leases/assignments, replace both verified packages,
+update configured paths, then verify and refresh before resuming. To opt in to
+the provider, run `memory upgrade` in preview first and then with `--apply` on a
+settled runtime. It audits/preserves existing knowledge and retains the prior
+configuration. Do not manually change provider configuration. No automatic
+consumer upgrade, SQLite enablement or migration is performed. JSON whole-store
+costs and the 64 MiB reference Git envelope remain; >100 MB is a refusal case.
+
+Observed evidence and limits: `MEMORY_PROVIDER_ACCEPTANCE.md`, CI artifacts and
+the linked acceptance PR. Actual Work extraction remains separately labelled
+from deterministic conformance and service probes. The ZIP excludes node_modules;
+MCP installs restore locked dependencies after installation.
 
 # Chelm-host 1.2.0 — cognitive tasks / Harness 0.12.0
 
