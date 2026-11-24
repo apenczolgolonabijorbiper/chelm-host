@@ -5,9 +5,9 @@ installation. Set CHELM_HARNESS_ROOT and CHELM_PROVIDER_HARNESS_ROOT to the exac
 published 0.13.0 package. Relative environment paths are resolved once on entry.
 Use a disposable temporary runtime; never point fixtures at consumer state.
 
-The shared runner defaults to one test file at a time on Windows and four on
+The shared runner defaults to two test files at a time on Windows and four on
 Linux/macOS. Individual files retain their normal test coverage. Windows is a
-conservative resource policy pending measured serial/parallel evidence; it is
+bounded resource policy informed by retained serial/parallel evidence; it is
 not a diagnosis of ECONNRESET or proof that historical deadlocks were absent.
 `--concurrency 4` selects the comparison explicitly. Retain every attempt,
 including failures; do not wrap mutation tests in a success-only retry loop.
@@ -16,7 +16,8 @@ including failures; do not wrap mutation tests in a success-only retry loop.
 | --- | --- | --- |
 | CLI operation in test/probe | 60 seconds, matching existing host subprocess bound | 5 seconds |
 | Complete service probe | 150 seconds across all commands | Each child uses the smaller remaining/60-second bound |
-| Outer packaged probe / individual test | 180 seconds | Supervised subprocess exits before fixture deletion |
+| Outer packaged probe / individual scenario | 180 seconds | Supervised subprocess exits before fixture deletion |
+| Aggregate test file | 600 seconds | Individual scenarios retain their separate 180-second timer |
 | Whole test attempt | 600 seconds | 5 seconds for owned-tree cleanup |
 
 These bounds preserve hang detection; they are not latency targets. Changing a
@@ -55,6 +56,12 @@ For comparison, master cd14af4's successful Windows Node 22 suite took 277 secon
 at concurrency 4, with 999 seconds of summed per-test elapsed time. Those are
 historical CI measurements, not a prediction of serial time or reference-machine
 capacity. Superseded/cancelled administrative runs do not count as acceptance.
+
+The initial concurrency-1 attempt on Windows Node 24 reached only 78 tests before
+the 600-second suite limit; Node 22 also exposed that CLI --test-timeout=180000
+caps an entire multi-case file. Run 45462787753 retains these failed attempts.
+They are not discarded or counted as passes. Windows therefore uses two files,
+with per-scenario bounds in tests/scenario.mjs and a separate aggregate file bound.
 
 No minimum hardware capacity or historical timeout root cause is established by
 the supplied index alone. Compare the retained phases and concurrency before
