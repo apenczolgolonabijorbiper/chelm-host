@@ -189,3 +189,11 @@ in ACCEPTANCE.md and build evidence, separately from this traceability map.
 | XW-6 | out-of-scope | [docs/CHELM_HOST_DESIGN.md](../docs/CHELM_HOST_DESIGN.md) | Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference. |
 | XW-7 | out-of-scope | [docs/CHELM_HOST_DESIGN.md](../docs/CHELM_HOST_DESIGN.md) | Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference. |
 | XW-8 | out-of-scope | [docs/CHELM_HOST_DESIGN.md](../docs/CHELM_HOST_DESIGN.md) | Boundary or deferred identity-crosswalk proposal, not an implementation request. OUT-2 now permits explicit standalone service; Chelm still does not schedule inference. |
+
+Tracker #25 cognitive task requirements and slices #26–#30 have their own observed
+coverage table in COGNITIVE_ACCEPTANCE.md and conformance/cognitive.test.mjs. These
+are additive to the numbered baseline requirements. Published-package
+conformance, actual Work inference evaluation and platform/deployment acceptance
+are separate statuses. Retained inputs/responses, hashes and per-case semantic
+verdicts are in docs/evidence/cognition-2026-11-24; the release builder rechecks
+their integrity without treating that as an automatic semantic verdict.

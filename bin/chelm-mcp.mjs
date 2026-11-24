@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import cognitiveTools from '../schemas/cognitive-worker-tools.json' with {type:'json'};
 
 import readline from 'node:readline';
 import {
@@ -138,6 +139,7 @@ export const toolDefinitions = names.map(name => ({
     additionalProperties: false
   }
 }));
+toolDefinitions.push(...cognitiveTools);
 export async function handle(message, runtime) {
   const response = {
     jsonrpc: '2.0',
@@ -152,9 +154,9 @@ export async function handle(message, runtime) {
       },
       serverInfo: {
         name: 'chelm-host',
-        version: '1.1.0'
+        version: '1.2.0'
       },
-      instructions: 'Read work_unit.protocol and guidance. Process only in workspace_abs; use validate and submit; abandon on failure.'
+      instructions: 'For observations, read work_unit.protocol and guidance and process only in workspace_abs. For cognitive tasks, read the bound protocol artifacts, use bounded cognitive reads and stage only declared output slots. Validate, submit and require a committed receipt; abandon on failure.'
     };
     else if (message.method === 'ping') response.result = {};
     else if (message.method === 'tools/list') response.result = {
@@ -171,7 +173,7 @@ export async function handle(message, runtime) {
         return response;
       }
       try {
-        const result = await execute('worker', tool.slice(6), {
+        const result = await execute(tool.startsWith('chelm_cognitive_')?'cognitive-worker':'worker', tool.startsWith('chelm_cognitive_')?tool.slice(16):tool.slice(6), {
           runtime
         }, message.params.arguments ?? {});
         response.result = {

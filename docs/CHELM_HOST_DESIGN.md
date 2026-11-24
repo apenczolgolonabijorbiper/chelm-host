@@ -748,3 +748,12 @@ User: `{at, role: "user", text, observationId, questionId}`. Golem: `{at, role: 
 | Requests | `requests list`, `requests set` |
 | Delegation | `delegate offer|list|adopt|cancel` |
 | Worker | `worker next|context|validate|submit|renew|abandon|propose|take|return` (MCP: `chelm_<name>`) |
+
+## Additive cognitive task binding
+
+See COGNITIVE_TASKS.md for the explicit task lifecycle, local/remote execution,
+result/citation projections, reviewed hypothesis publication and bounded linked
+conversation continuation. It extends the owner-hosted assignment transport and
+consumes portable Harness contracts. It introduces no provider client, background
+inference scheduler or silent APP-20 behavior change. COGNITIVE_ACCEPTANCE.md
+tracks implemented versus observed and externally pending acceptance for #25.

@@ -31,9 +31,19 @@ function call(command, input, extras = []) {
     timeout: 180000
   });
   const value = JSON.parse(r.stdout ?? 'null');
-  if (r.status !== 0 || !value?.ok) throw Error('Service probe ' + command.join(' ') + ' failed: ' + JSON
-    .stringify(value));
+  if (r.status !== 0 || !value?.ok) throw Object.assign(Error('Service probe ' + command.join(' ') + ' failed: ' + JSON
+    .stringify(value)), {code:value?.error?.code ?? null});
   return value;
+}
+if (process.argv[3] === '--refresh') {
+  try {
+    call(['refresh']);
+    process.stdout.write(JSON.stringify({refreshed:true})+'\n');
+  } catch (e) {
+    process.stdout.write(JSON.stringify({refreshed:false,error:{code:e.code??null,message:e.message}})+'\n');
+    process.exit(1);
+  }
+  process.exit(0);
 }
 try {
   call(['init'], null, ['--harness', settings.harness, '--python', settings.python, '--git', settings.git]);
@@ -120,6 +130,32 @@ try {
   const summary = call(['read', 'summary']).view;
   if (summary.processed !== 1 || summary.totals.claims !== 1) throw Error(
     'Committed read view did not match the synthetic cycle');
+  const before = call(['read', 'summary']).view.head;
+  const task = call(['task', 'create'], {idempotency_key:'iis-cognition',text:'What can the synthetic IIS source retain?'}).task;
+  const work = call(['cognitive-worker','next'], {work_kind:'cognitive',request_id:'iis-assignment',task_id:task.task_id,executor});
+  const identity = {work_id:work.work_id,attempt:work.attempt};
+  const cognition = (operation, options) => call(['cognitive-worker','read'], {...identity,request_id:'iis-'+operation,operation,options});
+  cognition('round');
+  const context = cognition('context', {current:false});
+  const claim = context.claims[0];
+  const source = cognition('source', {id:claim.sources[0].observation_id,length:16000});
+  const delivery = cognition('receipt');
+  const result = {protocol_version:1,task_id:task.task_id,binding:work.task.binding,outcome:'answer',
+    answer:'The synthetic source declares that the IIS process can retain this declaration.',
+    findings:[{id:'iis-finding',classification:'source_assertion',text:'The IIS process can retain the synthetic declaration.',claim_ids:[claim.id],premise_ids:[],
+      evidence:[{source_id:source.id,sha256:source.sha256,start:source.start,quote:source.text}],uncertainty:[]}],
+    questions:[],uncertainty:[],stop_reason:'complete',coverage:delivery.coverage,usage:delivery.usage,
+    model:{requested:null,observed:null,configuration:'Deterministic IIS service probe; no language model.',cost:null}};
+  // Source delivery uses the portable source id; keep exact retained text/hash.
+  result.findings[0].evidence[0].source_id = claim.sources[0].observation_id;
+  const slot = work.output_slots.find(s=>s.path==='result.json');
+  call(['cognitive-worker','stage'], {...identity,slot_id:slot.slot_id,revision:1,offset:0,text:JSON.stringify(result),final:true});
+  const outputs=[{slot_id:slot.slot_id,revision:1}];
+  const validated=call(['cognitive-worker','validate'], {...identity,outputs});
+  const receipt=call(['cognitive-worker','submit'], {...identity,outputs,candidate_digest:validated.candidate_digest,submission_id:'iis-result'});
+  const completed=call(['task','get'], {task_id:task.task_id}).task;
+  if (receipt.status!=='committed'||completed.state!=='completed'||completed.result.findings.length!==1||call(['read','summary']).view.head!==before)
+    throw Error('IIS cognitive result/receipt or read-only memory invariant failed');
   call(['ask'], {
     text: 'Synthetic IIS record'
   });
@@ -130,8 +166,9 @@ try {
     platform: process.platform,
     os_release: os.release(),
     operations: ['init', 'verify', 'submit', 'index', 'worker next', 'worker validate', 'worker submit',
-      'read summary', 'ask'
+      'read summary', 'ask', 'task create', 'cognitive-worker next/read/stage/validate/submit', 'task get'
     ],
+    cognitive_task: {task_id:task.task_id,work_id:work.work_id,state:completed.state,receipt:completed.receipt,read_only_preserved:true},
     processed: summary.processed,
     claims: summary.totals.claims
   }) + '\n');

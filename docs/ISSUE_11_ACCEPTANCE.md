@@ -14,23 +14,23 @@ from the automated fixtures. Do not upgrade an application for this check.
   client (for example Codex). B needs no harness, Python, server paths or share.
 - Use the successful CI artifact **chelm-release** linked from issue #11. Inside
   it, verify the ZIP against its adjacent `.sha256`, then extract the nested
-  `chelm-host-1.1.0.zip`. This acceptance candidate contains the additional tools;
-  the older published 1.1.0 asset does not. Record the artifact's CI revision.
+  `chelm-host-1.2.0.zip`. This acceptance candidate contains the additional tools;
+  the older published 1.2.0 asset does not. Record the artifact's CI revision.
 - After unpacking `chelm-release.zip` into Downloads/chelm-release, on A:
 
 ```powershell
-$Archive = 'C:/Users/YOUR_USER/Downloads/chelm-release/chelm-host-1.1.0.zip'
+$Archive = 'C:/Users/YOUR_USER/Downloads/chelm-release/chelm-host-1.2.0.zip'
 $Expected = ((Get-Content "$Archive.sha256" -Raw).Trim() -split '\s+')[0]
 if ((Get-FileHash $Archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne $Expected) { throw 'ZIP checksum mismatch' }
 if (Test-Path C:/GolemAcceptance/chelm-host) { throw 'Choose a fresh test folder' }
 Expand-Archive -LiteralPath $Archive -DestinationPath C:/GolemAcceptance
 ```
 
-- Install the exact published harness 0.11.0 on A. With Python available:
+- Install the exact published harness 0.12.0 on A. With Python available:
 
 ```powershell
 $Pkg = 'C:/GolemAcceptance/chelm-host'
-python "$Pkg/tools/prepare-harness.py" --version 0.11.0 --destination C:/GolemAcceptance/golem-harness
+python "$Pkg/tools/prepare-harness.py" --version 0.12.0 --destination C:/GolemAcceptance/golem-harness
 node "$Pkg/integration/install-dependencies.mjs"
 ```
 

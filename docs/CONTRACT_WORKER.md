@@ -111,3 +111,12 @@ Worker submit accepts optional nullable numeric usage (model_ms, input_tokens,
 output_tokens, cached_input_tokens). Omitted fields remain unknown/null. Remote
 submission retries must retain normalized usage as well as digest/submission ID.
 Existing runtime configurations remain valid; no instance migration is needed.
+
+## Cognitive assignments
+
+Observation `worker next` keeps the existing processing lease contract. The
+additive `cognitive-worker` CLI / `chelm_cognitive_*` stdio tools instead use the
+staged immutable-assignment binding in [COGNITIVE_TASKS.md](COGNITIVE_TASKS.md).
+Cognitive work holds no canonical processing lease. It stages only result and
+optional learning proposal slots; its receipt means result publication, with
+explicit task_state, and does not claim canonical memory was updated.

@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "key": "cedar-plan-old",
+      "text": "Project Cedar shipment planned for 10 June 2026. This plan was issued on 1 May 2026.",
+      "from": "2026-05-01T00:00:00Z",
+      "to": "2026-05-20T00:00:00Z",
+      "id": "fa740e28-76d8-4123-933f-d032972e6c84"
+    },
+    {
+      "key": "cedar-plan-new",
+      "text": "Project Cedar shipment planned for 17 June 2026. This revised plan was issued on 20 May 2026. It replaces the 1 May plan. The actual shipment has not been confirmed.",
+      "from": "2026-05-20T00:00:00Z",
+      "id": "96874b8a-0bf3-4dcf-b82b-5685a147b240"
+    },
+    {
+      "key": "alex-pl17",
+      "text": "Alex Nowak, employee PL-17 in Krakow, leads Project Cedar.",
+      "id": "dfbcbab7-0061-4cf6-9528-62d7395ff390"
+    },
+    {
+      "key": "alex-de08",
+      "text": "Alex Nowak, employee DE-08 in Berlin, leads Project Birch.",
+      "id": "7746bfd8-ae3d-4ef3-8f44-78b12870c44b"
+    }
+  ],
+  "seeding": "Deterministic observations and graph claims, not model inference."
+}

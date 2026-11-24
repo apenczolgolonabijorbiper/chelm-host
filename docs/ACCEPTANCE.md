@@ -312,3 +312,10 @@ not release evidence. Existing canonical Chelm 1.0.2/harness 0.10.0 runtimes nee
 no data migration or reset; pause processing, settle assignments/drain leases,
 replace the verified pair, verify and refresh before resuming. Older releases'
 measurements above remain historical evidence, not new-version validation.
+
+## #25 cognitive tasks — 1.2.0 / Harness 0.12.0
+
+See [COGNITIVE_ACCEPTANCE.md](COGNITIVE_ACCEPTANCE.md) for the current published-pair,
+model and platform evidence. Historical 1.1.0/0.11.0 measurements above remain
+historical. The current production loader and all cognition tests use the exact
+published 0.12.0 package; the development source dependency has been removed.

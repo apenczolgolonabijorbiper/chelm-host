@@ -1,0 +1,26 @@
+{
+  "protocol_version": 1,
+  "proposal_id": "cedar-delay-after-dispatch",
+  "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+  "binding": {
+    "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+    "snapshot_id": "19d482421dbfea8f0d694e499147e28d7d3f051c",
+    "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+  },
+  "operation": "add_hypothesis",
+  "target_id": null,
+  "hypothesis_id": "hyp-cedar-one-day-delay",
+  "statement": "Cedar shipment was one calendar day later than the revised planned date.",
+  "support": [
+    "clm-96874b8a-0bf3-4dcf-b82b-5685a147b240",
+    "clm-6fdc8710-9969-4335-abba-e098b218c54f"
+  ],
+  "refutation": [],
+  "uncertainty": [
+    "This derived hypothesis relies on the single supplied dispatch record and revised plan."
+  ],
+  "rationale": "Compare the source-backed 18 June actual date with the source-backed 17 June planned date. The generated answer is not an independent premise.",
+  "verification_needed": [
+    "Independently verify dispatch record CEDAR-2026-0618 and the applicable revised target before treating the conclusion as independently confirmed."
+  ]
+}

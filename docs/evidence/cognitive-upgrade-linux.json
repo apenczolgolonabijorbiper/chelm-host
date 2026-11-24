@@ -1,0 +1,31 @@
+{
+  "source": "Disposable canonical runtime initialized and processed by original Chelm 1.1.0 ZIP / published Harness 0.11.0, then configured with the verified 0.12.0 engine and operated by the clean 1.2.0 package.",
+  "host_1_1_0_archive_sha256": "2785f28319fb4f8b8772ed7cc75e343984a0fc1b357b25b4d68bdef046403ac2",
+  "baseline": {
+    "passed": true,
+    "actor": "agent",
+    "node": "v24.22.3",
+    "platform": "linux",
+    "os_release": "6.18.57",
+    "operations": [
+      "init",
+      "verify",
+      "submit",
+      "index",
+      "worker next",
+      "worker validate",
+      "worker submit",
+      "read summary",
+      "ask"
+    ],
+    "processed": 1,
+    "claims": 1
+  },
+  "head_before": "a42f163948de1ca6ddda855293240020593b387e",
+  "head_after": "a42f163948de1ca6ddda855293240020593b387e",
+  "original_claims_preserved": true,
+  "new_cognitive_context_claims": 1,
+  "task_state": "cancelled",
+  "migration_or_reset": false,
+  "actual_model_used": false
+}

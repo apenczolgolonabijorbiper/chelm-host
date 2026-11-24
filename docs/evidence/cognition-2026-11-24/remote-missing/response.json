@@ -1,0 +1,74 @@
+{
+  "protocol_version": 1,
+  "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+  "binding": {
+    "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+    "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+    "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+  },
+  "outcome": "insufficient",
+  "answer": "The revised plan calls for shipment on 17 June 2026, but the supplied evidence does not establish actual shipment: the revised source says it is unconfirmed. I cannot determine an actual date or lateness from these records. Please obtain an authorized dispatch record identifying Cedar and its actual shipment date; I have not initiated collection.",
+  "findings": [
+    {
+      "id": "planned-only",
+      "classification": "source_assertion",
+      "text": "The revised Cedar plan gives 17 June 2026 and expressly states that actual shipment is unconfirmed.",
+      "claim_ids": [
+        "clm-96874b8a-0bf3-4dcf-b82b-5685a147b240"
+      ],
+      "premise_ids": [],
+      "evidence": [
+        {
+          "source_id": "96874b8a-0bf3-4dcf-b82b-5685a147b240",
+          "sha256": "410cf5edd5818c57517fed249a6ee6362e82d23305f3d21d4b71c5f8c4ce22e2",
+          "start": 0,
+          "quote": "\nProject Cedar shipment planned for 17 June 2026. This revised plan was issued on 20 May 2026. It replaces the 1 May plan. The actual shipment has not been confirmed.\n"
+        }
+      ],
+      "uncertainty": []
+    }
+  ],
+  "questions": [
+    {
+      "id": "collect-dispatch",
+      "kind": "collection_request",
+      "origin": "golem",
+      "text": "If application policy permits, obtain the Project Cedar dispatch record with actual shipment date and submit it as a new observation.",
+      "reply_to": [
+        "339b24d9-297a-4868-8b7c-0ca9178bde02"
+      ],
+      "premise_ids": [
+        "planned-only"
+      ],
+      "intent": {
+        "category": "verify",
+        "origin": "golem",
+        "basis": "explicit",
+        "description": "Request application-controlled evidence collection to resolve actual shipment",
+        "uncertainty": []
+      }
+    }
+  ],
+  "uncertainty": [
+    "Missing dispatch evidence is not proof that Cedar did not ship.",
+    "Actual shipment date and delay are unknown in the delivered evidence."
+  ],
+  "stop_reason": "missing_evidence",
+  "coverage": {
+    "truncated": false,
+    "pending_count": 0,
+    "valid_at": null
+  },
+  "usage": {
+    "rounds": 1,
+    "context_requests": 5,
+    "source_bytes": 373,
+    "elapsed_ms": 886
+  },
+  "model": {
+    "requested": null,
+    "observed": null,
+    "configuration": "ChatGPT Work response; exact model identity, settings, actual tokens and cost unavailable. Subsequent semantic review by same agent.",
+    "cost": null
+  }
+}

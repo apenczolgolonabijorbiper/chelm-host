@@ -1,4 +1,4 @@
-Current integration: exact 0.10.0, purpose-guidance-v2 for every run (including purpose-only). `profile install` uses the native transactional source lifecycle; profile mirrors can include purpose.md. See REMOTE_WORKERS.md for cutover.
+Current integration: exact 0.12.0, purpose-guidance-v2 for every run (including purpose-only). `profile install` uses the native transactional source lifecycle; profile mirrors can include purpose.md. See REMOTE_WORKERS.md for cutover.
 
 # Harness Integration
 
@@ -10,7 +10,8 @@ for measured checks, platform checks awaiting CI, and deviations.
 
 Chelm-host calls the harness exactly as the reference consumer does today. It also takes over the layout, capability and policy checks that the consumer does not do.
 
-- `HAR-1` Validation, indexing, retrieval and statistics MUST be the harness CLI: `node <harness>/processor/memory-tool.mjs validate --root <dir> [--previous <graph>]`, `... stats --root <dir>`, `... context --root <dir> [options of APP-33]`, and `<python> <harness>/processor/process.py --root <instance>`. Chelm-host MUST NOT re-implement them or import harness modules in-process, except to read the harness version and release hashes, and to call `requireCapabilities` from `server/core-policies.mjs` if the backend is built on the harness adapter template (`docs/APPLICATION_PROFILES.md`).
+- `HAR-1` Validation, indexing, retrieval and statistics MUST be the harness CLI: `node <harness>/processor/memory-tool.mjs validate --root <dir> [--previous <graph>]`, `... stats --root <dir>`, `... context --root <dir> [options of APP-33]`, and `<python> <harness>/processor/process.py --root <instance>`. Chelm-host MUST NOT re-implement them or import harness modules in-process, except for the public cognitive core/session validators and reference adapter
+  openCognition/publishLearning methods described below, to read the harness version and release hashes, and to call `requireCapabilities` from `server/core-policies.mjs` if the backend is built on the harness adapter template (`docs/APPLICATION_PROFILES.md`).
 - `HAR-2` Initialization MUST use `<python> <harness>/processor/init-instance.py --root <instance> [--profile]`, never a copy of its templates. (0.10.0 has no `--legacy-layout`.)
 - `HAR-3` Layout: Chelm-host MUST take the purpose and hypotheses paths from the `layout` object reported by `memory-tool validate` (`purpose_path`, `hypotheses_path`; in 0.10.0 always `instance/purpose.md` and `memory/hypotheses.json`) and use them everywhere: read model, storage backend protocol files, merge. It MUST NOT keep a fallback to the historical `persona/` paths. An instance that fails layout resolution or uses graph schema 1 is refused with `instance_incompatible` (see `RT-11`). Note for the vendor: `docs/PROCESSING.md` and `docs/ADAPTERS.md` of 0.10.0 still mention historical layouts. `docs/INSTANCE_LAYOUT.md` and `server/instance-layout.mjs` are authoritative.
 - `HAR-4` Storage backend: Chelm-host MUST ship a Git backend that satisfies adapter contract v1 (`status`, `claim`, `renew`, `validate`, `commit`, `release-error`) with the semantics in `docs/ADAPTERS.md`, and passes the harness conformance suite (`adapters/conformance/adapter.test.mjs` with `GOLEM_ADAPTER` as a JSON command array) with every applicable test passing.
@@ -27,3 +28,10 @@ Chelm-host calls the harness exactly as the reference consumer does today. It al
 - `HAR-10` Policy changes and leases: when `commit` fails because the selected policy changed during the lease, Chelm-host returns `policy_changed` and releases the lease with a fixed safe reason. Unlike other validation failures, the draft outputs are not restored. The result offers a re-claim of the same sources (`claim --ids`, when they are still ready) with a new run ID and the new guidance. The executor must re-check its drafts against the new guidance, write the journal for the new run (with the new `guidance_version` line), and submit again (`WRK-4`).
 
 ---
+
+Cognitive task integration consumes public Harness 0.12.0 core/session validators
+and the reference adapter's openCognition/publishLearning methods from the exact
+verified published ZIP. The same production loader is exercised by local and
+HTTP MCP conformance; no source checkout or engine injection is needed.
+See COGNITIVE_ACCEPTANCE.md for evidence and COGNITIVE_TASKS.md for authorization
+and snapshot rules.

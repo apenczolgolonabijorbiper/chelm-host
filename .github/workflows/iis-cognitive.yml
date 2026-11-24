@@ -1,0 +1,63 @@
+name: Focused IIS cognitive acceptance
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/iis-cognitive.yml'
+      - 'tools/Test-IisIdentity.ps1'
+      - 'tools/service-probe.mjs'
+      - 'tools/build-release.py'
+      - 'lib/util.mjs'
+      - 'lib/cognitive.mjs'
+      - 'lib/read-model.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: iis-cognitive-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22.12.0'
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.12'
+      - run: python tools/prepare-harness.py --destination ../harness-release
+      - name: Build the complete validated package
+        run: python tools/build-release.py --harness ../harness-release
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: iis-cognitive-package
+          path: dist/chelm-host-*.zip
+          if-no-files-found: error
+  iis:
+    needs: package
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22.12.0'
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: iis-cognitive-package
+          path: dist
+      - run: python tools/prepare-harness.py --destination ../harness-release
+      - name: Verify cognitive task completion and concurrent C# file readers under IIS
+        shell: powershell
+        run: |
+          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/iis-identity.json -InstallPrerequisites
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: iis-cognitive-evidence
+          path: dist/*.json
+          if-no-files-found: warn

@@ -1,0 +1,65 @@
+{
+  "source_run_id": 45334865794,
+  "source_job_id": 138245040861,
+  "source_commit": "bfb66e36f76a8ecfd9c51f1c29f5bf1aa99aa380",
+  "source": "Parsed structured JSON emitted in the successful job log; original workflow artifact retained by GitHub.",
+  "artifact_id": 14893078520,
+  "artifact_zip_sha256": "4ff6d149055456048f2161b7e5a8d7cc22dd5bae993331d856aafca2c578e758",
+  "evidence": {
+    "result": {
+      "iis_identity": "IIS APPPOOL\\ChelmProbe-cbdf81f88b6143e0938a37624a83fa19",
+      "task_view_read": true,
+      "task_view_refresh_recovered": true,
+      "task_view_reader_blocked": true,
+      "probe": {
+        "passed": true,
+        "actor": "S-1-5-82-3337893094-1422085245-598284497-834633709-569947166",
+        "node": "v22.12.0",
+        "platform": "win32",
+        "os_release": "10.0.20348",
+        "operations": [
+          "init",
+          "verify",
+          "submit",
+          "index",
+          "worker next",
+          "worker validate",
+          "worker submit",
+          "read summary",
+          "ask",
+          "task create",
+          "cognitive-worker next/read/stage/validate/submit",
+          "task get"
+        ],
+        "cognitive_task": {
+          "task_id": "9f29a165-f91a-4d53-90f2-211c4cfba794",
+          "work_id": "2eac2e9d-b086-4831-a505-5b980630e7f3",
+          "state": "completed",
+          "receipt": {
+            "status": "committed",
+            "task_state": "completed",
+            "task_id": "9f29a165-f91a-4d53-90f2-211c4cfba794",
+            "work_id": "2eac2e9d-b086-4831-a505-5b980630e7f3",
+            "attempt": 1,
+            "task_revision": 1,
+            "submission_id": "iis-result",
+            "candidate_digest": "51c99f025d28d0e252847ac2cf82fec2298c94f147fd54d9efdf7e8984382e0a",
+            "binding": {
+              "instance_id": "f3a47f47-d7ab-46f6-8440-fd28236be406",
+              "snapshot_id": "660a6972ff407324758614518987ae284d050924",
+              "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+            },
+            "published_at": "2026-11-24T05:43:08.407Z"
+          },
+          "read_only_preserved": true
+        },
+        "processed": 1,
+        "claims": 1
+      }
+    },
+    "recorded_at": "2026-11-24T05:43:12.2263116Z",
+    "identity_type": "ApplicationPoolIdentity",
+    "os": "Microsoft Windows Server 2022 Datacenter",
+    "load_user_profile": false
+  }
+}

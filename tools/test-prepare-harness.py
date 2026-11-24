@@ -19,10 +19,10 @@ class PublishedPackageTests(unittest.TestCase):
         self.original_root = module.ROOT
         module.ROOT = self.root
         self.addCleanup(setattr, module, 'ROOT', self.original_root)
-        files = {'VERSION': b'0.11.0\n', 'docs/example.md': b'Synthetic only.\n'}
-        manifest = json.dumps({'schema_version': 1, 'version': '0.11.0', 'files': {k: module.digest(v) for k,v in files.items()}}).encode()
+        files = {'VERSION': b'0.12.0\n', 'docs/example.md': b'Synthetic only.\n'}
+        manifest = json.dumps({'schema_version': 1, 'version': '0.12.0', 'files': {k: module.digest(v) for k,v in files.items()}}).encode()
         self.members = [('golem-harness/' + k,v) for k,v in files.items()] + [('golem-harness/RELEASE.json', manifest)]
-        self.pinned = {'version': '0.11.0', 'archive': 'synthetic.zip', 'manifest_sha256': module.digest(manifest)}
+        self.pinned = {'version': '0.12.0', 'archive': 'synthetic.zip', 'manifest_sha256': module.digest(manifest)}
         self.archive = self.root / 'input.zip'
         self.save(self.members)
 

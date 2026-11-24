@@ -1,0 +1,42 @@
+{
+  "reviewer": "Same ChatGPT Work agent, subsequent review; no independent reviewer or blind evaluation claimed.",
+  "scope": "Six retained host integration responses, supplementing the published Harness 18-case conformance evidence; synthetic fixture facts only.",
+  "cases": [
+    {
+      "case_id": "local-current",
+      "response_sha256": "99bbf0acab1fae0f8a7678ce74101badcf33de70893f7604d3a4ebcee69fdb52",
+      "verdict": "pass",
+      "reason": "Correctly uses both dated plans, identifies the explicit 20 May replacement, derives the seven-calendar-day shift from 10 to 17 June, and refuses to equate a plan with actual shipment. Cited claims and exact original text support both premises; uncertainty preserves the missing dispatch record."
+    },
+    {
+      "case_id": "remote-current",
+      "response_sha256": "4325d145a683043c61693a277dfb9824d4c4eeba37c5fd790cb9b17a60e5fdca",
+      "verdict": "pass",
+      "reason": "The authenticated HTTP result agrees with the local result on latest plan, seven-day change and lack of actual dispatch confirmation. Source assertions remain distinct from the derived comparison. The same original snapshot and source identities are used; no memory write is needed."
+    },
+    {
+      "case_id": "local-asof",
+      "response_sha256": "71c92b4c441da15c56cdc6cb817b08589be3f7311e956dafd16e3d31f88e4630",
+      "verdict": "pass",
+      "reason": "Answers 10 June from the plan whose valid-time interval includes 10 May. The as-of context excludes the later revision, and the response explicitly distinguishes valid time from reconstruction of past stored knowledge. Coverage retains the exact requested valid_at."
+    },
+    {
+      "case_id": "remote-identity",
+      "response_sha256": "e6a0d331718f2fae9154773cd59d51f22d82812c668bc006b8249a2c8c6bdef0",
+      "verdict": "pass",
+      "reason": "Preserves the PL-17/Krakow and DE-08/Berlin identities instead of merging by their shared name. Gives conditional Cedar/Birch answers and a linked clarification question, with insufficient/needs_input state. Both identities have separate exact evidence."
+    },
+    {
+      "case_id": "remote-missing",
+      "response_sha256": "d7abb8b6d41ff0829c247592792f024d5468a7ffc3b7a4b162523142d432801b",
+      "verdict": "pass",
+      "reason": "Does not invent shipment or infer non-shipment from absent evidence. Retains the 17 June planned date, states unknown actual date/lateness, and issues an application-controlled collection proposal with an explicit reply link. Separate proposed learning carries uncertainty and is rejected without canonical mutation."
+    },
+    {
+      "case_id": "remote-resumed",
+      "response_sha256": "36c1d120b9bac5892255246986bf499802c9db2e1a6af1b2b0ebf83f3bea9794",
+      "verdict": "pass",
+      "reason": "Uses the new committed dispatch observation for 18 June and the revised 17 June target to derive one day of delay. Preserves the earlier insufficient answer in history and does not treat its text as an independent witness. Separate approved learning cites the two original memory claims, retains unknown confidence and independent verification needs, and has a transactional receipt."
+    }
+  ]
+}

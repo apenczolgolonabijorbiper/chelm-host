@@ -1,0 +1,85 @@
+{
+  "protocol_version": 1,
+  "task_id": "a36a1ef9-97bf-47a8-b9bc-bc07a7cfe1de",
+  "binding": {
+    "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+    "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+    "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+  },
+  "outcome": "answer",
+  "answer": "The 20 May revision is the latest supplied Cedar plan. It changes planned shipment from 10 June to 17 June 2026, a seven-day delay, and explicitly replaces the 1 May plan. Neither source confirms an actual dispatch; the revised plan expressly says actual shipment is unconfirmed. A dispatch record is needed to determine actual shipment.",
+  "findings": [
+    {
+      "id": "old-plan",
+      "classification": "source_assertion",
+      "text": "The 1 May plan set Cedar shipment for 10 June 2026.",
+      "claim_ids": [
+        "clm-fa740e28-76d8-4123-933f-d032972e6c84"
+      ],
+      "premise_ids": [],
+      "evidence": [
+        {
+          "source_id": "fa740e28-76d8-4123-933f-d032972e6c84",
+          "sha256": "3304a82d81d607bdbefa9f08876f0a7e31938432da19ab06a6c1c41a896a3a5c",
+          "start": 0,
+          "quote": "\nProject Cedar shipment planned for 10 June 2026. This plan was issued on 1 May 2026.\n"
+        }
+      ],
+      "uncertainty": []
+    },
+    {
+      "id": "revised-plan",
+      "classification": "source_assertion",
+      "text": "The 20 May revision sets 17 June 2026, explicitly replaces the 1 May plan, and says actual shipment is unconfirmed.",
+      "claim_ids": [
+        "clm-96874b8a-0bf3-4dcf-b82b-5685a147b240"
+      ],
+      "premise_ids": [],
+      "evidence": [
+        {
+          "source_id": "96874b8a-0bf3-4dcf-b82b-5685a147b240",
+          "sha256": "410cf5edd5818c57517fed249a6ee6362e82d23305f3d21d4b71c5f8c4ce22e2",
+          "start": 0,
+          "quote": "\nProject Cedar shipment planned for 17 June 2026. This revised plan was issued on 20 May 2026. It replaces the 1 May plan. The actual shipment has not been confirmed.\n"
+        }
+      ],
+      "uncertainty": []
+    },
+    {
+      "id": "comparison",
+      "classification": "derived_conclusion",
+      "text": "The latest supplied plan moves shipment seven calendar days later, from 10 to 17 June. The plans do not establish actual shipment.",
+      "claim_ids": [],
+      "premise_ids": [
+        "old-plan",
+        "revised-plan"
+      ],
+      "evidence": [],
+      "uncertainty": [
+        "No actual dispatch record was supplied."
+      ]
+    }
+  ],
+  "questions": [],
+  "uncertainty": [
+    "Actual shipment cannot be established from the supplied plans."
+  ],
+  "stop_reason": "complete",
+  "coverage": {
+    "truncated": false,
+    "pending_count": 0,
+    "valid_at": null
+  },
+  "usage": {
+    "rounds": 1,
+    "context_requests": 5,
+    "source_bytes": 373,
+    "elapsed_ms": 752
+  },
+  "model": {
+    "requested": null,
+    "observed": null,
+    "configuration": "ChatGPT Work authored this response from Chelm-delivered task/context/source artifacts. Exact model identifier, inference settings, actual token usage and cost are not exposed. Same agent will perform subsequent semantic review.",
+    "cost": null
+  }
+}

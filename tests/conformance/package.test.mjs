@@ -58,7 +58,7 @@ test('PKG/INS-1..6: release integrity, installer idempotence and conflict prefli
 test('Schemas: runtime and all published read views satisfy the distributed schemas', t => {
   const f = fixture(t);
   for (const name of ['summary', 'observations', 'subjects', 'questions', 'answers', 'journals',
-      'warnings', 'requests', 'delegations'
+      'warnings', 'requests', 'delegations', 'tasks'
     ]) {
     const schema = JSON.parse(fs.readFileSync(path.join(source, 'schemas/read-model/' + name +
       '.schema.json')));
@@ -136,6 +136,9 @@ test('VF-7: packaged service probe completes a synthetic lease under the executi
   assert.equal(value.passed, true);
   assert.equal(value.processed, 1);
   assert.equal(value.claims, 1);
+  assert.equal(value.cognitive_task.state, 'completed');
+  assert.equal(value.cognitive_task.read_only_preserved, true);
+  assert.equal(value.cognitive_task.receipt.status, 'committed');
 });
 
 test('installer upgrade replaces old package and refuses managed AGENTS/MCP conflicts before mutation', t => {

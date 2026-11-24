@@ -1,0 +1,25 @@
+{
+  "protocol_version": 1,
+  "proposal_id": "cedar-risk-before-dispatch",
+  "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+  "binding": {
+    "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+    "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+    "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+  },
+  "operation": "add_hypothesis",
+  "target_id": null,
+  "hypothesis_id": "hyp-cedar-unconfirmed-risk",
+  "statement": "Cedar may have delivery slippage relative to its revised plan; actual dispatch evidence is needed before treating that as a fact.",
+  "support": [
+    "clm-96874b8a-0bf3-4dcf-b82b-5685a147b240"
+  ],
+  "refutation": [],
+  "uncertainty": [
+    "The source states a plan and lack of confirmation; it does not show an actual delay."
+  ],
+  "rationale": "A separately reviewed uncertainty-bearing check may guide evidence collection without turning model prose into an independent witness.",
+  "verification_needed": [
+    "Obtain the actual Cedar dispatch record and compare its date with 17 June 2026."
+  ]
+}

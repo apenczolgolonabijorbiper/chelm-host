@@ -1,0 +1,53 @@
+{
+  "protocol_version": 1,
+  "task_id": "88e284bf-47c2-45c0-b06b-dd1e63e2fd81",
+  "binding": {
+    "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+    "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+    "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+  },
+  "outcome": "answer",
+  "answer": "As of 10 May 2026, the supplied valid-time evidence gives a planned Cedar shipment date of 10 June 2026. The source is the plan issued on 1 May. This answers the historical planned date; it does not establish actual shipment or reconstruct what records were stored on 10 May.",
+  "findings": [
+    {
+      "id": "asof-plan",
+      "classification": "source_assertion",
+      "text": "The 1 May plan gives 10 June 2026; its retained validity interval includes 10 May.",
+      "claim_ids": [
+        "clm-fa740e28-76d8-4123-933f-d032972e6c84"
+      ],
+      "premise_ids": [],
+      "evidence": [
+        {
+          "source_id": "fa740e28-76d8-4123-933f-d032972e6c84",
+          "sha256": "3304a82d81d607bdbefa9f08876f0a7e31938432da19ab06a6c1c41a896a3a5c",
+          "start": 0,
+          "quote": "\nProject Cedar shipment planned for 10 June 2026. This plan was issued on 1 May 2026.\n"
+        }
+      ],
+      "uncertainty": []
+    }
+  ],
+  "questions": [],
+  "uncertainty": [
+    "This is a valid-time answer using the retained snapshot, not a historical transaction-time reconstruction."
+  ],
+  "stop_reason": "complete",
+  "coverage": {
+    "truncated": false,
+    "pending_count": 0,
+    "valid_at": "2026-05-10T00:00:00Z"
+  },
+  "usage": {
+    "rounds": 1,
+    "context_requests": 2,
+    "source_bytes": 86,
+    "elapsed_ms": 1530
+  },
+  "model": {
+    "requested": null,
+    "observed": null,
+    "configuration": "ChatGPT Work response; exact model identity, inference settings, token usage and cost unavailable. Subsequent semantic review by the same agent.",
+    "cost": null
+  }
+}

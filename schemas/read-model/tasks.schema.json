@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "runtime_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "enum": [
+              "queued",
+              "running",
+              "needs_input",
+              "completed",
+              "failed",
+              "cancelled",
+              "expired"
+            ]
+          },
+          "result": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "receipt": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "learning": {
+            "type": "object"
+          },
+          "stale": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "history": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "task_id",
+          "state",
+          "result",
+          "receipt",
+          "learning",
+          "stale",
+          "history"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "generated_at",
+    "head",
+    "runtime_id",
+    "data"
+  ],
+  "additionalProperties": true
+}

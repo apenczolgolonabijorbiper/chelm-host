@@ -36,12 +36,28 @@ try {
   # Paths below are administrator-generated; the endpoint accepts no input or commands.
   $handler = @'
 <%@ WebHandler Language="C#" Class="ChelmProbe" %>
+<%@ Assembly Name="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 using System;
 using System.Web;
 using System.Diagnostics;
+using System.IO;
+using System.Collections.Generic;
 using System.Security.Principal;
 public class ChelmProbe : IHttpHandler {
   public bool IsReusable { get { return false; } }
+  private Dictionary<string, object> Refresh() {
+    var info = new ProcessStartInfo(@"NODE_EXE", "\"SCRIPT_PATH\" \"CONFIG_PATH\" --refresh");
+    info.UseShellExecute = false; info.CreateNoWindow = true;
+    info.RedirectStandardOutput = true; info.RedirectStandardError = true;
+    var child = Process.Start(info);
+    var output = child.StandardOutput.ReadToEndAsync();
+    var error = child.StandardError.ReadToEndAsync();
+    if (!child.WaitForExit(180000)) { child.Kill(); throw new Exception("Refresh timed out"); }
+    var result = new System.Web.Script.Serialization.JavaScriptSerializer().DeserializeObject(output.Result) as Dictionary<string, object>;
+    if (result == null || !result.ContainsKey("refreshed")) throw new Exception("Invalid refresh response: " + output.Result + " " + error.Result);
+    if ((child.ExitCode == 0) != (bool)result["refreshed"]) throw new Exception("Inconsistent refresh exit status");
+    return result;
+  }
   public void ProcessRequest(HttpContext context) {
     context.Response.ContentType = "application/json";
     var info = new ProcessStartInfo(@"NODE_EXE", "\"SCRIPT_PATH\" \"CONFIG_PATH\"");
@@ -51,11 +67,43 @@ public class ChelmProbe : IHttpHandler {
     var output = process.StandardOutput.ReadToEndAsync();
     var error = process.StandardError.ReadToEndAsync();
     if (!process.WaitForExit(180000)) { process.Kill(); throw new Exception("Probe timed out"); }
-    if (process.ExitCode != 0) { context.Response.StatusCode = 500; }
-    context.Response.Write("{\"iis_identity\":\"" + HttpUtility.JavaScriptStringEncode(WindowsIdentity.GetCurrent().Name) + "\",\"probe\":" + output.Result.Trim() + "}");
+    if (process.ExitCode != 0) throw new Exception("Service probe failed: " + output.Result + " " + error.Result);
+    // Exercise a deliberately long-held reader. Windows may exhaust bounded
+    // rename retries even with delete-sharing; the old object must stay intact.
+    string taskText;
+    bool readerBlocked;
+    using (var stream = new FileStream(@"TASK_VIEW_PATH", FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete)) {
+      var attempt = Refresh();
+      readerBlocked = !(bool)attempt["refreshed"];
+      if (readerBlocked) {
+        var failure = attempt["error"] as Dictionary<string, object>;
+        var code = failure == null ? "" : (string)failure["code"];
+        var diagnostic = failure == null ? "" : (string)failure["message"];
+        if ((code != "EPERM" && code != "EACCES" && code != "EBUSY") || !diagnostic.Contains("rename") || !diagnostic.Contains("tasks.json"))
+          throw new Exception("Unexpected refresh failure: " + diagnostic);
+      }
+      using (var reader = new StreamReader(stream)) { taskText = reader.ReadToEnd(); }
+    }
+    // Application readers close promptly and never wait for writes while open.
+    // An explicit retry after the held handle closes must fully refresh views.
+    if (readerBlocked && !(bool)Refresh()["refreshed"]) throw new Exception("Refresh did not recover after closing the task reader");
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+    var taskView = serializer.DeserializeObject(taskText) as Dictionary<string, object>;
+    if (taskView == null || !taskView.ContainsKey("data") || !taskView.ContainsKey("head")) throw new Exception("Invalid task view");
+    var rows = taskView["data"] as System.Collections.IList;
+    var row = rows != null && rows.Count == 1 ? rows[0] as Dictionary<string, object> : null;
+    if (row == null || (string)row["state"] != "completed" || row["receipt"] == null) throw new Exception("Completed cognitive task missing");
+    var replacement = serializer.DeserializeObject(File.ReadAllText(@"TASK_VIEW_PATH")) as Dictionary<string, object>;
+    if (replacement == null || (string)replacement["head"] != (string)taskView["head"]) throw new Exception("Replacement view binding changed");
+    var replacementRows = replacement["data"] as System.Collections.IList;
+    var replacementRow = replacementRows != null && replacementRows.Count == 1 ? replacementRows[0] as Dictionary<string, object> : null;
+    if (replacementRow == null || (string)replacementRow["state"] != "completed" || serializer.Serialize(replacementRow["receipt"]) != serializer.Serialize(row["receipt"]))
+      throw new Exception("Task result/receipt changed during reader recovery");
+    context.Response.Write("{\"iis_identity\":\"" + HttpUtility.JavaScriptStringEncode(WindowsIdentity.GetCurrent().Name) + "\",\"task_view_read\":true,\"task_view_refresh_recovered\":true,\"task_view_reader_blocked\":" + (readerBlocked ? "true" : "false") + ",\"probe\":" + output.Result.Trim() + "}");
   }
 }
 '@
+  $handler = $handler.Replace('TASK_VIEW_PATH', (Join-Path $privateRoot 'runtime/host/read-model/tasks.json').Replace('"','""'))
   $handler = $handler.Replace('NODE_EXE',$nodeExe.Replace('"','""')).Replace('SCRIPT_PATH',$script.Replace('\','\\')).Replace('CONFIG_PATH',$settingsPath.Replace('\','\\'))
   [System.IO.File]::WriteAllText((Join-Path $webRoot 'probe.ashx'),$handler,[System.Text.UTF8Encoding]::new($false))
   [System.IO.File]::WriteAllText((Join-Path $webRoot 'web.config'),'<configuration><system.web><identity impersonate="false"/><compilation targetFramework="4.8"/><httpRuntime targetFramework="4.8" executionTimeout="240"/></system.web></configuration>')
