@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test from '../scenario.mjs';
 import {ownedProcess} from '../../tools/owned-process.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
