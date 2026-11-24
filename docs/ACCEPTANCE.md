@@ -1,3 +1,29 @@
+# Revised scenario/file policy — plan #53 / 2026-11-24
+
+The corrected policy passed **136/136 staged Linux host tests and 11/11 adapter
+cases**, with no skips, against the same verified published Harness 0.13.0.
+The additional case injects a hanging async scenario and verifies its own finite
+deadline. Owned-process tests now check descendant listening-socket cleanup after
+timeout, normal exit, thrown error and abrupt caller death, preserving a sentinel.
+The full staged validation took 91 seconds on Linux Node 24.22.3. Every entry in
+the extracted 227-entry development ZIP matched its manifest, with no node_modules.
+
+The initial Windows concurrency-1 policy failed at the 600-second suite bound;
+Node 22 additionally exposed the 180-second CLI timeout bounding a whole file.
+Those failed attempts remain retained in run 45462787753. Windows now schedules
+two files, with separate 180-second scenario and 600-second aggregate file/suite
+bounds. A 90-minute CI job allowance accommodates the complete repeat sequence;
+operation and suite deadlines were not raised. This is a correction to the
+implementation's test policy, not proof of the historical consumer timeout cause.
+
+[Revised Linux evidence](evidence/reliability-2026-11-24/linux-revised-policy.json)
+retains exact tested identity/hashes and the failed development/Windows controls.
+The earlier positive Linux control below remains historical. Revised Windows
+repetitions, standalone MCP and platform/IIS gates remain pending until observed.
+Manual review/merge, publication and actual client HTTPS gates remain separate.
+
+---
+
 # Reliability follow-up — plan #53 / 2026-11-24
 
 Observed locally on Linux 6.18.57 / Node 24.22.3 / Python 3.12.14 with the verified
