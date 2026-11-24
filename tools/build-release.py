@@ -83,6 +83,7 @@ def build(harness, output=None, provider_harness=None):
             node_major = subprocess.check_output(['node', '-p', 'process.versions.node.split(".")[0]'], text=True).strip()
             if node_major == '24':
                 subprocess.run([*policy, '--repeat', '10', '--label', 'mcp-standalone',
+                                '--attempt-ms', '180000',
                                 '--file', 'tests/conformance/cognitive.test.mjs',
                                 '--name', 'Independent authenticated MCP client'], cwd=stage, check=True, env=env)
         env['GOLEM_ADAPTER'] = json.dumps(['node', str(stage / 'lib/backend.mjs')])
