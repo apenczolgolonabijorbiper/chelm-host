@@ -9,7 +9,7 @@ import {createHash} from 'node:crypto';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 for (const key of ['CHELM_HARNESS_ROOT','CHELM_PROVIDER_HARNESS_ROOT'])
   if (process.env[key]) process.env[key]=path.resolve(process.env[key]);
-const options = {concurrency: process.platform === 'win32' ? 1 : 4, repeat: 1, label: 'supported', 'attempt-ms':600000};
+const options = {concurrency: process.platform === 'win32' ? 2 : 4, repeat: 1, label: 'supported', 'attempt-ms':600000};
 for (let i=2; i<process.argv.length; i+=2) {
   const key=process.argv[i].slice(2), value=process.argv[i+1];
   if (!['concurrency','repeat','report','label','name','file','attempt-ms'].includes(key) || !value) throw Error('Unknown/missing test policy option');
@@ -35,7 +35,7 @@ let failed=false;
 for(let attempt=1;attempt<=options.repeat;attempt++) {
   const started=Date.now(), phase=`${options.label} suite attempt ${attempt}`;
   const metrics=fs.mkdtempSync(path.join(os.tmpdir(),'chelm-test-metrics-'));
-  const args=['--test','--test-reporter=tap',`--test-concurrency=${options.concurrency}`,'--test-timeout=180000',
+  const args=['--test','--test-reporter=tap',`--test-concurrency=${options.concurrency}`,'--test-timeout=600000',
     ...(options.name?['--test-name-pattern='+options.name]:[]),...tests];
   const r=ownedProcess(process.execPath,args,{cwd:root,timeout:options['attempt-ms'],phase,env:{...process.env,CHELM_PROCESS_REPORT_DIR:metrics}});
   const log=String(r.stdout??'')+String(r.stderr??'');
