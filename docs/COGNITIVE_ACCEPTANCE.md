@@ -30,8 +30,8 @@ builder repeats this shared-fixture check as well as the six host integrity chec
 | Upgrade from original 1.1.0 / published 0.11.0 | [disposable Linux upgrade record](evidence/cognitive-upgrade-linux.json) | original HEAD/claims preserved; cognitive context works without reset/migration |
 | Full clean-package regression | staged release builder | 95/95 host tests, 11/11 Harness backend conformance, 5 preparation checks passed; zero skips |
 | Actual external LLM through CLI and HTTP MCP | [six retained responses and semantic verdicts](evidence/cognition-2026-11-24/README.md) | 6/6 pass; exact original response hashes, committed receipts, resolved citations, rejected/approved learning and observation-backed resume |
-| Linux/macOS/Windows matrix | PR #42 CI | updated published-pair run pending |
-| IIS identity, completed task/result file read and bounded sharing refusal and post-close C# reader recovery | Test-IisIdentity.ps1, service-probe.mjs | updated Windows CI result pending |
+| Linux/macOS/Windows matrix | [current PR checks](https://github.com/apenczolgolonabijorbiper/chelm-host/pull/42/checks) | required before merge; Linux Node 22.12/24, macOS Node 22.12, Windows Server 2022 Node 22.12 |
+| IIS identity, completed task/result file read, bounded sharing refusal and post-close C# reader recovery | [retained Windows result](evidence/cognitive-iis-windows-2022.json) | passed in [focused CI](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45334865794) at bfb66e3, including ApplicationPoolIdentity / LoadUserProfile=false |
 | IIS Express on Windows 11 and consumer's full IIS Server 2022 Standard deployment | existing deployment procedures and issue #11 | external deployment validation remains separate; not claimed by hosted CI |
 
 ## Reproduce deterministic acceptance
