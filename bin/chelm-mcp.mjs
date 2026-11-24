@@ -155,7 +155,7 @@ export async function handle(message, runtime) {
       },
       serverInfo: {
         name: 'chelm-host',
-        version: '1.2.0'
+        version: '1.3.0'
       },
       instructions: 'Provider config-3 runtimes use chelm_memory_* contract 3 and stage only semantic changes.json. Config-2 file workers: for observations, read work_unit.protocol and guidance and process only in workspace_abs. For cognitive tasks, read the bound protocol artifacts, use bounded cognitive reads and stage only declared output slots. Validate, submit and require a committed receipt; abandon on failure.'
     };
