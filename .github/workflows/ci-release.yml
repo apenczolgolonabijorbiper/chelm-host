@@ -52,6 +52,7 @@ jobs:
           repository: apenczolgolonabijorbiper/golem14-harness
           ref: 00aba14b49641c3deb9d17d7cc327f6f8578f503
           path: provider-source
+          fetch-depth: 0
       - name: Build and verify exact unpublished provider contract package
         run: python tools/prepare-provider-harness.py --source ../provider-source --destination ../provider-package
       - name: Build with all Chelm and harness backend conformance tests

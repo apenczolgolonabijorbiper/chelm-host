@@ -67,7 +67,10 @@ node bin/chelm.mjs memory upgrade --runtime /private/runtime --harness /tmp/prov
 node bin/chelm.mjs memory status --runtime /private/runtime
 ```
 
-The source checkout must be clean at the exact commit in the development pin.
+The source checkout must be clean with full history at the exact commit in the development pin.
+Development package identity pins the manifest and every payload hash; ZIP
+compression may vary by platform and its observed archive hash is reported.
+Published package downloads still require their exact archive hash.
 The first upgrade command only audits/plans. Apply requires no active lease,
 assignment, dirty instance files or unresolved publication recovery. It audits the
 existing immutable snapshot, saves the original config and exact file hashes in

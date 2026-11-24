@@ -3,8 +3,8 @@
   "source_commit": "00aba14b49641c3deb9d17d7cc327f6f8578f503",
   "version": "0.12.0",
   "manifest_sha256": "ba571725ebf082e0cc50530505c588e2ed1d8f6b0f4f1a98bdbf36ee3ebd1e5f",
-  "archive_sha256": "ee91183e23db3905483d101deb05efa645a13f62cda0027cd877c403f0ce9274",
   "provider_version": 1,
   "host_api_version": 2,
-  "production_enabled": false
+  "production_enabled": false,
+  "reference_archive_sha256": "ee91183e23db3905483d101deb05efa645a13f62cda0027cd877c403f0ce9274"
 }
