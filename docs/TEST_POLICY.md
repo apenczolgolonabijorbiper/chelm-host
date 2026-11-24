@@ -48,6 +48,14 @@ MCP cognition attempts. All selected runs still use finite operation/suite bound
 Linux/macOS perform the full staged control suite; platform artifacts include
 the logs as well as reports. Checks here do not complete live HTTPS/IIS acceptance.
 
+Each standalone MCP attempt has a 180-second outer bound. The CI job allows 90
+minutes for the full prescribed sequence and subsequent benchmarks/IIS checks;
+this orchestration allowance does not raise any command, probe or suite bound.
+For comparison, master cd14af4's successful Windows Node 22 suite took 277 seconds
+at concurrency 4, with 999 seconds of summed per-test elapsed time. Those are
+historical CI measurements, not a prediction of serial time or reference-machine
+capacity. Superseded/cancelled administrative runs do not count as acceptance.
+
 No minimum hardware capacity or historical timeout root cause is established by
 the supplied index alone. Compare the retained phases and concurrency before
 changing the policy for a consumer. A full staged run has no intentional skips;
