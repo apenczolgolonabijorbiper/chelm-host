@@ -68,7 +68,8 @@ node bin/chelm.mjs memory status --runtime /private/runtime
 ```
 
 The source checkout must be clean with full history at the exact commit in the development pin.
-Development package identity pins the manifest and every payload hash; ZIP
+Development package identity pins each supported platform manifest and every payload hash;
+the observed Windows variant differs only in the generated architecture explorer. ZIP
 compression may vary by platform and its observed archive hash is reported.
 Published package downloads still require their exact archive hash.
 The first upgrade command only audits/plans. Apply requires no active lease,

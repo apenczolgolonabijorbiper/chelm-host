@@ -184,3 +184,9 @@ test('retained Work inference response is immutable and separately reviewed',()=
  assert.equal(response.operations.filter(o=>o.op==='add_claim').length,2);
  assert.equal(JSON.parse(fs.readFileSync(path.join(dir,'semantic-verdict.json'))).independent,false);
 });
+providerTest('Windows provider pin changes only the generated presentation, never runtime bytes',()=>{
+ const pin=JSON.parse(fs.readFileSync(path.join(source,'provider-compatibility.json'))),original=fs.readFileSync(path.join(candidateHarness,'RELEASE.json'),'utf8');
+ const canonical=original.replace(pin.explorer_sha256_by_platform.win32,pin.explorer_sha256_by_platform.default);
+ assert.equal(hash(canonical),pin.manifest_sha256);
+ assert.equal(hash(canonical.replace(pin.explorer_sha256_by_platform.default,pin.explorer_sha256_by_platform.win32)),pin.manifest_sha256_by_platform.win32);
+});

@@ -17,6 +17,12 @@ Harness release. No SQLite, migration, consumer upgrade or new release is claime
 - This build still carries upstream VERSION 0.12.0 but differs from the published
   archive. Separate explicit configuration and pins prevent substitution.
 
+The Windows builder has a separately pinned manifest
+`a6920ddae1200556c5717cbe47f547867eef4592960de46f1f9e8490043f411d`.
+Its only file-hash difference is the generated architecture explorer; all runtime,
+contract and validator bytes match the default package exactly. A regression
+check proves that the two pinned manifests differ only in that presentation file.
+
 ## Observed vendor results on Linux, 2026-11-24
 
 | Check | Observation |

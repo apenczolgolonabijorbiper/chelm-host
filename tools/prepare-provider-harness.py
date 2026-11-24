@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def prepare(source, destination):
     pin = json.loads((ROOT / 'provider-compatibility.json').read_text())
+    expected_manifest = pin.get('manifest_sha256_by_platform', {}).get(sys.platform, pin['manifest_sha256'])
     source, destination = Path(source).resolve(), Path(destination).resolve()
     commit = subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip()
     if commit != pin['source_commit']:
@@ -27,13 +28,13 @@ def prepare(source, destination):
         output = Path(temporary) / 'provider.zip'
         subprocess.run([sys.executable, str(source / 'tools/build-release.py'), '--output', str(output)], check=True)
         with zipfile.ZipFile(output) as package:
-            if hashlib.sha256(package.read('golem-harness/RELEASE.json')).hexdigest() != pin['manifest_sha256']:
+            if hashlib.sha256(package.read('golem-harness/RELEASE.json')).hexdigest() != expected_manifest:
                 raise ValueError('Provider manifest differs from exact development pin: ' + hashlib.sha256(package.read('golem-harness/RELEASE.json')).hexdigest())
             package.extractall(destination)
         # Development ZIP compression may vary with the platform's zlib. The
         # exact manifest and every payload hash remain pinned. Published package
         # downloads continue to require their exact archive hash.
-        print(json.dumps({'source_commit': commit, 'manifest_sha256': pin['manifest_sha256'],
+        print(json.dumps({'source_commit': commit, 'manifest_sha256': expected_manifest,
                           'observed_archive_sha256': hashlib.sha256(output.read_bytes()).hexdigest(),
                           'reference_archive_sha256': pin['reference_archive_sha256']}))
     print(destination / 'golem-harness')
