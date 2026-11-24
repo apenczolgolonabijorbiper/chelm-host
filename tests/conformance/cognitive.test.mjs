@@ -146,29 +146,40 @@ integration('Reviewed learning commits once; rejection preserves memory and boun
   await assert.rejects(f.task('continue',{task_id:task.task_id,idempotency_key:'exhausted',messages:[msg]}),e=>e.code==='budget');
 });
 
-import {Client} from '@modelcontextprotocol/sdk/client/index.js';
-import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
-import {startServer} from '../../lib/remote-server.mjs';
+import {mcpSession} from '../mcp-session.mjs';
+function useHttp(f,session) {
+  f.call=async(name,input)=>{
+    const result=await session.call(name,input),value=JSON.parse(result.content[0].text);
+    assert.notEqual(result.isError,true,JSON.stringify(value));const {ok,...payload}=value;
+    assert.equal(ok,true,JSON.stringify(value));return payload;
+  };
+}
 integration('Independent authenticated MCP client completes and reconnects to the same snapshot/result contract',async t=>{
   const f=await setup(t);ingest(f);const task=await f.create();
-  let server,client;
-  async function connect(){
-    server=await startServer({port:0,public_url:'http://127.0.0.1/mcp',development:true,runtimes:{app:f.root},auth:{mode:'worker-tokens',workers:[{principal:'worker-b',runtimes:['app'],token_env:'TEST_COGNITIVE_TOKEN'}]}},{env:{TEST_COGNITIVE_TOKEN:'synthetic-conformance-token-not-a-secret'}});
-    client=new Client({name:'independent-cognitive-client',version:'1'});
-    await client.connect(new StreamableHTTPClientTransport(new URL('http://127.0.0.1:'+server.address().port+'/mcp'),{requestInit:{headers:{Authorization:'Bearer synthetic-conformance-token-not-a-secret'}}}));
-  }
-  async function close(){await client?.close();await new Promise(resolve=>server.close(resolve));}
-  await connect();t.after(close);
-  f.call=async(name,input)=>{
-    const result=await client.callTool({name,arguments:input});
-    const value=JSON.parse(result.content[0].text);assert.notEqual(result.isError,true,JSON.stringify(value));const {ok,...payload}=value;assert.equal(ok,true,JSON.stringify(value));return payload;
-  };
+  const session=mcpSession(t,f.root);await session.connect();useHttp(f,session);
   const w=await f.call('chelm_request_work',{work_kind:'cognitive',request_id:'http-work',task_id:task.task_id,executor});
   const result=await resultFor(f,w),c=await stage(f,w,result),done=await submit(f,c);
-  await close();await connect();
+  await session.close();await session.connect();
   assert.deepEqual((await f.call('chelm_work_status',args(w))).receipt,done.receipt);
   assert.deepEqual(await f.call('chelm_submit_candidate',done.input),done.receipt);
   assert.equal(ok('task','get',f.root,{task_id:task.task_id}).task.state,'completed');
+});
+integration('MCP response loss after commit is labelled and reconciles one durable result after reconnect',async t=>{
+  const f=await setup(t),task=await f.create();let lose=false;
+  const session=mcpSession(t,f.root,{label:'response-loss',hooks:{afterCognitiveCommit(){
+    if(lose){lose=false;session.server.closeAllConnections();}
+  }}});
+  await session.connect();useHttp(f,session);
+  const w=await f.call('chelm_request_work',{work_kind:'cognitive',request_id:'loss-work',task_id:task.task_id,executor});
+  const c=await stage(f,w,await resultFor(f,w)),v=await f.call('chelm_validate_candidate',c);
+  const input={...c,candidate_digest:v.candidate_digest,submission_id:'network-response-loss'};
+  lose=true;
+  await assert.rejects(f.call('chelm_submit_candidate',input),/MCP phase tool chelm_submit_candidate.*failed/);
+  await session.close();await session.connect();
+  const recovered=await f.call('chelm_work_status',args(w));assert.equal(recovered.receipt.status,'committed');
+  assert.deepEqual(await f.call('chelm_submit_candidate',input),recovered.receipt);
+  const final=ok('task','get',f.root,{task_id:task.task_id}).task;
+  assert.equal(final.history.length,1);assert.equal(final.state,'completed');
 });
 
 integration('Read-only/rejected/stale learning and policy drift cannot publish invalid canonical changes',async t=>{
