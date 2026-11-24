@@ -1,25 +1,26 @@
 {
   "schema_version": 1,
-  "harness_supported": "=0.12.0",
+  "harness_supported": "=0.13.0",
   "supported_harness_versions": [
-    "0.12.0"
+    "0.13.0"
   ],
   "versions": {
-    "0.12.0": {
+    "0.13.0": {
       "graph": 2,
       "hypotheses": 1,
       "vocabulary": 2,
       "layout": "canonical",
-      "runtimes": "Existing canonical runtimes from Chelm-host 1.0.2 with harness 0.10.0 retain instance memory and host state. Pause workers, drain/release active leases and settle remote assignments; replace both verified packages, update configured paths if needed, run chelm verify and refresh, then resume. No reset or migration is required. Older incompatible instance formats remain unsupported.",
-      "cognitive_task": 1
+      "runtimes": "Existing canonical runtimes retain memory and host state. Pause workers, drain leases and assignments, replace both verified packages, update configured paths, verify and refresh before resuming. Provider selection is a separate audited memory upgrade operation; no reset, database migration or automatic selection is performed.",
+      "cognitive_task": 1,
+      "memory_provider": 1
     }
   },
   "published_harness": {
-    "version": "0.12.0",
-    "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.12.0",
-    "archive": "golem-cognitive-harness-0.12.0.zip",
-    "archive_sha256": "9bc17e21d0528e7359006b5bda6c17cce99df3021294e15e2d217d7330627522",
-    "manifest_sha256": "52c4fa98a06993bfa4f2504df58a82504e4303a20fd465a09c19140b8d3cfda6"
+    "version": "0.13.0",
+    "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.13.0",
+    "archive": "golem-cognitive-harness-0.13.0.zip",
+    "archive_sha256": "25451b801f5d411d0e35d03567fe8e6cf78d304bcb288556e0566c883cd68a6f",
+    "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
   },
   "cognitive_tasks": {
     "contract": 1,
@@ -34,9 +35,9 @@
     "production_enabled": true
   },
   "memory_provider_integration": {
-    "status": "development-build-unpublished",
+    "status": "published",
     "pin_file": "provider-compatibility.json",
-    "production_enabled": false,
+    "production_enabled": true,
     "provider_version": 1,
     "host_api_version": 2,
     "runtime_config": 3,

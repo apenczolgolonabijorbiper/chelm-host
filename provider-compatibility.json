@@ -1,17 +1,12 @@
 {
-  "status": "development-build-unpublished",
-  "source_commit": "00aba14b49641c3deb9d17d7cc327f6f8578f503",
-  "version": "0.12.0",
-  "manifest_sha256": "ba571725ebf082e0cc50530505c588e2ed1d8f6b0f4f1a98bdbf36ee3ebd1e5f",
+  "status": "published",
+  "source_commit": "6b4f39ff5371f6aa3a6b9aac1e82ed680851e39e",
+  "version": "0.13.0",
+  "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.13.0",
+  "archive": "golem-cognitive-harness-0.13.0.zip",
+  "archive_sha256": "25451b801f5d411d0e35d03567fe8e6cf78d304bcb288556e0566c883cd68a6f",
+  "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b",
   "provider_version": 1,
   "host_api_version": 2,
-  "production_enabled": false,
-  "reference_archive_sha256": "ee91183e23db3905483d101deb05efa645a13f62cda0027cd877c403f0ce9274",
-  "manifest_sha256_by_platform": {
-    "win32": "a6920ddae1200556c5717cbe47f547867eef4592960de46f1f9e8490043f411d"
-  },
-  "explorer_sha256_by_platform": {
-    "default": "42834c5435a4ba0274fcbc4756d2d3bc446293b10026282e1a060e90329d7e7b",
-    "win32": "5fdbb50fdf15e53f0136dc6d3cba1e5a67201f90c6f4c02382c54384292db7ed"
-  }
+  "production_enabled": true
 }

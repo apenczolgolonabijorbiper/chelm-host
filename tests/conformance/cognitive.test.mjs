@@ -58,7 +58,7 @@ test('Cognition tool schemas and dependency-free stdio declarations agree',()=>{
   for(const name of ['cognitive-worker-once.sudo.md','cognitive-worker-resume.sudo.md','cognitive-worker-loop.sudo.md']){const prompt=fs.readFileSync(file(source,'prompts/'+name),'utf8');for(const tool of prompt.match(/\bchelm_[a-z_]+\b/g)??[])assert(remoteToolSchemas[tool],name+': unknown tool '+tool);}
   for(const [op,remote]of Object.entries(cognitiveCommands))assert.deepEqual(defs.find(t=>t.name==='chelm_cognitive_'+op).inputSchema,z.toJSONSchema(remoteToolSchemas[remote],{target:'draft-7'}));
 });
-test('Published 0.12.0 creates cognition tasks through the production CLI',async t=>{
+test('Published 0.13.0 creates cognition tasks through the production CLI',async t=>{
   const f=fixture(t);
   const created=ok('task','create',f.root,{idempotency_key:'new',text:'Hello'}).task;
   assert.equal(created.state,'queued');

@@ -32,16 +32,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python tools/prepare-harness.py --destination ../harness-release
-      - uses: actions/checkout@v7.0.1
-        with:
-          repository: apenczolgolonabijorbiper/golem14-harness
-          ref: 00aba14b49641c3deb9d17d7cc327f6f8578f503
-          path: provider-source
-          fetch-depth: 0
-      - name: Prepare the exact provider integration package
-        run: python tools/prepare-provider-harness.py --source ../provider-source --destination ../provider-package
       - name: Build the complete validated package
-        run: python tools/build-release.py --harness ../harness-release --provider-harness ../provider-package/golem-harness
+        run: python tools/build-release.py --harness ../harness-release --provider-harness ../harness-release
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: iis-cognitive-package
@@ -68,6 +60,12 @@ jobs:
         run: |
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
           ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/iis-identity.json -InstallPrerequisites
+      - name: Verify semantic provider cycles through both IIS identities
+        shell: powershell
+        run: |
+          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Output dist/iis-provider.json
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Mode IisExpress -Output dist/iis-express-provider.json
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:

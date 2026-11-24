@@ -2,7 +2,7 @@ Provider runtimes (config 3): use `chelm_memory_*` MCP tools or `chelm memory-wo
 
 # Configure remote cognitive workers
 
-Machine A hosts the application, Chelm 1.2 and verified harness **0.12.0**. Machine
+Machine A hosts the application, Chelm 1.3 and verified harness **0.13.0**. Machine
 B needs an MCP-capable agent and inference access. Native HTTP clients need no
 Chelm, harness, Python, Git, SMB share or access to files on A. The optional stdio
 bridge needs Node and this package's shipped dependencies on B, but no harness.
@@ -30,7 +30,7 @@ node C:/Golem/chelm-host/bin/chelm.mjs migrate --runtime C:/GolemData/MyApp --ap
 The last two commands are alternatives. Cutover archives old local host metadata
 and configuration, never deletes share contents, and leaves memory commits intact.
 It writes runtime configuration schema 2 with remote worker defaults. Update
-`harness.root` to the verified 0.12.0 folder. Then:
+`harness.root` to the verified 0.13.0 folder. Then:
 
 ```powershell
 node C:/Golem/chelm-host/bin/chelm.mjs verify --runtime C:/GolemData/MyApp

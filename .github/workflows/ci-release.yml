@@ -43,22 +43,12 @@ jobs:
           python-version: '3.12'
       - name: Install locked runtime dependencies
         run: npm ci --ignore-scripts
-      - name: Download and verify published harness 0.12.0
-        run: python tools/prepare-harness.py --version 0.12.0 --destination ../harness-release
-      - name: Preserve raw provider source bytes on all platforms
-        run: git config --global core.autocrlf false
-      - uses: actions/checkout@v7.0.1
-        with:
-          repository: apenczolgolonabijorbiper/golem14-harness
-          ref: 00aba14b49641c3deb9d17d7cc327f6f8578f503
-          path: provider-source
-          fetch-depth: 0
-      - name: Build and verify exact unpublished provider contract package
-        run: python tools/prepare-provider-harness.py --source ../provider-source --destination ../provider-package
+      - name: Download and verify published Harness 0.13.0
+        run: python tools/prepare-harness.py --version 0.13.0 --destination ../harness-release
       - name: Build with all Chelm and harness backend conformance tests
-        run: python tools/build-release.py --harness ../harness-release --provider-harness ../provider-package/golem-harness
+        run: python tools/build-release.py --harness ../harness-release --provider-harness ../harness-release
       - name: Measure provider boundary and explicit oversized refusal
-        run: node tools/benchmark-provider.mjs --harness ../harness-release --provider-harness ../provider-package/golem-harness --output dist/provider-${{ runner.os }}.json
+        run: node tools/benchmark-provider.mjs --harness ../harness-release --provider-harness ../harness-release --output dist/provider-${{ runner.os }}.json
       - name: Measure synthetic host capacity and tree bounds
         run: node tools/benchmark-capacity.mjs --harness ../harness-release --output dist/capacity-${{ runner.os }}.json
       - name: Verify default full IIS application pool identity
@@ -67,6 +57,13 @@ jobs:
         run: |
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
           ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/iis-identity.json -InstallPrerequisites
+      - name: Verify provider mode under full IIS and IIS Express
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Output dist/iis-provider.json
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Mode IisExpress -Output dist/iis-express-provider.json
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:

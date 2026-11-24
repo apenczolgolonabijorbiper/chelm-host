@@ -1,7 +1,7 @@
 // Synthetic filesystem/Git/child-process probe, intended to be launched by the IIS worker.
 import fs from 'node:fs';
 import {
-  actor
+  actor, hash
 } from '../lib/util.mjs';
 import path from 'node:path';
 import os from 'node:os';
@@ -48,6 +48,10 @@ if (process.argv[3] === '--refresh') {
 try {
   call(['init'], null, ['--harness', settings.harness, '--python', settings.python, '--git', settings.git]);
   call(['verify']);
+  if (settings.provider) {
+    const selected = call(['memory', 'upgrade'], null, ['--harness', settings.harness, '--apply']);
+    if (selected.knowledge_rewritten || selected.status !== 'selected') throw Error('Provider selection rewrote knowledge');
+  }
   const sent = call(['submit'], {
     subject_id: 'synthetic-iis',
     groups: [{
@@ -63,70 +67,109 @@ try {
     new Date(Date.now() - 120000).toISOString()));
   fs.rmSync(path.join(instance, 'evidence', observation + '.json'));
   call(['index']);
-  const u = call(['worker', 'next'], {
-    executor,
-    max: 1
-  }).work_unit;
-  if (!u) throw Error('Expected a claimed synthetic observation');
-  const graph = JSON.parse(fs.readFileSync(path.join(instance, 'memory/graph.json'))),
-    s = u.sources[0];
-  graph.updated_at = new Date().toISOString();
-  graph.sources.push({
-    id: s.id,
-    path: s.path,
-    sha256: s.sha256,
-    recorded_at: s.recorded_at
-  });
-  const entity = 'ent-' + s.id;
-  graph.entities.push({
-    id: entity,
-    type: 'other',
-    kind: 'record',
-    label: 'Synthetic IIS record',
-    aliases: [],
-    source_ids: [s.id],
-    created_at: graph.updated_at,
-    uncertainty: []
-  });
-  graph.claims.push({
-    id: 'clm-' + s.id,
-    subject_id: entity,
-    attributed_to_id: entity,
-    predicate: 'describes',
-    object: {
-      value: 'Synthetic service check'
-    },
-    classification: 'source_assertion',
-    sources: [{
-      observation_id: s.id,
-      quote: 'Synthetic IIS process can retain this declaration.'
-    }],
-    asserted_at: s.recorded_at,
-    valid_time: {
-      from: null,
-      to: null,
-      expression: null,
-      precision: 'unknown'
-    },
-    status: 'active',
-    supersedes: [],
-    uncertainty: [],
-    created_at: graph.updated_at
-  });
-  fs.writeFileSync(path.join(instance, 'memory/graph.json'), JSON.stringify(graph, null, 2) + '\n');
-  fs.writeFileSync(path.join(instance, u.journal_path), '# IIS synthetic cycle\nStarted: ' + u.claimed_at + '\nguidance_version: ' + u.guidance.guidance_identity +
-    '\nNo language model was used. Source and warnings reviewed; verification by harness candidate validation.\n'
-  );
-  call(['worker', 'validate'], {
-    executor,
-    run_id: u.run_id,
-    outputs: []
-  });
-  call(['worker', 'submit'], {
-    executor,
-    run_id: u.run_id,
-    outputs: []
-  });
+  let providerEvidence = null;
+  if (settings.provider) {
+    const w = call(['memory-worker', 'next'], {request_id:'iis-memory',executor,max:1});
+    const identity = {work_id:w.work_id,attempt:w.attempt};
+    if (w.worker_contract !== 3 || w.output_slots.length !== 1 || w.output_slots[0].path !== 'changes.json' || w.artifacts.some(a=>a.path.endsWith('graph.json')))
+      throw Error('Provider work exposed the physical graph');
+    const memory = (op,input={})=>call(['memory-worker',op],{...identity,...input});
+    for (const artifact of w.artifacts) {
+      let offset=0;
+      do {
+        const page=memory('artifact',{artifact_id:artifact.artifact_id,offset});
+        if (page.next_offset===null) break;
+        offset=page.next_offset;
+      } while (true);
+    }
+    const source=w.sources[0], delivered=memory('source',{source_id:source.id,offset:0,max_bytes:65536});
+    const bytes=Buffer.from(delivered.base64,'base64');
+    if (bytes.length!==delivered.total_bytes || hash(bytes)!==source.sha256) throw Error('Incomplete source delivery');
+    const at=new Date().toISOString(),entity='ent-'+source.id,attempt='iis-verification';
+    const change={provider_version:1,base_snapshot:w.snapshot_id,policy_id:w.policy_id,lease_id:w.run_id,
+      run_id:w.run_id,attempt_id:attempt,idempotency_key:'iis-memory-cycle',at,sources:[{id:source.id,sha256:source.sha256}],operations:[
+      {op:'add_entity',record:{id:entity,type:'other',kind:'record',label:'Synthetic IIS record',aliases:[],source_ids:[source.id],uncertainty:[],created_at:at}},
+      {op:'add_claim',record:{id:'clm-'+source.id,subject_id:entity,attributed_to_id:entity,predicate:'describes',object:{value:'Synthetic service check'},
+        classification:'source_assertion',sources:[{observation_id:source.id,quote:'Synthetic IIS process can retain this declaration.'}],asserted_at:source.recorded_at,
+        valid_time:{from:null,to:null,expression:null,precision:'unknown'},status:'active',supersedes:[],uncertainty:[],created_at:at}},
+      {op:'append_journal',record:{id:w.run_id,policy_id:w.policy_id,review:'Synthetic IIS source, warnings and alternatives reviewed. No language model used.',verification_id:attempt,model:executor.model}},
+      {op:'append_verification',record:{id:attempt,run_id:w.run_id,result:'Deterministic IIS provider probe; host checks pending. No language model used.'}}
+    ]};
+    const slot_id=w.output_slots[0].slot_id;
+    memory('stage',{slot_id,revision:1,offset:0,text:JSON.stringify(change),final:true});
+    const outputs=[{slot_id,revision:1}],validated=memory('validate',{outputs});
+    const receipt=memory('submit',{outputs,candidate_digest:validated.candidate_digest,submission_id:'iis-memory-result'});
+    if(receipt.status!=='committed'||memory('status').receipt.id!==change.idempotency_key) throw Error('Provider receipt recovery failed');
+    const audit=call(['memory','audit']);
+    if(audit.errors.length) throw Error('Provider audit failed');
+    providerEvidence={kind:'json-git',worker_contract:w.worker_contract,snapshot_id:receipt.snapshot_id,
+      semantic_only:true,source_bytes:bytes.length,receipt,audit_errors:audit.errors};
+  } else {
+    const u = call(['worker', 'next'], {
+      executor,
+      max: 1
+    }).work_unit;
+    if (!u) throw Error('Expected a claimed synthetic observation');
+    const graph = JSON.parse(fs.readFileSync(path.join(instance, 'memory/graph.json'))),
+      s = u.sources[0];
+    graph.updated_at = new Date().toISOString();
+    graph.sources.push({
+      id: s.id,
+      path: s.path,
+      sha256: s.sha256,
+      recorded_at: s.recorded_at
+    });
+    const entity = 'ent-' + s.id;
+    graph.entities.push({
+      id: entity,
+      type: 'other',
+      kind: 'record',
+      label: 'Synthetic IIS record',
+      aliases: [],
+      source_ids: [s.id],
+      created_at: graph.updated_at,
+      uncertainty: []
+    });
+    graph.claims.push({
+      id: 'clm-' + s.id,
+      subject_id: entity,
+      attributed_to_id: entity,
+      predicate: 'describes',
+      object: {
+        value: 'Synthetic service check'
+      },
+      classification: 'source_assertion',
+      sources: [{
+        observation_id: s.id,
+        quote: 'Synthetic IIS process can retain this declaration.'
+      }],
+      asserted_at: s.recorded_at,
+      valid_time: {
+        from: null,
+        to: null,
+        expression: null,
+        precision: 'unknown'
+      },
+      status: 'active',
+      supersedes: [],
+      uncertainty: [],
+      created_at: graph.updated_at
+    });
+    fs.writeFileSync(path.join(instance, 'memory/graph.json'), JSON.stringify(graph, null, 2) + '\n');
+    fs.writeFileSync(path.join(instance, u.journal_path), '# IIS synthetic cycle\nStarted: ' + u.claimed_at + '\nguidance_version: ' + u.guidance.guidance_identity +
+      '\nNo language model was used. Source and warnings reviewed; verification by harness candidate validation.\n'
+    );
+    call(['worker', 'validate'], {
+      executor,
+      run_id: u.run_id,
+      outputs: []
+    });
+    call(['worker', 'submit'], {
+      executor,
+      run_id: u.run_id,
+      outputs: []
+    });
+  }
   const summary = call(['read', 'summary']).view;
   if (summary.processed !== 1 || summary.totals.claims !== 1) throw Error(
     'Committed read view did not match the synthetic cycle');
@@ -165,10 +208,15 @@ try {
     node: process.version,
     platform: process.platform,
     os_release: os.release(),
-    operations: ['init', 'verify', 'submit', 'index', 'worker next', 'worker validate', 'worker submit',
-      'read summary', 'ask', 'task create', 'cognitive-worker next/read/stage/validate/submit', 'task get'
-    ],
+    operations: ['init', 'verify', ...(settings.provider ? ['memory upgrade'] : []), 'submit', 'index',
+      ...(settings.provider ? ['memory-worker next/artifact/source/stage/validate/submit/status', 'memory audit'] : ['worker next', 'worker validate', 'worker submit']),
+      'read summary', 'ask', 'task create', 'cognitive-worker next/read/stage/validate/submit', 'task get'],
+    packages: {host_version:JSON.parse(fs.readFileSync(path.join(pkg,'RELEASE.json'))).version,
+      host_manifest_sha256:hash(fs.readFileSync(path.join(pkg,'RELEASE.json'))),
+      harness_version:JSON.parse(fs.readFileSync(path.join(settings.harness,'RELEASE.json'))).version,
+      harness_manifest_sha256:hash(fs.readFileSync(path.join(settings.harness,'RELEASE.json')))},
     cognitive_task: {task_id:task.task_id,work_id:work.work_id,state:completed.state,receipt:completed.receipt,read_only_preserved:true},
+    memory_provider: providerEvidence,
     processed: summary.processed,
     claims: summary.totals.claims
   }) + '\n');

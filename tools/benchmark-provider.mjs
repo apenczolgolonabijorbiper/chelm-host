@@ -54,7 +54,7 @@ try{
  }
  const report={schema_version:1,at:new Date().toISOString(),platform:process.platform,node:process.version,
    harness_pin:JSON.parse(fs.readFileSync(new URL('../provider-compatibility.json',import.meta.url))),
-   method:'Sequential synthetic fixtures. No LLM. Initialization uses published Harness; provider operations use the exact unpublished contract build. Timings overlap and are not additive. RSS is cumulative process maximum, not per-phase allocation or combined child peak.',
+   method:'Sequential synthetic fixtures. No LLM. Initialization uses published Harness; provider operations use the same exact published contract package. Timings overlap and are not additive. RSS is cumulative process maximum, not per-phase allocation or combined child peak.',
    json_whole_store_costs_remain:true,agent_graph_bytes:0,oversized_graph_mib:101,oversized_refused:true,samples};
  const output=opt('output');if(process.argv.includes('--output')){fs.mkdirSync(path.dirname(path.resolve(output)),{recursive:true});fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n');}
  console.log(JSON.stringify(report));

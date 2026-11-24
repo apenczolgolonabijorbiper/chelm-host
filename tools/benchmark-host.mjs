@@ -108,7 +108,7 @@ try {
       git: spawnSync('git', ['--version'], { encoding: 'utf8' }).stdout?.trim() || 'unavailable',
       node: process.version
     },
-    harness_version: '0.12.0',
+    harness_version: '0.13.0',
     fixture: 'Fresh canonical empty memory; submit 10 synthetic groups, ask once, then status per sample.',
     method: 'Wall time includes CLI startup. NFR-4 excludes measured indexer/validator children; ask retains retrieval time. This is not a capacity benchmark or reference-consumer measurement.',
     node_process_start_ms: startup,
