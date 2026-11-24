@@ -1,0 +1,13 @@
+{
+  "authorization": "User-authorized disposable vendor acceptance; application approves synthetic dispatch record collection only.",
+  "sources": [
+    {
+      "key": "cedar-actual",
+      "text": "Dispatch record CEDAR-2026-0618 confirms that Project Cedar shipped on 18 June 2026.",
+      "from": "2026-06-18T00:00:00Z",
+      "id": "6fdc8710-9969-4335-abba-e098b218c54f"
+    }
+  ],
+  "state": "queued",
+  "revision": 2
+}

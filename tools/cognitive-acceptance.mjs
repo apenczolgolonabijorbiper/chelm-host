@@ -79,7 +79,9 @@ if(op==='init'){
   else task=call(['task','create'],{idempotency_key:arg,text:spec.text,mode:spec.mode??'read_only',...(spec.scope?{scope:spec.scope}:{}),limits:{elapsed_ms:3600000},timeout_ms:7200000}).task;
   const t=await transport(spec.transport);
   try{
-    const work=await t.call('chelm_request_work',{work_kind:'cognitive',request_id:arg,task_id:task.task_id,executor}),identity={work_id:work.work_id,attempt:work.attempt};
+    const work=await t.call('chelm_request_work',{work_kind:'cognitive',request_id:arg,task_id:task.task_id,executor});
+    assert.equal(work.kind,'cognitive','Complete the previous case before requesting another assignment');
+    const identity={work_id:work.work_id,attempt:work.attempt};
     const artifacts=[];for(const a of work.artifacts){let offset=0;do{const item=await t.call('chelm_read_artifact',{...identity,artifact_id:a.artifact_id,offset});artifacts.push(item);offset=item.next_offset;}while(offset!==null);}
     await t.call('chelm_cognitive_read',{...identity,request_id:'round',operation:'round'});
     const context=await t.call('chelm_cognitive_read',{...identity,request_id:'context',operation:'context',options:{current:false}}),sources=[];
@@ -119,5 +121,30 @@ if(op==='init'){
   const result=call(['task','learning'],{task_id:c.task_id,work_id:c.work.work_id,allowed,reference:'Application acceptance policy: '+(allowed?'approve the reviewed unverified delay-risk hypothesis':'deny unverified learning before evidence collection')});
   const after=git('rev-parse','HEAD');assert.equal(result.learning.state,allowed?'committed':'rejected');assert.equal(before===after,!allowed);
   save(path.join(evidence,arg,'learning-receipt.json'),{allowed,result,head_before:before,head_after:after});
-}else throw Error('Expected init/prepare/complete/collect/learning');
+}else if(op==='verify'){
+  const t=await transport('remote'),recovered=[];
+  try{
+    for(const [name,c] of Object.entries(state.cases)){
+      const dir=path.join(evidence,name),completion=read(path.join(dir,'completion.json'));
+      assert.equal(sha(fs.readFileSync(path.join(dir,'response.json'))),completion.response_sha256);
+      if(c.transport==='remote'){
+        const status=await t.call('chelm_work_status',{work_id:c.work.work_id,attempt:c.work.attempt});
+        assert.deepEqual(status.receipt,completion.receipt);
+        const retry=await t.call('chelm_submit_candidate',completion.submit_input);assert.deepEqual(retry,completion.receipt);
+        recovered.push({case_id:name,receipt:retry});
+      }
+    }
+  }finally{await t.close();}
+  const final=call(['task','get'],{task_id:state.cases['remote-resumed'].task_id}).task;
+  assert.equal(final.history.length,2);assert.equal(final.history[0].state,'needs_input');assert.equal(final.history[1].state,'completed');
+  assert.equal(final.learning.state,'committed');
+  const graph=read(path.join(instance,'memory/graph.json')),hypotheses=read(path.join(instance,'memory/hypotheses.json'));
+  const learning=read(path.join(evidence,'remote-resumed','learning-receipt.json'));
+  save(path.join(evidence,'recovery.json'),{recovered,final_task:final,claim_count:graph.claims.length,source_count:graph.sources.length,hypotheses,canonical_learning_receipt:read(path.join(instance,learning.result.learning.receipt.receipt_path))});
+  save(path.join(evidence,'phase-timings.json'),{measurement:'Public CLI wall times or HTTP tool wall times, excluding agent reasoning between calls. These overlap with host-internal phases and must not be summed with them.',inference_ms:null,input_tokens:null,output_tokens:null,cost:null,samples:state.timings});
+  // Preserve sanitized host envelopes, never worker tokens or server configuration.
+  const logs=fs.readdirSync(path.join(runtime,'host/logs')).filter(p=>p.startsWith('chelm.'));
+  for(const name of logs)fs.copyFileSync(path.join(runtime,'host/logs',name),path.join(evidence,'host-'+name));
+  console.log(JSON.stringify({responses:Object.keys(state.cases).length,recovered:recovered.length,history:final.history.length,learning:final.learning.state}));
+}else throw Error('Expected init/prepare/complete/collect/learning/verify');
 save(statePath,state);

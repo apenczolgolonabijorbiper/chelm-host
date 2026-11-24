@@ -1,0 +1,14 @@
+{
+  "published_harness": "0.12.0",
+  "archive_sha256": "9bc17e21d0528e7359006b5bda6c17cce99df3021294e15e2d217d7330627522",
+  "source_directory": "cognition/conformance/chatgpt-work/fresh-2026-11-23",
+  "raw_files_sha256": {
+    "evaluator-input.json": "d7258b69bdf71dc465dd4547571085ef90d08406dcab20b9dff831e78836ec23",
+    "executor-request.json": "e1cba12cf2f01c53985e9cd0e8b0624c7d6d44bcab813b6afef3d0502516e43f",
+    "response.json": "13aba271e233e62e4cb1801045733334305a86997c0599c3202565901fc3191d",
+    "semantic-review.json": "257fb1435273a63c13751d3ccec92579ee39a653834e6ec6a27eb9ccac40cc2c",
+    "run-metadata.json": "d1d67446bd045bce96d23cbe7d114bcf75747180231e074168d5dfb45f7eaa8a"
+  },
+  "coverage": "Shared published 18-case inputs/original Work outputs rechecked with the published evaluator; vendor semantic review remains separate from deterministic validation. Six retained Chelm cases add actual host integration execution.",
+  "limitation": "This is reuse of the published model run, not 18 new model calls or 18 new executions through Chelm."
+}

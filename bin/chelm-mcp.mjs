@@ -156,7 +156,7 @@ export async function handle(message, runtime) {
         name: 'chelm-host',
         version: '1.2.0'
       },
-      instructions: 'Read work_unit.protocol and guidance. Process only in workspace_abs; use validate and submit; abandon on failure.'
+      instructions: 'For observations, read work_unit.protocol and guidance and process only in workspace_abs. For cognitive tasks, read the bound protocol artifacts, use bounded cognitive reads and stage only declared output slots. Validate, submit and require a committed receipt; abandon on failure.'
     };
     else if (message.method === 'ping') response.result = {};
     else if (message.method === 'tools/list') response.result = {

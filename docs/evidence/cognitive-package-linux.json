@@ -1,0 +1,19 @@
+{
+  "platform": "linux",
+  "harness_version": "0.12.0",
+  "suite_seconds": 52.40888893200008,
+  "tst9_under_10_minutes": true,
+  "host_tests": {
+    "passed": 95,
+    "failed": 0,
+    "skipped": 0
+  },
+  "harness_backend_tests": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0
+  },
+  "preparation_tests": 5,
+  "cognitive_integrity_cases": 6,
+  "model_semantics": "Separate per-case reasons in semantic-review.json; the release builder checks integrity only."
+}

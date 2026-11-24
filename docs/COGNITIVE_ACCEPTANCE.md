@@ -11,6 +11,13 @@ compatibility.json. Archive SHA-256:
 Manifest SHA-256:
 `52c4fa98a06993bfa4f2504df58a82504e4303a20fd465a09c19140b8d3cfda6`.
 No source checkout, engine-injection test setting or skipped cognition cases.
+The published Harness also retains its own [18-case vendor acceptance](https://github.com/apenczolgolonabijorbiper/golem14-harness/tree/v0.12.0/cognition/conformance/chatgpt-work/fresh-2026-11-23),
+including per-case semantic verdicts. The six host cases supplement that portable
+coverage with actual Chelm lifecycle and transport execution; they do not replace it.
+The published evaluator was rerun against all 18 retained inputs/outputs with zero
+integrity errors; [provenance](evidence/published-harness-cognition-provenance.json)
+records raw file hashes and distinguishes reuse from new inference. The release
+builder repeats this shared-fixture check as well as the six host integrity checks.
 
 ## Observed versus pending
 
@@ -20,8 +27,9 @@ No source checkout, engine-injection test setting or skipped cognition cases.
 | Results, receipts, restart/reconnect, exact source reads, scoping | same, including independent authenticated HTTP MCP client | deterministic acceptance passed |
 | Concurrent intake, strict/stale snapshots and guidance changes | same | deterministic acceptance passed |
 | Read-only, rejected/stale/approved learning and finite continuation | same | deterministic acceptance passed |
+| Upgrade from original 1.1.0 / published 0.11.0 | [disposable Linux upgrade record](evidence/cognitive-upgrade-linux.json) | original HEAD/claims preserved; cognitive context works without reset/migration |
 | Full clean-package regression | staged release builder | 95/95 host tests, 11/11 Harness backend conformance, 5 preparation checks passed; zero skips |
-| Actual external LLM through CLI and HTTP MCP | evidence/cognition-2026-11-24 | in progress; responses retained separately from scripted tests |
+| Actual external LLM through CLI and HTTP MCP | [six retained responses and semantic verdicts](evidence/cognition-2026-11-24/README.md) | 6/6 pass; exact original response hashes, committed receipts, resolved citations, rejected/approved learning and observation-backed resume |
 | Linux/macOS/Windows matrix | PR #42 CI | updated published-pair run pending |
 | IIS identity, completed task/result file read and replacement under open C# reader | Test-IisIdentity.ps1, service-probe.mjs | updated Windows CI result pending |
 | IIS Express on Windows 11 and consumer's full IIS Server 2022 Standard deployment | existing deployment procedures and issue #11 | external deployment validation remains separate; not claimed by hosted CI |
@@ -36,7 +44,7 @@ node --test --test-concurrency=4 tests/conformance/cognitive.test.mjs
 python tools/build-release.py --harness ../harness-release
 ```
 
-The clean Linux package validation/conformance stage took 53.3 seconds on
+The final clean Linux package validation/conformance stage took 52.4 seconds on
 Node 24.22.3 / Python 3.12.14; benchmarks and ZIP creation are additional.
 Scripted tests and the IIS service probe do not invoke a language model.
 Model semantic acceptance is independent of schema/digest/citation integrity.

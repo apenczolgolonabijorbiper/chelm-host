@@ -1,0 +1,369 @@
+{
+  "response_sha256": "d7abb8b6d41ff0829c247592792f024d5468a7ffc3b7a4b162523142d432801b",
+  "validation": {
+    "status": "validated",
+    "candidate_digest": "9cdedfebab9e093869ef17951c1af0ff415eb0b4ec8a56b8811f93d6a73884b8",
+    "usage": {
+      "rounds": 1,
+      "context_requests": 5,
+      "source_bytes": 373,
+      "elapsed_ms": 36565
+    },
+    "coverage": {
+      "truncated": false,
+      "pending_count": 0,
+      "valid_at": null
+    },
+    "stale": false
+  },
+  "receipt": {
+    "status": "committed",
+    "task_state": "needs_input",
+    "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+    "work_id": "7f509f98-c498-4955-b5ae-3de3cc96019b",
+    "attempt": 1,
+    "task_revision": 1,
+    "submission_id": "remote-missing",
+    "candidate_digest": "9cdedfebab9e093869ef17951c1af0ff415eb0b4ec8a56b8811f93d6a73884b8",
+    "binding": {
+      "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+      "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "published_at": "2026-11-23T23:47:43.427Z"
+  },
+  "submit_input": {
+    "work_id": "7f509f98-c498-4955-b5ae-3de3cc96019b",
+    "attempt": 1,
+    "outputs": [
+      {
+        "slot_id": "05545a35-77ac-45ac-9560-d142dcc5f2aa",
+        "revision": 1
+      },
+      {
+        "slot_id": "f01a7aeb-4587-4529-a070-06ba74943c2a",
+        "revision": 1
+      }
+    ],
+    "candidate_digest": "9cdedfebab9e093869ef17951c1af0ff415eb0b4ec8a56b8811f93d6a73884b8",
+    "submission_id": "remote-missing"
+  },
+  "task": {
+    "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+    "owner": "agent",
+    "idempotency_key": "remote-missing",
+    "input_identity": "d7950a8178728df7391d9fbf40d45e425c5fed1074c5f04d479ed6ecda98c8d2",
+    "conversation_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+    "template": {
+      "protocol_version": 1,
+      "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+      "conversation_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "unassigned",
+        "guidance_id": "unassigned"
+      },
+      "mode": "propose_learning",
+      "messages": [
+        {
+          "id": "339b24d9-297a-4868-8b7c-0ca9178bde02",
+          "author": "user",
+          "kind": "user_question",
+          "text": "When did Cedar actually ship, and was it late against the revised plan? Request evidence if missing. You may propose learning separately.",
+          "reply_to": [],
+          "intent": {
+            "category": "unknown",
+            "origin": "user",
+            "basis": "unknown",
+            "description": "User intent awaits cognitive interpretation.",
+            "uncertainty": []
+          }
+        }
+      ],
+      "scope": {
+        "subject_ids": [],
+        "valid_at": null
+      },
+      "limits": {
+        "rounds": 8,
+        "context_requests": 24,
+        "claims": 40,
+        "source_bytes": 262144,
+        "expansion_budget": 4000,
+        "elapsed_ms": 3600000
+      }
+    },
+    "revision": 1,
+    "continuations": 0,
+    "continuation_keys": [],
+    "created_at": "2026-11-23T23:47:06.317Z",
+    "deadline": "2026-11-24T01:47:06.317Z",
+    "freshness": "allow_stale",
+    "max_attempts": 3,
+    "max_continuations": 2,
+    "output_max_bytes": 262144,
+    "state": "needs_input",
+    "attempts": [
+      {
+        "work_id": "7f509f98-c498-4955-b5ae-3de3cc96019b",
+        "attempt": 1,
+        "revision": 1,
+        "status": "committed",
+        "expires_at": "2026-11-24T00:17:06.810Z",
+        "receipt": {
+          "status": "committed",
+          "task_state": "needs_input",
+          "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+          "work_id": "7f509f98-c498-4955-b5ae-3de3cc96019b",
+          "attempt": 1,
+          "task_revision": 1,
+          "submission_id": "remote-missing",
+          "candidate_digest": "9cdedfebab9e093869ef17951c1af0ff415eb0b4ec8a56b8811f93d6a73884b8",
+          "binding": {
+            "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+            "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+            "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+          },
+          "published_at": "2026-11-23T23:47:43.427Z"
+        }
+      }
+    ],
+    "result": {
+      "protocol_version": 1,
+      "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "outcome": "insufficient",
+      "answer": "The revised plan calls for shipment on 17 June 2026, but the supplied evidence does not establish actual shipment: the revised source says it is unconfirmed. I cannot determine an actual date or lateness from these records. Please obtain an authorized dispatch record identifying Cedar and its actual shipment date; I have not initiated collection.",
+      "findings": [
+        {
+          "id": "planned-only",
+          "classification": "source_assertion",
+          "text": "The revised Cedar plan gives 17 June 2026 and expressly states that actual shipment is unconfirmed.",
+          "claim_ids": [
+            "clm-96874b8a-0bf3-4dcf-b82b-5685a147b240"
+          ],
+          "premise_ids": [],
+          "evidence": [
+            {
+              "source_id": "96874b8a-0bf3-4dcf-b82b-5685a147b240",
+              "sha256": "410cf5edd5818c57517fed249a6ee6362e82d23305f3d21d4b71c5f8c4ce22e2",
+              "start": 0,
+              "quote": "\nProject Cedar shipment planned for 17 June 2026. This revised plan was issued on 20 May 2026. It replaces the 1 May plan. The actual shipment has not been confirmed.\n"
+            }
+          ],
+          "uncertainty": []
+        }
+      ],
+      "questions": [
+        {
+          "id": "collect-dispatch",
+          "kind": "collection_request",
+          "origin": "golem",
+          "text": "If application policy permits, obtain the Project Cedar dispatch record with actual shipment date and submit it as a new observation.",
+          "reply_to": [
+            "339b24d9-297a-4868-8b7c-0ca9178bde02"
+          ],
+          "premise_ids": [
+            "planned-only"
+          ],
+          "intent": {
+            "category": "verify",
+            "origin": "golem",
+            "basis": "explicit",
+            "description": "Request application-controlled evidence collection to resolve actual shipment",
+            "uncertainty": []
+          }
+        }
+      ],
+      "uncertainty": [
+        "Missing dispatch evidence is not proof that Cedar did not ship.",
+        "Actual shipment date and delay are unknown in the delivered evidence."
+      ],
+      "stop_reason": "missing_evidence",
+      "coverage": {
+        "truncated": false,
+        "pending_count": 0,
+        "valid_at": null
+      },
+      "usage": {
+        "rounds": 1,
+        "context_requests": 5,
+        "source_bytes": 373,
+        "elapsed_ms": 36565
+      },
+      "model": {
+        "requested": null,
+        "observed": null,
+        "configuration": "ChatGPT Work response; exact model identity, settings, actual tokens and cost unavailable. Subsequent semantic review by same agent.",
+        "cost": null
+      }
+    },
+    "receipt": {
+      "status": "committed",
+      "task_state": "needs_input",
+      "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+      "work_id": "7f509f98-c498-4955-b5ae-3de3cc96019b",
+      "attempt": 1,
+      "task_revision": 1,
+      "submission_id": "remote-missing",
+      "candidate_digest": "9cdedfebab9e093869ef17951c1af0ff415eb0b4ec8a56b8811f93d6a73884b8",
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "published_at": "2026-11-23T23:47:43.427Z"
+    },
+    "learning": {
+      "state": "pending"
+    },
+    "answered_at": "2026-11-23T23:47:43.427Z",
+    "answered_binding": {
+      "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+      "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "stale": false,
+    "current_snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+    "history": [
+      {
+        "work_id": "7f509f98-c498-4955-b5ae-3de3cc96019b",
+        "revision": 1,
+        "reported_usage": {
+          "model_ms": null,
+          "input_tokens": null,
+          "output_tokens": null,
+          "cached_input_tokens": null
+        },
+        "result": {
+          "protocol_version": 1,
+          "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+          "binding": {
+            "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+            "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+            "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+          },
+          "outcome": "insufficient",
+          "answer": "The revised plan calls for shipment on 17 June 2026, but the supplied evidence does not establish actual shipment: the revised source says it is unconfirmed. I cannot determine an actual date or lateness from these records. Please obtain an authorized dispatch record identifying Cedar and its actual shipment date; I have not initiated collection.",
+          "findings": [
+            {
+              "id": "planned-only",
+              "classification": "source_assertion",
+              "text": "The revised Cedar plan gives 17 June 2026 and expressly states that actual shipment is unconfirmed.",
+              "claim_ids": [
+                "clm-96874b8a-0bf3-4dcf-b82b-5685a147b240"
+              ],
+              "premise_ids": [],
+              "evidence": [
+                {
+                  "source_id": "96874b8a-0bf3-4dcf-b82b-5685a147b240",
+                  "sha256": "410cf5edd5818c57517fed249a6ee6362e82d23305f3d21d4b71c5f8c4ce22e2",
+                  "start": 0,
+                  "quote": "\nProject Cedar shipment planned for 17 June 2026. This revised plan was issued on 20 May 2026. It replaces the 1 May plan. The actual shipment has not been confirmed.\n"
+                }
+              ],
+              "uncertainty": []
+            }
+          ],
+          "questions": [
+            {
+              "id": "collect-dispatch",
+              "kind": "collection_request",
+              "origin": "golem",
+              "text": "If application policy permits, obtain the Project Cedar dispatch record with actual shipment date and submit it as a new observation.",
+              "reply_to": [
+                "339b24d9-297a-4868-8b7c-0ca9178bde02"
+              ],
+              "premise_ids": [
+                "planned-only"
+              ],
+              "intent": {
+                "category": "verify",
+                "origin": "golem",
+                "basis": "explicit",
+                "description": "Request application-controlled evidence collection to resolve actual shipment",
+                "uncertainty": []
+              }
+            }
+          ],
+          "uncertainty": [
+            "Missing dispatch evidence is not proof that Cedar did not ship.",
+            "Actual shipment date and delay are unknown in the delivered evidence."
+          ],
+          "stop_reason": "missing_evidence",
+          "coverage": {
+            "truncated": false,
+            "pending_count": 0,
+            "valid_at": null
+          },
+          "usage": {
+            "rounds": 1,
+            "context_requests": 5,
+            "source_bytes": 373,
+            "elapsed_ms": 36565
+          },
+          "model": {
+            "requested": null,
+            "observed": null,
+            "configuration": "ChatGPT Work response; exact model identity, settings, actual tokens and cost unavailable. Subsequent semantic review by same agent.",
+            "cost": null
+          }
+        },
+        "proposal": {
+          "protocol_version": 1,
+          "proposal_id": "cedar-risk-before-dispatch",
+          "task_id": "db60e845-7d4c-4f0d-9175-57cadaf9b415",
+          "binding": {
+            "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+            "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+            "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+          },
+          "operation": "add_hypothesis",
+          "target_id": null,
+          "hypothesis_id": "hyp-cedar-unconfirmed-risk",
+          "statement": "Cedar may have delivery slippage relative to its revised plan; actual dispatch evidence is needed before treating that as a fact.",
+          "support": [
+            "clm-96874b8a-0bf3-4dcf-b82b-5685a147b240"
+          ],
+          "refutation": [],
+          "uncertainty": [
+            "The source states a plan and lack of confirmation; it does not show an actual delay."
+          ],
+          "rationale": "A separately reviewed uncertainty-bearing check may guide evidence collection without turning model prose into an independent witness.",
+          "verification_needed": [
+            "Obtain the actual Cedar dispatch record and compare its date with 17 June 2026."
+          ]
+        },
+        "accepted_bytes": {
+          "learning.json": "{\n  \"protocol_version\": 1,\n  \"proposal_id\": \"cedar-risk-before-dispatch\",\n  \"task_id\": \"db60e845-7d4c-4f0d-9175-57cadaf9b415\",\n  \"binding\": {\n    \"instance_id\": \"d949a12f-a7af-4ad2-bc83-63c963c4fc76\",\n    \"snapshot_id\": \"5bb2638abb3127fa3d4deb49e63b4fd886974eff\",\n    \"guidance_id\": \"7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3\"\n  },\n  \"operation\": \"add_hypothesis\",\n  \"target_id\": null,\n  \"hypothesis_id\": \"hyp-cedar-unconfirmed-risk\",\n  \"statement\": \"Cedar may have delivery slippage relative to its revised plan; actual dispatch evidence is needed before treating that as a fact.\",\n  \"support\": [\n    \"clm-96874b8a-0bf3-4dcf-b82b-5685a147b240\"\n  ],\n  \"refutation\": [],\n  \"uncertainty\": [\n    \"The source states a plan and lack of confirmation; it does not show an actual delay.\"\n  ],\n  \"rationale\": \"A separately reviewed uncertainty-bearing check may guide evidence collection without turning model prose into an independent witness.\",\n  \"verification_needed\": [\n    \"Obtain the actual Cedar dispatch record and compare its date with 17 June 2026.\"\n  ]\n}\n",
+          "result.json": "{\n  \"protocol_version\": 1,\n  \"task_id\": \"db60e845-7d4c-4f0d-9175-57cadaf9b415\",\n  \"binding\": {\n    \"instance_id\": \"d949a12f-a7af-4ad2-bc83-63c963c4fc76\",\n    \"snapshot_id\": \"5bb2638abb3127fa3d4deb49e63b4fd886974eff\",\n    \"guidance_id\": \"7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3\"\n  },\n  \"outcome\": \"insufficient\",\n  \"answer\": \"The revised plan calls for shipment on 17 June 2026, but the supplied evidence does not establish actual shipment: the revised source says it is unconfirmed. I cannot determine an actual date or lateness from these records. Please obtain an authorized dispatch record identifying Cedar and its actual shipment date; I have not initiated collection.\",\n  \"findings\": [\n    {\n      \"id\": \"planned-only\",\n      \"classification\": \"source_assertion\",\n      \"text\": \"The revised Cedar plan gives 17 June 2026 and expressly states that actual shipment is unconfirmed.\",\n      \"claim_ids\": [\n        \"clm-96874b8a-0bf3-4dcf-b82b-5685a147b240\"\n      ],\n      \"premise_ids\": [],\n      \"evidence\": [\n        {\n          \"source_id\": \"96874b8a-0bf3-4dcf-b82b-5685a147b240\",\n          \"sha256\": \"410cf5edd5818c57517fed249a6ee6362e82d23305f3d21d4b71c5f8c4ce22e2\",\n          \"start\": 0,\n          \"quote\": \"\\nProject Cedar shipment planned for 17 June 2026. This revised plan was issued on 20 May 2026. It replaces the 1 May plan. The actual shipment has not been confirmed.\\n\"\n        }\n      ],\n      \"uncertainty\": []\n    }\n  ],\n  \"questions\": [\n    {\n      \"id\": \"collect-dispatch\",\n      \"kind\": \"collection_request\",\n      \"origin\": \"golem\",\n      \"text\": \"If application policy permits, obtain the Project Cedar dispatch record with actual shipment date and submit it as a new observation.\",\n      \"reply_to\": [\n        \"339b24d9-297a-4868-8b7c-0ca9178bde02\"\n      ],\n      \"premise_ids\": [\n        \"planned-only\"\n      ],\n      \"intent\": {\n        \"category\": \"verify\",\n        \"origin\": \"golem\",\n        \"basis\": \"explicit\",\n        \"description\": \"Request application-controlled evidence collection to resolve actual shipment\",\n        \"uncertainty\": []\n      }\n    }\n  ],\n  \"uncertainty\": [\n    \"Missing dispatch evidence is not proof that Cedar did not ship.\",\n    \"Actual shipment date and delay are unknown in the delivered evidence.\"\n  ],\n  \"stop_reason\": \"missing_evidence\",\n  \"coverage\": {\n    \"truncated\": false,\n    \"pending_count\": 0,\n    \"valid_at\": null\n  },\n  \"usage\": {\n    \"rounds\": 1,\n    \"context_requests\": 5,\n    \"source_bytes\": 373,\n    \"elapsed_ms\": 886\n  },\n  \"model\": {\n    \"requested\": null,\n    \"observed\": null,\n    \"configuration\": \"ChatGPT Work response; exact model identity, settings, actual tokens and cost unavailable. Subsequent semantic review by same agent.\",\n    \"cost\": null\n  }\n}\n"
+        },
+        "published_at": "2026-11-23T23:47:43.427Z",
+        "stale": false,
+        "state": "needs_input",
+        "learning": {
+          "state": "pending"
+        }
+      }
+    ]
+  },
+  "citations": [
+    {
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "source_id": "96874b8a-0bf3-4dcf-b82b-5685a147b240",
+      "sha256": "410cf5edd5818c57517fed249a6ee6362e82d23305f3d21d4b71c5f8c4ce22e2",
+      "start": 0,
+      "text": "\nProject Cedar shipment planned for 17 June 2026. This revised plan was issued on 20 May 2026. It replaces the 1 May plan. The actual shipment has not been confirmed.\n",
+      "next_offset": null
+    }
+  ],
+  "read_only_memory_preserved": true
+}

@@ -1,0 +1,17 @@
+{
+  "allowed": true,
+  "result": {
+    "learning": {
+      "state": "committed",
+      "receipt": {
+        "status": "published",
+        "head": "ceff839147e99a7475e6a82d5aaa503d4a28c1bf",
+        "receipt_path": "memory/learning/ccbd1e57e94ae2108e43d9b0eb9aa312c711770a7b0ea13941822a9853487200.json"
+      },
+      "at": "2026-11-23T23:48:19.415Z",
+      "reference": "Application acceptance policy: approve the reviewed unverified delay-risk hypothesis"
+    }
+  },
+  "head_before": "19d482421dbfea8f0d694e499147e28d7d3f051c",
+  "head_after": "ceff839147e99a7475e6a82d5aaa503d4a28c1bf"
+}

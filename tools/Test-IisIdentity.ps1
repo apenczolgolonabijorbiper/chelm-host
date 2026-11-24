@@ -66,7 +66,7 @@ public class ChelmProbe : IHttpHandler {
       var refreshOutput = refresh.StandardOutput.ReadToEndAsync();
       var refreshError = refresh.StandardError.ReadToEndAsync();
       if (!refresh.WaitForExit(180000)) { refresh.Kill(); throw new Exception("Refresh timed out"); }
-      if (refresh.ExitCode != 0) throw new Exception("Concurrent task view replacement failed");
+      if (refresh.ExitCode != 0) throw new Exception("Concurrent task view replacement failed: " + refreshOutput.Result + " " + refreshError.Result);
       using (var reader = new StreamReader(stream)) { taskText = reader.ReadToEnd(); }
     }
     var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();

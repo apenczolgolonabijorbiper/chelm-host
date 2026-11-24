@@ -1,0 +1,12 @@
+{
+  "allowed": false,
+  "result": {
+    "learning": {
+      "state": "rejected",
+      "at": "2026-11-23T23:47:44.071Z",
+      "reference": "Application acceptance policy: deny unverified learning before evidence collection"
+    }
+  },
+  "head_before": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+  "head_after": "5bb2638abb3127fa3d4deb49e63b4fd886974eff"
+}

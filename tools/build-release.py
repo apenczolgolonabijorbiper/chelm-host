@@ -56,6 +56,16 @@ def build(harness, output=None):
         subprocess.run(['node', str(stage / 'integration/install-dependencies.mjs')], check=True, env=env)
         subprocess.run(['node', str(stage / 'bin/chelm.mjs'), 'verify', '--harness', str(harness),
                         '--python', env['GOLEM_PYTHON']], check=True, env=env)
+        subprocess.run(['node', str(stage / 'tools/check-cognitive-evidence.mjs'),
+                        str(stage / 'docs/evidence/cognition-2026-11-24'), str(harness)],
+                       cwd=stage, check=True, env=env)
+        cognitive_evidence = harness / 'cognition/conformance/chatgpt-work/fresh-2026-11-23'
+        cognitive_report = Path(directory) / 'published-harness-cognition-integrity.json'
+        subprocess.run(['node', str(harness / 'tools/evaluate-cognition.mjs'), 'check',
+                        str(cognitive_evidence / 'evaluator-input.json'), str(cognitive_evidence / 'response.json'),
+                        str(cognitive_report)],
+                       cwd=stage, check=True, env=env)
+        (output.parent / cognitive_report.name).write_bytes(cognitive_report.read_bytes())
         tests = [str(p.relative_to(stage)) for p in sorted((stage / 'tests').rglob('*.test.mjs'))]
         subprocess.run(['node', '--test', '--test-concurrency=4', *tests], cwd=stage, check=True, env=env)
         env['GOLEM_ADAPTER'] = json.dumps(['node', str(stage / 'lib/backend.mjs')])

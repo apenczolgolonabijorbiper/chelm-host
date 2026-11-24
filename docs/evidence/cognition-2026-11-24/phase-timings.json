@@ -1,0 +1,609 @@
+{
+  "measurement": "Public CLI wall times or HTTP tool wall times, excluding agent reasoning between calls. These overlap with host-internal phases and must not be summed with them.",
+  "inference_ms": null,
+  "input_tokens": null,
+  "output_tokens": null,
+  "cost": null,
+  "samples": [
+    {
+      "command": "init",
+      "elapsed_ms": 522.09458
+    },
+    {
+      "command": "submit",
+      "elapsed_ms": 132.8578819999999
+    },
+    {
+      "command": "submit",
+      "elapsed_ms": 141.59647400000006
+    },
+    {
+      "command": "submit",
+      "elapsed_ms": 171.357662
+    },
+    {
+      "command": "submit",
+      "elapsed_ms": 159.70983999999999
+    },
+    {
+      "command": "index",
+      "elapsed_ms": 143.44453799999997
+    },
+    {
+      "command": "worker next",
+      "elapsed_ms": 208.42581100000007
+    },
+    {
+      "command": "worker submit",
+      "elapsed_ms": 574.7245929999999
+    },
+    {
+      "command": "task create",
+      "elapsed_ms": 104.08852300000001
+    },
+    {
+      "command": "cognitive-worker next",
+      "elapsed_ms": 184.58270300000004
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 117.28292199999999
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 114.20729799999992
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 111.90416800000003
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 155.39684999999997
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 114.90438899999992
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 109.73972200000003
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 156.97774200000003
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 192.689437
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 172.0677979999998
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 161.60611999999992
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 203.0222490000001
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 167.3488339999999
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 157.16978700000027
+    },
+    {
+      "command": "cognitive-worker stage",
+      "elapsed_ms": 183.84517499999998
+    },
+    {
+      "command": "cognitive-worker validate",
+      "elapsed_ms": 216.75934000000007
+    },
+    {
+      "command": "cognitive-worker submit",
+      "elapsed_ms": 154.51905499999998
+    },
+    {
+      "command": "task get",
+      "elapsed_ms": 98.37678699999992
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 84.69557299999997
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 134.46913299999994
+    },
+    {
+      "command": "task create",
+      "elapsed_ms": 191.97477899999998
+    },
+    {
+      "command": "HTTP chelm_request_work",
+      "elapsed_ms": 168.695246
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 42.960905000000025
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 40.926630000000046
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 14.370323999999982
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 14.004182000000014
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 21.214666999999963
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 22.500404000000003
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 104.53505199999995
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 109.26755800000001
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 80.965913
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 84.180521
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 73.58644299999992
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 67.42760199999998
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 65.55097999999998
+    },
+    {
+      "command": "task create",
+      "elapsed_ms": 144.104757
+    },
+    {
+      "command": "cognitive-worker next",
+      "elapsed_ms": 117.866015
+    },
+    {
+      "command": "HTTP chelm_stage_output",
+      "elapsed_ms": 61.14450199999993
+    },
+    {
+      "command": "HTTP chelm_validate_candidate",
+      "elapsed_ms": 109.71823600000005
+    },
+    {
+      "command": "HTTP chelm_submit_candidate",
+      "elapsed_ms": 83.36064499999998
+    },
+    {
+      "command": "task get",
+      "elapsed_ms": 119.71047099999998
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 125.87605000000008
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 73.99905999999987
+    },
+    {
+      "command": "task create",
+      "elapsed_ms": 105.92526099999998
+    },
+    {
+      "command": "cognitive-worker next",
+      "elapsed_ms": 227.51280199999997
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 136.52721300000007
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 111.55362600000001
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 151.55446900000004
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 117.30847800000004
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 124.56631700000014
+    },
+    {
+      "command": "cognitive-worker artifact",
+      "elapsed_ms": 158.6387719999998
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 173.28159400000004
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 190.02168499999993
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 190.17236200000002
+    },
+    {
+      "command": "cognitive-worker read",
+      "elapsed_ms": 165.0493100000001
+    },
+    {
+      "command": "cognitive-worker stage",
+      "elapsed_ms": 145.89563900000002
+    },
+    {
+      "command": "cognitive-worker validate",
+      "elapsed_ms": 170.88307099999997
+    },
+    {
+      "command": "cognitive-worker submit",
+      "elapsed_ms": 195.00348999999994
+    },
+    {
+      "command": "task get",
+      "elapsed_ms": 103.45984199999998
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 75.22011499999996
+    },
+    {
+      "command": "task create",
+      "elapsed_ms": 134.839208
+    },
+    {
+      "command": "HTTP chelm_request_work",
+      "elapsed_ms": 167.40349300000003
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 40.551313999999934
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 13.77767700000004
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 20.664041999999995
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 20.32626300000004
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 24.31602399999997
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 31.38433299999997
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 100.23420699999997
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 72.00164600000005
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 66.63408999999979
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 67.1645739999999
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 70.50099599999999
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 68.45765699999993
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 69.10862799999995
+    },
+    {
+      "command": "HTTP chelm_stage_output",
+      "elapsed_ms": 65.62028600000002
+    },
+    {
+      "command": "HTTP chelm_validate_candidate",
+      "elapsed_ms": 120.45119699999998
+    },
+    {
+      "command": "HTTP chelm_submit_candidate",
+      "elapsed_ms": 97.22734199999991
+    },
+    {
+      "command": "task get",
+      "elapsed_ms": 140.65113600000006
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 149.541336
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 130.19972600000006
+    },
+    {
+      "command": "task create",
+      "elapsed_ms": 199.334757
+    },
+    {
+      "command": "HTTP chelm_request_work",
+      "elapsed_ms": 203.42545600000005
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 45.359931000000074
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 19.00808900000004
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 21.07840699999997
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 33.70692400000007
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 52.91504499999985
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 42.73090899999988
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 113.39704400000005
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 84.63349700000003
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 168.69417700000008
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 68.74258099999997
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 87.8712599999999
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 70.76278000000002
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 62.75340099999994
+    },
+    {
+      "command": "HTTP chelm_stage_output",
+      "elapsed_ms": 66.24915300000004
+    },
+    {
+      "command": "HTTP chelm_stage_output",
+      "elapsed_ms": 42.945132
+    },
+    {
+      "command": "HTTP chelm_validate_candidate",
+      "elapsed_ms": 128.96908399999995
+    },
+    {
+      "command": "HTTP chelm_submit_candidate",
+      "elapsed_ms": 79.02348899999993
+    },
+    {
+      "command": "task get",
+      "elapsed_ms": 117.809936
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 116.70178700000008
+    },
+    {
+      "command": "task learning",
+      "elapsed_ms": 186.73217599999998
+    },
+    {
+      "command": "submit",
+      "elapsed_ms": 199.090236
+    },
+    {
+      "command": "index",
+      "elapsed_ms": 181.14266599999996
+    },
+    {
+      "command": "worker next",
+      "elapsed_ms": 227.41359
+    },
+    {
+      "command": "worker submit",
+      "elapsed_ms": 576.562239
+    },
+    {
+      "command": "task continue",
+      "elapsed_ms": 145.00678300000004
+    },
+    {
+      "command": "task get",
+      "elapsed_ms": 90.377476
+    },
+    {
+      "command": "HTTP chelm_request_work",
+      "elapsed_ms": 197.25696500000004
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 23.521188000000052
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 22.80164400000001
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 24.064546999999948
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 32.94728999999995
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 37.55910800000004
+    },
+    {
+      "command": "HTTP chelm_read_artifact",
+      "elapsed_ms": 39.01375900000005
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 67.80103199999996
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 71.69592
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 67.60186099999999
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 69.36066099999994
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 62.56618500000013
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 58.783255000000054
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 55.443943999999874
+    },
+    {
+      "command": "HTTP chelm_cognitive_read",
+      "elapsed_ms": 65.40534200000002
+    },
+    {
+      "command": "HTTP chelm_stage_output",
+      "elapsed_ms": 65.929125
+    },
+    {
+      "command": "HTTP chelm_stage_output",
+      "elapsed_ms": 41.77814599999999
+    },
+    {
+      "command": "HTTP chelm_validate_candidate",
+      "elapsed_ms": 141.52678600000002
+    },
+    {
+      "command": "HTTP chelm_submit_candidate",
+      "elapsed_ms": 82.46692100000007
+    },
+    {
+      "command": "task get",
+      "elapsed_ms": 125.24649699999998
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 121.05431499999986
+    },
+    {
+      "command": "task evidence",
+      "elapsed_ms": 78.13977200000022
+    },
+    {
+      "command": "task learning",
+      "elapsed_ms": 396.14587599999993
+    },
+    {
+      "command": "HTTP chelm_work_status",
+      "elapsed_ms": 34.20610799999997
+    },
+    {
+      "command": "HTTP chelm_submit_candidate",
+      "elapsed_ms": 30.790831000000026
+    },
+    {
+      "command": "HTTP chelm_work_status",
+      "elapsed_ms": 42.19666600000005
+    },
+    {
+      "command": "HTTP chelm_submit_candidate",
+      "elapsed_ms": 44.01324199999999
+    },
+    {
+      "command": "HTTP chelm_work_status",
+      "elapsed_ms": 14.938877999999931
+    },
+    {
+      "command": "HTTP chelm_submit_candidate",
+      "elapsed_ms": 13.857808999999975
+    },
+    {
+      "command": "HTTP chelm_work_status",
+      "elapsed_ms": 22.417395000000056
+    },
+    {
+      "command": "HTTP chelm_submit_candidate",
+      "elapsed_ms": 33.854827
+    },
+    {
+      "command": "task get",
+      "elapsed_ms": 133.834789
+    }
+  ]
+}

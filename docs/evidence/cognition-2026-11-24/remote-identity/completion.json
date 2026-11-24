@@ -1,0 +1,388 @@
+{
+  "response_sha256": "e6a0d331718f2fae9154773cd59d51f22d82812c668bc006b8249a2c8c6bdef0",
+  "validation": {
+    "status": "validated",
+    "candidate_digest": "2cd8bca8af99e112baad633873bcd038ac4de531ff7527f45bec0b8d59bd7dd6",
+    "usage": {
+      "rounds": 1,
+      "context_requests": 5,
+      "source_bytes": 373,
+      "elapsed_ms": 22830
+    },
+    "coverage": {
+      "truncated": false,
+      "pending_count": 0,
+      "valid_at": null
+    },
+    "stale": false
+  },
+  "receipt": {
+    "status": "committed",
+    "task_state": "needs_input",
+    "task_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+    "work_id": "43fa024f-c053-44f9-95c7-c75b765c7ebc",
+    "attempt": 1,
+    "task_revision": 1,
+    "submission_id": "remote-identity",
+    "candidate_digest": "2cd8bca8af99e112baad633873bcd038ac4de531ff7527f45bec0b8d59bd7dd6",
+    "binding": {
+      "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+      "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "published_at": "2026-11-23T23:47:05.471Z"
+  },
+  "submit_input": {
+    "work_id": "43fa024f-c053-44f9-95c7-c75b765c7ebc",
+    "attempt": 1,
+    "outputs": [
+      {
+        "slot_id": "0e719ab6-21c3-442b-a8aa-03efe9be80b0",
+        "revision": 1
+      }
+    ],
+    "candidate_digest": "2cd8bca8af99e112baad633873bcd038ac4de531ff7527f45bec0b8d59bd7dd6",
+    "submission_id": "remote-identity"
+  },
+  "task": {
+    "task_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+    "owner": "agent",
+    "idempotency_key": "remote-identity",
+    "input_identity": "7ffb91a6ce4a9bc9a659e640a29786081db61cdcd78ec3ccd675c54a57be7828",
+    "conversation_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+    "template": {
+      "protocol_version": 1,
+      "task_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+      "conversation_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "unassigned",
+        "guidance_id": "unassigned"
+      },
+      "mode": "read_only",
+      "messages": [
+        {
+          "id": "a65789ee-b7ed-4967-aed4-46b121bf74f1",
+          "author": "user",
+          "kind": "user_question",
+          "text": "Which project does Alex Nowak lead? Clarify if the identity is ambiguous.",
+          "reply_to": [],
+          "intent": {
+            "category": "unknown",
+            "origin": "user",
+            "basis": "unknown",
+            "description": "User intent awaits cognitive interpretation.",
+            "uncertainty": []
+          }
+        }
+      ],
+      "scope": {
+        "subject_ids": [],
+        "valid_at": null
+      },
+      "limits": {
+        "rounds": 8,
+        "context_requests": 24,
+        "claims": 40,
+        "source_bytes": 262144,
+        "expansion_budget": 4000,
+        "elapsed_ms": 3600000
+      }
+    },
+    "revision": 1,
+    "continuations": 0,
+    "continuation_keys": [],
+    "created_at": "2026-11-23T23:46:42.139Z",
+    "deadline": "2026-11-24T01:46:42.139Z",
+    "freshness": "allow_stale",
+    "max_attempts": 3,
+    "max_continuations": 2,
+    "output_max_bytes": 262144,
+    "state": "needs_input",
+    "attempts": [
+      {
+        "work_id": "43fa024f-c053-44f9-95c7-c75b765c7ebc",
+        "attempt": 1,
+        "revision": 1,
+        "status": "committed",
+        "expires_at": "2026-11-24T00:16:42.562Z",
+        "receipt": {
+          "status": "committed",
+          "task_state": "needs_input",
+          "task_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+          "work_id": "43fa024f-c053-44f9-95c7-c75b765c7ebc",
+          "attempt": 1,
+          "task_revision": 1,
+          "submission_id": "remote-identity",
+          "candidate_digest": "2cd8bca8af99e112baad633873bcd038ac4de531ff7527f45bec0b8d59bd7dd6",
+          "binding": {
+            "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+            "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+            "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+          },
+          "published_at": "2026-11-23T23:47:05.471Z"
+        }
+      }
+    ],
+    "result": {
+      "protocol_version": 1,
+      "task_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "outcome": "insufficient",
+      "answer": "The supplied evidence contains two distinct employees named Alex Nowak: PL-17 in Krakow leads Project Cedar, while DE-08 in Berlin leads Project Birch. The name alone does not identify which person you mean. Please specify the employee ID or location.",
+      "findings": [
+        {
+          "id": "alex-pl",
+          "classification": "source_assertion",
+          "text": "Employee PL-17, Alex Nowak in Krakow, leads Cedar.",
+          "claim_ids": [
+            "clm-dfbcbab7-0061-4cf6-9528-62d7395ff390"
+          ],
+          "premise_ids": [],
+          "evidence": [
+            {
+              "source_id": "dfbcbab7-0061-4cf6-9528-62d7395ff390",
+              "sha256": "f025023ce1563f977a77798bb507658f41bee4dd684485252789b661ff781815",
+              "start": 0,
+              "quote": "\nAlex Nowak, employee PL-17 in Krakow, leads Project Cedar.\n"
+            }
+          ],
+          "uncertainty": []
+        },
+        {
+          "id": "alex-de",
+          "classification": "source_assertion",
+          "text": "Employee DE-08, Alex Nowak in Berlin, leads Birch.",
+          "claim_ids": [
+            "clm-7746bfd8-ae3d-4ef3-8f44-78b12870c44b"
+          ],
+          "premise_ids": [],
+          "evidence": [
+            {
+              "source_id": "7746bfd8-ae3d-4ef3-8f44-78b12870c44b",
+              "sha256": "1947ef9037bbd3e4f985a1b02b88c026c41f2d0a4715040d8e7c5faf914b8ea3",
+              "start": 0,
+              "quote": "\nAlex Nowak, employee DE-08 in Berlin, leads Project Birch.\n"
+            }
+          ],
+          "uncertainty": []
+        }
+      ],
+      "questions": [
+        {
+          "id": "which-alex",
+          "kind": "cognitive_question",
+          "origin": "golem",
+          "text": "Do you mean Alex Nowak PL-17 in Krakow or DE-08 in Berlin?",
+          "reply_to": [
+            "a65789ee-b7ed-4967-aed4-46b121bf74f1"
+          ],
+          "premise_ids": [
+            "alex-pl",
+            "alex-de"
+          ],
+          "intent": {
+            "category": "clarify",
+            "origin": "golem",
+            "basis": "explicit",
+            "description": "Resolve the employee identity before selecting a project",
+            "uncertainty": []
+          }
+        }
+      ],
+      "uncertainty": [
+        "The requested employee identity is ambiguous."
+      ],
+      "stop_reason": "missing_evidence",
+      "coverage": {
+        "truncated": false,
+        "pending_count": 0,
+        "valid_at": null
+      },
+      "usage": {
+        "rounds": 1,
+        "context_requests": 5,
+        "source_bytes": 373,
+        "elapsed_ms": 22830
+      },
+      "model": {
+        "requested": null,
+        "observed": null,
+        "configuration": "ChatGPT Work response; exact model identity, settings, actual tokens and cost unavailable. Subsequent semantic review by same agent.",
+        "cost": null
+      }
+    },
+    "receipt": {
+      "status": "committed",
+      "task_state": "needs_input",
+      "task_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+      "work_id": "43fa024f-c053-44f9-95c7-c75b765c7ebc",
+      "attempt": 1,
+      "task_revision": 1,
+      "submission_id": "remote-identity",
+      "candidate_digest": "2cd8bca8af99e112baad633873bcd038ac4de531ff7527f45bec0b8d59bd7dd6",
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "published_at": "2026-11-23T23:47:05.471Z"
+    },
+    "learning": {
+      "state": "none"
+    },
+    "answered_at": "2026-11-23T23:47:05.471Z",
+    "answered_binding": {
+      "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+      "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "stale": false,
+    "current_snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+    "history": [
+      {
+        "work_id": "43fa024f-c053-44f9-95c7-c75b765c7ebc",
+        "revision": 1,
+        "reported_usage": {
+          "model_ms": null,
+          "input_tokens": null,
+          "output_tokens": null,
+          "cached_input_tokens": null
+        },
+        "result": {
+          "protocol_version": 1,
+          "task_id": "70a7ed81-6e47-422a-85a2-ded46d2b5dde",
+          "binding": {
+            "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+            "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+            "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+          },
+          "outcome": "insufficient",
+          "answer": "The supplied evidence contains two distinct employees named Alex Nowak: PL-17 in Krakow leads Project Cedar, while DE-08 in Berlin leads Project Birch. The name alone does not identify which person you mean. Please specify the employee ID or location.",
+          "findings": [
+            {
+              "id": "alex-pl",
+              "classification": "source_assertion",
+              "text": "Employee PL-17, Alex Nowak in Krakow, leads Cedar.",
+              "claim_ids": [
+                "clm-dfbcbab7-0061-4cf6-9528-62d7395ff390"
+              ],
+              "premise_ids": [],
+              "evidence": [
+                {
+                  "source_id": "dfbcbab7-0061-4cf6-9528-62d7395ff390",
+                  "sha256": "f025023ce1563f977a77798bb507658f41bee4dd684485252789b661ff781815",
+                  "start": 0,
+                  "quote": "\nAlex Nowak, employee PL-17 in Krakow, leads Project Cedar.\n"
+                }
+              ],
+              "uncertainty": []
+            },
+            {
+              "id": "alex-de",
+              "classification": "source_assertion",
+              "text": "Employee DE-08, Alex Nowak in Berlin, leads Birch.",
+              "claim_ids": [
+                "clm-7746bfd8-ae3d-4ef3-8f44-78b12870c44b"
+              ],
+              "premise_ids": [],
+              "evidence": [
+                {
+                  "source_id": "7746bfd8-ae3d-4ef3-8f44-78b12870c44b",
+                  "sha256": "1947ef9037bbd3e4f985a1b02b88c026c41f2d0a4715040d8e7c5faf914b8ea3",
+                  "start": 0,
+                  "quote": "\nAlex Nowak, employee DE-08 in Berlin, leads Project Birch.\n"
+                }
+              ],
+              "uncertainty": []
+            }
+          ],
+          "questions": [
+            {
+              "id": "which-alex",
+              "kind": "cognitive_question",
+              "origin": "golem",
+              "text": "Do you mean Alex Nowak PL-17 in Krakow or DE-08 in Berlin?",
+              "reply_to": [
+                "a65789ee-b7ed-4967-aed4-46b121bf74f1"
+              ],
+              "premise_ids": [
+                "alex-pl",
+                "alex-de"
+              ],
+              "intent": {
+                "category": "clarify",
+                "origin": "golem",
+                "basis": "explicit",
+                "description": "Resolve the employee identity before selecting a project",
+                "uncertainty": []
+              }
+            }
+          ],
+          "uncertainty": [
+            "The requested employee identity is ambiguous."
+          ],
+          "stop_reason": "missing_evidence",
+          "coverage": {
+            "truncated": false,
+            "pending_count": 0,
+            "valid_at": null
+          },
+          "usage": {
+            "rounds": 1,
+            "context_requests": 5,
+            "source_bytes": 373,
+            "elapsed_ms": 22830
+          },
+          "model": {
+            "requested": null,
+            "observed": null,
+            "configuration": "ChatGPT Work response; exact model identity, settings, actual tokens and cost unavailable. Subsequent semantic review by same agent.",
+            "cost": null
+          }
+        },
+        "proposal": null,
+        "accepted_bytes": {
+          "result.json": "{\n  \"protocol_version\": 1,\n  \"task_id\": \"70a7ed81-6e47-422a-85a2-ded46d2b5dde\",\n  \"binding\": {\n    \"instance_id\": \"d949a12f-a7af-4ad2-bc83-63c963c4fc76\",\n    \"snapshot_id\": \"5bb2638abb3127fa3d4deb49e63b4fd886974eff\",\n    \"guidance_id\": \"7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3\"\n  },\n  \"outcome\": \"insufficient\",\n  \"answer\": \"The supplied evidence contains two distinct employees named Alex Nowak: PL-17 in Krakow leads Project Cedar, while DE-08 in Berlin leads Project Birch. The name alone does not identify which person you mean. Please specify the employee ID or location.\",\n  \"findings\": [\n    {\n      \"id\": \"alex-pl\",\n      \"classification\": \"source_assertion\",\n      \"text\": \"Employee PL-17, Alex Nowak in Krakow, leads Cedar.\",\n      \"claim_ids\": [\n        \"clm-dfbcbab7-0061-4cf6-9528-62d7395ff390\"\n      ],\n      \"premise_ids\": [],\n      \"evidence\": [\n        {\n          \"source_id\": \"dfbcbab7-0061-4cf6-9528-62d7395ff390\",\n          \"sha256\": \"f025023ce1563f977a77798bb507658f41bee4dd684485252789b661ff781815\",\n          \"start\": 0,\n          \"quote\": \"\\nAlex Nowak, employee PL-17 in Krakow, leads Project Cedar.\\n\"\n        }\n      ],\n      \"uncertainty\": []\n    },\n    {\n      \"id\": \"alex-de\",\n      \"classification\": \"source_assertion\",\n      \"text\": \"Employee DE-08, Alex Nowak in Berlin, leads Birch.\",\n      \"claim_ids\": [\n        \"clm-7746bfd8-ae3d-4ef3-8f44-78b12870c44b\"\n      ],\n      \"premise_ids\": [],\n      \"evidence\": [\n        {\n          \"source_id\": \"7746bfd8-ae3d-4ef3-8f44-78b12870c44b\",\n          \"sha256\": \"1947ef9037bbd3e4f985a1b02b88c026c41f2d0a4715040d8e7c5faf914b8ea3\",\n          \"start\": 0,\n          \"quote\": \"\\nAlex Nowak, employee DE-08 in Berlin, leads Project Birch.\\n\"\n        }\n      ],\n      \"uncertainty\": []\n    }\n  ],\n  \"questions\": [\n    {\n      \"id\": \"which-alex\",\n      \"kind\": \"cognitive_question\",\n      \"origin\": \"golem\",\n      \"text\": \"Do you mean Alex Nowak PL-17 in Krakow or DE-08 in Berlin?\",\n      \"reply_to\": [\n        \"a65789ee-b7ed-4967-aed4-46b121bf74f1\"\n      ],\n      \"premise_ids\": [\n        \"alex-pl\",\n        \"alex-de\"\n      ],\n      \"intent\": {\n        \"category\": \"clarify\",\n        \"origin\": \"golem\",\n        \"basis\": \"explicit\",\n        \"description\": \"Resolve the employee identity before selecting a project\",\n        \"uncertainty\": []\n      }\n    }\n  ],\n  \"uncertainty\": [\n    \"The requested employee identity is ambiguous.\"\n  ],\n  \"stop_reason\": \"missing_evidence\",\n  \"coverage\": {\n    \"truncated\": false,\n    \"pending_count\": 0,\n    \"valid_at\": null\n  },\n  \"usage\": {\n    \"rounds\": 1,\n    \"context_requests\": 5,\n    \"source_bytes\": 373,\n    \"elapsed_ms\": 673\n  },\n  \"model\": {\n    \"requested\": null,\n    \"observed\": null,\n    \"configuration\": \"ChatGPT Work response; exact model identity, settings, actual tokens and cost unavailable. Subsequent semantic review by same agent.\",\n    \"cost\": null\n  }\n}\n"
+        },
+        "published_at": "2026-11-23T23:47:05.471Z",
+        "stale": false,
+        "state": "needs_input",
+        "learning": {
+          "state": "none"
+        }
+      }
+    ]
+  },
+  "citations": [
+    {
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "source_id": "dfbcbab7-0061-4cf6-9528-62d7395ff390",
+      "sha256": "f025023ce1563f977a77798bb507658f41bee4dd684485252789b661ff781815",
+      "start": 0,
+      "text": "\nAlex Nowak, employee PL-17 in Krakow, leads Project Cedar.\n",
+      "next_offset": null
+    },
+    {
+      "binding": {
+        "instance_id": "d949a12f-a7af-4ad2-bc83-63c963c4fc76",
+        "snapshot_id": "5bb2638abb3127fa3d4deb49e63b4fd886974eff",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "source_id": "7746bfd8-ae3d-4ef3-8f44-78b12870c44b",
+      "sha256": "1947ef9037bbd3e4f985a1b02b88c026c41f2d0a4715040d8e7c5faf914b8ea3",
+      "start": 0,
+      "text": "\nAlex Nowak, employee DE-08 in Berlin, leads Project Birch.\n",
+      "next_offset": null
+    }
+  ],
+  "read_only_memory_preserved": true
+}
