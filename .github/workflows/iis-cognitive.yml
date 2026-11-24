@@ -18,8 +18,13 @@ concurrency:
 jobs:
   package:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: host
     steps:
       - uses: actions/checkout@v7.0.1
+        with:
+          path: host
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22.12.0'
@@ -27,12 +32,20 @@ jobs:
         with:
           python-version: '3.12'
       - run: python tools/prepare-harness.py --destination ../harness-release
+      - uses: actions/checkout@v7.0.1
+        with:
+          repository: apenczolgolonabijorbiper/golem14-harness
+          ref: 00aba14b49641c3deb9d17d7cc327f6f8578f503
+          path: provider-source
+          fetch-depth: 0
+      - name: Prepare the exact provider integration package
+        run: python tools/prepare-provider-harness.py --source ../provider-source --destination ../provider-package
       - name: Build the complete validated package
-        run: python tools/build-release.py --harness ../harness-release
+        run: python tools/build-release.py --harness ../harness-release --provider-harness ../provider-package/golem-harness
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: iis-cognitive-package
-          path: dist/chelm-host-*.zip
+          path: host/dist/chelm-host-*.zip
           if-no-files-found: error
   iis:
     needs: package

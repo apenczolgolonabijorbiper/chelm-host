@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "at": "2026-11-24T08:22:51.352Z",
+  "platform": "linux",
+  "node": "v24.22.3",
+  "harness_pin": {
+    "status": "development-build-unpublished",
+    "source_commit": "00aba14b49641c3deb9d17d7cc327f6f8578f503",
+    "version": "0.12.0",
+    "manifest_sha256": "ba571725ebf082e0cc50530505c588e2ed1d8f6b0f4f1a98bdbf36ee3ebd1e5f",
+    "archive_sha256": "ee91183e23db3905483d101deb05efa645a13f62cda0027cd877c403f0ce9274",
+    "provider_version": 1,
+    "host_api_version": 2,
+    "production_enabled": false
+  },
+  "method": "Sequential synthetic fixtures. No LLM. Initialization uses published Harness; provider operations use the exact unpublished contract build. Timings overlap and are not additive. RSS is cumulative process maximum, not per-phase allocation or combined child peak.",
+  "json_whole_store_costs_remain": true,
+  "agent_graph_bytes": 0,
+  "oversized_graph_mib": 101,
+  "oversized_refused": true,
+  "samples": [
+    {
+      "name": "small",
+      "sources": 20,
+      "entities": 10,
+      "claims": 40,
+      "graph_bytes": 36337,
+      "startup_ms": 244.74082799999996,
+      "provider_load_ms": 36.269296,
+      "context_ms": 12.831688999999983,
+      "context_output_bytes": 3268,
+      "changes_bytes": 1028,
+      "audit_ms": 8.525476000000026,
+      "candidate_prepare_validate_ms": 37.635306000000014,
+      "publish_revalidate_ms": 179.200779,
+      "read_model_refresh_ms": 96.06806699999993,
+      "cumulative_host_peak_rss_mib": 63.69921875
+    },
+    {
+      "name": "large",
+      "sources": 1000,
+      "entities": 1000,
+      "claims": 4000,
+      "graph_bytes": 3337277,
+      "startup_ms": 225.07851600000004,
+      "provider_load_ms": 349.2225649999998,
+      "context_ms": 257.12710600000014,
+      "context_output_bytes": 3268,
+      "changes_bytes": 1028,
+      "audit_ms": 525.9179729999996,
+      "candidate_prepare_validate_ms": 1196.4473389999994,
+      "publish_revalidate_ms": 1870.3196130000006,
+      "read_model_refresh_ms": 1456.4357740000005,
+      "cumulative_host_peak_rss_mib": 340.06640625
+    }
+  ]
+}

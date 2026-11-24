@@ -175,3 +175,14 @@ and [COGNITIVE_ACCEPTANCE.md](docs/COGNITIVE_ACCEPTANCE.md). The pinned publishe
 Harness 0.12.0 provides these contracts. The same verified package is used for
 production loading and the full cognition test suite.
 Existing retrieval-only `ask` and observation processing keep their semantics.
+
+## Memory provider integration (#32)
+
+Phase A adds opt-in host-owned JSON/Git provider selection, bounded local/remote
+reads and semantic change sets through memory worker contract 3. Existing memory
+is audited and preserved byte-for-byte when selecting it. This integration uses
+an exact unpublished Harness development package: the published 0.12.0 pin
+remains intact, and paired release acceptance is pending. See
+[provider setup and ownership](docs/MEMORY_PROVIDERS.md) and
+[observed acceptance evidence](docs/MEMORY_PROVIDER_ACCEPTANCE.md). Optional
+SQLite and migration are separate follow-on work; neither is enabled here.

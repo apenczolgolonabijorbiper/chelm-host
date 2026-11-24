@@ -319,3 +319,10 @@ See [COGNITIVE_ACCEPTANCE.md](COGNITIVE_ACCEPTANCE.md) for the current published
 model and platform evidence. Historical 1.1.0/0.11.0 measurements above remain
 historical. The current production loader and all cognition tests use the exact
 published 0.12.0 package; the development source dependency has been removed.
+
+## Provider architecture Phase A (#32–#34)
+
+See [MEMORY_PROVIDER_ACCEPTANCE.md](MEMORY_PROVIDER_ACCEPTANCE.md) for separate
+observed results, exact unpublished Harness identity, package/platform gates and
+capacity limits. Existing checks above describe config-2 behavior and do not
+prove provider-mode IIS or published-pair acceptance.

@@ -25,14 +25,18 @@ def entries():
             and p.name not in {'.gitignore', 'RELEASE.json'}}
 
 
-def build(harness, output=None):
+def build(harness, output=None, provider_harness=None):
+    provider_harness = Path(provider_harness or os.environ.get("CHELM_PROVIDER_HARNESS_ROOT", "")).resolve()
+    if not (provider_harness / "RELEASE.json").is_file():
+        raise ValueError("--provider-harness must name the exact integrity-checked provider development package")
     harness = Path(harness).resolve()
     version = (ROOT / 'VERSION').read_text().strip()
     output = Path(output or ROOT / 'dist' / f'chelm-host-{version}.zip').resolve()
     payload = entries()
     manifest = {'schema_version': 1, 'version': version,
                 'contracts': {'app': 1, 'worker': 2, 'read_model': 1,
-                              'runtime_config': 2, 'remote_worker': 2, 'cognitive_task': 1},
+                              'runtime_config': 2, 'remote_worker': 2, 'cognitive_task': 1, 'memory_worker': 3, 'provider_runtime_config': 3},
+                'provider_integration': json.loads((ROOT / 'provider-compatibility.json').read_text()),
                 'harness_supported': '=0.12.0', 'supported_harness_versions': ['0.12.0'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',
@@ -42,6 +46,7 @@ def build(harness, output=None):
                 'files': {name: digest(data) for name, data in payload.items()}}
     payload['RELEASE.json'] = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
     env = {**os.environ, 'CHELM_HARNESS_ROOT': str(harness),
+           'CHELM_PROVIDER_HARNESS_ROOT': str(provider_harness),
            'GOLEM_PYTHON': os.environ.get('GOLEM_PYTHON', os.sys.executable)}
     output.parent.mkdir(parents=True, exist_ok=True)
     env['CHELM_ACCEPTANCE_REPORT_DIR'] = str(output.parent)
@@ -101,5 +106,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--harness', required=True, type=Path)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--provider-harness', type=Path)
     args = parser.parse_args()
-    build(args.harness, args.output)
+    build(args.harness, args.output, args.provider_harness)

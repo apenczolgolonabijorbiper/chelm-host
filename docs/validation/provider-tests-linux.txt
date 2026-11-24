@@ -1,0 +1,38 @@
+✔ provider selection preserves existing knowledge and rejects unsupported selections (3323.392607ms)
+✔ local CLI semantic cycle isolates drafts, refuses graph workers and retains portable export (5487.217928ms)
+✔ remote semantic cycle enforces owner, attempt, exact evidence, bad quote and response-loss recovery (3319.94836ms)
+✔ publication rechecks source/policy and stale snapshots; renew supports semantic rebase (3298.990303ms)
+✔ local MCP advertises and completes a semantic cycle through shared schemas (1921.053137ms)
+✔ Chelm JSON/Git provider: record reads, missing IDs, evidence paging, exact and scoped lookup (1056.883203ms)
+✔ Chelm JSON/Git provider: cursors bind snapshot, selector and collection; deterministic pages (1141.293603ms)
+✔ Chelm JSON/Git provider: identical prepared retries, conflicting keys and cross-snapshot cursors (1128.357844ms)
+✔ Chelm JSON/Git provider: complete isolated cycle, history, artifacts, receipt recovery and idempotency (1378.639743ms)
+✔ Chelm JSON/Git provider: refuses source changed without partial completion (1310.811135ms)
+✔ Chelm JSON/Git provider: refuses policy changed without partial completion (1180.383919ms)
+✔ Chelm JSON/Git provider: refuses lease expiry without partial completion (1231.952268ms)
+✔ Chelm JSON/Git provider: refuses base changed without partial completion (1181.571292ms)
+✔ Chelm JSON/Git provider: refuses interruption before publish without partial completion (1292.307883ms)
+✔ Chelm JSON/Git provider: response loss recovers durable receipt and does not process twice (1380.5674ms)
+✔ Chelm JSON/Git provider: candidate mutation and forged writes cannot publish (1157.790892ms)
+✔ Chelm JSON/Git provider: semantic validator rejects exact quotes (1188.266865ms)
+✔ Chelm JSON/Git provider: semantic validator rejects attribution (1066.765149ms)
+✔ Chelm JSON/Git provider: semantic validator rejects dependency cycle (1090.8314ms)
+✔ Chelm JSON/Git provider: semantic validator rejects missing replacement (1082.972995ms)
+✔ Chelm JSON/Git provider: semantic validator rejects question closure (1122.18022ms)
+✔ Chelm JSON/Git provider: semantic validator rejects hypothesis evidence (1062.539738ms)
+✔ Chelm JSON/Git provider: semantic validator rejects verification pointer (1083.100657ms)
+✔ Chelm JSON/Git provider: semantic rebase and abort retain the committed snapshot (1043.921492ms)
+✔ Chelm JSON/Git provider: logical transfer preserves two snapshots, byte identities and receipts (1224.027881ms)
+✔ HTTP MCP uses shared memory schemas, authenticated scope and byte-paged protocols (2921.709961ms)
+✔ cognition reads retained provider snapshots without a graph workspace (3969.714163ms)
+✔ memory SudoLang tool names exist in both published transports (0.908874ms)
+✔ interrupted claim recovers the same assignment and admin cancellation releases its lease (2391.791408ms)
+✔ retained Work inference response is immutable and separately reviewed (0.424838ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 50298.074723

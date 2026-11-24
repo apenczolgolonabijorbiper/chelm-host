@@ -1,0 +1,18 @@
+{
+  "verdict": "pass-for-this-synthetic-source",
+  "reviewer": "Same ChatGPT Work assistant after original response was saved",
+  "independent": false,
+  "response_sha256": "e045ad0cd16cd41d47d796b18059a1d2fcf54efa3a56ce4f64313f26fcb3bca9",
+  "reasons": [
+    "Both exact source quotations survive publication with named attribution.",
+    "Reported Lab A installation remains a source assertion.",
+    "December Lab B relocation is retained only as a plan; no completed move or new current location is asserted.",
+    "Chronology mismatch and lack of independent verification remain explicit uncertainty.",
+    "Five entities and two claims were read back through bounded provider context; no raw graph was required."
+  ],
+  "limitations": [
+    "One synthetic source in the current Work session",
+    "Same assistant will inspect deterministic validation; no independent reviewer",
+    "Unavailable model and inference settings are unknown"
+  ]
+}
