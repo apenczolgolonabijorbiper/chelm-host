@@ -1,3 +1,35 @@
+# Reliability follow-up — plan #53 / 2026-11-24
+
+Observed locally on Linux 6.18.57 / Node 24.22.3 / Python 3.12.14 with the verified
+published Harness 0.13.0: **135/135 staged host tests and 11/11 adapter conformance
+cases passed**, with no skips. The final staged suite took 72 seconds (complete
+build validation 84 seconds). Extracted development ZIP integrity passed for all
+225 entries, with zero node_modules entries. Both file-worker and provider
+service probes completed memory publication and a read-only cognitive task.
+
+Forced timeout and abrupt caller termination removed synthetic owned descendants;
+success/error cleanup preserved exits/output and an unrelated sentinel remained
+alive. Empty/malformed stdin reached structured CLI usage errors. Labelled HTTP
+response-loss recovery retained one committed receipt/result. Reconstructed
+v0.2.0 config fixtures passed migration guidance, explicit apply and byte-preserving
+preflight checks; quoted POSIX commands were executed. Operational preflight
+lock/log writes are intentional. No historical private runtime was migrated.
+
+[Retained Linux summary](evidence/reliability-2026-11-24/linux-summary.json) records
+tested source/tree, exact package manifests, counts, timings and development ZIP
+hash. Later evidence/documentation additions do not change the recorded tested
+source identity. Raw per-platform logs/phase reports are CI artifacts. See
+[scope and limitations](WINDOWS_RELIABILITY.md) and [test policy](TEST_POLICY.md).
+
+Windows Node 24 ten-attempt MCP acceptance and three supported-policy staged
+runs plus concurrency comparison are configured CI gates and remain pending
+until observed. Historical Windows ECONNRESET root cause and orphan waiting
+point are unconfirmed; passing Linux checks do not resolve them. Live IIS HTTPS,
+physical-client acceptance, maintainer review/merge and publication remain
+separate. No new package version is published by this change.
+
+---
+
 # Pending-issue acceptance follow-up — 1.0.2 / 2026-11-22
 
 The follow-up maps **177 declared design IDs**, including PAR-1 through PAR-23,
