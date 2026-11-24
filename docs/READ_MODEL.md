@@ -42,7 +42,12 @@ using var reader = new StreamReader(stream, Encoding.UTF8, true);
 var json = reader.ReadToEnd();
 ```
 
-An already-open handle sees the old complete file; a later open sees the new one.
+An already-open handle sees a complete old file. On Windows, Node's rename backend
+can still refuse replacement while that target is open, even with delete-sharing.
+Never await refresh/publication while holding a view handle: read and close it
+within the request. If sharing retries are exhausted, the old file stays intact;
+retry the mutation after readers close. A later open sees the successfully
+replaced file.
 Compare head/generated_at across independently opened views when a consistent
 snapshot matters. Do not retain view handles between requests.
 
@@ -64,3 +69,9 @@ A crash after atomic result publication may leave this cached view behind.
 or start inference. Concurrent readers see complete individual JSON files; there
 is no transactional multi-file view generation guarantee. On Windows/.NET use
 FileShare.ReadWrite | FileShare.Delete to permit atomic file replacement.
+
+The IIS acceptance probe deliberately holds a C# reader past the retry window.
+It accepts only a structured EPERM/EACCES/EBUSY refusal naming the task-view rename,
+checks the old complete result/receipt, closes the handle, retries refresh and
+checks the replacement result/receipt. This verifies failure/recovery without a
+delete-before-rename gap. See Microsoft's [file move requirements](https://learn.microsoft.com/en-us/windows/win32/fileio/moving-and-replacing-files).

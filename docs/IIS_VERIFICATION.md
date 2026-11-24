@@ -53,6 +53,7 @@ under such an identity, participants may list that recorded SID.
 
 The 1.2.0 probe also completes a read-only cognitive task, checks its durable
 receipt and reads the completed task view directly in C#. With FileShare.Delete
-it holds the old view open while another Node process runs refresh and atomically
-replaces the file, then checks the replacement binding. This is deterministic
+it holds the old view open while another Node process runs refresh. A bounded
+sharing refusal must preserve the old complete object; after closing the reader,
+refresh must recover with the same task binding/result/receipt. This is deterministic
 service integration evidence; it does not claim to invoke a model under IIS.

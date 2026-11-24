@@ -31,13 +31,18 @@ function call(command, input, extras = []) {
     timeout: 180000
   });
   const value = JSON.parse(r.stdout ?? 'null');
-  if (r.status !== 0 || !value?.ok) throw Error('Service probe ' + command.join(' ') + ' failed: ' + JSON
-    .stringify(value));
+  if (r.status !== 0 || !value?.ok) throw Object.assign(Error('Service probe ' + command.join(' ') + ' failed: ' + JSON
+    .stringify(value)), {code:value?.error?.code ?? null});
   return value;
 }
 if (process.argv[3] === '--refresh') {
-  call(['refresh']);
-  process.stdout.write(JSON.stringify({refreshed:true})+'\n');
+  try {
+    call(['refresh']);
+    process.stdout.write(JSON.stringify({refreshed:true})+'\n');
+  } catch (e) {
+    process.stdout.write(JSON.stringify({refreshed:false,error:{code:e.code??null,message:e.message}})+'\n');
+    process.exit(1);
+  }
   process.exit(0);
 }
 try {

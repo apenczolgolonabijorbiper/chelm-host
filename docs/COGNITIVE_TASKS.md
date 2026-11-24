@@ -200,7 +200,7 @@ worker credentials outside the public web root; serve only authorized task and
 citation responses. Use existing Windows atomic replacement retries and IIS
 identity procedures. A file read does not start an executor; arrange bounded
 agent invocations externally. The Windows CI IIS probe completes a cognitive task and checks its result/receipt
-from C#, including atomic replacement while the old view remains open. Observed
+from C#, including bounded sharing refusal and recovery after the old reader closes. Observed
 platform results and remaining deployment limits are in COGNITIVE_ACCEPTANCE.md.
 
 Existing operation logs distinguish request_work (queue/snapshot capture), read

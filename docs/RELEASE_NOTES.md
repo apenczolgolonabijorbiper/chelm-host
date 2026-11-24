@@ -13,7 +13,8 @@ in compatibility.json. Source checkouts do not substitute for this package.
 - Test cognition against the published package through the production loader;
   remove the source-only engine checkout and skipped cognition suite.
 - Qualify the .NET 4 assembly identity in the IIS probe. Verify task completion,
-  result/receipt file reading and atomic view replacement under an open C# reader.
+  result/receipt file reading, bounded sharing refusal and refresh recovery after
+  closing a deliberately held C# reader.
 
 | Supported harness | Runtime requirements (PKG-14) |
 |---|---|
