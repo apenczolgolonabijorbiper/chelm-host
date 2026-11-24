@@ -57,7 +57,7 @@ public class ChelmProbe : IHttpHandler {
     var child = Process.Start(info);
     var output = child.StandardOutput.ReadToEndAsync();
     var error = child.StandardError.ReadToEndAsync();
-    if (!child.WaitForExit(180000)) { child.Kill(); throw new Exception("Refresh timed out"); }
+    if (!child.WaitForExit(180000)) { child.Kill(); child.WaitForExit(5000); System.Threading.Tasks.Task.WaitAll(new System.Threading.Tasks.Task[] { output, error }, 5000); throw new Exception("Refresh timed out; owned command supervisor cleans descendants"); }
     var result = new System.Web.Script.Serialization.JavaScriptSerializer().DeserializeObject(output.Result) as Dictionary<string, object>;
     if (result == null || !result.ContainsKey("refreshed")) throw new Exception("Invalid refresh response: " + output.Result + " " + error.Result);
     if ((child.ExitCode == 0) != (bool)result["refreshed"]) throw new Exception("Inconsistent refresh exit status");
@@ -71,7 +71,7 @@ public class ChelmProbe : IHttpHandler {
     var process = Process.Start(info);
     var output = process.StandardOutput.ReadToEndAsync();
     var error = process.StandardError.ReadToEndAsync();
-    if (!process.WaitForExit(180000)) { process.Kill(); throw new Exception("Probe timed out"); }
+    if (!process.WaitForExit(180000)) { process.Kill(); process.WaitForExit(5000); System.Threading.Tasks.Task.WaitAll(new System.Threading.Tasks.Task[] { output, error }, 5000); throw new Exception("Probe timed out; owned command supervisor cleans descendants"); }
     if (process.ExitCode != 0) throw new Exception("Service probe failed: " + output.Result + " " + error.Result);
     // Exercise a deliberately long-held reader. Windows may exhaust bounded
     // rename retries even with delete-sharing; the old object must stay intact.

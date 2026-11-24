@@ -8,6 +8,7 @@ import {
   spawnSync
 } from 'node:child_process';
 import assert from 'node:assert/strict';
+import {ownedProcess} from '../tools/owned-process.mjs';
 export const source = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const harness = process.env.CHELM_HARNESS_ROOT ?? path.resolve(source, '../harness-release');
 export const executor = {
@@ -23,10 +24,10 @@ export function invoke(command, sub, root, input, options = {}) {
     args.push('--' + k);
     if (v !== true) args.push(String(v));
   }
-  const r = spawnSync(process.execPath, args, {
+  const r = ownedProcess(process.execPath, args, {
     input: input === undefined ? undefined : JSON.stringify(input),
     encoding: 'utf8',
-    timeout: 180000
+    timeout: 60000, phase: 'test CLI '+command+' '+(sub??'')
   });
   assert(!r.error, r.error?.message);
   let value;

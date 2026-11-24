@@ -73,8 +73,18 @@ def build(harness, output=None, provider_harness=None):
                         str(cognitive_report)],
                        cwd=stage, check=True, env=env)
         (output.parent / cognitive_report.name).write_bytes(cognitive_report.read_bytes())
-        tests = [str(p.relative_to(stage)) for p in sorted((stage / 'tests').rglob('*.test.mjs'))]
-        subprocess.run(['node', '--test', '--test-concurrency=4', *tests], cwd=stage, check=True, env=env)
+        # Same bounded policy as npm test and vendor installer verification.
+        policy = ['node', str(stage / 'tools/run-tests.mjs'), '--report', str(output.parent)]
+        subprocess.run([*policy, '--repeat', '3' if os.name == 'nt' else '1'], cwd=stage, check=True, env=env)
+        if os.name == 'nt':
+            # Diagnostic comparison only; retain all failures. The supported
+            # policy above remains a strict release gate, without masking retries.
+            subprocess.run([*policy, '--concurrency', '4', '--label', 'parallel-baseline'], cwd=stage, env=env)
+            node_major = subprocess.check_output(['node', '-p', 'process.versions.node.split(".")[0]'], text=True).strip()
+            if node_major == '24':
+                subprocess.run([*policy, '--repeat', '10', '--label', 'mcp-standalone',
+                                '--file', 'tests/conformance/cognitive.test.mjs',
+                                '--name', 'Independent authenticated MCP client'], cwd=stage, check=True, env=env)
         env['GOLEM_ADAPTER'] = json.dumps(['node', str(stage / 'lib/backend.mjs')])
         subprocess.run(['node', '--test', str(harness / 'adapters/conformance/adapter.test.mjs')],
                        cwd=stage, check=True, env=env)
