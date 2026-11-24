@@ -29,7 +29,9 @@ jobs:
           - os: windows-2022
             node: '24'
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 30
+    # Four bounded suite attempts plus ten standalone MCP attempts on Windows;
+    # operation/scenario deadlines remain unchanged inside each attempt.
+    timeout-minutes: 90
     defaults:
       run:
         working-directory: host

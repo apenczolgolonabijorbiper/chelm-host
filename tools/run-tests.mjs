@@ -9,13 +9,14 @@ import {createHash} from 'node:crypto';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 for (const key of ['CHELM_HARNESS_ROOT','CHELM_PROVIDER_HARNESS_ROOT'])
   if (process.env[key]) process.env[key]=path.resolve(process.env[key]);
-const options = {concurrency: process.platform === 'win32' ? 1 : 4, repeat: 1, label: 'supported'};
+const options = {concurrency: process.platform === 'win32' ? 1 : 4, repeat: 1, label: 'supported', 'attempt-ms':600000};
 for (let i=2; i<process.argv.length; i+=2) {
   const key=process.argv[i].slice(2), value=process.argv[i+1];
-  if (!['concurrency','repeat','report','label','name','file'].includes(key) || !value) throw Error('Unknown/missing test policy option');
-  options[key]=['concurrency','repeat'].includes(key)?Number(value):value;
+  if (!['concurrency','repeat','report','label','name','file','attempt-ms'].includes(key) || !value) throw Error('Unknown/missing test policy option');
+  options[key]=['concurrency','repeat','attempt-ms'].includes(key)?Number(value):value;
 }
 for (const k of ['concurrency','repeat']) if (!Number.isInteger(options[k]) || options[k]<1 || options[k]>10) throw Error('Invalid '+k);
+if(!Number.isInteger(options['attempt-ms'])||options['attempt-ms']<1000||options['attempt-ms']>600000)throw Error('Invalid attempt budget');
 const tests = fs.readdirSync(path.join(root,'tests'), {recursive:true}).filter(p=>p.endsWith('.test.mjs')).sort().map(p=>path.join('tests',p)).filter(p=>!options.file || p.replaceAll('\\','/')===options.file);
 if (!tests.length) throw Error('No matching test files');
 const report={platform:process.platform,os_release:os.release(),node:process.version,policy:options,
@@ -36,7 +37,7 @@ for(let attempt=1;attempt<=options.repeat;attempt++) {
   const metrics=fs.mkdtempSync(path.join(os.tmpdir(),'chelm-test-metrics-'));
   const args=['--test','--test-reporter=tap',`--test-concurrency=${options.concurrency}`,'--test-timeout=180000',
     ...(options.name?['--test-name-pattern='+options.name]:[]),...tests];
-  const r=ownedProcess(process.execPath,args,{cwd:root,timeout:600000,phase,env:{...process.env,CHELM_PROCESS_REPORT_DIR:metrics}});
+  const r=ownedProcess(process.execPath,args,{cwd:root,timeout:options['attempt-ms'],phase,env:{...process.env,CHELM_PROCESS_REPORT_DIR:metrics}});
   const log=String(r.stdout??'')+String(r.stderr??'');
   const logName=`tests-${options.label}-${process.platform}-${attempt}.log`;
   fs.writeFileSync(path.join(destination,logName),log);
