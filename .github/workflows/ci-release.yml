@@ -3,9 +3,9 @@ on:
   push:
     branches: [master]
     tags: ['v*']
-    paths: ['VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
+    paths: ['provider-compatibility.json', 'compatibility.json', 'VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
   pull_request:
-    paths: ['VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
+    paths: ['provider-compatibility.json', 'compatibility.json', 'VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,7 +27,7 @@ jobs:
           - os: ubuntu-latest
             node: '24'
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: host
@@ -45,8 +45,19 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Download and verify published harness 0.12.0
         run: python tools/prepare-harness.py --version 0.12.0 --destination ../harness-release
+      - name: Preserve raw provider source bytes on all platforms
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v7.0.1
+        with:
+          repository: apenczolgolonabijorbiper/golem14-harness
+          ref: 00aba14b49641c3deb9d17d7cc327f6f8578f503
+          path: provider-source
+      - name: Build and verify exact unpublished provider contract package
+        run: python tools/prepare-provider-harness.py --source ../provider-source --destination ../provider-package
       - name: Build with all Chelm and harness backend conformance tests
-        run: python tools/build-release.py --harness ../harness-release
+        run: python tools/build-release.py --harness ../harness-release --provider-harness ../provider-package/golem-harness
+      - name: Measure provider boundary and explicit oversized refusal
+        run: node tools/benchmark-provider.mjs --harness ../harness-release --provider-harness ../provider-package/golem-harness --output dist/provider-${{ runner.os }}.json
       - name: Measure synthetic host capacity and tree bounds
         run: node tools/benchmark-capacity.mjs --harness ../harness-release --output dist/capacity-${{ runner.os }}.json
       - name: Verify default full IIS application pool identity
@@ -103,5 +114,6 @@ jobs:
           if gh release view "v$version" >/dev/null 2>&1; then
             echo "Release v$version already exists; existing assets remain immutable."
           else
+            node -e "const p=require('./provider-compatibility.json');if(!p.production_enabled)throw Error('Provider package is unpublished: publish Harness first, pin its release hashes and complete paired acceptance before releasing Chelm')"
             gh release create "v$version" --target "$GITHUB_SHA" --title "Chelm-host $version" --notes-file docs/RELEASE_NOTES.md dist/*.zip dist/*.sha256 dist/*.json
           fi

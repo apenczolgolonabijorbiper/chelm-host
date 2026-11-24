@@ -1,3 +1,5 @@
+Provider runtimes (config 3): use `chelm_memory_*` MCP tools or `chelm memory-worker`, worker contract 3 and `prompts/memory-worker-once.sudo.md`. Stage only semantic `changes.json`; no graph editing. See docs/MEMORY_PROVIDERS.md. The legacy file-worker procedure below applies only to config-2 runtimes.
+
 # Remote worker contract v2
 
 Chelm owns the authoritative runtime, source reservations, immutable snapshots,

@@ -1,0 +1,554 @@
+[
+  {
+    "name": "chelm_memory_next",
+    "description": "Claim observation work with semantic changes v1 and worker contract 3. Stable request_id. Read protocol artifacts, pinned guidance and every assigned source. No graph editing.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "executor": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "kind": {
+              "enum": [
+                "agent",
+                "scripted",
+                "other"
+              ]
+            },
+            "model": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "host": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "model",
+            "host"
+          ],
+          "additionalProperties": false
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "request_id",
+        "executor"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_list",
+    "description": "List your memory work and retained receipts.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_status",
+    "description": "Recover a durable memory receipt after reconnect or uncertain publication.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_renew",
+    "description": "Renew before expiry; rebase/restage changes to the returned current snapshot.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_abandon",
+    "description": "Release an owned lease without processing sources. Inspect uncertain submissions first.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_context",
+    "description": "Bounded Harness retrieval from the assigned immutable snapshot.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "filters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "maxLength": 16000
+            },
+            "entity_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "source_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "external_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "scheme": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "namespace": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "predicate": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "type": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "kind": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "claim_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "maxItems": 100
+            },
+            "hops": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "status": {
+              "enum": [
+                "active",
+                "all"
+              ]
+            },
+            "current": {
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_source",
+    "description": "Read exact snapshot evidence as base64 byte pages; follow total_bytes.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65536
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt",
+        "source_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_read",
+    "description": "Read one exact logical record from the assigned snapshot.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "collection": {
+          "enum": [
+            "entities",
+            "claims",
+            "questions",
+            "hypotheses",
+            "journals",
+            "verification",
+            "receipts",
+            "processed"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt",
+        "collection",
+        "id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_artifact",
+    "description": "Read a required protocol artifact as base64 byte pages.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "artifact_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt",
+        "artifact_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_stage",
+    "description": "Stage changes.json in UTF-8 chunks <=32768 bytes using the assigned slot; mark final:true. No graph, ledger or database output.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "slot_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32768
+        },
+        "final": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt",
+        "slot_id",
+        "revision",
+        "text"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_validate",
+    "description": "Validate the exact uploaded semantic change set; returns transport and logical candidate digests.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              }
+            },
+            "required": [
+              "slot_id",
+              "revision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt",
+        "outputs"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_rebase",
+    "description": "Check touched-record conflicts and rebind staged changes to current snapshot. Review and stage the returned change in a new revision before validating.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              }
+            },
+            "required": [
+              "slot_id",
+              "revision"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt",
+        "outputs"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_memory_submit",
+    "description": "Revalidate and publish the exact candidate atomically with completion and receipt. Stable submission_id; use status after response loss.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "work_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              }
+            },
+            "required": [
+              "slot_id",
+              "revision"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "candidate_digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "submission_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "work_id",
+        "attempt",
+        "outputs",
+        "candidate_digest",
+        "submission_id"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

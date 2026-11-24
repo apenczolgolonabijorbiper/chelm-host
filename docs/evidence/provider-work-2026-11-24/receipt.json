@@ -1,0 +1,14 @@
+{
+  "status": "committed",
+  "id": "work-inference-e3636e21-40c4-4b47-9b88-96e2f3aa3eb6",
+  "provider_version": 1,
+  "run_id": "e3636e21-40c4-4b47-9b88-96e2f3aa3eb6",
+  "attempt_id": "da0aed1c-3b33-4653-8329-4e4d8fe41df5",
+  "base_snapshot": "43f90a068043043c252966d71dbd0947bec80485",
+  "policy_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3",
+  "change_digest": "eed00e8183bc7e3c5bad02da62d1090852d20e61e5021c8a75e88279213d822e",
+  "candidate_digest": "38cb76513b8761b1a731a6b2260ba5c659e71fec426e1bd2690ee298ef306ed6",
+  "published_at": "2026-11-24T08:20:03.977Z",
+  "verification_id": "da0aed1c-3b33-4653-8329-4e4d8fe41df5",
+  "snapshot_id": "c6cadab62b4e4f12a7f767d31f0aae23f09e6411"
+}

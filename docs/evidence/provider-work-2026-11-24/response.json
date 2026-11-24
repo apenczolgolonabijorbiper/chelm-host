@@ -1,0 +1,176 @@
+{
+  "provider_version": 1,
+  "base_snapshot": "43f90a068043043c252966d71dbd0947bec80485",
+  "policy_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3",
+  "lease_id": "e3636e21-40c4-4b47-9b88-96e2f3aa3eb6",
+  "run_id": "e3636e21-40c4-4b47-9b88-96e2f3aa3eb6",
+  "attempt_id": "da0aed1c-3b33-4653-8329-4e4d8fe41df5",
+  "idempotency_key": "work-inference-e3636e21-40c4-4b47-9b88-96e2f3aa3eb6",
+  "at": "2026-11-24T08:19:45.853Z",
+  "sources": [
+    {
+      "id": "03af7e25-2ee3-43c6-9c69-9d630c1c0472",
+      "sha256": "c592e4a826bc2e7474376cb9705a3ac9c54851548591233215ad29e23af516f7"
+    }
+  ],
+  "operations": [
+    {
+      "op": "add_entity",
+      "record": {
+        "id": "ent-pump-p17",
+        "type": "other",
+        "label": "Pump P-17",
+        "aliases": [],
+        "source_ids": [
+          "03af7e25-2ee3-43c6-9c69-9d630c1c0472"
+        ],
+        "uncertainty": [],
+        "created_at": "2026-11-24T08:19:45.853Z"
+      }
+    },
+    {
+      "op": "add_entity",
+      "record": {
+        "id": "ent-lab-a",
+        "type": "place",
+        "label": "Lab A",
+        "aliases": [],
+        "source_ids": [
+          "03af7e25-2ee3-43c6-9c69-9d630c1c0472"
+        ],
+        "uncertainty": [],
+        "created_at": "2026-11-24T08:19:45.853Z"
+      }
+    },
+    {
+      "op": "add_entity",
+      "record": {
+        "id": "ent-lab-b",
+        "type": "place",
+        "label": "Lab B",
+        "aliases": [],
+        "source_ids": [
+          "03af7e25-2ee3-43c6-9c69-9d630c1c0472"
+        ],
+        "uncertainty": [],
+        "created_at": "2026-11-24T08:19:45.853Z"
+      }
+    },
+    {
+      "op": "add_entity",
+      "record": {
+        "id": "ent-olga",
+        "type": "person",
+        "label": "Olga",
+        "aliases": [],
+        "source_ids": [
+          "03af7e25-2ee3-43c6-9c69-9d630c1c0472"
+        ],
+        "uncertainty": [],
+        "created_at": "2026-11-24T08:19:45.853Z"
+      }
+    },
+    {
+      "op": "add_entity",
+      "record": {
+        "id": "ent-piotr",
+        "type": "person",
+        "label": "Piotr",
+        "aliases": [],
+        "source_ids": [
+          "03af7e25-2ee3-43c6-9c69-9d630c1c0472"
+        ],
+        "uncertainty": [],
+        "created_at": "2026-11-24T08:19:45.853Z"
+      }
+    },
+    {
+      "op": "add_claim",
+      "record": {
+        "id": "clm-installation-report",
+        "subject_id": "ent-pump-p17",
+        "attributed_to_id": "ent-olga",
+        "predicate": "installed_in_reported",
+        "object": {
+          "entity_id": "ent-lab-a"
+        },
+        "classification": "source_assertion",
+        "sources": [
+          {
+            "observation_id": "03af7e25-2ee3-43c6-9c69-9d630c1c0472",
+            "quote": "pump P-17 is installed in Lab A."
+          }
+        ],
+        "asserted_at": "2026-11-23T10:00:00.000Z",
+        "valid_time": {
+          "from": null,
+          "to": null,
+          "expression": null,
+          "precision": "unknown"
+        },
+        "status": "active",
+        "supersedes": [],
+        "uncertainty": [
+          "Olga’s report is a source assertion; no independent installation verification was supplied."
+        ],
+        "created_at": "2026-11-24T08:19:45.853Z"
+      }
+    },
+    {
+      "op": "add_claim",
+      "record": {
+        "id": "clm-relocation-plan",
+        "subject_id": "ent-pump-p17",
+        "attributed_to_id": "ent-piotr",
+        "predicate": "relocation_planned_to",
+        "object": {
+          "entity_id": "ent-lab-b"
+        },
+        "classification": "source_assertion",
+        "sources": [
+          {
+            "observation_id": "03af7e25-2ee3-43c6-9c69-9d630c1c0472",
+            "quote": "moving pump P-17 to Lab B is planned for December."
+          }
+        ],
+        "asserted_at": "2026-11-23T10:00:00.000Z",
+        "valid_time": {
+          "from": null,
+          "to": null,
+          "expression": null,
+          "precision": "unknown"
+        },
+        "status": "active",
+        "supersedes": [],
+        "uncertainty": [
+          "A future plan does not establish a completed relocation or a new current location.",
+          "The observation timestamp is 2026-11-23, while the text dates Piotr’s statement 2026-11-24; the source chronology needs clarification."
+        ],
+        "created_at": "2026-11-24T08:19:45.853Z"
+      }
+    },
+    {
+      "op": "append_journal",
+      "record": {
+        "id": "e3636e21-40c4-4b47-9b88-96e2f3aa3eb6",
+        "policy_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3",
+        "model": "unknown (ChatGPT Work session)",
+        "review": "Read the full source, pinned purpose and protocol artifacts. Retrieved P-17 context and received zero analyzed claims; this was not treated as proof of nonexistence. Reviewed warnings: none returned. Preserved named attribution, exact quotes and the distinction between an installation report and a future relocation plan. No completed move was inferred. Unresolved: no independent installation verification, unspecified year of December, and source timestamp preceding the dated Piotr statement. Local semantic review completed; host validation/publication pending. Completion evidence is the separate verification record and durable receipt keyed by run/attempt.",
+        "verification_id": "da0aed1c-3b33-4653-8329-4e4d8fe41df5"
+      }
+    },
+    {
+      "op": "append_verification",
+      "record": {
+        "id": "da0aed1c-3b33-4653-8329-4e4d8fe41df5",
+        "run_id": "e3636e21-40c4-4b47-9b88-96e2f3aa3eb6",
+        "result": "Actual semantic extraction authored by the assistant in this ChatGPT Work session; host candidate checks pending.",
+        "limitations": [
+          "One synthetic source; not a blind evaluation",
+          "Model identity, inference settings, tokens and cost unavailable",
+          "Later semantic review is by the same assistant; no independent evaluator"
+        ]
+      }
+    }
+  ]
+}

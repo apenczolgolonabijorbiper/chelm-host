@@ -1,0 +1,41 @@
+"""Build the pinned, unpublished provider API for vendor development checks only."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import zipfile
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def prepare(source, destination):
+    pin = json.loads((ROOT / 'provider-compatibility.json').read_text())
+    source, destination = Path(source).resolve(), Path(destination).resolve()
+    commit = subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip()
+    if commit != pin['source_commit']:
+        raise ValueError('Provider source commit differs from development pin')
+    if subprocess.check_output(['git', '-C', str(source), 'status', '--porcelain'], text=True).strip():
+        raise ValueError('Provider source must be clean')
+    if destination.exists():
+        raise ValueError('Provider destination must not exist')
+    with tempfile.TemporaryDirectory(prefix='chelm-provider-package-') as temporary:
+        output = Path(temporary) / 'provider.zip'
+        subprocess.run([sys.executable, str(source / 'tools/build-release.py'), '--output', str(output)], check=True)
+        if hashlib.sha256(output.read_bytes()).hexdigest() != pin['archive_sha256']:
+            raise ValueError('Built provider package differs from exact development pin')
+        with zipfile.ZipFile(output) as package:
+            if hashlib.sha256(package.read('golem-harness/RELEASE.json')).hexdigest() != pin['manifest_sha256']:
+                raise ValueError('Provider manifest differs from exact development pin')
+            package.extractall(destination)
+    print(destination / 'golem-harness')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source', type=Path, required=True)
+    parser.add_argument('--destination', type=Path, required=True)
+    args = parser.parse_args()
+    prepare(args.source, args.destination)

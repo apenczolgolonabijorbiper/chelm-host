@@ -1,3 +1,7 @@
+Unreleased provider architecture work (#32): see MEMORY_PROVIDERS.md and
+MEMORY_PROVIDER_ACCEPTANCE.md. No new version, published package-pair support,
+SQLite enablement or consumer migration is asserted.
+
 # Chelm-host 1.2.0 — cognitive tasks / Harness 0.12.0
 
 Supports **Harness 0.12.0 exactly**, using the published ZIP and manifest hashes
