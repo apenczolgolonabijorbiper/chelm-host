@@ -19,6 +19,7 @@ import {
   packageRoot
 } from '../lib/harness.mjs';
 import { installDependencies } from '../lib/dependencies.mjs';
+import {inspectRuntime} from '../lib/runtime-readiness.mjs';
 const begin = '<!-- chelm-host:begin -->',
   end = '<!-- chelm-host:end -->';
 
@@ -77,6 +78,7 @@ export function install(options) {
       'MCP registration cannot be combined with deferred agent integration');
     const hint = options['runtime-hint'] ?? state?.runtime_hint ?? '<private-runtime>';
     const runtime_path_abs = resolveHint(repo, hint);
+    const runtime_status = inspectRuntime(runtime_path_abs, file(dest,'bin/chelm.mjs'));
     installPackage(dest, source, options);
     const next = {
       ...state,
@@ -90,7 +92,8 @@ export function install(options) {
       installed_to: dest,
       integration_deferred: true,
       runtime_path_abs,
-      messages: ['Agent integration deferred; rerun the installer without the defer/skip flag to install it.']
+      runtime_status,
+      messages: ['Agent integration deferred; rerun the installer without the defer/skip flag to install it.',runtime_status.message]
     };
   }
   const hint = options['runtime-hint'] ?? state?.runtime_hint ?? '<private-runtime>',
@@ -98,6 +101,7 @@ export function install(options) {
     `${begin}\nUse vendor/chelm-host/AGENTS.md for all Golem operations.\nRuntime: ${hint}\nWorker entry: node vendor/chelm-host/bin/chelm.mjs worker next --runtime ${hint} --input -\n${end}`;
   assert(!/[\r\n]/.test(hint), 'input_invalid', 'Runtime hint must be one line');
   const runtimePath = resolveHint(repo, hint);
+  const runtime_status = inspectRuntime(runtimePath, file(dest,'bin/chelm.mjs'));
   const agentsPath = file(repo, 'AGENTS.md'),
     agents = fs.existsSync(agentsPath) ? fs.readFileSync(agentsPath, 'utf8') : '';
   const start = agents.indexOf(begin),
@@ -155,7 +159,8 @@ export function install(options) {
     installed_to: dest,
     mcp: server,
     runtime_path_abs: runtimePath,
-    messages: options['register-mcp'] ? [] : ['Add the returned mcp entry to your client configuration.']
+    runtime_status,
+    messages: [...(options['register-mcp'] ? [] : ['Add the returned mcp entry to your client configuration.']),runtime_status.message]
   };
 }
 try {

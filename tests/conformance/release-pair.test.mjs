@@ -10,7 +10,7 @@ import {hash} from '../../lib/util.mjs';
 
 test('release pair pins the published harness identity and exercises its new command surface',t=>{
  const compatibility=JSON.parse(fs.readFileSync(path.join(source,'compatibility.json'))),pin=compatibility.published_harness;
- assert.equal(pin.version,'0.13.0');assert.equal(version().package_version,'1.3.0');assert.equal(version().harness_supported,'=0.13.0');
+ assert.equal(pin.version,'0.13.0');assert.equal(version().package_version,'1.3.1');assert.equal(version().harness_supported,'=0.13.0');
  assert.equal(hash(fs.readFileSync(path.join(harness,'RELEASE.json'))),pin.manifest_sha256);
  assert.equal(verifyHarness({harness:{root:harness}}).manifest.version,pin.version);
  const f=fixture(t),result=spawnSync(process.execPath,[path.join(harness,'processor/memory-tool.mjs'),'validate','--root',f.instance,'--timings','true'],{encoding:'utf8'});

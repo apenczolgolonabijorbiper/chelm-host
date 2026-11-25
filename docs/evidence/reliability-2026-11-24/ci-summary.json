@@ -1,0 +1,732 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-25",
+  "scope": "Observed cumulative PR #56 CI, synthetic disposable runtimes; no publication or consumer migration",
+  "run_url": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45468016957",
+  "pr_head_commit": "ca149ae320948cac3972572c4356e4abd0ad45b1",
+  "tested_merge_commit": "da7127bc6d1e5369e20835a864302a3a9487314f",
+  "tested_tree": "49ff9bca3542b6339b8852cf1421f974acc0c844",
+  "published_harness": {
+    "version": "0.13.0",
+    "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.13.0",
+    "archive": "golem-cognitive-harness-0.13.0.zip",
+    "archive_sha256": "25451b801f5d411d0e35d03567fe8e6cf78d304bcb288556e0566c883cd68a6f",
+    "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+  },
+  "platforms": [
+    {
+      "runner": "windows-2022",
+      "platform": "win32",
+      "os_release": "10.0.20348",
+      "node": "v22.12.0",
+      "job_url": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45468016957/job/138708254538",
+      "job_conclusion": "success",
+      "artifact_id": 14960860611,
+      "artifact_sha256": "38185de35daf93d042452f1cc4ad59f38a9742ee6015fd4fc031b9707d1d0a39",
+      "packages": {
+        "host": {
+          "version": "1.3.0",
+          "manifest_sha256": "087f223b0d7e19fe125064ab7721a67a737ffb3cf1d2f87d940d939a368baf32"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "test_reports": [
+        {
+          "file": "tests-parallel-baseline-win32.json",
+          "sha256": "6f6ebad9f1549b205efdb40bab146c570e7b06d2d750f9aa8dc7ae0ad236f104",
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "parallel-baseline",
+            "attempt-ms": 600000,
+            "report": "D:\\a\\chelm-host\\chelm-host\\host\\dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 422254,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-parallel-baseline-win32-1.log",
+              "max_concurrent_supervised_commands": 4
+            }
+          ]
+        },
+        {
+          "file": "tests-supported-win32.json",
+          "sha256": "c7372effe82313553fad34806e341d4278dfc2bc7598e4b96d96743905750643",
+          "policy": {
+            "concurrency": 2,
+            "repeat": 3,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "D:\\a\\chelm-host\\chelm-host\\host\\dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 580279,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-win32-1.log",
+              "max_concurrent_supervised_commands": 2
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 562670,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-win32-2.log",
+              "max_concurrent_supervised_commands": 2
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 565012,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-win32-3.log",
+              "max_concurrent_supervised_commands": 2
+            }
+          ]
+        }
+      ],
+      "adapter_conformance": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "skipped": 0,
+        "source": "job log"
+      },
+      "iis_probes": [
+        {
+          "file": "iis-express-provider.json",
+          "sha256": "ba623af0356cae01de49459a69acd553135c94b37248c2ca3f314eb00707deaa",
+          "mode": "IisExpress",
+          "provider_mode": true,
+          "identity_type": "InteractiveDeveloper",
+          "load_user_profile": null,
+          "os": "Microsoft Windows Server 2022 Datacenter",
+          "host_archive_sha256": "09c7f4104dfe7b6baa89a8a6cca85dec720787096988330a26138e9a45a9e9a6",
+          "passed": true,
+          "task_view_read": true,
+          "task_view_refresh_recovered": true
+        },
+        {
+          "file": "iis-identity.json",
+          "sha256": "dfe64d81d8392b09e67d97bf708bc1a39aa82bb82b9ce1d642bb212a9fb36089",
+          "mode": "FullIis",
+          "provider_mode": false,
+          "identity_type": "ApplicationPoolIdentity",
+          "load_user_profile": false,
+          "os": "Microsoft Windows Server 2022 Datacenter",
+          "host_archive_sha256": "09c7f4104dfe7b6baa89a8a6cca85dec720787096988330a26138e9a45a9e9a6",
+          "passed": true,
+          "task_view_read": true,
+          "task_view_refresh_recovered": true
+        },
+        {
+          "file": "iis-provider.json",
+          "sha256": "aaf450ac53a0a9389f619fa1c27bac87680cc65c1e1b0e1e86a10768f78160b6",
+          "mode": "FullIis",
+          "provider_mode": true,
+          "identity_type": "ApplicationPoolIdentity",
+          "load_user_profile": false,
+          "os": "Microsoft Windows Server 2022 Datacenter",
+          "host_archive_sha256": "09c7f4104dfe7b6baa89a8a6cca85dec720787096988330a26138e9a45a9e9a6",
+          "passed": true,
+          "task_view_read": true,
+          "task_view_refresh_recovered": true
+        }
+      ]
+    },
+    {
+      "runner": "windows-2022",
+      "platform": "win32",
+      "os_release": "10.0.20348",
+      "node": "v24.22.3",
+      "job_url": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45468016957/job/138708254431",
+      "job_conclusion": "success",
+      "artifact_id": 14960915720,
+      "artifact_sha256": "7596ee2effadf5147a0d44cd6484dacddd5cf03625824bbf8069eddc431c8709",
+      "packages": {
+        "host": {
+          "version": "1.3.0",
+          "manifest_sha256": "087f223b0d7e19fe125064ab7721a67a737ffb3cf1d2f87d940d939a368baf32"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "test_reports": [
+        {
+          "file": "tests-mcp-standalone-win32.json",
+          "sha256": "89bac9b117d5098a69de5d322a4e1c9fee6a66e7a214d183e278c7a885161137",
+          "policy": {
+            "concurrency": 2,
+            "repeat": 10,
+            "label": "mcp-standalone",
+            "attempt-ms": 180000,
+            "report": "D:\\a\\chelm-host\\chelm-host\\host\\dist",
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 14805,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-1.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 14775,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-2.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 14844,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-3.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 14774,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-4.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 14689,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-5.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 14710,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-6.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 14751,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-7.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 14810,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-8.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 14692,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-9.log",
+              "max_concurrent_supervised_commands": 1
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 14870,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-mcp-standalone-win32-10.log",
+              "max_concurrent_supervised_commands": 1
+            }
+          ]
+        },
+        {
+          "file": "tests-parallel-baseline-win32.json",
+          "sha256": "d5b0988476b7619e6d8ff5efdadbf61856baf3251647ae411d6d593fa4b38a50",
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "parallel-baseline",
+            "attempt-ms": 600000,
+            "report": "D:\\a\\chelm-host\\chelm-host\\host\\dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 408605,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-parallel-baseline-win32-1.log",
+              "max_concurrent_supervised_commands": 4
+            }
+          ]
+        },
+        {
+          "file": "tests-supported-win32.json",
+          "sha256": "7c704e654d8deee769c39f3561567ae4e2091f6fdf755ef7a1223a0e19110035",
+          "policy": {
+            "concurrency": 2,
+            "repeat": 3,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "D:\\a\\chelm-host\\chelm-host\\host\\dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 572701,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-win32-1.log",
+              "max_concurrent_supervised_commands": 2
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 559223,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-win32-2.log",
+              "max_concurrent_supervised_commands": 2
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 557056,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-win32-3.log",
+              "max_concurrent_supervised_commands": 2
+            }
+          ]
+        }
+      ],
+      "adapter_conformance": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "skipped": 0,
+        "source": "job log"
+      },
+      "iis_probes": [
+        {
+          "file": "iis-express-provider.json",
+          "sha256": "95fed604de1339459978c1ca06adbbdd7afee2ed5ce71226f18858c14d2ee051",
+          "mode": "IisExpress",
+          "provider_mode": true,
+          "identity_type": "InteractiveDeveloper",
+          "load_user_profile": null,
+          "os": "Microsoft Windows Server 2022 Datacenter",
+          "host_archive_sha256": "09c7f4104dfe7b6baa89a8a6cca85dec720787096988330a26138e9a45a9e9a6",
+          "passed": true,
+          "task_view_read": true,
+          "task_view_refresh_recovered": true
+        },
+        {
+          "file": "iis-identity.json",
+          "sha256": "ae6110a95fbbe682903892ab9d6570319c4e482f87437f5a137734f9fe28d1a7",
+          "mode": "FullIis",
+          "provider_mode": false,
+          "identity_type": "ApplicationPoolIdentity",
+          "load_user_profile": false,
+          "os": "Microsoft Windows Server 2022 Datacenter",
+          "host_archive_sha256": "09c7f4104dfe7b6baa89a8a6cca85dec720787096988330a26138e9a45a9e9a6",
+          "passed": true,
+          "task_view_read": true,
+          "task_view_refresh_recovered": true
+        },
+        {
+          "file": "iis-provider.json",
+          "sha256": "d763e6de04954873f5ae099e4e747031730302e05135345c3248e6c3e73a2a01",
+          "mode": "FullIis",
+          "provider_mode": true,
+          "identity_type": "ApplicationPoolIdentity",
+          "load_user_profile": false,
+          "os": "Microsoft Windows Server 2022 Datacenter",
+          "host_archive_sha256": "09c7f4104dfe7b6baa89a8a6cca85dec720787096988330a26138e9a45a9e9a6",
+          "passed": true,
+          "task_view_read": true,
+          "task_view_refresh_recovered": true
+        }
+      ]
+    },
+    {
+      "runner": "ubuntu-latest",
+      "platform": "linux",
+      "os_release": "7.0.0-1020-azure",
+      "node": "v22.12.0",
+      "job_url": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45468016957/job/138708254425",
+      "job_conclusion": "success",
+      "artifact_id": 14955807282,
+      "artifact_sha256": "7b22e0b603b7d7579998b4e93021b5c0670300b5b48949c281355a0f0724ca6b",
+      "packages": {
+        "host": {
+          "version": "1.3.0",
+          "manifest_sha256": "ace7ddf1e6291be0743a76f24a1330f4670c52cc5b7055ed65b86a84c7615120"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "test_reports": [
+        {
+          "file": "tests-supported-linux.json",
+          "sha256": "7df2137d006467e5ea29aafe6d7cbab073c22900dd8131f7fb6844a72b72d37e",
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "/home/runner/work/chelm-host/chelm-host/host/dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 59715,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-linux-1.log",
+              "max_concurrent_supervised_commands": 4
+            }
+          ]
+        }
+      ],
+      "adapter_conformance": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "skipped": 0,
+        "source": "job log"
+      },
+      "iis_probes": []
+    },
+    {
+      "runner": "ubuntu-latest",
+      "platform": "linux",
+      "os_release": "7.0.0-1020-azure",
+      "node": "v24.22.3",
+      "job_url": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45468016957/job/138708254412",
+      "job_conclusion": "success",
+      "artifact_id": 14956046442,
+      "artifact_sha256": "ffd3a99657548d67029dcc3185c7374152cef521ee9cdfffc770eeb8f5788c15",
+      "packages": {
+        "host": {
+          "version": "1.3.0",
+          "manifest_sha256": "ace7ddf1e6291be0743a76f24a1330f4670c52cc5b7055ed65b86a84c7615120"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "test_reports": [
+        {
+          "file": "tests-supported-linux.json",
+          "sha256": "07c51fe7c0bc55c8949a9fdf63296d876f9a168a7252ec1f1c575c978bc936b5",
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "/home/runner/work/chelm-host/chelm-host/host/dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 74196,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-linux-1.log",
+              "max_concurrent_supervised_commands": 4
+            }
+          ]
+        }
+      ],
+      "adapter_conformance": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "skipped": 0,
+        "source": "job log"
+      },
+      "iis_probes": []
+    },
+    {
+      "runner": "macos-latest",
+      "platform": "darwin",
+      "os_release": "25.6.0",
+      "node": "v22.12.0",
+      "job_url": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45468016957/job/138708254121",
+      "job_conclusion": "success",
+      "artifact_id": 14957035571,
+      "artifact_sha256": "f502bbd99a9786cd9d99649c05669a17ced48147a198011b3eb522ed12805a92",
+      "packages": {
+        "host": {
+          "version": "1.3.0",
+          "manifest_sha256": "ace7ddf1e6291be0743a76f24a1330f4670c52cc5b7055ed65b86a84c7615120"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "test_reports": [
+        {
+          "file": "tests-supported-darwin.json",
+          "sha256": "85d5386e909e7446b6f8e244b57f4158b1e9cad212a21d0ca86bd17a34492e7b",
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "/Users/runner/work/chelm-host/chelm-host/host/dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 166836,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 136,
+                "pass": 136,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-darwin-1.log",
+              "max_concurrent_supervised_commands": 4
+            }
+          ]
+        }
+      ],
+      "adapter_conformance": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "skipped": 0,
+        "source": "job log"
+      },
+      "iis_probes": []
+    }
+  ],
+  "extracted_development_zip": {
+    "artifact_id": 14956415991,
+    "artifact_sha256": "e321e32a5b8b14ff48d533d5feb8ca5837ef6bd3c342da80fd8eedbdc4fb7ee0",
+    "published": false,
+    "version": "1.3.0",
+    "files": 228,
+    "archive_sha256": "7982095b68975235c9d315badd241b26c21fa43c470a645b8e9c31a929262fce",
+    "manifest_sha256": "ace7ddf1e6291be0743a76f24a1330f4670c52cc5b7055ed65b86a84c7615120",
+    "all_manifest_entries_verified": true,
+    "checksum_verified": true,
+    "node_modules": 0
+  },
+  "retained_limitations": [
+    "Historical VI-024 orphan waiting point and VI-022 intermittent reset root cause remain unconfirmed; these are synthetic lifecycle and response-loss regressions.",
+    "VI-023 original raw logs remain unavailable. The failed initial concurrency-1 policy in run 45462787753 is retained in linux-revised-policy.json; the final source was not rerun at concurrency 1.",
+    "PR #55 Windows Node 22 job 138705940393 passed all three 132-case suites, concurrency-4 comparison and 11 adapter cases, then failed to connect to the full-IIS provider probe at Test-IisIdentity.ps1:147. Cause remains unconfirmed; the cumulative #56 run passed this gate. The failed run is not relabelled successful.",
+    "Windows supported single attempts took 557056–580279 ms. The entire repeated build sequence took 2209.328/2321.984 seconds on Node 22/24; its historical aggregate tst9_under_10_minutes field is false. No claim is made that all qualification repetitions fit a single 600-second attempt budget.",
+    "Capacity benchmarks miss the 3-second regeneration target on these Windows runners; that separate reference-machine performance gate is not completed here.",
+    "Windows artifacts retain their own manifest identities. Only the Linux Node 24 development ZIP was independently extracted and checked in this review.",
+    "Actual consumer Windows 11/Server 2022 Standard deployment, live HTTPS/ARR and inference-client gates #7/#10/#11 remain external.",
+    "Manual review/merge and separately authorized version selection/publication remain pending. These results apply to the recorded tested tree, before this evidence-only documentation update."
+  ]
+}
