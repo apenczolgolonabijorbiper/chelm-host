@@ -11,6 +11,7 @@ import os
 import re
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import zipfile
 
@@ -42,7 +43,7 @@ def qualify(package, harness, output, profile='qualification'):
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(data)
         env = {**os.environ, 'CHELM_HARNESS_ROOT': str(harness),
-               'CHELM_PROVIDER_HARNESS_ROOT': str(harness), 'GOLEM_PYTHON': os.sys.executable}
+               'CHELM_PROVIDER_HARNESS_ROOT': str(harness), 'GOLEM_PYTHON': sys.executable}
         subprocess.run(['node', str(stage / 'integration/install-dependencies.mjs')], cwd=stage, env=env, check=True)
         base = ['node', str(stage / 'tools/run-tests.mjs'), '--report', str(output)]
         summary = {'archive_sha256': archive_hash, 'version': manifest['version'],
