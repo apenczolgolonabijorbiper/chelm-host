@@ -214,7 +214,9 @@ use `session reset --apply` for the full generation/cleanup operation.
    `{"submission_id":"stable-save-id","request_ids":["input-id"],"projection":{}}`.
    Renew before expiry; save only at a settled boundary. Use `session status`
    for authoritative head/pending state. `session stop` releases publishing
-   authority while retaining the local runtime. `session reset --apply --input
+   authority while retaining the local runtime and inert storage binding. It
+   can reconnect in place under a new session ID if its durable base has not
+   moved, or perform full reset after stop. `session reset --apply --input
    RESET.json` uses `{"reset_id":"stable-reset-id"}`.
 
 All session CLI commands take `--runtime PRIVATE`. See the six

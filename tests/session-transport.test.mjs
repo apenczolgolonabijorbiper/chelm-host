@@ -55,6 +55,10 @@ test('Authenticated real HTTP binding saves, loses workspace, restores exact his
   const saved=await localSession(f.root,'save',{},save,client);
   assert.equal(saved.state,'durably-saved');assert.equal((await client.call('status')).pending.length,0);
   const old=read(file(f.root,'host/session/connection.json')).binding;
+  await localSession(f.root,'stop',{}, {},client);await localSession(f.root,'stop',{}, {},client);
+  refuse('session_bound','reset',null,f.root,undefined,{scope:'instance'});
+  const resumed=await localSession(f.root,'connect',{}, {session_id:'persistent-reconnect'},client);assert(resumed.binding.fence>old.fence);
+  assert.equal(ok('task','get',f.root,{task_id:result.task.task_id}).task.result.answer,result.result.answer);
   await localSession(f.root,'stop',{}, {},client);fs.rmSync(f.root,{recursive:true,force:true});
   const restored=path.join(f.base,'fresh-agent-workspace');
   await localSession(restored,'connect',{apply:true,harness},{session_id:'second-session'},client);
@@ -66,6 +70,7 @@ test('Authenticated real HTTP binding saves, loses workspace, restores exact his
   const secondBase=read(file(restored,'host/session/connection.json')).binding.base_revision;
   const retried=await localSession(restored,'save',{},save,client);assert.deepEqual(retried.receipt,saved.receipt);
   assert.equal(read(file(restored,'host/session/connection.json')).binding.base_revision,secondBase);
+  await localSession(restored,'stop',{}, {},client);
   const reset=await localSession(restored,'reset',{apply:true},{reset_id:'full-reset'},client);
   assert.equal(reset.local_cleanup,'confirmed');assert.equal(reset.cleanup_pending,false);assert(!fs.existsSync(restored));
   await assert.rejects(client.call('publish',{binding:old,publication:{submission_id:'first-save'}}),refusal('generation_changed'));

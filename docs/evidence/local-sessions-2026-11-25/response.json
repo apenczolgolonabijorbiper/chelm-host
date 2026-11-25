@@ -1,26 +1,26 @@
 {
   "protocol_version": 1,
-  "task_id": "8ccdd85a-0f75-43f4-b2da-e86b8ea96134",
+  "task_id": "81beafeb-2e63-40d6-99ca-05bd4ab053e4",
   "binding": {
-    "instance_id": "7f26b608-b705-4e95-bc3f-9bd5adc955ab",
-    "snapshot_id": "c9af2e2c7dcd5016da1f7d06053b232c31a7e8b1",
+    "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+    "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
     "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
   },
   "outcome": "answer",
-  "answer": "The team should use 28 November 2026. The 20 November note describes a proposed 26 November freeze without owner approval. The 24 November note records approval for 28 November and explicitly replaces that proposal. This supports the approved planning date; neither note establishes that the freeze has already happened.",
+  "answer": "Use 28 November 2026 as the approved freeze date. The 20 November note describes 26 November as an unapproved proposal. The 24 November note explicitly approves 28 November and replaces the earlier proposal, so the two dates represent successive planning decisions rather than two equally approved dates. These notes establish the approved plan, not that the freeze has already occurred.",
   "findings": [
     {
-      "id": "earlier-proposal",
+      "id": "proposal",
       "classification": "source_assertion",
-      "text": "On 20 November the 26 November date was still an unapproved proposal.",
+      "text": "The 26 November proposal lacked owner approval on 20 November.",
       "claim_ids": [
-        "clm-c724bb48-6301-42fd-9f68-49448a13243b"
+        "clm-5833875b-c350-4736-a2f5-0064c1c5aa83"
       ],
       "premise_ids": [],
       "evidence": [
         {
-          "source_id": "c724bb48-6301-42fd-9f68-49448a13243b",
-          "sha256": "a3956d16f1a66b889cf2dfd31143a4998d85996a1bab7ec10f54ccda34e3adee",
+          "source_id": "5833875b-c350-4736-a2f5-0064c1c5aa83",
+          "sha256": "c66f8f6d7207ff18030203fc313beb6d148bc773dda91e5ac989905f0bc8629d",
           "start": 0,
           "quote": "\nOn 2026-11-20, the team planned a database freeze for 26 November. The owner had not yet approved it.\n"
         }
@@ -28,17 +28,17 @@
       "uncertainty": []
     },
     {
-      "id": "approved-replacement",
+      "id": "approval",
       "classification": "source_assertion",
-      "text": "On 24 November the owner approved 28 November as the replacement date.",
+      "text": "The owner approved 28 November on 24 November, explicitly replacing the proposed date.",
       "claim_ids": [
-        "clm-ef505133-cb63-452f-b77c-825c058f16bd"
+        "clm-77a779a6-d357-46f1-9e75-cf399563e725"
       ],
       "premise_ids": [],
       "evidence": [
         {
-          "source_id": "ef505133-cb63-452f-b77c-825c058f16bd",
-          "sha256": "3788579b282514ea7924664d4db954c0d48cff2349f2dbe14dc1c9de8e014065",
+          "source_id": "77a779a6-d357-46f1-9e75-cf399563e725",
+          "sha256": "e1e66dca090b9c78c55ec48db0fab92db09f11639a6575e79cd84171728929f7",
           "start": 0,
           "quote": "\nOn 2026-11-24, the owner approved the database freeze for 28 November, replacing the earlier proposed date.\n"
         }
@@ -48,7 +48,7 @@
   ],
   "questions": [],
   "uncertainty": [
-    "The conclusion is based on the supplied notes; no independent confirmation of execution is available."
+    "The conclusion relies on the supplied notes; independent confirmation of execution is unavailable."
   ],
   "stop_reason": "complete",
   "coverage": {
@@ -60,12 +60,12 @@
     "rounds": 1,
     "context_requests": 3,
     "source_bytes": 212,
-    "elapsed_ms": 409
+    "elapsed_ms": 434
   },
   "model": {
     "requested": null,
     "observed": null,
-    "configuration": "Response authored by the ChatGPT Work LLM in the implementing conversation after reading both bounded sources. Provider model ID, reasoning parameters, tokens and cost unavailable. Synthetic setup/transport scripts did not generate the answer.",
+    "configuration": "Response authored by the actual ChatGPT Work LLM after reading both bounded sources in the implementing conversation. Provider model ID, reasoning parameters, tokens and cost unavailable. Synthetic setup/transport scripts did not generate semantic text.",
     "cost": null
   }
 }

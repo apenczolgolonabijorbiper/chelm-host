@@ -41,6 +41,11 @@ reasoning parameters, tokens and cost were unavailable. The implementing agent
 also reviewed this one synthetic case; this is not a blinded/general capability
 assessment. A fresh Node process is not a fresh ChatGPT Work conversation.
 
+Persistent stop/reconnect/reset was also verified: stopping retains only an inert
+storage association, reconnect acquires a new fence at the same durable base,
+and full reset after stop still fences the store. Final actual-agent evidence
+was refreshed after this lifecycle fix and matches the current code fingerprint.
+
 ## Release/closure gate
 
 Use the full staged builder against the exact published Harness package. Retain

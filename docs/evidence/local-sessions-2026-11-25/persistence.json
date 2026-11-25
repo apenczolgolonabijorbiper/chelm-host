@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-11-25T01:28:00.721Z",
+  "observed_at": "2026-11-25T01:39:17.567Z",
   "environment": {
     "platform": "linux",
     "node": "v24.22.3",
@@ -7,7 +7,7 @@
   },
   "packages": {
     "host_version": "1.3.0",
-    "host_code_sha256": "b7cde4ed635fc026f007611108273b1172ab864ef03705bb91103115f501ebda",
+    "host_code_sha256": "1dd6711b4d99afd29b4323c342efdb52a9679d1965dd55b3cbd7e6e72c446238",
     "harness_version": "0.13.0",
     "harness_manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
   },
@@ -18,44 +18,44 @@
   "resume": "Independent new Node process and moved directory",
   "saved_receipt": {
     "state": "durably-saved",
-    "runtime_id": "7f26b608-b705-4e95-bc3f-9bd5adc955ab",
+    "runtime_id": "7f866799-5703-421c-9307-6f2e44049925",
     "generation": 1,
     "revision": 1,
     "submission_id": "actual-answer-checkpoint",
     "identity": "6615ed41752cb0876415613838ef5089e86f16404123f8b9c06630574cc77151",
-    "checkpoint_id": "073b1ade5a8f10b6a9d31212d5844f303d37184f3b8619fd816be1afa9c028a6",
-    "sha256": "52262fc313d90f3a8ec466e900fba93665bc3bd539bd56e650f83a05b2ffd79a",
-    "key": "7f26b608-b705-4e95-bc3f-9bd5adc955ab/1/ce757dfbc85c9b7763f3df35b9c7866456ddfd4e6f2a1226177f77ed74677e64",
+    "checkpoint_id": "b70944a1868bd62caae5bfc8d7f54d334389f1be3e405296dd8b712839c00c22",
+    "sha256": "d6070716b00359f3f9bbb22f1c8bad95b7722c92b6da7c80133f9bf94fd9b7d3",
+    "key": "7f866799-5703-421c-9307-6f2e44049925/1/ce757dfbc85c9b7763f3df35b9c7866456ddfd4e6f2a1226177f77ed74677e64",
     "request_ids": [],
     "projection": null
   },
   "restored_task_receipt": {
     "status": "committed",
     "task_state": "completed",
-    "task_id": "8ccdd85a-0f75-43f4-b2da-e86b8ea96134",
-    "work_id": "83e621a7-bd70-4e82-b126-a5a8850c2566",
+    "task_id": "81beafeb-2e63-40d6-99ca-05bd4ab053e4",
+    "work_id": "db203cf2-0168-4dc5-b7c2-229cfad11e41",
     "attempt": 1,
     "task_revision": 1,
     "submission_id": "actual-work-response",
-    "candidate_digest": "2a55adade50a87532bcc7971b3790336e20dafe302cb1796d250bae3fb9c3032",
+    "candidate_digest": "1408fcf4e3894da016240fed94817ba9c362915e73d35004275b2b9b1068c9f0",
     "binding": {
-      "instance_id": "7f26b608-b705-4e95-bc3f-9bd5adc955ab",
-      "snapshot_id": "c9af2e2c7dcd5016da1f7d06053b232c31a7e8b1",
+      "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+      "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
       "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
     },
-    "published_at": "2026-11-25T01:27:59.260Z"
+    "published_at": "2026-11-25T01:39:15.625Z"
   },
   "answer_preserved": true,
   "citations": [
     {
-      "source_id": "c724bb48-6301-42fd-9f68-49448a13243b",
-      "sha256": "a3956d16f1a66b889cf2dfd31143a4998d85996a1bab7ec10f54ccda34e3adee",
+      "source_id": "5833875b-c350-4736-a2f5-0064c1c5aa83",
+      "sha256": "c66f8f6d7207ff18030203fc313beb6d148bc773dda91e5ac989905f0bc8629d",
       "text_sha256": "266167cb912262976f99702182a0a11fa7e834b69ad53547eae510365a319844",
       "exact_bytes_preserved": true
     },
     {
-      "source_id": "ef505133-cb63-452f-b77c-825c058f16bd",
-      "sha256": "3788579b282514ea7924664d4db954c0d48cff2349f2dbe14dc1c9de8e014065",
+      "source_id": "77a779a6-d357-46f1-9e75-cf399563e725",
+      "sha256": "e1e66dca090b9c78c55ec48db0fab92db09f11639a6575e79cd84171728929f7",
       "text_sha256": "f50c3f85f471ddc3b90f0c5c306e41db9c01e89b34555b027a112c88fed7c6b5",
       "exact_bytes_preserved": true
     }
@@ -66,20 +66,20 @@
       "content_key": "2bfe9dc69cc22fda6faa6a0ef2718c3c568c768ecd0d9ddd1c208a14f465024f",
       "status": "written",
       "observation_ids": [
-        "4b21a15f-0707-4f8f-9896-016839796ad7"
+        "c33045cf-3ffc-4a6d-afaf-39c683c6f3c8"
       ]
     }
   ],
   "new_checkpoint": {
     "state": "durably-saved",
-    "runtime_id": "7f26b608-b705-4e95-bc3f-9bd5adc955ab",
+    "runtime_id": "7f866799-5703-421c-9307-6f2e44049925",
     "generation": 1,
     "revision": 2,
     "submission_id": "after-resume",
     "identity": "37d5ddd86e40fb4fd10a0ffe60208215d0880658c9052210bc553afa8e75e8e9",
-    "checkpoint_id": "2bc0b8eed753c148594c424f1e2206763e2968fa7d0c00e38de2c6187363167f",
-    "sha256": "7a84a307dc069f2de2263674073bfaeaddfbcc25a40d47fe4ed219cf52c21670",
-    "key": "7f26b608-b705-4e95-bc3f-9bd5adc955ab/1/7c65eeb09ea03a05f69d0ddab9a79299dcebccea055f4145e9c02a044d9ff5ac",
+    "checkpoint_id": "b26ae7b280ce91be8d56c2d2da3bff667dee028df93a31f3afa37862dd29311b",
+    "sha256": "83506d58dc4215f57bb0cb85893201682a2601b9736d44b618243b65da3010d7",
+    "key": "7f866799-5703-421c-9307-6f2e44049925/1/7c65eeb09ea03a05f69d0ddab9a79299dcebccea055f4145e9c02a044d9ff5ac",
     "request_ids": [
       "new-evidence-after-resume"
     ],
