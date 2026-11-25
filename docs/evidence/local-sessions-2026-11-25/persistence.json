@@ -1,0 +1,118 @@
+{
+  "observed_at": "2026-11-25T01:28:00.721Z",
+  "environment": {
+    "platform": "linux",
+    "node": "v24.22.3",
+    "python": "3.12.14"
+  },
+  "packages": {
+    "host_version": "1.3.0",
+    "host_code_sha256": "b7cde4ed635fc026f007611108273b1172ab864ef03705bb91103115f501ebda",
+    "harness_version": "0.13.0",
+    "harness_manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+  },
+  "initial_local_history_enrolled_after_answer": true,
+  "inference": "Actual ChatGPT Work LLM authored response in implementing conversation; not an independent fresh agent conversation.",
+  "transport": "Actual authenticated loopback HTTP with independent store process. Private Sites D1/R2 not observed.",
+  "original_workspace_removed": true,
+  "resume": "Independent new Node process and moved directory",
+  "saved_receipt": {
+    "state": "durably-saved",
+    "runtime_id": "7f26b608-b705-4e95-bc3f-9bd5adc955ab",
+    "generation": 1,
+    "revision": 1,
+    "submission_id": "actual-answer-checkpoint",
+    "identity": "6615ed41752cb0876415613838ef5089e86f16404123f8b9c06630574cc77151",
+    "checkpoint_id": "073b1ade5a8f10b6a9d31212d5844f303d37184f3b8619fd816be1afa9c028a6",
+    "sha256": "52262fc313d90f3a8ec466e900fba93665bc3bd539bd56e650f83a05b2ffd79a",
+    "key": "7f26b608-b705-4e95-bc3f-9bd5adc955ab/1/ce757dfbc85c9b7763f3df35b9c7866456ddfd4e6f2a1226177f77ed74677e64",
+    "request_ids": [],
+    "projection": null
+  },
+  "restored_task_receipt": {
+    "status": "committed",
+    "task_state": "completed",
+    "task_id": "8ccdd85a-0f75-43f4-b2da-e86b8ea96134",
+    "work_id": "83e621a7-bd70-4e82-b126-a5a8850c2566",
+    "attempt": 1,
+    "task_revision": 1,
+    "submission_id": "actual-work-response",
+    "candidate_digest": "2a55adade50a87532bcc7971b3790336e20dafe302cb1796d250bae3fb9c3032",
+    "binding": {
+      "instance_id": "7f26b608-b705-4e95-bc3f-9bd5adc955ab",
+      "snapshot_id": "c9af2e2c7dcd5016da1f7d06053b232c31a7e8b1",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "published_at": "2026-11-25T01:27:59.260Z"
+  },
+  "answer_preserved": true,
+  "citations": [
+    {
+      "source_id": "c724bb48-6301-42fd-9f68-49448a13243b",
+      "sha256": "a3956d16f1a66b889cf2dfd31143a4998d85996a1bab7ec10f54ccda34e3adee",
+      "text_sha256": "266167cb912262976f99702182a0a11fa7e834b69ad53547eae510365a319844",
+      "exact_bytes_preserved": true
+    },
+    {
+      "source_id": "ef505133-cb63-452f-b77c-825c058f16bd",
+      "sha256": "3788579b282514ea7924664d4db954c0d48cff2349f2dbe14dc1c9de8e014065",
+      "text_sha256": "f50c3f85f471ddc3b90f0c5c306e41db9c01e89b34555b027a112c88fed7c6b5",
+      "exact_bytes_preserved": true
+    }
+  ],
+  "new_evidence": [
+    {
+      "kind": "record",
+      "content_key": "2bfe9dc69cc22fda6faa6a0ef2718c3c568c768ecd0d9ddd1c208a14f465024f",
+      "status": "written",
+      "observation_ids": [
+        "4b21a15f-0707-4f8f-9896-016839796ad7"
+      ]
+    }
+  ],
+  "new_checkpoint": {
+    "state": "durably-saved",
+    "runtime_id": "7f26b608-b705-4e95-bc3f-9bd5adc955ab",
+    "generation": 1,
+    "revision": 2,
+    "submission_id": "after-resume",
+    "identity": "37d5ddd86e40fb4fd10a0ffe60208215d0880658c9052210bc553afa8e75e8e9",
+    "checkpoint_id": "2bc0b8eed753c148594c424f1e2206763e2968fa7d0c00e38de2c6187363167f",
+    "sha256": "7a84a307dc069f2de2263674073bfaeaddfbcc25a40d47fe4ed219cf52c21670",
+    "key": "7f26b608-b705-4e95-bc3f-9bd5adc955ab/1/7c65eeb09ea03a05f69d0ddab9a79299dcebccea055f4145e9c02a044d9ff5ac",
+    "request_ids": [
+      "new-evidence-after-resume"
+    ],
+    "projection": null
+  },
+  "reset": {
+    "state": "reset",
+    "receipt": {
+      "reset_id": "actual-work-reset",
+      "from": 1,
+      "generation": 2,
+      "state": "fenced",
+      "cleanup_pending": true
+    },
+    "cleanup_pending": false,
+    "detached_copies": {
+      "actual-work-original": {
+        "generation": 1,
+        "cleanup": "pending-unreachable"
+      },
+      "actual-work-restored": {
+        "generation": 1,
+        "cleanup": "pending-unreachable"
+      }
+    },
+    "session_id": "actual-work-restored",
+    "generation": 1,
+    "local_cleanup": "confirmed"
+  },
+  "late_worker_refusal": "generation_changed",
+  "remaining": [
+    "fresh independent Work/Codex/Cursor conversation",
+    "live authenticated Sites D1/R2 handoff",
+    "Windows/macOS observed package runs"
+  ]
+}

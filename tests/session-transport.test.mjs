@@ -1,0 +1,80 @@
+import test from './scenario.mjs';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {spawn,spawnSync} from 'node:child_process';
+import {once} from 'node:events';
+import {randomBytes} from 'node:crypto';
+import {fixture,harness,source,ok,refuse,executor,analyze} from './helpers.mjs';
+import {createCheckpoint} from '../lib/checkpoint.mjs';
+import {DurableSessions} from '../lib/durable-session.mjs';
+import {localSession} from '../lib/local-session.mjs';
+import {FileSessionStore} from '../integration/local-session/file-store.mjs';
+import {D1R2SessionStore} from '../integration/local-session/d1-r2-store.mjs';
+import {SessionClient,sessionHandler} from '../integration/local-session/transport.mjs';
+import {file,read} from '../lib/util.mjs';
+import {completedCognition} from './session-fixture.mjs';
+const refusal=code=>e=>e.code===code;
+async function setup(t){
+  const f=fixture(t),c=await createCheckpoint(f.root,path.join(f.base,'initial.json'),{generation:1,base_revision:0});
+  const expected=Object.fromEntries(['host_version','host_code_sha256','harness_version','harness_manifest_sha256'].map(k=>[k,c.manifest[k]]));
+  return {...f,c,expected};
+}
+test('Optional D1/R2 adapter executes conditional SQL on independent SQLite connections and immutable bucket semantics',async t=>{
+  const f=await setup(t),dbPath=path.join(f.base,'coordinator.sqlite');
+  const sql=(kind,statement,args=[])=>{
+    const r=spawnSync(process.env.GOLEM_PYTHON??(process.platform==='win32'?'py':'python3'),[file(source,'tests/process/d1-fixture.py'),dbPath],{input:JSON.stringify({kind,sql:statement,args}),encoding:'utf8',timeout:10000});
+    assert.equal(r.status,0,r.stderr);return JSON.parse(r.stdout);
+  };
+  sql('schema',fs.readFileSync(file(source,'integration/local-session/0001_sessions.sql'),'utf8'));
+  // Real SQL/CAS semantics; not a claim of hosted D1 or R2 acceptance.
+  const wrap=()=>({withSession(mode){assert.equal(mode,'first-primary');return this;},prepare(statement){return {bind(...args){return {async first(){return sql('first',statement,args);},async run(){return {meta:{changes:sql('run',statement,args).changes}};}};}};}});
+  const objects=new FileSessionStore(path.join(f.base,'bucket')),bucket={async put(key,bytes,opts){assert.deepEqual(opts,{onlyIf:{etagDoesNotMatch:'*'}});const name=key.slice(12);if(await objects.getObject(name))return null;await objects.putImmutable(name,bytes);return {};},async get(key){const bytes=await objects.getObject(key.slice(12));return bytes?{arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}:null;},async delete(key){await objects.deleteObject(key.slice(12));}};
+  const opts={runtime_id:f.c.manifest.runtime_id,principal:'owner',expected:f.expected},a=new DurableSessions(new D1R2SessionStore(wrap(),bucket),opts),b=new DurableSessions(new D1R2SessionStore(wrap(),bucket),opts);
+  await a.transaction(s=>s.generation);const binding=await a.acquire({generation:1,base_revision:0,session_id:'a'});
+  await assert.rejects(b.acquire({generation:1,base_revision:0,session_id:'b'}),refusal('session_busy'));
+  await a.upload(binding,'save',fs.readFileSync(f.c.output));await a.upload(binding,'save',fs.readFileSync(f.c.output));
+  const receipt=await a.publish(binding,{submission_id:'save'});assert.deepEqual(await b.recover({generation:1,submission_id:'save'}),receipt);
+  await b.reset({generation:1,reset_id:'reset'});assert.equal((await b.sweep()).cleanup_pending,false);
+});
+test('Authenticated real HTTP binding saves, loses workspace, restores exact history/citations, accepts new evidence and fences a late reset worker',async t=>{
+  const f=await setup(t),token=randomBytes(32).toString('hex');
+  const child=spawn(process.execPath,[file(source,'tools/session-store-server.mjs')],{env:{...process.env,CHELM_SESSION_STORE:path.join(f.base,'durable'),CHELM_SESSION_TOKEN:token,CHELM_SESSION_RUNTIME:f.c.manifest.runtime_id,CHELM_SESSION_OWNER:'synthetic-owner',CHELM_SESSION_PACKAGES:JSON.stringify(f.expected)},stdio:['ignore','pipe','pipe']});
+  t.after(async()=>{if(child.exitCode===null){child.kill();await once(child,'close');}});
+  let stdout='',stderr='';child.stderr.on('data',b=>stderr+=b);const url=await new Promise((resolve,reject)=>{child.stdout.on('data',b=>{stdout+=b;if(stdout.includes('\n'))resolve(JSON.parse(stdout.split('\n')[0]).url);});child.once('error',reject);child.once('exit',code=>reject(Error('Store server exited '+code+': '+stderr)));});
+  const client=new SessionClient({url,token}),wrong=new SessionClient({url,token:'invalid'});
+  await assert.rejects(wrong.call('initialize'),refusal('authorization'));
+  await localSession(f.root,'initialize',{}, {},client);await localSession(f.root,'connect',{}, {session_id:'first-session'},client);
+  await client.call('intake',{generation:1,request_id:'observation-1',payload:{text:'Durable evidence before execution'}});
+  const ids=f.submit(),w=ok('worker','next',f.root,{executor}).work_unit;analyze(f,w);ok('worker','submit',f.root,{executor,run_id:w.run_id,outputs:['memory/graph.json',w.journal_path]});
+  const result=await completedCognition(f.root),before=ok('status',null,f.root).head;
+  const save={submission_id:'first-save',request_ids:['observation-1'],projection:{task_id:result.task.task_id}},fetcher=client.fetcher;let loseResponse=true;
+  client.fetcher=async(url,opts)=>{const r=await fetcher(url,opts);if(JSON.parse(opts.body).operation==='publish'&&loseResponse){loseResponse=false;throw Error('publication response lost');}return r;};
+  await assert.rejects(localSession(f.root,'save',{},save,client),/publication response lost/);
+  refuse('checkpoint_pending','submit',null,f.root,{subject_id:'new',groups:[{kind:'record',lines:['Preserve pending checkpoint']}]});
+  const saved=await localSession(f.root,'save',{},save,client);
+  assert.equal(saved.state,'durably-saved');assert.equal((await client.call('status')).pending.length,0);
+  const old=read(file(f.root,'host/session/connection.json')).binding;
+  await localSession(f.root,'stop',{}, {},client);fs.rmSync(f.root,{recursive:true,force:true});
+  const restored=path.join(f.base,'fresh-agent-workspace');
+  await localSession(restored,'connect',{apply:true,harness},{session_id:'second-session'},client);
+  assert.equal(ok('status',null,restored).head,before);assert.deepEqual(ok('task','get',restored,{task_id:result.task.task_id}).task.receipt,result.receipt);
+  assert.equal(ok('task','evidence',restored,{task_id:result.task.task_id,work_id:result.w.work_id,source_id:ids[0],length:16000}).text,result.result.findings[0].evidence[0].quote);
+  await client.call('intake',{generation:1,request_id:'observation-2',payload:{text:'New evidence after resume'}});
+  ok('submit',null,restored,{subject_id:'new',groups:[{kind:'record',lines:['New evidence after resume']}]});
+  const saved2=await localSession(restored,'save',{}, {submission_id:'second-save',request_ids:['observation-2']},client);assert.equal(saved2.receipt.revision,2);
+  const secondBase=read(file(restored,'host/session/connection.json')).binding.base_revision;
+  const retried=await localSession(restored,'save',{},save,client);assert.deepEqual(retried.receipt,saved.receipt);
+  assert.equal(read(file(restored,'host/session/connection.json')).binding.base_revision,secondBase);
+  const reset=await localSession(restored,'reset',{apply:true},{reset_id:'full-reset'},client);
+  assert.equal(reset.local_cleanup,'confirmed');assert.equal(reset.cleanup_pending,false);assert(!fs.existsSync(restored));
+  await assert.rejects(client.call('publish',{binding:old,publication:{submission_id:'first-save'}}),refusal('generation_changed'));
+  const status=await client.call('status');assert.equal(status.generation,2);assert.equal(status.head,null);
+  assert(!stdout.includes(token));assert(!stderr.includes(token));
+});
+test('Transport rejects redirects, unauthenticated reads and oversized bodies without falling back',async t=>{
+  assert.throws(()=>new SessionClient({url:'http://example.invalid/chelm-session',token:'x'}),refusal('authorization'));
+  assert.throws(()=>new SessionClient({url:'https://user:secret@example.invalid/chelm-session',token:'x'}),refusal('authorization'));
+  const deny=sessionHandler(async()=>null);assert.equal((await deny(new Request('https://site.invalid/chelm-session',{method:'POST',body:'not json'}))).status,401);
+  const handler=sessionHandler(async()=>({}));const r=await handler(new Request('https://site.invalid/chelm-session',{method:'POST',headers:{'content-length':String(13*1024*1024)},body:'{}'}));assert.equal((await r.json()).error.code,'capacity_exceeded');
+});

@@ -1,0 +1,48 @@
+{
+  "observed_date": "2026-11-25",
+  "platform": "linux",
+  "node": "v24.22.3",
+  "python": "3.12.14",
+  "harness_version": "0.13.0",
+  "host_archive_published": false,
+  "host_staged_suite": {
+    "tests": 147,
+    "pass": 147,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "harness_backend_conformance": {
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "skipped": 0
+  },
+  "package_identities": {
+    "host": {
+      "version": "1.3.0",
+      "manifest_sha256": "d1ff9b51aed38e1c4fce69da33206a1cc74e81883ea328c0acc670dd41ea2f7d"
+    },
+    "harness": {
+      "version": "0.13.0",
+      "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+    },
+    "provider": {
+      "version": "0.13.0",
+      "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+    }
+  },
+  "archive_sha256": "c1201a9471ea60a7b10ffd3e2b8b97e8f7ad85cf106df1e0acfac626e8c6fe18",
+  "test_timing": {
+    "platform": "linux",
+    "harness_version": "0.13.0",
+    "suite_seconds": 84.53716613999995,
+    "tst9_under_10_minutes": true
+  },
+  "notes": [
+    "Validation archive only; published Chelm 1.3.0 is unchanged.",
+    "The source suite passed 141 tests with six staged-package-only skips. The staged suite exercised all 147.",
+    "Synthetic benchmarks and retained cognition integrity checks passed.",
+    "Windows/macOS and live Sites/fresh independent agent conversation remain separate acceptance."
+  ]
+}

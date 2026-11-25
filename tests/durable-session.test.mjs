@@ -1,0 +1,96 @@
+import test from './scenario.mjs';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fixture} from './helpers.mjs';
+import {createCheckpoint} from '../lib/checkpoint.mjs';
+import {DurableSessions} from '../lib/durable-session.mjs';
+import {FileSessionStore} from '../integration/local-session/file-store.mjs';
+const rejects=code=>e=>e.code===code;
+async function setup(t){
+  const f=fixture(t),c=await createCheckpoint(f.root,path.join(f.base,'checkpoint.json'),{generation:1,base_revision:0});
+  const expected=Object.fromEntries(['host_version','host_code_sha256','harness_version','harness_manifest_sha256'].map(k=>[k,c.manifest[k]]));
+  const store=new FileSessionStore(path.join(f.base,'private-store')),opts={runtime_id:c.manifest.runtime_id,principal:'application-owner',expected};
+  let now=Date.now();const clock=()=>now;
+  const coordinator=new DurableSessions(store,{...opts,clock});
+  await coordinator.transaction(s=>({generation:s.generation}));
+  const binding=await coordinator.acquire({generation:1,base_revision:0,session_id:'session-a'});
+  return {...f,c,bytes:fs.readFileSync(c.output),store,opts,coordinator,binding,clock,advance:ms=>{now+=ms;}};
+}
+test('Independent durable instances fence competing sessions and survive coordinator/process replacement',async t=>{
+  const f=await setup(t),other=new DurableSessions(new FileSessionStore(path.join(f.base,'private-store')),{...f.opts,clock:f.clock});
+  await assert.rejects(other.acquire({generation:1,base_revision:0,session_id:'session-b'}),rejects('session_busy'));
+  await f.coordinator.upload(f.binding,'save-1',f.bytes);
+  const r=await f.coordinator.publish(f.binding,{submission_id:'save-1'});assert.equal(r.revision,1);
+  assert.deepEqual(await other.recover({generation:1,submission_id:'save-1'}),r);
+  f.advance(300001);const replacement=await other.acquire({generation:1,base_revision:1,session_id:'session-b'});
+  assert(replacement.fence>f.binding.fence);
+  await assert.rejects(f.coordinator.publish(f.binding,{submission_id:'save-1'}),rejects('session_fenced'));
+  await assert.rejects(f.coordinator.renew(f.binding),rejects('session_fenced'));
+  assert.equal((await other.status()).head.sha256,f.c.sha256);
+});
+test('Unknown upload and publication outcomes recover the same immutable object/receipt; newly arrived input is never replaced',async t=>{
+  const f=await setup(t),c=f.coordinator;
+  await c.intake({generation:1,request_id:'first',payload:{text:'Original durable evidence'}});
+  await c.progress(f.binding,['first'],'local-committed');await c.progress(f.binding,['first'],'checkpoint-pending');
+  await assert.rejects(c.upload(f.binding,'save-1',f.bytes,{afterUpload(){throw Error('lost upload response');}}),/lost upload response/);
+  assert.equal((await c.status()).head,null);assert.equal((await c.status()).pending[0].state,'checkpoint-pending');
+  await c.upload(f.binding,'save-1',f.bytes);
+  await c.intake({generation:1,request_id:'new-during-work',payload:{text:'New input'}});
+  const publication={submission_id:'save-1',request_ids:['first'],projection:{answer:'Synthetic result'}};
+  await assert.rejects(c.publish(f.binding,publication,{afterPublish(){throw Error('lost head response');}}),/lost head response/);
+  const receipt=await c.recover({generation:1,submission_id:'save-1'});
+  assert.deepEqual(await c.publish(f.binding,publication),receipt);assert.equal((await c.status()).revision,1);
+  assert.equal((await c.status()).pending[0].request_id,'new-during-work');
+  assert.deepEqual(await c.download({generation:1,revision:1}),f.bytes);
+  await assert.rejects(c.publish(f.binding,{...publication,projection:{different:true}}),rejects('idempotency_conflict'));
+  await assert.rejects(c.intake({generation:1,request_id:'first',payload:{text:'changed'}}),rejects('idempotency_conflict'));
+  const unauthorized=new DurableSessions(f.store,{...f.opts,principal:'another-owner'});
+  await assert.rejects(unauthorized.status(),rejects('authorization'));await assert.rejects(unauthorized.recover({generation:1,submission_id:'save-1'}),rejects('authorization'));
+});
+test('Reset fences an in-flight upload first, inventories the late bytes and preserves honest pending purge for unknown outcomes',async t=>{
+  const f=await setup(t),c=f.coordinator;
+  let reset;
+  await assert.rejects(c.upload(f.binding,'racing-upload',f.bytes,{afterUpload:async()=>{reset=await c.reset({generation:1,reset_id:'reset-1'});assert.equal((await c.sweep()).cleanup_pending,true);}}),rejects('generation_changed'));
+  assert.equal(reset.generation,2);assert.equal((await c.status()).head,null);
+  const swept=await c.sweep();assert.equal(swept.cleanup_pending,false);assert.equal(swept.local_copies['session-a'].cleanup,'pending-unreachable');
+  await assert.rejects(c.renew(f.binding),rejects('generation_changed'));
+  await assert.rejects(c.publish(f.binding,{submission_id:'racing-upload'}),rejects('generation_changed'));
+  await assert.rejects(c.download({generation:1,revision:0}),rejects('generation_changed'));
+  assert.deepEqual(await c.reset({generation:1,reset_id:'reset-1'}),reset);
+  await c.localCleanup({session_id:'session-a',generation:1});assert.equal((await c.status()).local_copies['session-a'].cleanup,'confirmed');
+  const next=await c.acquire({generation:2,base_revision:0,session_id:'new-session'});
+  await assert.rejects(c.acquire({generation:2,base_revision:0,session_id:'session-a'}),rejects('idempotency_conflict'));
+  await assert.rejects(c.upload(next,'old-import',f.bytes),rejects('generation_changed'));
+});
+test('Storage failures never acknowledge local-only work; unobserved uploads remain inventoried across reset',async t=>{
+  const f=await setup(t),c=f.coordinator,put=f.store.putImmutable.bind(f.store),cas=f.store.compareAndSwap.bind(f.store);
+  f.store.putImmutable=async()=>{throw Error('storage unavailable');};await assert.rejects(c.upload(f.binding,'offline',f.bytes),/storage unavailable/);
+  await assert.rejects(c.publish(f.binding,{submission_id:'offline'}),rejects('object_unavailable'));
+  assert.equal((await c.status()).head,null);f.store.putImmutable=put;
+  await c.upload(f.binding,'good',f.bytes);
+  f.store.compareAndSwap=async()=>{throw Error('coordinator unavailable');};await assert.rejects(c.publish(f.binding,{submission_id:'good'}),/coordinator unavailable/);f.store.compareAndSwap=cas;
+  assert.equal((await c.status()).head,null);assert.equal(await c.recover({generation:1,submission_id:'good'}),null);
+  await c.reset({generation:1,reset_id:'reset'});const s=await c.sweep();assert.equal(s.cleanup_pending,true);
+  const retired=(await f.store.readState(f.opts.runtime_id)).retired;assert.equal(retired.length,1);assert.equal(retired[0].inflight,true);
+  await c.settleRetiredUpload(retired[0].key);assert.equal((await c.sweep()).cleanup_pending,false);
+});
+test('CAS at the actual head update rejects divergent same-base publication and corrupt or mismatched checkpoints',async t=>{
+  const f=await setup(t),c=f.coordinator;
+  await c.upload(f.binding,'left',f.bytes);await c.upload(f.binding,'right',f.bytes);
+  const both=await Promise.allSettled([c.publish(f.binding,{submission_id:'left'}),c.publish(f.binding,{submission_id:'right'})]);
+  assert.equal(both.filter(r=>r.status==='fulfilled').length,1);assert.equal(both.find(r=>r.status==='rejected').reason.code,'head_moved');
+  const current={...f.binding,base_revision:1},bad=Buffer.from(f.bytes);bad[20]^=1;await assert.rejects(c.upload(current,'corrupt',bad));
+  const a=JSON.parse(f.bytes);a.manifest.runtime_id='00000000-0000-4000-8000-000000000001';await assert.rejects(c.upload(current,'wrong',Buffer.from(JSON.stringify(a))),rejects('checkpoint_invalid'));
+  await assert.rejects(async()=>c.intake({generation:1,request_id:'constructor',payload:{}}),rejects('invalid_key'));
+});
+test('Concurrent retries of one upload retain every late writer in reset inventory',async t=>{
+  const f=await setup(t),c=f.coordinator,put=f.store.putImmutable.bind(f.store),gates=[];
+  let ready;const registered=new Promise(resolve=>{ready=resolve;});
+  f.store.putImmutable=async(key,bytes)=>{await new Promise(resolve=>{gates.push(resolve);if(gates.length===2)ready();});return put(key,bytes);};
+  const first=c.upload(f.binding,'same',f.bytes).catch(e=>e),second=c.upload(f.binding,'same',f.bytes).catch(e=>e);
+  await registered;await c.reset({generation:1,reset_id:'reset'});assert.equal((await c.sweep()).cleanup_pending,true);
+  gates[0]();assert.equal((await first).code,'generation_changed');assert.equal((await c.sweep()).cleanup_pending,true);
+  gates[1]();assert.equal((await second).code,'generation_changed');assert.equal((await c.sweep()).cleanup_pending,false);
+  assert.equal((await c.status()).head,null);
+});

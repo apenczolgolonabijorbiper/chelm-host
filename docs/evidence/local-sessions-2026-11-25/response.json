@@ -1,0 +1,71 @@
+{
+  "protocol_version": 1,
+  "task_id": "8ccdd85a-0f75-43f4-b2da-e86b8ea96134",
+  "binding": {
+    "instance_id": "7f26b608-b705-4e95-bc3f-9bd5adc955ab",
+    "snapshot_id": "c9af2e2c7dcd5016da1f7d06053b232c31a7e8b1",
+    "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+  },
+  "outcome": "answer",
+  "answer": "The team should use 28 November 2026. The 20 November note describes a proposed 26 November freeze without owner approval. The 24 November note records approval for 28 November and explicitly replaces that proposal. This supports the approved planning date; neither note establishes that the freeze has already happened.",
+  "findings": [
+    {
+      "id": "earlier-proposal",
+      "classification": "source_assertion",
+      "text": "On 20 November the 26 November date was still an unapproved proposal.",
+      "claim_ids": [
+        "clm-c724bb48-6301-42fd-9f68-49448a13243b"
+      ],
+      "premise_ids": [],
+      "evidence": [
+        {
+          "source_id": "c724bb48-6301-42fd-9f68-49448a13243b",
+          "sha256": "a3956d16f1a66b889cf2dfd31143a4998d85996a1bab7ec10f54ccda34e3adee",
+          "start": 0,
+          "quote": "\nOn 2026-11-20, the team planned a database freeze for 26 November. The owner had not yet approved it.\n"
+        }
+      ],
+      "uncertainty": []
+    },
+    {
+      "id": "approved-replacement",
+      "classification": "source_assertion",
+      "text": "On 24 November the owner approved 28 November as the replacement date.",
+      "claim_ids": [
+        "clm-ef505133-cb63-452f-b77c-825c058f16bd"
+      ],
+      "premise_ids": [],
+      "evidence": [
+        {
+          "source_id": "ef505133-cb63-452f-b77c-825c058f16bd",
+          "sha256": "3788579b282514ea7924664d4db954c0d48cff2349f2dbe14dc1c9de8e014065",
+          "start": 0,
+          "quote": "\nOn 2026-11-24, the owner approved the database freeze for 28 November, replacing the earlier proposed date.\n"
+        }
+      ],
+      "uncertainty": []
+    }
+  ],
+  "questions": [],
+  "uncertainty": [
+    "The conclusion is based on the supplied notes; no independent confirmation of execution is available."
+  ],
+  "stop_reason": "complete",
+  "coverage": {
+    "truncated": false,
+    "pending_count": 0,
+    "valid_at": null
+  },
+  "usage": {
+    "rounds": 1,
+    "context_requests": 3,
+    "source_bytes": 212,
+    "elapsed_ms": 409
+  },
+  "model": {
+    "requested": null,
+    "observed": null,
+    "configuration": "Response authored by the ChatGPT Work LLM in the implementing conversation after reading both bounded sources. Provider model ID, reasoning parameters, tokens and cost unavailable. Synthetic setup/transport scripts did not generate the answer.",
+    "cost": null
+  }
+}
