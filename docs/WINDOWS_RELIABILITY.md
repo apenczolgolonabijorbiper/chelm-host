@@ -3,6 +3,27 @@
 Tracks VI-024 (#49), VI-023 (#50), VI-022 (#51) and VI-018 (#52).
 Published Harness 0.13.0 stays pinned; no consumer runtime is modified.
 
+## Observed cumulative acceptance, reviewed 2026-11-25
+
+[CI summary](evidence/reliability-2026-11-24/ci-summary.json) retains observed
+results from run 45468016957, tested merge `da7127bc6d1e5369e20835a864302a3a9487314f`.
+Windows Server 2022 build 20348 on Node 22.12.0 and 24.22.3 each passed three
+consecutive complete 136-test staged suites at concurrency 2, plus a complete
+concurrency-4 comparison. Node 24 additionally passed ten consecutive standalone
+MCP attempts without masking retries. Linux on both Node versions and macOS on
+22.12.0 passed all 136 tests; every platform passed 11 adapter cases, with zero
+skips. Synthetic descendant/socket/EOF/hang, transport recovery and legacy
+migration controls are included. Full IIS file/provider and IIS Express provider
+probes passed on both Windows jobs. See ACCEPTANCE.md for exact scope and hashes.
+
+The earlier #55 Windows Node 22 job failed to connect to the IIS provider probe
+after all its suites/adapter checks passed; it remains a failed historical run,
+with unconfirmed startup cause. The final cumulative run passing does not explain
+that failure or the owner's intermittent ECONNRESET. No original VI-023 logs were
+recovered and the final source was not rerun at concurrency 1. The historical
+failed serial policy remains in linux-revised-policy.json. These evidence limits
+are preserved rather than converting a passing test into a root-cause claim.
+
 ## Owned process lifetime and test scheduling
 
 The confirmed source defect was equal 180-second inner-command and outer-probe

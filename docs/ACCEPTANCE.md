@@ -1,3 +1,58 @@
+# Observed platform acceptance — plan #53 / reviewed 2026-11-25
+
+The cumulative implementation in PR #56 passed all five jobs in
+[run 45468016957](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45468016957).
+These are observed results, superseding the pending platform status in the
+historical implementation notes below. The tested PR head is `ca149ae320948cac3972572c4356e4abd0ad45b1`;
+Actions checked out merge `da7127bc6d1e5369e20835a864302a3a9487314f`,
+tree `49ff9bca3542b6339b8852cf1421f974acc0c844`. Later evidence-only edits
+do not change that tested identity. Both runtime modes use published Harness
+0.13.0 with the unchanged archive/manifest pins.
+
+| Platform | Node | Complete staged suite | Adapter conformance | Additional observed gates |
+| --- | --- | --- | --- | --- |
+| Windows Server 2022, build 20348 | 22.12.0 | Three consecutive 136/136 passes, concurrency 2 | 11/11 | Concurrency-4 comparison 136/136; full IIS file/provider and IIS Express provider probes |
+| Windows Server 2022, build 20348 | 24.22.3 | Three consecutive 136/136 passes, concurrency 2 | 11/11 | Concurrency-4 comparison 136/136; ten standalone MCP passes; same three IIS probes |
+| Linux, kernel 7.0.0-1020-azure | 22.12.0 | 136/136, concurrency 4 | 11/11 | File-worker/provider package paths and transport controls |
+| Linux, kernel 7.0.0-1020-azure | 24.22.3 | 136/136, concurrency 4 | 11/11 | File-worker/provider package paths and transport controls |
+| macOS, Darwin 25.6.0 | 22.12.0 | 136/136, concurrency 4 | 11/11 | Full staged control suite |
+
+Every full-suite and standalone attempt above has zero failures, cancellations
+or skips. Forced timeout, abrupt caller death, success/error descendant and
+listening-socket cleanup, sentinel preservation, finite stdin EOF, injected
+scenario hang, response-loss reconciliation and schema-1/2/3 migration guidance
+regressions passed within those full suites. No mutation retry wrapper was used.
+The six hosted IIS probes passed with their recorded identities; hosted Server
+2022 Datacenter is not the consumer's Windows 11/Server 2022 Standard deployment.
+
+[Retained CI summary](evidence/reliability-2026-11-24/ci-summary.json) records
+artifact/report hashes, exact platform manifests, every attempt and elapsed time,
+job links and limitations. Its five downloaded platform artifacts were verified
+against their advertised SHA-256 digests. The Linux Node 24 development ZIP was
+independently extracted: all **228 entries** and the archive checksum matched,
+with zero node_modules. It is an unpublished development build labelled 1.3.0,
+not a replacement for the immutable published 1.3.0 release.
+
+The earlier #55 Windows Node 22 job passed its complete repeated suites and
+adapter checks, then failed to connect at the full-IIS provider probe. Its cause
+is unconfirmed and the failed job remains failed; the cumulative #56 run passed
+that gate. The initial failed concurrency-1 policy also remains retained. The
+historical consumer orphan/reset root causes and original VI-023 raw failures
+remain unconfirmed. Windows full attempts took 557–580 seconds; the entire
+multi-attempt qualification sequence took 37–39 minutes, and does not satisfy
+the historical aggregate `tst9_under_10_minutes` field. Windows capacity runs
+also miss the separate 3-second regeneration target. Correctness passes do not
+establish those performance targets.
+
+Implementation and synthetic platform verification are available for maintainer
+review in order **#54 → #55 → #56**. Retarget each successor to master after its
+predecessor merges. Manual review/merge, version selection/publication and live
+HTTPS/ARR/inference-client gates #7/#10/#11 remain separate. No consumer runtime
+was reset, migrated or upgraded. Specification parity obligations #38–#41 remain
+as stated in [WINDOWS_RELIABILITY.md](WINDOWS_RELIABILITY.md).
+
+---
+
 # Revised scenario/file policy — plan #53 / 2026-11-24
 
 The corrected policy passed **136/136 staged Linux host tests and 11/11 adapter
