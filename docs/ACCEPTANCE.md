@@ -455,3 +455,8 @@ runs. Older sections record historical implementation evidence. Hosted IIS
 Express runs use Server 2022; actual consumer Windows 11/Standard server checks
 are separate. Optional SQLite #35 and migration #36 remain open and disabled;
 no consumer instance was reset, migrated or upgraded by this release work.
+# Portable local sessions (#45–#48)
+
+See [LOCAL_SESSION_ACCEPTANCE.md](LOCAL_SESSION_ACCEPTANCE.md) for checkpoint,
+coordinator, transport and external/platform evidence. Existing measurements
+below remain historical and do not qualify the new capability automatically.

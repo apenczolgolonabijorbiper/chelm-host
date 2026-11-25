@@ -204,3 +204,10 @@ config-2 and config-3 runtimes. See
 [provider setup and ownership](docs/MEMORY_PROVIDERS.md) and
 [observed acceptance evidence](docs/MEMORY_PROVIDER_ACCEPTANCE.md). Optional
 SQLite and migration are separate follow-on work; neither is enabled here.
+# Portable local runtime sessions
+
+Complete settled runtime checkpoints, fenced durable publication and optional
+private HTTP / Sites D1+R2 bindings are described in
+[LOCAL_SESSIONS.md](docs/LOCAL_SESSIONS.md). The six lifecycle prompts preserve
+the existing local JSON/Git and external inference contracts. See
+[acceptance status](docs/LOCAL_SESSION_ACCEPTANCE.md) for pending external checks.

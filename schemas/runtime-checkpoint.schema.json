@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Chelm complete settled runtime checkpoint v1",
+  "type": "object",
+  "required": ["manifest", "entries"],
+  "properties": {
+    "manifest": {
+      "type": "object",
+      "required": ["format", "version", "runtime_id", "host_version", "host_code_sha256", "harness_version", "harness_manifest_sha256", "git", "files"],
+      "properties": {
+        "format": {"const": "chelm-runtime-checkpoint"},
+        "version": {"const": 1},
+        "runtime_id": {"type": "string", "format": "uuid"},
+        "host_version": {"type": "string"},
+        "host_code_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "harness_version": {"const": "0.13.0"},
+        "harness_manifest_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "durable_binding": {
+          "type": "object",
+          "required": ["generation", "base_revision"],
+          "properties": {"generation": {"type": "integer", "minimum": 1}, "base_revision": {"type": "integer", "minimum": 0}},
+          "additionalProperties": false
+        },
+        "git": {
+          "type": "object",
+          "required": ["head", "branch", "refs"],
+          "properties": {"head": {"type": "string", "pattern": "^[a-f0-9]{40}$"}, "branch": {"type": "string"}, "refs": {"type": "array", "items": {"type": "string"}, "maxItems": 100}},
+          "additionalProperties": false
+        },
+        "files": {
+          "type": "array", "maxItems": 20000,
+          "items": {"type": "object", "required": ["path", "size", "sha256"], "properties": {"path": {"type": "string", "maxLength": 240}, "size": {"type": "integer", "minimum": 0}, "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}, "additionalProperties": false}
+        }
+      },
+      "additionalProperties": false
+    },
+    "entries": {"type": "array", "maxItems": 20000, "items": {"type": "object", "required": ["path", "base64"], "properties": {"path": {"type": "string"}, "base64": {"type": "string"}}, "additionalProperties": false}}
+  },
+  "additionalProperties": false
+}

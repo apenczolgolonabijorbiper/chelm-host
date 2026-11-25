@@ -1,0 +1,106 @@
+{
+  "task_id": "81beafeb-2e63-40d6-99ca-05bd4ab053e4",
+  "result": {
+    "protocol_version": 1,
+    "task_id": "81beafeb-2e63-40d6-99ca-05bd4ab053e4",
+    "binding": {
+      "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+      "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "outcome": "answer",
+    "answer": "Use 28 November 2026 as the approved freeze date. The 20 November note describes 26 November as an unapproved proposal. The 24 November note explicitly approves 28 November and replaces the earlier proposal, so the two dates represent successive planning decisions rather than two equally approved dates. These notes establish the approved plan, not that the freeze has already occurred.",
+    "findings": [
+      {
+        "id": "proposal",
+        "classification": "source_assertion",
+        "text": "The 26 November proposal lacked owner approval on 20 November.",
+        "claim_ids": [
+          "clm-5833875b-c350-4736-a2f5-0064c1c5aa83"
+        ],
+        "premise_ids": [],
+        "evidence": [
+          {
+            "source_id": "5833875b-c350-4736-a2f5-0064c1c5aa83",
+            "sha256": "c66f8f6d7207ff18030203fc313beb6d148bc773dda91e5ac989905f0bc8629d",
+            "start": 0,
+            "quote": "\nOn 2026-11-20, the team planned a database freeze for 26 November. The owner had not yet approved it.\n"
+          }
+        ],
+        "uncertainty": []
+      },
+      {
+        "id": "approval",
+        "classification": "source_assertion",
+        "text": "The owner approved 28 November on 24 November, explicitly replacing the proposed date.",
+        "claim_ids": [
+          "clm-77a779a6-d357-46f1-9e75-cf399563e725"
+        ],
+        "premise_ids": [],
+        "evidence": [
+          {
+            "source_id": "77a779a6-d357-46f1-9e75-cf399563e725",
+            "sha256": "e1e66dca090b9c78c55ec48db0fab92db09f11639a6575e79cd84171728929f7",
+            "start": 0,
+            "quote": "\nOn 2026-11-24, the owner approved the database freeze for 28 November, replacing the earlier proposed date.\n"
+          }
+        ],
+        "uncertainty": []
+      }
+    ],
+    "questions": [],
+    "uncertainty": [
+      "The conclusion relies on the supplied notes; independent confirmation of execution is unavailable."
+    ],
+    "stop_reason": "complete",
+    "coverage": {
+      "truncated": false,
+      "pending_count": 0,
+      "valid_at": null
+    },
+    "usage": {
+      "rounds": 1,
+      "context_requests": 3,
+      "source_bytes": 212,
+      "elapsed_ms": 22607
+    },
+    "model": {
+      "requested": null,
+      "observed": null,
+      "configuration": "Response authored by the actual ChatGPT Work LLM after reading both bounded sources in the implementing conversation. Provider model ID, reasoning parameters, tokens and cost unavailable. Synthetic setup/transport scripts did not generate semantic text.",
+      "cost": null
+    }
+  },
+  "receipt": {
+    "status": "committed",
+    "task_state": "completed",
+    "task_id": "81beafeb-2e63-40d6-99ca-05bd4ab053e4",
+    "work_id": "db203cf2-0168-4dc5-b7c2-229cfad11e41",
+    "attempt": 1,
+    "task_revision": 1,
+    "submission_id": "actual-work-response",
+    "candidate_digest": "1408fcf4e3894da016240fed94817ba9c362915e73d35004275b2b9b1068c9f0",
+    "binding": {
+      "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+      "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "published_at": "2026-11-25T01:39:15.625Z"
+  },
+  "validation": {
+    "status": "validated",
+    "candidate_digest": "1408fcf4e3894da016240fed94817ba9c362915e73d35004275b2b9b1068c9f0",
+    "usage": {
+      "rounds": 1,
+      "context_requests": 3,
+      "source_bytes": 212,
+      "elapsed_ms": 22607
+    },
+    "coverage": {
+      "truncated": false,
+      "pending_count": 0,
+      "valid_at": null
+    },
+    "stale": false
+  }
+}

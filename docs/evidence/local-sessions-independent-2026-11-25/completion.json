@@ -1,0 +1,109 @@
+{
+  "observed_at": "2026-11-25T06:11:36.811Z",
+  "runtime_id": "cbb11a5b-6951-4dc8-935a-e66b46dd2fe5",
+  "run_id": "f72f3860-824c-4a4a-8382-34ead003f67e",
+  "validation": {
+    "ok": true,
+    "messages": [],
+    "mode": "candidate",
+    "head": "443f5b969e2378a4bd14d46c88c3e9371f433aea",
+    "output": {
+      "valid": true,
+      "layout": {
+        "purpose_path": "instance/purpose.md",
+        "hypotheses_path": "memory/hypotheses.json"
+      },
+      "profile": {
+        "state": "none",
+        "guidance_version": {
+          "schema_version": 2,
+          "purpose_path": "instance/purpose.md",
+          "purpose_sha256": "f7de0119ab564e6c84a334b4bf93db2d16cc18bd67682618b3ebe1e90009dc21",
+          "config_sha256": null,
+          "profile": null,
+          "delivered_sha256": "f7de0119ab564e6c84a334b4bf93db2d16cc18bd67682618b3ebe1e90009dc21"
+        }
+      },
+      "warnings": [],
+      "warning_summary": {
+        "total": 0,
+        "returned": 0,
+        "truncated": false
+      },
+      "entities": 3,
+      "claims": 3,
+      "sources": 3
+    },
+    "files": [
+      "memory/graph.json",
+      "memory/index.md",
+      "questions/queue.json",
+      "questions/queue.md",
+      "memory/hypotheses.json",
+      "memory/runs/f72f3860-824c-4a4a-8382-34ead003f67e.md",
+      "inbox/ab801f97-21ca-4524-b667-350af0e678d3.md",
+      "evidence/ab801f97-21ca-4524-b667-350af0e678d3.json",
+      "memory/runs/f72f3860-824c-4a4a-8382-34ead003f67e.guidance.json",
+      "memory/processed.json",
+      "memory/processing-lock.json"
+    ],
+    "left_uncommitted": []
+  },
+  "publication": {
+    "ok": true,
+    "messages": [],
+    "status": "committed",
+    "head": "7a6835c1b7a92230bfabb29fb05aeace2db7b0ba",
+    "processed": [
+      "ab801f97-21ca-4524-b667-350af0e678d3"
+    ],
+    "files": [
+      "memory/graph.json",
+      "memory/index.md",
+      "questions/queue.json",
+      "questions/queue.md",
+      "memory/hypotheses.json",
+      "memory/runs/f72f3860-824c-4a4a-8382-34ead003f67e.md",
+      "inbox/ab801f97-21ca-4524-b667-350af0e678d3.md",
+      "evidence/ab801f97-21ca-4524-b667-350af0e678d3.json",
+      "memory/runs/f72f3860-824c-4a4a-8382-34ead003f67e.guidance.json",
+      "memory/processed.json",
+      "memory/processing-lock.json"
+    ],
+    "left_uncommitted": [],
+    "warnings": [],
+    "warning_summary": {
+      "total": 0,
+      "returned": 0,
+      "truncated": false
+    },
+    "requests": []
+  },
+  "persisted_state": {
+    "head": "7a6835c1b7a92230bfabb29fb05aeace2db7b0ba",
+    "observation_analyzed": true
+  },
+  "warnings": [],
+  "warning_summary": {
+    "total": 0,
+    "returned": 0,
+    "truncated": false
+  },
+  "original_task": {
+    "receipt_unchanged": true,
+    "answer_unchanged": true,
+    "citations": [
+      {
+        "source_id": "618ee93f-c2ef-472f-9754-dd4ae41d4864",
+        "sha256": "52c20996ab91a08cc4c8967c920ce87416eb7cf68860f73a22e9171213743f6d",
+        "exact_text": true
+      },
+      {
+        "source_id": "90850092-bd62-456f-a003-3069a3b5016e",
+        "sha256": "0c5dc9199e97683ed92f97c0e2ea6327d102ae637aed361f5f677e1048bb128e",
+        "exact_text": true
+      }
+    ]
+  },
+  "semantic_verdict": "PASS: actual LLM retained a requested dry run without asserting approval/completion or changing the approved freeze; author review, not independent semantic certification."
+}

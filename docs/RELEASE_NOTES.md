@@ -1,3 +1,19 @@
+# Unreleased — portable local runtime sessions (#45–#48)
+
+- Add versioned complete-runtime checkpoint create/inspect/restore with retained
+  Git history, task results/receipts and exact historical citation bytes; settled
+  boundaries, safe package/path/hash/Git validation and explicit owner rebinding.
+- Add storage-neutral immutable upload, generation/base/session-fenced head CAS,
+  durable intake/acknowledgements, same-submission receipt recovery, reset/purge
+  inventory and honest pending cleanup of unknown uploads/detached copies.
+- Ship agent lifecycle CLI/prompts, a private authenticated HTTP fixture and an
+  optional D1/R2 Worker binding/recipe. Exact supported Harness remains 0.13.0.
+
+These features are not part of the already-published 1.3.0 package. Checkpoints
+require the exact creating host implementation. External model, fresh agent
+conversation and live hosted Sites acceptance are tracked separately in
+LOCAL_SESSION_ACCEPTANCE.md; implementation/CI fixtures do not certify them.
+
 # Chelm-host 1.3.1 — Windows reliability and migration guidance
 
 Supports **published Harness 0.13.0 exactly** with unchanged archive/manifest pins.
