@@ -1,20 +1,21 @@
-"""Retain serial/parallel and individual-file measurements of one verified ZIP.
+"""Verify one release ZIP and run focused or extended Windows checks.
 
 This optional qualification supplements the ordinary staged release gates.
 Serial/parallel suite failures are retained diagnostics; every individual file
-must pass. All invocations retain the existing finite 600-second attempt bound.
+must pass. Extended comparisons use the default 600-second attempt bound.
 """
 import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import tempfile
 import zipfile
 
 
-def qualify(package, harness, output):
+def qualify(package, harness, output, profile='qualification'):
     package, harness, output = (Path(p).resolve() for p in (package, harness, output))
     output.mkdir(parents=True, exist_ok=True)
     archive_hash = hashlib.sha256(package.read_bytes()).hexdigest()
@@ -58,6 +59,34 @@ def qualify(package, harness, output):
             (output / 'windows-qualification.json').write_text(json.dumps(summary, indent=2) + '\n')
             return result.returncode
 
+        if profile != 'qualification':
+            subprocess.run(['node', str(stage / 'bin/chelm.mjs'), 'verify',
+                            '--harness', str(harness), '--python', sys.executable],
+                           cwd=stage, env=env, check=True)
+            cases = ['Independent authenticated MCP client completes and reconnects to the same snapshot/result contract']
+            if profile == 'focused':
+                cases.extend([
+                    'MCP response loss after commit is labelled and reconciles one durable result after reconnect',
+                    'VF-6: bounded Windows sharing retries preserve atomic replacement and propagate other failures',
+                    'Owned timeout occurs after child startup, kills descendants, preserves unrelated sentinel',
+                    'Abrupt caller termination leaves supervisor able to clean its owned child tree',
+                    'Owned normal success and thrown error preserve exit/output and remove descendants',
+                    'SEC-2: paths reject traversal, drives, reserved Git and links',
+                    'CON-2: launching a CLI through an OS path alias still emits JSON',
+                    'NFR-1: unloaded Windows profiles use the actual OS SID and fail closed on lookup errors',
+                ])
+            pattern = '^(' + '|'.join(cases) + ')$'
+            args = ['--name', pattern, '--attempt-ms', '180000']
+            if profile == 'smoke':
+                args += ['--file', 'tests/conformance/cognitive.test.mjs']
+            if run(profile, args, 'comparisons'):
+                raise RuntimeError('Packaged Windows ' + profile + ' checks failed')
+            log = (output / ('tests-' + profile + '-win32-1.log')).read_text(encoding='utf-8')
+            for case in cases:
+                if not re.search(r'^ok \d+ - ' + re.escape(case) + '$', log, re.MULTILINE):
+                    raise RuntimeError('Required Windows case did not pass: ' + case)
+            return
+
         # Both use the same immutable package, fixture code and finite budget.
         for concurrency in (4, 1):
             run('qualification-concurrency-' + str(concurrency), ['--concurrency', str(concurrency)], 'comparisons')
@@ -78,7 +107,8 @@ if __name__ == '__main__':
     parser.add_argument('--package', required=True, type=Path)
     parser.add_argument('--harness', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
+    parser.add_argument('--profile', choices=['qualification', 'smoke', 'focused'], default='qualification')
     args = parser.parse_args()
     if os.name != 'nt':
         parser.error('Windows qualification requires Windows')
-    qualify(args.package, args.harness, args.output)
+    qualify(args.package, args.harness, args.output, args.profile)
