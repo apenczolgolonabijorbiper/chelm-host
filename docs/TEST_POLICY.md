@@ -18,7 +18,7 @@ including failures; do not wrap mutation tests in a success-only retry loop.
 | Complete service probe | 150 seconds across all commands | Each child uses the smaller remaining/60-second bound |
 | Outer packaged probe / individual scenario | 180 seconds | Supervised subprocess exits before fixture deletion |
 | Aggregate test file | 600 seconds | Individual scenarios retain their separate 180-second timer |
-| Whole test attempt | 600 seconds | 5 seconds for owned-tree cleanup |
+| Whole test attempt | 600 seconds by default, 750 seconds for the supported staged Windows release suite | 5 seconds for owned-tree cleanup |
 
 These bounds preserve hang detection; they are not latency targets. Changing a
 bound requires retained phase measurements. `owned-process.py` uses the existing
@@ -96,6 +96,14 @@ separate and are not certified by these correctness results.
 
 See [CI summary](evidence/reliability-2026-11-24/ci-summary.json) for the exact
 tested tree, platform/report hashes, all attempts and retained failed controls.
+
+The expanded 152-test suite hit the 600-second outer bound twice on Windows
+Node 22 in [run 45620958269](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45620958269/job/139228634025).
+The third attempt passed 152/152 in 599.360 seconds of Node test-runner time.
+The supported staged Windows release suite now has a 750-second outer bound
+for each of its three required attempts. The file (600 seconds), scenario
+(180 seconds), standalone MCP (180 seconds) and command (60 seconds) bounds
+still apply. Diagnostic comparisons use the default 600-second outer bound.
 
 ## Optional complete serial comparison
 

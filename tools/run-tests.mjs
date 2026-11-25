@@ -16,7 +16,10 @@ for (let i=2; i<process.argv.length; i+=2) {
   options[key]=['concurrency','repeat','attempt-ms'].includes(key)?Number(value):value;
 }
 for (const k of ['concurrency','repeat']) if (!Number.isInteger(options[k]) || options[k]<1 || options[k]>10) throw Error('Invalid '+k);
-if(!Number.isInteger(options['attempt-ms'])||options['attempt-ms']<1000||options['attempt-ms']>600000)throw Error('Invalid attempt budget');
+const maxAttemptMs = process.platform === 'win32' ? 750000 : 600000;
+if (!Number.isInteger(options['attempt-ms']) || options['attempt-ms'] < 1000 || options['attempt-ms'] > maxAttemptMs) {
+  throw Error('Invalid attempt budget');
+}
 const tests = fs.readdirSync(path.join(root,'tests'), {recursive:true}).filter(p=>p.endsWith('.test.mjs')).sort().map(p=>path.join('tests',p)).filter(p=>!options.file || p.replaceAll('\\','/')===options.file);
 if (!tests.length) throw Error('No matching test files');
 const report={platform:process.platform,os_release:os.release(),node:process.version,policy:options,

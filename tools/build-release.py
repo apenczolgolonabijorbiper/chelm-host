@@ -74,9 +74,11 @@ def build(harness, output=None, provider_harness=None):
                         str(cognitive_report)],
                        cwd=stage, check=True, env=env)
         (output.parent / cognitive_report.name).write_bytes(cognitive_report.read_bytes())
-        # Same bounded policy as npm test and vendor installer verification.
+        # Keep the shared runner and its per-test bounds. Staged Windows runs
+        # need aggregate headroom for the expanded release suite.
         policy = ['node', str(stage / 'tools/run-tests.mjs'), '--report', str(output.parent)]
-        subprocess.run([*policy, '--repeat', '3' if os.name == 'nt' else '1'], cwd=stage, check=True, env=env)
+        supported_policy = [*policy, '--repeat', '3', '--attempt-ms', '750000'] if os.name == 'nt' else policy
+        subprocess.run(supported_policy, cwd=stage, check=True, env=env)
         if os.name == 'nt':
             # Diagnostic comparison only; retain all failures. The supported
             # policy above remains a strict release gate, without masking retries.
