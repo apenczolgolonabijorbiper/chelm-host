@@ -86,11 +86,19 @@ test('CAS at the actual head update rejects divergent same-base publication and 
 });
 test('Concurrent retries of one upload retain every late writer in reset inventory',async t=>{
   const f=await setup(t),c=f.coordinator,put=f.store.putImmutable.bind(f.store),gates=[];
+  // Force storage arrival to reverse invocation order, while retaining the
+  // real checkpoint validator, so the ordering regression is deterministic.
+  const validate=c.validate.bind(c);let validationCalls=0,releaseFirst;
+  const firstValidation=new Promise(resolve=>{releaseFirst=resolve;});
+  c.validate=async bytes=>{const order=++validationCalls,value=await validate(bytes);if(order===1)await firstValidation;return value;};
   let ready;const registered=new Promise(resolve=>{ready=resolve;});
-  f.store.putImmutable=async(key,bytes)=>{await new Promise(resolve=>{gates.push(resolve);if(gates.length===2)ready();});return put(key,bytes);};
+  f.store.putImmutable=async(key,bytes)=>{await new Promise(resolve=>{gates.push(resolve);if(gates.length===1)releaseFirst();if(gates.length===2)ready();});return put(key,bytes);};
   const first=c.upload(f.binding,'same',f.bytes).catch(e=>e),second=c.upload(f.binding,'same',f.bytes).catch(e=>e);
   await registered;await c.reset({generation:1,reset_id:'reset'});assert.equal((await c.sweep()).cleanup_pending,true);
-  gates[0]();assert.equal((await first).code,'generation_changed');assert.equal((await c.sweep()).cleanup_pending,true);
-  gates[1]();assert.equal((await second).code,'generation_changed');assert.equal((await c.sweep()).cleanup_pending,false);
+  // Async validation need not enter storage in invocation order. Release the
+  // first arriving writer and await whichever upload it belongs to; awaiting
+  // `first` here can deadlock while that upload is still behind gates[1].
+  gates[0]();assert.equal((await Promise.race([first,second])).code,'generation_changed');assert.equal((await c.sweep()).cleanup_pending,true);
+  gates[1]();for(const result of await Promise.all([first,second]))assert.equal(result.code,'generation_changed');assert.equal((await c.sweep()).cleanup_pending,false);
   assert.equal((await c.status()).head,null);
 });

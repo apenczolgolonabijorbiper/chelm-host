@@ -25,8 +25,9 @@ No GitHub memory repository, permanent agent server or MCP server was used.
 
 The original checkpoint digest was
 `447bf8b174c996a0ad44164ca05f110abf0da8ae1450f59a3483416996d83fff`.
-Package identities match the preceding `hosted.json`; only acceptance documentation
-was added after this run. The published pair remains Chelm 1.3.0 / Harness 0.13.0;
+Package identities match the preceding `hosted.json`; acceptance documentation
+and a test-ordering correction were added after this run. The host implementation
+fingerprint is unchanged. The published pair remains Chelm 1.3.0 / Harness 0.13.0;
 the portable-session additions are source changes pending a separate release.
 
 ## Semantic verdict and limits
@@ -46,6 +47,14 @@ were not run and are not claimed. Supported OS/Node clean-package qualification
 is separate: see the matrix attached to PR #57 and
 [LOCAL_SESSION_ACCEPTANCE.md](../../LOCAL_SESSION_ACCEPTANCE.md).
 Failed, cancelled and in-progress jobs are not passes.
+
+Final-head Linux Node 24 exposed an ordering assumption in the concurrent-upload
+test: invocation order need not match storage arrival after asynchronous
+validation. The test now forces reversed arrival, waits for whichever released
+writer finishes, and still asserts both generation refusals and pending/final
+cleanup. Ten complete durable-session suite attempts passed (60 tests, no
+failures/skips); `ci-fixture-regression.json` retains the failure and outcomes.
+Production code, timeouts, limits, fencing and validation were not changed.
 
 Cleanup acknowledges this conversation's observed runtime deletion and the four
 previous copies whose deletion the committed handoff explicitly recorded. The
