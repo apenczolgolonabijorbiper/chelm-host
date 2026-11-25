@@ -42,7 +42,8 @@ test('Authenticated real HTTP binding saves, loses workspace, restores exact his
   const child=spawn(process.execPath,[file(source,'tools/session-store-server.mjs')],{env:{...process.env,CHELM_SESSION_STORE:path.join(f.base,'durable'),CHELM_SESSION_TOKEN:token,CHELM_SESSION_RUNTIME:f.c.manifest.runtime_id,CHELM_SESSION_OWNER:'synthetic-owner',CHELM_SESSION_PACKAGES:JSON.stringify(f.expected)},stdio:['ignore','pipe','pipe']});
   t.after(async()=>{if(child.exitCode===null){child.kill();await once(child,'close');}});
   let stdout='',stderr='';child.stderr.on('data',b=>stderr+=b);const url=await new Promise((resolve,reject)=>{child.stdout.on('data',b=>{stdout+=b;if(stdout.includes('\n'))resolve(JSON.parse(stdout.split('\n')[0]).url);});child.once('error',reject);child.once('exit',code=>reject(Error('Store server exited '+code+': '+stderr)));});
-  const client=new SessionClient({url,token}),wrong=new SessionClient({url,token:'invalid'});
+  const fixtureFetch=async(...args)=>{const response=await fetch(...args);assert.equal(response.headers.get('connection'),'close');return response;};
+  const client=new SessionClient({url,token,fetcher:fixtureFetch}),wrong=new SessionClient({url,token:'invalid'});
   await assert.rejects(wrong.call('initialize'),refusal('authorization'));
   await localSession(f.root,'initialize',{}, {},client);await localSession(f.root,'connect',{}, {session_id:'first-session'},client);
   await client.call('intake',{generation:1,request_id:'observation-1',payload:{text:'Durable evidence before execution'}});

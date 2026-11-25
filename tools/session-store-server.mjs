@@ -12,7 +12,11 @@ const handler=sessionHandler(async req=>{const b=Buffer.from(req.headers.get('au
 const server=http.createServer(async(req,res)=>{
   try{
     const request=new Request('http://localhost'+req.url,{method:req.method,headers:req.headers,...(!['GET','HEAD'].includes(req.method)?{body:req,duplex:'half'}:{})});
-    const response=await handler(request);res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()));
+    // Agent-side Git/Python work can block its event loop past the server's
+    // keep-alive deadline. Use a fresh socket for each fixture request so a
+    // buffered idle-close cannot be mistaken for a lost publication response.
+    // Never retry a potentially committed write to hide transport failures.
+    const response=await handler(request);res.writeHead(response.status,{...Object.fromEntries(response.headers),connection:'close'});res.end(Buffer.from(await response.arrayBuffer()));
   }catch{res.writeHead(503);res.end();}
 });
 server.requestTimeout=65000;server.listen(Number(process.env.CHELM_SESSION_PORT??0),'127.0.0.1',()=>process.stdout.write(JSON.stringify({url:`http://127.0.0.1:${server.address().port}/chelm-session`})+'\n'));
