@@ -1,0 +1,83 @@
+{
+  "scope": "Revised scenario/file policy, synthetic Linux; Windows remains a separate gate",
+  "source_commit": "aad17dadfeb29d6cbae2b44ef7b039907f7cfd54",
+  "source_tree": "764115e22bbe1241f0094384535dd9da6f43065f",
+  "environment": {
+    "platform": "linux",
+    "node": "v24.22.3",
+    "os_release": "6.18.57"
+  },
+  "packages": {
+    "host": {
+      "version": "1.3.0",
+      "manifest_sha256": "e0f8c79720c91add15cacb8b67d7afd445cc798c7603ba3ebbd77186235a9827"
+    },
+    "harness": {
+      "version": "0.13.0",
+      "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+    },
+    "provider": {
+      "version": "0.13.0",
+      "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+    }
+  },
+  "staged_suite": {
+    "attempt": 1,
+    "elapsed_ms": 78015,
+    "exit": 0,
+    "signal": null,
+    "error": null,
+    "counts": {
+      "tests": 136,
+      "pass": 136,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "max_concurrent_supervised_commands": 4
+  },
+  "adapter_conformance": {
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "skipped": 0
+  },
+  "development_zip": {
+    "published": false,
+    "files": 227,
+    "node_modules": 0,
+    "archive_sha256": "8cfd74594870eaf0b89e33d23663ae4264572a10e8c1dd925c1117c0a092c07c",
+    "all_manifest_entries_verified": true
+  },
+  "retained_failures": [
+    {
+      "run_url": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45462787753",
+      "node24": {
+        "attempt": 1,
+        "concurrency": 1,
+        "completed_tests_before_deadline": 78,
+        "limit_ms": 600000,
+        "result": "operation_timeout"
+      },
+      "node22": {
+        "file": "tests/conformance/memory-provider.test.mjs",
+        "limit_ms": 180000,
+        "result": "testTimeoutFailure"
+      },
+      "disposition": "Failed policy retained, subsequently cancelled administrative run. Does not count as acceptance."
+    },
+    {
+      "kind": "local development scenario bootstrap regression",
+      "manifest_sha256": "adfd2a53f455ca2ff044c549948b56a89d1eb6236301606c2b1c5fe5bce169c9",
+      "result": "135 pass, 1 failed newly injected guard test; unstaged development fixture",
+      "cause": "Nested Node test runner inherited NODE_TEST_CONTEXT. Fixed by clearing that internal environment field in the isolated regression subprocess."
+    }
+  ],
+  "remaining": [
+    "Revised Windows Node 24 three-run supported policy",
+    "Windows Node 24 ten standalone MCP attempts",
+    "Windows serial/parallel diagnostics and platform/IIS checks",
+    "Historical orphan waiting point and intermittent reset root cause remain unconfirmed",
+    "Maintainer review/merge and separately authorized publication"
+  ]
+}

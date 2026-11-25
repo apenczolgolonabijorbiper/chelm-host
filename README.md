@@ -118,6 +118,18 @@ this first release. Other harness releases are refused until explicitly tested.
 For 0.2 -> 1.0, run the explicit cutover preflight/apply described in the remote
 setup guide before runtime verification. Keep canonical memory intact.
 
+Package installation and runtime readiness are separate results. Both ordinary
+and deferred installers inspect only the resolved runtime hint, read-only, and
+return `runtime_status`. A recognized schema-1 runtime reports `migration_required`
+with executable/argv and quoted PowerShell/POSIX preflight commands. Review that
+preflight, settle legacy work (or explicitly choose cancellation), then request
+`migrate --apply` yourself. The installer never initializes or migrates a runtime.
+Missing, unresolved, unreadable and corrupt configs have distinct statuses;
+`supported_config` still requires explicit verify/refresh. Schema 2 remains
+supported alongside schema 3; provider selection is a separate explicit action.
+Preflight preserves config and memory bytes but acquires/releases an operational
+lock and appends a host log entry. See [runtime upgrade checks](docs/WINDOWS_RELIABILITY.md).
+
 See [app contract](docs/CONTRACT_APP.md), [runtime layout](docs/RUNTIME.md),
 [read views](docs/READ_MODEL.md), [remote worker contract](docs/REMOTE_WORKER_CONTRACT.md),
 [harness integration](docs/HARNESS_INTEGRATION.md), [design](docs/CHELM_HOST_DESIGN.md),
@@ -129,14 +141,20 @@ See [app contract](docs/CONTRACT_APP.md), [runtime layout](docs/RUNTIME.md),
 # Download the exact published, checksum-pinned harness package.
 python3 tools/prepare-harness.py --version 0.13.0 --destination ../harness-release
 export CHELM_HARNESS_ROOT=../harness-release
-node --test tests/
-python3 tools/build-release.py --harness "$CHELM_HARNESS_ROOT"
+npm test
+python3 tools/build-release.py --harness "$CHELM_HARNESS_ROOT" --provider-harness "$CHELM_HARNESS_ROOT"
 ```
 
 The builder runs all Chelm tests and applicable harness backend conformance before
 creating dist/chelm-host-1.3.0.zip and its .sha256. Releases have one chelm-host/
 folder and an exhaustive RELEASE.json. GitHub Actions performs the same checks
 on Windows, Linux and macOS; a v* tag publishes the validated ZIP and checksum.
+
+`npm test`, release builds and installer verification use the shared bounded
+[test policy](docs/TEST_POLICY.md). Consumer wrappers should invoke
+`node vendor/chelm-host/tools/run-tests.mjs` with absolute Harness environment
+paths and retain its exit status and reports. Their PowerShell implementation
+remains application-owned.
 
 Apache-2.0; see [NOTICE](NOTICE) for the backend's harness ancestry.
 

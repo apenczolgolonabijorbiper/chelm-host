@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "runtime_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "label": {
+      "type": "string"
+    },
+    "sandbox": {
+      "type": "object",
+      "properties": {
+        "resettable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "resettable"
+      ],
+      "additionalProperties": false
+    },
+    "harness": {
+      "type": "object",
+      "properties": {
+        "root": {
+          "type": "string"
+        },
+        "node": {
+          "type": "string"
+        },
+        "python": {
+          "type": "string"
+        },
+        "git": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "root",
+        "node",
+        "python",
+        "git"
+      ],
+      "additionalProperties": false
+    },
+    "instance": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "git_identity": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "email"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "path",
+        "git_identity"
+      ],
+      "additionalProperties": false
+    },
+    "intake": {
+      "type": "object",
+      "properties": {
+        "subject_header": {
+          "type": "string",
+          "pattern": "^[a-z_]+$"
+        },
+        "max_observation_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_message_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "question_source": {
+          "type": "string"
+        },
+        "oversize": {
+          "enum": [
+            "truncate",
+            "refuse"
+          ]
+        },
+        "kind_sets": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "subject_header",
+        "max_observation_chars",
+        "max_message_chars",
+        "question_source",
+        "oversize",
+        "kind_sets"
+      ],
+      "additionalProperties": false
+    },
+    "conversation": {
+      "type": "object",
+      "properties": {
+        "tail": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "tail"
+      ],
+      "additionalProperties": false
+    },
+    "requests": {
+      "type": "object",
+      "properties": {
+        "kinds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "max_open_proposed_per_subject": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reason_max_chars": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "kinds",
+        "max_open_proposed_per_subject",
+        "reason_max_chars"
+      ],
+      "additionalProperties": false
+    },
+    "delegation": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "share_root": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reservation_hours": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "enabled",
+        "share_root",
+        "reservation_hours",
+        "participants"
+      ],
+      "additionalProperties": false
+    },
+    "archive": {
+      "type": "object",
+      "properties": {
+        "root": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "root"
+      ],
+      "additionalProperties": false
+    },
+    "profile_expectation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "enforce": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source",
+        "enforce"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "runtime_id",
+    "label",
+    "sandbox",
+    "harness",
+    "instance",
+    "intake",
+    "conversation",
+    "requests",
+    "delegation",
+    "archive"
+  ],
+  "additionalProperties": false
+}
