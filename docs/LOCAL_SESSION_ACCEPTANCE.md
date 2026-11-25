@@ -17,9 +17,9 @@ Chelm remains 1.3.0. This work does not publish a release or upgrade a consumer.
 | Optional D1 SQL CAS / R2 conditional object contract | tests/session-transport.test.mjs; actual SQLite in independent processes and persistent filesystem bucket fixture; **not hosted D1/R2 evidence** |
 | Actual authenticated narrow HTTP transport | tests/session-transport.test.mjs; independent loopback server process, missing/wrong token refusal, save, original runtime deletion, fresh directory restore, citation read, new evidence, reset/late-worker refusal |
 | Actual inference through this deployment | Observed ChatGPT Work LLM response, real cognitive validation/submission and authenticated HTTP checkpoint/restore; docs/evidence/local-sessions-2026-11-25/ retains exact request/response, accepted receipt and persistence report |
-| Fresh independent ChatGPT Work/Codex/Cursor conversation resume | Pending; fresh CLI processes/directories do not establish a new agent conversation |
-| Live Sites authentication, D1/R2 and agent handoff | Template/recipe implemented; deployment and authenticated agent route access pending |
-| Windows/Linux/macOS clean package | Existing release CI matrix includes new suites; record observed runs before claiming platform acceptance |
+| Fresh independent ChatGPT Work/Codex/Cursor conversation resume | Pending; prior test reset deleted its checkpoint. A new hosted checkpoint and executable handoff are retained for a later independent conversation; fresh CLI processes/directories do not establish it |
+| Live Sites authentication, D1/R2 and agent handoff | Observed private Sites deployment, D1 schema/CAS, R2 checkpoint upload/readback, authenticated Work executor HTTPS and exact citation/receipt restore; docs/evidence/local-sessions-hosted-2026-11-25/ |
+| Windows/Linux/macOS clean package | Linux Node 22/24 and macOS Node 22 passed the staged matrix at 1535304; Windows Node 22/24 qualification is running after the loopback fixture fix. Exact run: https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45555453158 |
 
 The setup/run/checkpoint/reconnect/stop/reset SudoLang prompts and normative
 portable specification ship with the code. A Site deploy or browser sign-in
@@ -55,3 +55,23 @@ new evidence, read the earlier citation, and reset while an old agent is detache
 Observe actual hosted storage/transport separately from model and deterministic
 checks. Keep #45/#48 open until those external observations are retained; do not
 mark all tracker acceptance merely because the implementation and CI exist.
+
+## Finalization observations — 2026-11-25
+
+The finalization conversation deployed and exercised a private synthetic Site
+with actual D1/R2, authenticated HTTPS from the Work executor, actual cognitive
+inference, durable question intake before execution, accepted result, checkpoint,
+original-directory deletion, new-directory restore, exact citations/receipt, and
+a durable follow-up request. See
+[hosted evidence and fresh-conversation handoff](evidence/local-sessions-hosted-2026-11-25/README.md).
+The selected hosted checkpoint remains available with no publishing session;
+both local copies were deleted. Hosted reset and actual independent-conversation
+resume remain to be observed together.
+
+A Windows CI failure exposed stale loopback keep-alive reuse after synchronous
+agent work. The standalone fixture now closes each connection explicitly; no
+production retry, fencing, or timeout was relaxed. The three targeted transport
+cases passed locally and the full staged package passed 147 host tests and
+11 Harness conformance cases with zero failures/skips. The Linux staged suite
+reported 97.51 seconds before benchmarks. Full platform qualification is tracked
+in PR #57's Actions runs; cancelled/failed runs are not passes.

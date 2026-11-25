@@ -1,0 +1,7 @@
+{
+  "case": "freeze-proposal-and-replacement",
+  "verdict": "pass",
+  "reviewer": "same actual ChatGPT Work author; no independent or blinded review",
+  "reason": "Response uses the approved 28 November date, distinguishes the unapproved 26 November proposal, quotes both exact retained sources, and limits its conclusion to the plan rather than execution.",
+  "response_sha256": "df458180d1801f3ba7b1a554ec26ee76d1db31517a4e50fab565fdb74f6d1349"
+}

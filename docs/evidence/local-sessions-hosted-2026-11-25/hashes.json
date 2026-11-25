@@ -1,0 +1,14 @@
+{
+  "files": {
+    "README.md": "7480cf837caa81058643c84cebb0d5280a2f59d452d40ee4b1a910cebb86e878",
+    "accepted.json": "9951c8a62e96cf2051c803c70d7f6f6fc4d3c3daa051c134b8c84c745179ca20",
+    "deployed-worker.mjs": "e802b46cbf6a09cb658e1af8485bc566d5b0e8f36cfda5f5adbf6f49f57fde8a",
+    "hosted.json": "4f0a3ca22f5d69eeafc4c4f0655ba342d5385219ef1ac645f245a92d5e5a22c3",
+    "request.json": "d2f599847b2c14a36819464425602ff7f34e109d85df12eb3c7395787127b6e0",
+    "response.json": "df458180d1801f3ba7b1a554ec26ee76d1db31517a4e50fab565fdb74f6d1349",
+    "resume.mjs": "05db005e5d5398eee0025ff1d48c6fedec35ddc9f4c79cd9aff1940aebdd9018",
+    "semantic-review.json": "5a4048008f5767dc8e770a8b1413c52f4b3b5a1fc8689b90070399c9d6efb797",
+    "site-manifest.json": "6d5d1326f7a3019706b0702352e0042d59c7a835f897747dc009eeceb0b86446",
+    "site-schema.sql": "1cc75995e491a9d81f3ac08e4bffdcb776849f2df3bcdb71ff92b1e13153bebd"
+  }
+}

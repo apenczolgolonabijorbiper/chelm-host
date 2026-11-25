@@ -233,7 +233,10 @@ are cleaned only while that CAS mutex is exclusively held.
 Current Sites capabilities were checked on 2026-11-25: Worker ES modules,
 logical D1/R2 bindings and optional Site MCP are supported. Workers have a
 128 MiB isolate limit and do not run this local Python/Git runtime. This is a
-template, not a claim that this conversation deployed or authenticated a Site.
+template. A private synthetic Site was subsequently deployed and authenticated
+from the Work executor; see the dated hosted evidence linked from
+[LOCAL_SESSION_ACCEPTANCE.md](LOCAL_SESSION_ACCEPTANCE.md). This does not
+qualify an arbitrary consumer Site or independent-conversation resume.
 
 Use the application's existing Site identity/auth/UI. Bind `DB` and `BUCKET`
 in `.openai/hosting.json` (keep existing project ID and binding names), apply
@@ -247,7 +250,9 @@ This also makes the post-download reset/head recheck use primary data.
 
 The adapter APIs follow the official [D1 database reference](https://developers.cloudflare.com/d1/worker-api/d1-database/)
 and [R2 Workers API reference](https://developers.cloudflare.com/r2/api/workers/workers-api-reference/),
-checked on 2026-11-25. Hosted acceptance remains a separate required observation.
+checked on 2026-11-25. Hosted deployment, D1/R2 and executor HTTPS were observed
+separately from deterministic adapter tests in the dated hosted evidence.
+Independent-conversation resume and hosted reset remain explicit observations.
 
 The sample transport supports 8 MiB checkpoints, 12 MiB JSON bodies and a 1 MiB
 coordinator row. These explicit smaller limits fit a bounded synthetic runtime
