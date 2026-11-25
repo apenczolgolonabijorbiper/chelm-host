@@ -1,0 +1,314 @@
+{
+  "task": {
+    "protocol_version": 1,
+    "task_id": "81beafeb-2e63-40d6-99ca-05bd4ab053e4",
+    "conversation_id": "81beafeb-2e63-40d6-99ca-05bd4ab053e4",
+    "binding": {
+      "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+      "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "mode": "read_only",
+    "messages": [
+      {
+        "id": "1955fa4a-0011-4a7e-ad5e-26a7cbaf5754",
+        "author": "user",
+        "kind": "user_question",
+        "text": "Which database freeze date should the team use? Explain the earlier proposal versus the approved replacement, citing both notes.",
+        "reply_to": [],
+        "intent": {
+          "category": "unknown",
+          "origin": "user",
+          "basis": "unknown",
+          "description": "User intent awaits cognitive interpretation.",
+          "uncertainty": []
+        }
+      }
+    ],
+    "scope": {
+      "subject_ids": [],
+      "valid_at": null
+    },
+    "limits": {
+      "rounds": 8,
+      "context_requests": 24,
+      "claims": 40,
+      "source_bytes": 262144,
+      "expansion_budget": 4000,
+      "elapsed_ms": 600000
+    }
+  },
+  "executor": {
+    "id": "chatgpt-work-session",
+    "kind": "agent",
+    "model": "Actual ChatGPT Work LLM; exact provider model ID unavailable",
+    "host": "ChatGPT Work"
+  },
+  "context": {
+    "protocol_version": 1,
+    "binding": {
+      "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+      "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "request_id": "{\"current\":false,\"subject_ids\":[],\"limit\":40,\"expansion_budget\":4000}",
+    "claims": [
+      {
+        "id": "clm-5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "subject_id": "ent-5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "attributed_to_id": "ent-5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "predicate": "describes",
+        "object": {
+          "value": "Synthetic"
+        },
+        "classification": "source_assertion",
+        "sources": [
+          {
+            "observation_id": "5833875b-c350-4736-a2f5-0064c1c5aa83",
+            "quote": "On 2026-11-20, the team planned a database freeze for 26 November. The owner had not yet approved it."
+          }
+        ],
+        "asserted_at": "2026-11-25T01:36:50.996Z",
+        "valid_time": {
+          "from": null,
+          "to": null,
+          "expression": null,
+          "precision": "unknown"
+        },
+        "status": "active",
+        "supersedes": [],
+        "uncertainty": [],
+        "created_at": "2026-11-25T01:38:52.012Z"
+      },
+      {
+        "id": "clm-77a779a6-d357-46f1-9e75-cf399563e725",
+        "subject_id": "ent-77a779a6-d357-46f1-9e75-cf399563e725",
+        "attributed_to_id": "ent-77a779a6-d357-46f1-9e75-cf399563e725",
+        "predicate": "describes",
+        "object": {
+          "value": "Synthetic"
+        },
+        "classification": "source_assertion",
+        "sources": [
+          {
+            "observation_id": "77a779a6-d357-46f1-9e75-cf399563e725",
+            "quote": "On 2026-11-24, the owner approved the database freeze for 28 November, replacing the earlier proposed date."
+          }
+        ],
+        "asserted_at": "2026-11-25T01:36:51.392Z",
+        "valid_time": {
+          "from": null,
+          "to": null,
+          "expression": null,
+          "precision": "unknown"
+        },
+        "status": "active",
+        "supersedes": [],
+        "uncertainty": [],
+        "created_at": "2026-11-25T01:38:52.012Z"
+      }
+    ],
+    "entities": [
+      {
+        "id": "ent-5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "type": "other",
+        "kind": "record",
+        "label": "Synthetic record",
+        "aliases": [],
+        "source_ids": [
+          "5833875b-c350-4736-a2f5-0064c1c5aa83"
+        ],
+        "uncertainty": [],
+        "created_at": "2026-11-25T01:38:52.012Z"
+      },
+      {
+        "id": "ent-77a779a6-d357-46f1-9e75-cf399563e725",
+        "type": "other",
+        "kind": "record",
+        "label": "Synthetic record",
+        "aliases": [],
+        "source_ids": [
+          "77a779a6-d357-46f1-9e75-cf399563e725"
+        ],
+        "uncertainty": [],
+        "created_at": "2026-11-25T01:38:52.012Z"
+      }
+    ],
+    "sources": [
+      {
+        "id": "5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "sha256": "c66f8f6d7207ff18030203fc313beb6d148bc773dda91e5ac989905f0bc8629d",
+        "recorded_at": "2026-11-25T01:36:50.996Z"
+      },
+      {
+        "id": "77a779a6-d357-46f1-9e75-cf399563e725",
+        "sha256": "e1e66dca090b9c78c55ec48db0fab92db09f11639a6575e79cd84171728929f7",
+        "recorded_at": "2026-11-25T01:36:51.392Z"
+      }
+    ],
+    "selection": {
+      "current": false,
+      "alternatives": [],
+      "hidden": {
+        "superseded": 0,
+        "retracted": 0,
+        "predicate": 0,
+        "entity": 0,
+        "unknown_time": 0,
+        "valid_time": 0,
+        "current": 0
+      },
+      "knowledge": "current correction/retraction knowledge; not a past transaction snapshot"
+    },
+    "dependencies": [
+      {
+        "claim_id": "clm-5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "premise_ids": []
+      },
+      {
+        "claim_id": "clm-77a779a6-d357-46f1-9e75-cf399563e725",
+        "premise_ids": []
+      }
+    ],
+    "warnings": [
+      "Zero hits do not establish absence; pending observations are not analyzed memory."
+    ],
+    "truncated": false,
+    "truncation_reasons": [],
+    "pending_count": 0,
+    "valid_at": null,
+    "method": "lexical_filtered_plus_one_graph_hop"
+  },
+  "sources": [
+    {
+      "claim_id": "clm-5833875b-c350-4736-a2f5-0064c1c5aa83",
+      "binding": {
+        "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+        "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "id": "5833875b-c350-4736-a2f5-0064c1c5aa83",
+      "sha256": "c66f8f6d7207ff18030203fc313beb6d148bc773dda91e5ac989905f0bc8629d",
+      "start": 0,
+      "text": "\nOn 2026-11-20, the team planned a database freeze for 26 November. The owner had not yet approved it.\n",
+      "truncated": false,
+      "processed": true
+    },
+    {
+      "claim_id": "clm-77a779a6-d357-46f1-9e75-cf399563e725",
+      "binding": {
+        "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+        "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+        "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+      },
+      "id": "77a779a6-d357-46f1-9e75-cf399563e725",
+      "sha256": "e1e66dca090b9c78c55ec48db0fab92db09f11639a6575e79cd84171728929f7",
+      "start": 0,
+      "text": "\nOn 2026-11-24, the owner approved the database freeze for 28 November, replacing the earlier proposed date.\n",
+      "truncated": false,
+      "processed": true
+    }
+  ],
+  "receipt": {
+    "binding": {
+      "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+      "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+      "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+    },
+    "claims": [
+      {
+        "id": "clm-5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "subject_id": "ent-5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "attributed_to_id": "ent-5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "predicate": "describes",
+        "object": {
+          "value": "Synthetic"
+        },
+        "classification": "source_assertion",
+        "sources": [
+          {
+            "observation_id": "5833875b-c350-4736-a2f5-0064c1c5aa83",
+            "quote": "On 2026-11-20, the team planned a database freeze for 26 November. The owner had not yet approved it."
+          }
+        ],
+        "asserted_at": "2026-11-25T01:36:50.996Z",
+        "valid_time": {
+          "from": null,
+          "to": null,
+          "expression": null,
+          "precision": "unknown"
+        },
+        "status": "active",
+        "supersedes": [],
+        "uncertainty": [],
+        "created_at": "2026-11-25T01:38:52.012Z"
+      },
+      {
+        "id": "clm-77a779a6-d357-46f1-9e75-cf399563e725",
+        "subject_id": "ent-77a779a6-d357-46f1-9e75-cf399563e725",
+        "attributed_to_id": "ent-77a779a6-d357-46f1-9e75-cf399563e725",
+        "predicate": "describes",
+        "object": {
+          "value": "Synthetic"
+        },
+        "classification": "source_assertion",
+        "sources": [
+          {
+            "observation_id": "77a779a6-d357-46f1-9e75-cf399563e725",
+            "quote": "On 2026-11-24, the owner approved the database freeze for 28 November, replacing the earlier proposed date."
+          }
+        ],
+        "asserted_at": "2026-11-25T01:36:51.392Z",
+        "valid_time": {
+          "from": null,
+          "to": null,
+          "expression": null,
+          "precision": "unknown"
+        },
+        "status": "active",
+        "supersedes": [],
+        "uncertainty": [],
+        "created_at": "2026-11-25T01:38:52.012Z"
+      }
+    ],
+    "sources": [
+      {
+        "binding": {
+          "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+          "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+          "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+        },
+        "id": "5833875b-c350-4736-a2f5-0064c1c5aa83",
+        "sha256": "c66f8f6d7207ff18030203fc313beb6d148bc773dda91e5ac989905f0bc8629d",
+        "start": 0,
+        "text": "\nOn 2026-11-20, the team planned a database freeze for 26 November. The owner had not yet approved it.\n",
+        "truncated": false,
+        "processed": true
+      },
+      {
+        "binding": {
+          "instance_id": "7f866799-5703-421c-9307-6f2e44049925",
+          "snapshot_id": "6a8efefac2279633e306dcbbf07211d4efc38d79",
+          "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+        },
+        "id": "77a779a6-d357-46f1-9e75-cf399563e725",
+        "sha256": "e1e66dca090b9c78c55ec48db0fab92db09f11639a6575e79cd84171728929f7",
+        "start": 0,
+        "text": "\nOn 2026-11-24, the owner approved the database freeze for 28 November, replacing the earlier proposed date.\n",
+        "truncated": false,
+        "processed": true
+      }
+    ],
+    "coverage": {
+      "truncated": false,
+      "pending_count": 0,
+      "valid_at": null
+    },
+    "usage": {
+      "rounds": 1,
+      "context_requests": 3,
+      "source_bytes": 212,
+      "elapsed_ms": 434
+    }
+  }
+}

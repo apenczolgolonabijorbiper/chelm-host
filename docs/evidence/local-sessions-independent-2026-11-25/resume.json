@@ -1,0 +1,19 @@
+{
+  "observed_at": "2026-11-25T06:10:31.199Z",
+  "conversation_provenance": "New user-started Work conversation asking to finalize PR 57 using its retained checkpoint. Earlier implementing/finalization conversations ended before this conversation. Shared scratch files were used for read-only packages/instructions, not as a runtime restore source.",
+  "source_commit": "02ca017a0f95f6767a5b52ccbe94915ccfe00c1b",
+  "checkpoint_sha256": "447bf8b174c996a0ad44164ca05f110abf0da8ae1450f59a3483416996d83fff",
+  "transport": "Authenticated executor HTTPS to existing owner-private Site D1/R2",
+  "runtime": "/workspace/scratch/513a65fc2e8e/resumed-runtime",
+  "checks": {
+    "resume_mjs": "pass",
+    "exact_original_task_receipt": "pass",
+    "answer": "pass",
+    "git_snapshot": "pass",
+    "both_citation_bytes_hashes": "pass",
+    "earlier_sources_already_analyzed": "pass"
+  },
+  "pending_request_id": "new-evidence-for-next-conversation",
+  "new_observation_id": "ab801f97-21ca-4524-b667-350af0e678d3",
+  "readiness_no_work_before_age_gate": true
+}

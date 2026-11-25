@@ -1,0 +1,152 @@
+{
+  "observed_at": "2026-11-25T06:24:09.069195+00:00",
+  "failed_run": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45559366447",
+  "failed_job": 139019172480,
+  "failure": "Linux Node 24 timed out in Concurrent retries of one upload retain every late writer in reset inventory",
+  "cause": "Test released first storage-arrival gate but awaited first invocation; async checkpoint validation can reverse arrival order and leave that invocation blocked behind the second gate.",
+  "fix": "Force reversed validation/storage arrival in the regression, release one arrival, await whichever upload completes, assert cleanup still pending, release other writer, assert both generation_changed and final purge. Production code, limits and timeouts unchanged.",
+  "node": "v24.22.3",
+  "host_code_sha256": "1dd6711b4d99afd29b4323c342efdb52a9679d1965dd55b3cbd7e6e72c446238",
+  "attempts": [
+    {
+      "attempt": 1,
+      "elapsed_ms": 3807,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 2,
+      "elapsed_ms": 3442,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 3,
+      "elapsed_ms": 3792,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 4,
+      "elapsed_ms": 3491,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 5,
+      "elapsed_ms": 3361,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 6,
+      "elapsed_ms": 3367,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 7,
+      "elapsed_ms": 3483,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 8,
+      "elapsed_ms": 3527,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 9,
+      "elapsed_ms": 3414,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "attempt": 10,
+      "elapsed_ms": 3406,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    }
+  ]
+}

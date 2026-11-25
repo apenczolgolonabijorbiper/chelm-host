@@ -1,0 +1,159 @@
+{
+  "observed_at": "2026-11-25T06:12:28.488Z",
+  "before": {
+    "runtime_id": "cbb11a5b-6951-4dc8-935a-e66b46dd2fe5",
+    "generation": 1,
+    "revision": 2,
+    "head": {
+      "state": "durably-saved",
+      "runtime_id": "cbb11a5b-6951-4dc8-935a-e66b46dd2fe5",
+      "generation": 1,
+      "revision": 2,
+      "submission_id": "independent-follow-up-2",
+      "identity": "ab26de7dee4346391360d0046e4fdaff3a92216d05df33846a4838a8ba71b064",
+      "checkpoint_id": "e3f0ebf1ec72c022aee581f2c3d45fb8749d1725ba2ae539f19c3229c3a260bd",
+      "sha256": "e85f7c9ae4a77d0ee1dd5fe29ade762385b6f989159e393fdb686e7aa4514657",
+      "key": "cbb11a5b-6951-4dc8-935a-e66b46dd2fe5/1/726070bb7907a42e124e59c747de4ca1e0234319e3e97073629d3a5cecd31aa9",
+      "request_ids": [
+        "new-evidence-for-next-conversation"
+      ],
+      "projection": {
+        "task_id": "4146e87e-9ab1-4259-a0ef-8ac94b9377df",
+        "follow_up_observation": "ab801f97-21ca-4524-b667-350af0e678d3"
+      }
+    },
+    "session": {
+      "owner": "vendor-synthetic-acceptance",
+      "session_id": "acceptance-resume-1795586916884",
+      "generation": 1,
+      "fence": 9,
+      "base_revision": 2,
+      "issued_at": 1795586918204,
+      "expires_at": 1795587396608
+    },
+    "pending": [],
+    "cleanup_pending": false,
+    "local_copies": {
+      "work-nov25-hosted-original": {
+        "generation": 1,
+        "cleanup": "reachable"
+      },
+      "work-nov25-hosted-restored": {
+        "generation": 1,
+        "cleanup": "reachable"
+      },
+      "independent-work-1795585891347": {
+        "generation": 1,
+        "cleanup": "reachable"
+      },
+      "independent-work-1795585977717": {
+        "generation": 1,
+        "cleanup": "reachable"
+      },
+      "acceptance-resume-1795586916884": {
+        "generation": 1,
+        "cleanup": "reachable"
+      }
+    }
+  },
+  "reset": {
+    "state": "reset",
+    "receipt": {
+      "reset_id": "independent-hosted-reset-2",
+      "from": 1,
+      "generation": 2,
+      "state": "fenced",
+      "cleanup_pending": true
+    },
+    "cleanup_pending": false,
+    "detached_copies": {
+      "work-nov25-hosted-original": {
+        "generation": 1,
+        "cleanup": "pending-unreachable"
+      },
+      "work-nov25-hosted-restored": {
+        "generation": 1,
+        "cleanup": "pending-unreachable"
+      },
+      "independent-work-1795585891347": {
+        "generation": 1,
+        "cleanup": "pending-unreachable"
+      },
+      "independent-work-1795585977717": {
+        "generation": 1,
+        "cleanup": "pending-unreachable"
+      },
+      "acceptance-resume-1795586916884": {
+        "generation": 1,
+        "cleanup": "pending-unreachable"
+      }
+    },
+    "session_id": "acceptance-resume-1795586916884",
+    "generation": 1,
+    "local_cleanup": "confirmed"
+  },
+  "detached_old_binding_refusals": [
+    {
+      "operation": "upload",
+      "code": "generation_changed"
+    },
+    {
+      "operation": "renew",
+      "code": "generation_changed"
+    },
+    {
+      "operation": "publish",
+      "code": "generation_changed"
+    },
+    {
+      "operation": "download",
+      "code": "generation_changed"
+    },
+    {
+      "operation": "recover",
+      "code": "generation_changed"
+    },
+    {
+      "operation": "acquire",
+      "code": "generation_changed"
+    },
+    {
+      "operation": "intake",
+      "code": "generation_changed"
+    }
+  ],
+  "local_runtime_deleted": true,
+  "prior_copy_deletion_evidence": "Prior committed hosted.json + README deletion observations and current absence of recorded original/rehearsal paths; no new detached copies invented.",
+  "after": {
+    "runtime_id": "cbb11a5b-6951-4dc8-935a-e66b46dd2fe5",
+    "generation": 2,
+    "revision": 0,
+    "head": null,
+    "session": null,
+    "pending": [],
+    "cleanup_pending": false,
+    "local_copies": {
+      "work-nov25-hosted-original": {
+        "generation": 1,
+        "cleanup": "confirmed"
+      },
+      "work-nov25-hosted-restored": {
+        "generation": 1,
+        "cleanup": "confirmed"
+      },
+      "independent-work-1795585891347": {
+        "generation": 1,
+        "cleanup": "confirmed"
+      },
+      "independent-work-1795585977717": {
+        "generation": 1,
+        "cleanup": "confirmed"
+      },
+      "acceptance-resume-1795586916884": {
+        "generation": 1,
+        "cleanup": "confirmed"
+      }
+    }
+  },
+  "purge": "sweep confirms retired controlled checkpoint/upload inventory deleted; provider backups and physical retention outside adapter control are not asserted"
+}

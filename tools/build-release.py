@@ -37,7 +37,8 @@ def build(harness, output=None, provider_harness=None):
     payload = entries()
     manifest = {'schema_version': 1, 'version': version,
                 'contracts': {'app': 1, 'worker': 2, 'read_model': 1,
-                              'runtime_config': 2, 'remote_worker': 2, 'cognitive_task': 1, 'memory_worker': 3, 'provider_runtime_config': 3},
+                              'runtime_config': 2, 'remote_worker': 2, 'cognitive_task': 1, 'memory_worker': 3, 'provider_runtime_config': 3,
+                              'runtime_checkpoint': 1, 'durable_session': 1},
                 'provider_integration': json.loads((ROOT / 'provider-compatibility.json').read_text()),
                 'harness_supported': compatibility['harness_supported'], 'supported_harness_versions': compatibility['supported_harness_versions'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
