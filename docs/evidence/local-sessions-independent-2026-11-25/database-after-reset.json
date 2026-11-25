@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-11-25T06:13:41.790Z",
+  "method": "Native Sites read-only D1 database viewer, after HTTP reset and sweep",
+  "project_id": "appgprj_6b06751d9c3481918405dc0facdee07e",
+  "binding_name": "DB",
+  "table_name": "chelm_sessions",
+  "columns": [
+    "runtime_id",
+    "version",
+    "value"
+  ],
+  "rows": [
+    {
+      "runtime_id": "cbb11a5b-6951-4dc8-935a-e66b46dd2fe5",
+      "version": 34,
+      "value": "{\"version\":34,\"runtime_id\":\"cbb11a5b-6951-4dc8-935a-e66b46dd2fe5\",\"owner\":\"vendor-synthetic-acceptance\",\"generation\":2,\"revision\":0,\"fence\":10,\"session\":null,\"head\":null,\"objects\":{},\"receipts\":{},\"requests\":{},\"retired\":[],\"copies\":{\"work-nov25-hosted-original\":{\"generation\":1,\"cleanup\":\"confirmed\"},\"work-nov25-hosted-restored\":{\"generation\":1,\"cleanup\":\"confirmed\"},\"independent-work-1795585891347\":{\"generation\":1,\"cleanup\":\"confirmed\"},\"independent-work-1795585977717\":{\"generation\":1,\"cleanup\":\"confirmed\"},\"acceptance-resume-1795586916884\":{\"generation\":1,\"cleanup\":\"confirmed\"}},\"last_reset\":{\"reset_id\":\"independent-hosted-reset-2\",\"from\":1,\"generation\":2,\"state\":\"fenced\",\"cleanup_pending\":true}}"
+    }
+  ],
+  "limit": 2,
+  "offset": 0,
+  "has_more": false,
+  "model_projection": {
+    "truncated": false,
+    "truncated_values": 0,
+    "omitted_columns": 0,
+    "omitted_rows": 0,
+    "next_offset": null
+  }
+}

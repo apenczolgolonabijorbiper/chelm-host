@@ -1,0 +1,14 @@
+{
+  "executor": {
+    "id": "work-independent-nov25-0706",
+    "kind": "agent",
+    "model": "ChatGPT Work LLM; exact served model unknown",
+    "host": "ChatGPT Work independent conversation"
+  },
+  "run_id": "f72f3860-824c-4a4a-8382-34ead003f67e",
+  "outputs": [
+    "memory/graph.json",
+    "memory/index.md",
+    "memory/runs/f72f3860-824c-4a4a-8382-34ead003f67e.md"
+  ]
+}

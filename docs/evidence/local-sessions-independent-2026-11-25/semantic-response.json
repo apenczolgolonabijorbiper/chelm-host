@@ -1,0 +1,43 @@
+{
+  "authorship": "Actual active ChatGPT Work LLM in the independent finalization conversation; Python only serialized the authored decision.",
+  "source": {
+    "id": "ab801f97-21ca-4524-b667-350af0e678d3",
+    "path": "inbox/ab801f97-21ca-4524-b667-350af0e678d3.md",
+    "sha256": "5e52a1b90c42541ab5e1e690a180a329d1fa1eeffa7c52fdd182e8408936f717",
+    "recorded_at": "2026-11-25T06:08:38.383Z",
+    "kind": "record",
+    "subject_id": "hosted-follow-up"
+  },
+  "claim": {
+    "id": "clm-1a5c8b17-4088-4b61-b575-a59f35f017bc",
+    "subject_id": "ent-78cb4936-a475-45ba-b978-42d1ceb916ea",
+    "attributed_to_id": "ent-78cb4936-a475-45ba-b978-42d1ceb916ea",
+    "predicate": "describes",
+    "object": {
+      "value": "The team requested a dry run on 27 November 2026 before the approved 28 November 2026 database freeze."
+    },
+    "classification": "source_assertion",
+    "sources": [
+      {
+        "observation_id": "ab801f97-21ca-4524-b667-350af0e678d3",
+        "quote": "Follow-up note, 2026-11-25: The team requested a dry run on 27 November before the approved 28 November freeze."
+      }
+    ],
+    "asserted_at": "2026-11-25T06:08:38.383Z",
+    "valid_time": {
+      "from": null,
+      "to": null,
+      "expression": null,
+      "precision": "unknown"
+    },
+    "status": "active",
+    "supersedes": [],
+    "uncertainty": [
+      "A request is not approval or completion of the dry run. The note does not replace the approved freeze date."
+    ],
+    "created_at": "2026-11-25T06:10:31.199Z"
+  },
+  "prior_graph_records_unchanged": true,
+  "journal": "# Independent Work follow-up analysis\nStarted: 2026-11-25T06:09:40.808Z\nguidance_version: 7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3\nModel: ChatGPT Work LLM; exact served model, reasoning configuration, tokens and cost unknown.\nRuntime: cbb11a5b-6951-4dc8-935a-e66b46dd2fe5\nRun: f72f3860-824c-4a4a-8382-34ead003f67e\n\nRead all five protocol files, delivered purpose guidance, all three complete sources, prior graph, ledger, hypotheses and both empty question queues. Exact entity/predicate retrieval returned the retained approved-note assertion.\nSources analyzed: ab801f97-21ca-4524-b667-350af0e678d3 (5e52a1b90c42541ab5e1e690a180a329d1fa1eeffa7c52fdd182e8408936f717). Earlier sources are context only and are not reprocessed.\nSemantic decision authored by the actual LLM in a later independent conversation: request for a dry run on 27 November is distinct from approval/completion, and does not supersede the approved freeze on 28 November. No label-based team identity merge; new opaque record/claim IDs. No hypothesis or question closure.\nChanges: append one exact source, one record entity, one source_assertion; refresh readable index. Preserve every prior graph record and both question queues.\nWarnings reviewed: zero returned; no alternatives erased. Hypotheses reviewed: empty. Unresolved: dry-run approval/completion and team identity are unknown.\nCompleted local checks: exact source SHA-256 and quotation, unchanged prior source/entity/claim arrays, unique UUIDs, prior ledger contains exactly the two earlier processed sources. Normal 60-second readiness gate observed without rewriting recorded_at.\nHost candidate validation, publication and persisted-state readback: pending. Completion record: apenczolgolonabijorbiper/chelm-host docs/evidence/local-sessions-independent-2026-11-25/completion.json, keyed by runtime cbb11a5b-6951-4dc8-935a-e66b46dd2fe5 and run f72f3860-824c-4a4a-8382-34ead003f67e.\n",
+  "semantic_verdict": "PASS: request retained without falsely upgrading it to approval/completion or changing approved freeze date; no independent evaluator/model was used."
+}

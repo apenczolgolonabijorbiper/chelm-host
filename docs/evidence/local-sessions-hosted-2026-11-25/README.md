@@ -1,5 +1,10 @@
 # Hosted actual-agent acceptance and independent-session handoff
 
+Historical handoff: a later independent Work conversation completed this recipe,
+saved revision 2 and performed hosted reset. The generation-1 checkpoint is now
+purged; the steps below are the retained original handoff, not a currently
+resumable checkpoint. See [the independent-session evidence](../local-sessions-independent-2026-11-25/README.md).
+
 Observed on 2026-11-25 in the issue #45 finalization conversation. This is a new
 conversation relative to the implementing agent, but it **cannot resume that
 agent's checkpoint**: its test reset deleted the original checkpoint and store

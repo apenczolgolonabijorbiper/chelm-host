@@ -236,7 +236,8 @@ logical D1/R2 bindings and optional Site MCP are supported. Workers have a
 template. A private synthetic Site was subsequently deployed and authenticated
 from the Work executor; see the dated hosted evidence linked from
 [LOCAL_SESSION_ACCEPTANCE.md](LOCAL_SESSION_ACCEPTANCE.md). This does not
-qualify an arbitrary consumer Site or independent-conversation resume.
+qualify an arbitrary consumer Site. Independent Work conversation resume was
+subsequently observed in the separate acceptance record.
 
 Use the application's existing Site identity/auth/UI. Bind `DB` and `BUCKET`
 in `.openai/hosting.json` (keep existing project ID and binding names), apply
@@ -252,7 +253,10 @@ The adapter APIs follow the official [D1 database reference](https://developers.
 and [R2 Workers API reference](https://developers.cloudflare.com/r2/api/workers/workers-api-reference/),
 checked on 2026-11-25. Hosted deployment, D1/R2 and executor HTTPS were observed
 separately from deterministic adapter tests in the dated hosted evidence.
-Independent-conversation resume and hosted reset remain explicit observations.
+Independent Work conversation resume, actual follow-up inference and hosted
+reset were subsequently observed in
+[the independent-session record](evidence/local-sessions-independent-2026-11-25/README.md).
+Its generation-1 handoff checkpoint was deliberately purged by that reset.
 
 The sample transport supports 8 MiB checkpoints, 12 MiB JSON bodies and a 1 MiB
 coordinator row. These explicit smaller limits fit a bounded synthetic runtime
