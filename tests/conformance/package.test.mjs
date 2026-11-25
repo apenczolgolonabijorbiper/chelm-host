@@ -1,4 +1,5 @@
-import test from 'node:test';
+import test from '../scenario.mjs';
+import {ownedProcess} from '../../tools/owned-process.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -127,7 +128,8 @@ test('VF-7: packaged service probe completes a synthetic lease under the executi
     python: process.env.GOLEM_PYTHON ?? (process.platform === 'win32' ? 'py' : 'python3'),
     git: 'git'
   }));
-  const r = spawnSync(process.execPath, [path.join(source, 'tools/service-probe.mjs'), config], {
+  const r = ownedProcess(process.execPath, [path.join(source, 'tools/service-probe.mjs'), config], {
+    phase: 'packaged service probe',
     encoding: 'utf8',
     timeout: 180000
   });

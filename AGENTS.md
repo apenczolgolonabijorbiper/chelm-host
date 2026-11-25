@@ -37,7 +37,7 @@ config-2 runtimes.
 7. Requests from cognition are proposals. Only the application approves and runs
    collection; Chelm-host neither calls a model nor runs a scheduler.
 
-For maintainers: run node --test tests/ with CHELM_HARNESS_ROOT pointing to an
+For maintainers: run npm test with CHELM_HARNESS_ROOT pointing to an
 extracted harness 0.13.0 release, then tools/build-release.py --harness PUBLISHED --provider-harness PROVIDER
 before publishing. Provider package preparation and published pair acceptance are in
 docs/MEMORY_PROVIDERS.md.

@@ -5,9 +5,7 @@ import {
 } from '../lib/util.mjs';
 import path from 'node:path';
 import os from 'node:os';
-import {
-  spawnSync
-} from 'node:child_process';
+import {ownedProcess} from './owned-process.mjs';
 import {
   fileURLToPath
 } from 'node:url';
@@ -21,16 +19,24 @@ const executor = {
   host: os.hostname()
 };
 
+const probeDeadline = Date.now() + 150000;
 function call(command, input, extras = []) {
+  const remaining = probeDeadline - Date.now();
+  if (remaining <= 0) throw Object.assign(Error('Service probe scenario deadline exceeded'), {code:'operation_timeout'});
   const args = [path.join(pkg, 'bin/chelm.mjs'), ...command, '--runtime', runtime, ...extras, ...(input ? [
     '--input', '-'
   ] : [])];
-  const r = spawnSync(process.execPath, args, {
+  const r = ownedProcess(process.execPath, args, {
+    python: settings.python,
     input: input ? JSON.stringify(input) : undefined,
     encoding: 'utf8',
-    timeout: 180000
+    timeout: Math.min(60000, remaining),
+    phase: 'service-probe '+command.join(' ')
   });
-  const value = JSON.parse(r.stdout ?? 'null');
+  if (r.error) throw r.error;
+  let value;
+  try { value = JSON.parse(r.stdout ?? 'null'); }
+  catch { throw Object.assign(Error('Service probe '+command.join(' ')+' returned invalid JSON; exit='+r.status), {code:'input_invalid'}); }
   if (r.status !== 0 || !value?.ok) throw Object.assign(Error('Service probe ' + command.join(' ') + ' failed: ' + JSON
     .stringify(value)), {code:value?.error?.code ?? null});
   return value;
