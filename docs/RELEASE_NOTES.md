@@ -1,3 +1,27 @@
+# Chelm-host 1.3.1 — Windows reliability and migration guidance
+
+Supports **published Harness 0.13.0 exactly** with unchanged archive/manifest pins.
+Node 22.12+ / Python 3.12+ / Git remain required. Existing config-2 and config-3
+runtimes retain memory, configuration and provider selection. Pause executors,
+drain leases/assignments, replace the verified host package, verify and refresh.
+No reset or automatic runtime migration is performed.
+
+- VI-024 / #49: bound owned probe process trees, including caller-death cleanup,
+  finite stdin EOF and descendant/socket regressions with unrelated-process controls.
+- VI-023 / #50: share finite scenario/file/suite deadlines and measured Windows
+  scheduling between source and staged-package tests; retain every attempt.
+- VI-022 / #51: label MCP phases and nested causes, await idempotent transport
+  cleanup, and reconcile actual post-commit response loss through durable receipts.
+- VI-018 / #52: report recognized legacy configuration as migration_required with
+  runnable preflight commands; installers report read-only runtime readiness
+  separately from package installation success. Applying migration remains explicit.
+
+Historical consumer orphan/reset causes and missing VI-023 raw logs remain
+unconfirmed. Synthetic regressions and passing vendor Windows repetitions do not
+establish those causes or close live HTTPS/client gates #7/#10/#11. See
+WINDOWS_RELIABILITY.md, TEST_POLICY.md and ACCEPTANCE.md for observed evidence.
+The ZIP excludes node_modules; installers restore locked MCP dependencies.
+
 # Chelm-host 1.3.0 — host-owned memory providers / Harness 0.13.0
 
 Supports **published Harness 0.13.0 exactly**. Both runtime modes use the same

@@ -67,3 +67,45 @@ No minimum hardware capacity or historical timeout root cause is established by
 the supplied index alone. Compare the retained phases and concurrency before
 changing the policy for a consumer. A full staged run has no intentional skips;
 unstaged source runs explicitly skip package-only checks.
+
+## Observed final-policy measurements
+
+Run 45468016957 exercised the cumulative PR #56 tree on Windows Server 2022
+build 20348, published Harness 0.13.0. All attempts below passed 136/136 with
+zero skips; values include the shared runner's supervision/reporting overhead.
+
+| Node | Supported concurrency-2 attempts (seconds) | Concurrency-4 comparison (seconds) |
+| --- | --- | --- |
+| 22.12.0 | 580.279 / 562.670 / 565.012 | 422.254 |
+| 24.22.3 | 572.701 / 559.223 / 557.056 | 408.605 |
+
+Concurrency 4 was faster on these runners and passed; concurrency 2 remains the
+current conservative supported policy. This is not evidence that higher
+concurrency caused the historical failures. The final source was not rerun at
+concurrency 1; its failed predecessor measurement remains retained. Supported
+Windows attempts have only 20–43 seconds of headroom within 600 seconds, so
+these observations do not establish minimum consumer hardware capacity.
+
+Ten standalone Node 24 MCP attempts took 14.689–14.870 seconds each. Linux
+Node 22/24 full attempts took 59.715/74.196 seconds; macOS Node 22 took 166.836
+seconds. All five adapter suites passed 11/11. The full repeated Windows build
+sequence took 2209.328/2321.984 seconds on Node 22/24: the historical aggregate
+`tst9_under_10_minutes` field is false for that sequence, while each individual
+attempt remained within its 600-second bound. Capacity latency targets are
+separate and are not certified by these correctness results.
+
+See [CI summary](evidence/reliability-2026-11-24/ci-summary.json) for the exact
+tested tree, platform/report hashes, all attempts and retained failed controls.
+
+## Optional complete serial comparison
+
+Run the Windows reliability comparison workflow (manual dispatch, or changes to
+its workflow/qualification tool) to supplement ordinary release validation.
+`python tools/qualify-windows-reliability.py --package DIST_ZIP --harness HARNESS
+--output REPORTS` verifies the ZIP checksum/inventory/hashes, extracts one clean
+package and retains concurrency 4/1 plus every individual test file. Serial suite
+timeout remains a diagnostic, within the unchanged 600-second attempt bound.
+Every individual-file invocation must pass. The owner's four historical file
+names are unavailable; this covers all files without asserting their identity.
+Its 120-minute job orchestration limit covers the extra sequence; operation and
+suite deadlines are unchanged. Configuring this workflow is not observed evidence.

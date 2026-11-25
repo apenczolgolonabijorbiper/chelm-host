@@ -10,7 +10,7 @@ a read-only vendor installation and a private runtime writable by the pool.
 From an elevated Windows PowerShell 5.1 session on a disposable/test server:
 
 ```powershell
-./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.0.zip `
+./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.1.zip `
   -HarnessRoot C:/vendor/golem-harness -Output ./iis-identity.json
 ```
 
@@ -34,9 +34,9 @@ Provider mode is an additional independent probe; use the published 0.13.0
 Harness for all commands:
 
 ```powershell
-./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.0.zip `
+./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.1.zip `
   -HarnessRoot C:/vendor/golem-harness -MemoryProvider -Output ./iis-provider.json
-./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.0.zip `
+./tools/Test-IisIdentity.ps1 -HostZip ./dist/chelm-host-1.3.1.zip `
   -HarnessRoot C:/vendor/golem-harness -MemoryProvider -Mode IisExpress `
   -Output ./iis-express-provider.json
 ```

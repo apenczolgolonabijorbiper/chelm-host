@@ -1,0 +1,43 @@
+name: Windows reliability comparison
+on:
+  pull_request:
+    paths: ['tools/qualify-windows-reliability.py', '.github/workflows/windows-reliability.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: windows-reliability-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  qualify:
+    runs-on: windows-2022
+    # Includes normal repeated gates, two comparisons, and every individual file.
+    # Per-operation/scenario/file/attempt limits remain unchanged.
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.12'
+      - run: npm ci --ignore-scripts
+      - run: python tools/prepare-harness.py --destination ../harness-release
+      - run: python tools/build-release.py --harness ../harness-release --provider-harness ../harness-release
+      - name: Compare serial/parallel and verify each file in the same package
+        shell: powershell
+        run: |
+          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
+          python tools/qualify-windows-reliability.py --package $archive --harness ../harness-release --output dist/qualification
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: windows-reliability-comparison
+          path: |
+            dist/*.json
+            dist/*.log
+            dist/*.sha256
+            dist/qualification/
+          if-no-files-found: error
