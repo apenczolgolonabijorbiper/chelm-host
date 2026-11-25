@@ -1,7 +1,7 @@
 name: Windows reliability comparison
 on:
   pull_request:
-    paths: ['tools/qualify-windows-reliability.py', '.github/workflows/windows-reliability.yml']
+    paths: ['tools/owned-process.*', 'lib/remote*.mjs', 'tools/benchmark-capacity.mjs', 'tools/benchmark-provider.mjs']
   workflow_dispatch:
 permissions:
   contents: read
@@ -11,14 +11,17 @@ concurrency:
 jobs:
   qualify:
     runs-on: windows-2022
-    # Includes normal repeated gates, two comparisons, and every individual file.
-    # Per-operation/scenario/file/attempt limits remain unchanged.
+    # Includes repeated gates, two comparisons, every test file and capacity.
     timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22.12.0', '24']
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24'
+          node-version: ${{ matrix.node }}
       - uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.12'
@@ -31,10 +34,15 @@ jobs:
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
           python tools/qualify-windows-reliability.py --package $archive --harness ../harness-release --output dist/qualification
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Measure Windows capacity and provider boundary
+        run: |
+          node tools/benchmark-capacity.mjs --harness ../harness-release --output dist/capacity-Windows.json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tools/benchmark-provider.mjs --harness ../harness-release --provider-harness ../harness-release --output dist/provider-Windows.json
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
-          name: windows-reliability-comparison
+          name: windows-reliability-comparison-${{ matrix.node }}
           path: |
             dist/*.json
             dist/*.log

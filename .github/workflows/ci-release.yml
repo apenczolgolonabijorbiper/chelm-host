@@ -13,78 +13,73 @@ concurrency:
   group: chelm-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  package:
+    uses: ./.github/workflows/build-package.yml
+    with:
+      os: ubuntu-latest
+      node: '24'
+      publish-package: true
   validate:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - os: ubuntu-latest
-            node: '22.12.0'
-          - os: windows-2022
-            node: '22.12.0'
-          - os: macos-latest
-            node: '22.12.0'
-          - os: ubuntu-latest
-            node: '24'
-          - os: windows-2022
-            node: '24'
-    runs-on: ${{ matrix.os }}
-    # Four bounded suite attempts plus ten standalone MCP attempts on Windows;
-    # operation/scenario deadlines remain unchanged inside each attempt.
-    timeout-minutes: 90
-    defaults:
-      run:
-        working-directory: host
+        os: [ubuntu-latest, macos-latest]
+    uses: ./.github/workflows/build-package.yml
+    with:
+      os: ${{ matrix.os }}
+      node: '22.12.0'
+  windows:
+    needs: package
+    runs-on: windows-2022
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22.12.0', '24']
     steps:
       - uses: actions/checkout@v7.0.1
         with:
-          path: host
+          persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: ${{ matrix.node }}
       - uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.12'
-      - name: Install locked runtime dependencies
-        run: npm ci --ignore-scripts
-      - name: Download and verify published Harness 0.13.0
-        run: python tools/prepare-harness.py --version 0.13.0 --destination ../harness-release
-      - name: Build with all Chelm and harness backend conformance tests
-        run: python tools/build-release.py --harness ../harness-release --provider-harness ../harness-release
-      - name: Measure provider boundary and explicit oversized refusal
-        run: node tools/benchmark-provider.mjs --harness ../harness-release --provider-harness ../harness-release --output dist/provider-${{ runner.os }}.json
-      - name: Measure synthetic host capacity and tree bounds
-        run: node tools/benchmark-capacity.mjs --harness ../harness-release --output dist/capacity-${{ runner.os }}.json
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: chelm-release
+          path: dist
+      - name: Verify published Harness
+        run: python tools/prepare-harness.py --destination ../harness-release
+      - name: Verify packaged Chelm on Windows
+        shell: powershell
+        run: |
+          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
+          $testProfile = if ('${{ matrix.node }}' -eq '24') { 'focused' } else { 'smoke' }
+          python tools/qualify-windows-reliability.py --package $archive --harness ../harness-release --output dist/windows --profile $testProfile
       - name: Verify default full IIS application pool identity
-        if: runner.os == 'Windows'
+        if: matrix.node == '24'
         shell: powershell
         run: |
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
-          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/iis-identity.json -InstallPrerequisites
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/windows/iis-identity.json -InstallPrerequisites
       - name: Verify provider mode under full IIS and IIS Express
-        if: runner.os == 'Windows'
+        if: matrix.node == '24'
         shell: powershell
         run: |
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
-          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Output dist/iis-provider.json
-          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Mode IisExpress -Output dist/iis-express-provider.json
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Output dist/windows/iis-provider.json
+          ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Mode IisExpress -Output dist/windows/iis-express-provider.json
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
-          name: chelm-evidence-${{ matrix.os }}-${{ matrix.node }}
-          path: |
-            host/dist/*.json
-            host/dist/*.log
+          name: chelm-evidence-windows-2022-${{ matrix.node }}
+          path: dist/windows/
           if-no-files-found: warn
-      - uses: actions/upload-artifact@v7.0.2
-        if: matrix.os == 'ubuntu-latest' && matrix.node == '24'
-        with:
-          name: chelm-release
-          path: host/dist/*
-          if-no-files-found: error
   release:
     if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v'))
-    needs: validate
+    needs: [package, validate, windows]
     runs-on: ubuntu-latest
     permissions:
       contents: write

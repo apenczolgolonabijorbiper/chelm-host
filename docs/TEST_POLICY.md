@@ -42,16 +42,20 @@ phases/bounds and peak concurrent supervised commands. This peak counts owned
 CLI commands, not all Git/Python grandchildren. Failed attempts remain failures.
 `--repeat N` runs and retains N attempts and fails if any failed; it is not a retry.
 
-The release builder requires three complete staged Windows runs and retains a
-separate concurrency-4 comparison, whose failures are diagnostic rather than
-the supported release gate. Windows Node 24 additionally requires ten independent
-MCP cognition attempts. All selected runs still use finite operation/suite bounds.
-Linux/macOS perform the full staged control suite; platform artifacts include
-the logs as well as reports. Checks here do not complete live HTTPS/IIS acceptance.
+Routine release CI builds and runs the full staged suite on Ubuntu (Node 22.12
+and 24) and macOS (Node 22.12). Both Windows jobs verify the Ubuntu Node 24
+ZIP and manifest, install dependencies, verify the CLI and exercise an MCP
+round trip. Node 24 also covers Windows paths, file sharing, process ownership
+and cleanup, response-loss recovery, and full IIS/IIS Express. Publication
+requires both Windows jobs.
 
-Each standalone MCP attempt has a 180-second outer bound. The CI job allows 90
-minutes for the full prescribed sequence and subsequent benchmarks/IIS checks;
-this orchestration allowance does not raise any command, probe or suite bound.
+The Windows reliability comparison workflow runs the extended release builder
+on Node 22.12 and 24. It retains three required full attempts, the diagnostic
+concurrency-4 comparison and ten standalone MCP attempts on Node 24. It also
+retains capacity measurements and serial/per-file diagnostics. Use it for
+process supervision, remote transport or benchmark changes, or dispatch it
+manually. Each standalone MCP attempt retains its 180-second outer bound.
+
 For comparison, master cd14af4's successful Windows Node 22 suite took 277 seconds
 at concurrency 4, with 999 seconds of summed per-test elapsed time. Those are
 historical CI measurements, not a prediction of serial time or reference-machine
@@ -100,15 +104,15 @@ tested tree, platform/report hashes, all attempts and retained failed controls.
 The expanded 152-test suite hit the 600-second outer bound twice on Windows
 Node 22 in [run 45620958269](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45620958269/job/139228634025).
 The third attempt passed 152/152 in 599.360 seconds of Node test-runner time.
-The supported staged Windows release suite now has a 750-second outer bound
+The full staged Windows reliability suite has a 750-second outer bound
 for each of its three required attempts. The file (600 seconds), scenario
 (180 seconds), standalone MCP (180 seconds) and command (60 seconds) bounds
 still apply. Diagnostic comparisons use the default 600-second outer bound.
 
 ## Optional complete serial comparison
 
-Run the Windows reliability comparison workflow (manual dispatch, or changes to
-its workflow/qualification tool) to supplement ordinary release validation.
+Run the Windows reliability comparison workflow to supplement ordinary
+release validation.
 `python tools/qualify-windows-reliability.py --package DIST_ZIP --harness HARNESS
 --output REPORTS` verifies the ZIP checksum/inventory/hashes, extracts one clean
 package and retains concurrency 4/1 plus every individual test file. Serial suite

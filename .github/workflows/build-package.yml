@@ -1,0 +1,56 @@
+name: Build and validate Chelm package
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      node:
+        required: true
+        type: string
+      publish-package:
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ${{ inputs.os }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: host
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          path: host
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: ${{ inputs.node }}
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Install locked runtime dependencies
+        run: npm ci --ignore-scripts
+      - name: Download and verify published Harness 0.13.0
+        run: python tools/prepare-harness.py --version 0.13.0 --destination ../harness-release
+      - name: Build with all Chelm and harness backend conformance tests
+        run: python tools/build-release.py --harness ../harness-release --provider-harness ../harness-release
+      - name: Measure provider boundary and explicit oversized refusal
+        run: node tools/benchmark-provider.mjs --harness ../harness-release --provider-harness ../harness-release --output dist/provider-${{ runner.os }}.json
+      - name: Measure synthetic host capacity and tree bounds
+        run: node tools/benchmark-capacity.mjs --harness ../harness-release --output dist/capacity-${{ runner.os }}.json
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: chelm-evidence-${{ inputs.os }}-${{ inputs.node }}
+          path: |
+            host/dist/*.json
+            host/dist/*.log
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v7.0.2
+        if: inputs.publish-package
+        with:
+          name: chelm-release
+          path: host/dist/*
+          if-no-files-found: error
