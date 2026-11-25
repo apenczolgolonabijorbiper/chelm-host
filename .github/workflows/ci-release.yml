@@ -13,58 +13,23 @@ concurrency:
   group: chelm-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  package:
+    uses: ./.github/workflows/build-package.yml
+    with:
+      os: ubuntu-latest
+      node: '24'
+      publish-package: true
   validate:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - os: ubuntu-latest
-            node: '22.12.0'
-          - os: macos-latest
-            node: '22.12.0'
-          - os: ubuntu-latest
-            node: '24'
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
-    defaults:
-      run:
-        working-directory: host
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          path: host
-      - uses: actions/setup-node@v7.1.0
-        with:
-          node-version: ${{ matrix.node }}
-      - uses: actions/setup-python@v7.1.0
-        with:
-          python-version: '3.12'
-      - name: Install locked runtime dependencies
-        run: npm ci --ignore-scripts
-      - name: Download and verify published Harness 0.13.0
-        run: python tools/prepare-harness.py --version 0.13.0 --destination ../harness-release
-      - name: Build with all Chelm and harness backend conformance tests
-        run: python tools/build-release.py --harness ../harness-release --provider-harness ../harness-release
-      - name: Measure provider boundary and explicit oversized refusal
-        run: node tools/benchmark-provider.mjs --harness ../harness-release --provider-harness ../harness-release --output dist/provider-${{ runner.os }}.json
-      - name: Measure synthetic host capacity and tree bounds
-        run: node tools/benchmark-capacity.mjs --harness ../harness-release --output dist/capacity-${{ runner.os }}.json
-      - uses: actions/upload-artifact@v7.0.2
-        if: always()
-        with:
-          name: chelm-evidence-${{ matrix.os }}-${{ matrix.node }}
-          path: |
-            host/dist/*.json
-            host/dist/*.log
-          if-no-files-found: warn
-      - uses: actions/upload-artifact@v7.0.2
-        if: matrix.os == 'ubuntu-latest' && matrix.node == '24'
-        with:
-          name: chelm-release
-          path: host/dist/*
-          if-no-files-found: error
+        os: [ubuntu-latest, macos-latest]
+    uses: ./.github/workflows/build-package.yml
+    with:
+      os: ${{ matrix.os }}
+      node: '22.12.0'
   windows:
-    needs: validate
+    needs: package
     runs-on: windows-2022
     timeout-minutes: 20
     strategy:
@@ -114,7 +79,7 @@ jobs:
           if-no-files-found: warn
   release:
     if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v'))
-    needs: [validate, windows]
+    needs: [package, validate, windows]
     runs-on: ubuntu-latest
     permissions:
       contents: write
