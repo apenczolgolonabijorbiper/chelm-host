@@ -9,6 +9,9 @@ import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
 import {source,harness} from './helpers.mjs';
 import {startServer} from '../lib/remote-server.mjs';
+import {inspectRemoteDiscovery} from '../tools/remote-discovery.mjs';
+import {remoteToolSchemas} from '../lib/remote-tools.mjs';
+import {z} from 'zod';
 const exec=promisify(execFile), tool=path.join(source,'tools/issue11-acceptance.mjs');
 test('issue11 operator toolkit: isolated preparation, auth refusals, measured bridge and content-free collection', async t=>{
   const base=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'chelm-issue11-'));
@@ -25,6 +28,10 @@ test('issue11 operator toolkit: isolated preparation, auth refusals, measured br
   const url=`http://127.0.0.1:${server.address().port}/mcp/app`, report=path.join(base,'connectivity.json');
   await exec(process.execPath,[tool,'probe','--url',url,'--token-env','ISSUE11_WORKER_TOKEN','--denied-token-env','ISSUE11_DENIED_TOKEN','--output',report],{env});
   assert.equal(JSON.parse(fs.readFileSync(report)).ok,true);
+  const discovery=JSON.parse(fs.readFileSync(report)).checks.find(c=>c.name==='discovery');
+  assert.deepEqual(discovery.incompatible_tools,[]);
+  assert.deepEqual(discovery.incompatible_prompts,[]);
+  await exec(process.execPath,[path.join(source,'tools/probe-remote.mjs'),'--url',url,'--token-env','ISSUE11_WORKER_TOKEN'],{env});
   const broken=path.join(base,'broken.json');
   await assert.rejects(exec(process.execPath,[tool,'probe','--url',url,'--token-env','ISSUE11_WORKER_TOKEN','--output',broken],{env}));
   assert.equal(JSON.parse(fs.readFileSync(broken)).checks.find(c=>c.name==='denied_runtime').state,'not_run');
@@ -46,4 +53,23 @@ test('issue11 operator toolkit: isolated preparation, auth refusals, measured br
     const text=fs.readFileSync(p,'utf8');assert.equal(text.includes(token),false);assert.equal(text.includes(denied),false);
     assert.equal(text.includes('Release R-11 requires'),false);assert.equal(text.includes(root),false);
   }
+});
+
+test('remote discovery refuses missing operations, incompatible schemas and stale prompt bodies despite sufficient counts',async()=>{
+  const once=fs.readFileSync(path.join(source,'prompts/remote-worker-once.sudo.md'),'utf8');
+  const bodies={chelm_remote_once:once,chelm_remote_loop:once+'\n'+fs.readFileSync(path.join(source,'prompts/remote-worker-loop.sudo.md'),'utf8'),
+    chelm_remote_integration:once+'\n'+fs.readFileSync(path.join(source,'prompts/remote-integration.sudo.md'),'utf8')};
+  let tools=Object.entries(remoteToolSchemas).map(([name,schema])=>({name,inputSchema:z.toJSONSchema(schema)}));
+  const client={listTools:async()=>({tools}),listPrompts:async()=>({prompts:Object.keys(bodies).map(name=>({name}))}),
+    getPrompt:async({name})=>({messages:[{role:'user',content:{type:'text',text:bodies[name]}}]})};
+  assert.equal((await inspectRemoteDiscovery(client)).pass,true);
+  tools=tools.map(t=>t.name==='chelm_stage_output'?{...t,name:'unrelated_operation'}:t);
+  assert.deepEqual((await inspectRemoteDiscovery(client)).incompatible_tools,['chelm_stage_output']);
+  tools=Object.entries(remoteToolSchemas).map(([name,schema])=>({name,inputSchema:z.toJSONSchema(schema)}));
+  tools.find(t=>t.name==='chelm_request_work').inputSchema={type:'object',required:['incompatible_required_field'],properties:{incompatible_required_field:{type:'string'}}};
+  bodies.chelm_remote_once='Old instructions';
+  const result=await inspectRemoteDiscovery(client);
+  assert.equal(result.pass,false);
+  assert.deepEqual(result.incompatible_tools,['chelm_request_work']);
+  assert.deepEqual(result.incompatible_prompts,['chelm_remote_once']);
 });

@@ -22,8 +22,10 @@ $env:CHELM_WORKER_TOKEN = '<credential from your secret store>'
 node tools/probe-remote.mjs --url https://golem.example/mcp --token-env CHELM_WORKER_TOKEN --output remote-probe.json
 ```
 
-Expected: JSON `ok: true`, 11 worker tools, three prompts, successful read-only
-work listing. The report records the installed SDK version and server identity,
+Expected: JSON `ok: true`, compatible schemas for all 11 file-worker operations,
+the three file-worker prompts matching the probe's package, and successful read-only
+work listing. Additional tools/prompts are allowed. Use the same verified package
+on both machines. The report records the installed SDK version and server identity,
 without tokens, work contents or server paths. A wrong token must give HTTP 401;
 a principal without runtime permission must give HTTP 403. Confirm the origin
 allowlist and inspect server/proxy logs for secret or observation leakage.
