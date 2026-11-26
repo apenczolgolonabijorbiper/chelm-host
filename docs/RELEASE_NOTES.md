@@ -1,3 +1,16 @@
+# Chelm-host 1.4.1 — Harness 0.15.0 approval and installer preflight
+
+Approve the official Harness 0.15.0 package after 92 passing qualification cases
+against published host 1.4.0, including cognizer routing, file workers, cognition,
+providers and cross-package upgrade/checkpoint checks. Retain its exact archive
+and manifest identities and keep the build reference at 0.13.0.
+
+Application-owned upgrade scripts must not parse the descriptive
+`harness_supported` field or mistake the build-reference provenance hash for the
+only allowed runtime. Document delegation to the incoming delivery's `chelm verify`
+command with selected-package integrity and feature checks. This release does not
+modify an application's external PowerShell upgrade script.
+
 # Chelm-host 1.4.0 — preferred cognizer routing and qualified compatibility
 
 ## Preferred cognizer dispatch (#59)

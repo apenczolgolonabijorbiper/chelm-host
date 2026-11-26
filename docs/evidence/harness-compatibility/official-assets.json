@@ -2,6 +2,13 @@
   "source": "https://api.github.com/repos/apenczolgolonabijorbiper/golem14-harness/releases?per_page=20",
   "releases": [
     {
+      "version": "0.15.0",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.15.0",
+      "archive": "golem-cognitive-harness-0.15.0.zip",
+      "archive_sha256": "66f9251137900720964a5106f712e89a7c9c3ced2c5d70d6b68ef1bccf06df94",
+      "asset_id": 793312328
+    },
+    {
       "version": "0.14.0",
       "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.14.0",
       "archive": "golem-cognitive-harness-0.14.0.zip",

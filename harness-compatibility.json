@@ -146,6 +146,19 @@
         "memory_provider"
       ],
       "evidence": "docs/evidence/harness-compatibility/0.14.0.json"
+    },
+    "0.15.0": {
+      "version": "0.15.0",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.15.0",
+      "archive": "golem-cognitive-harness-0.15.0.zip",
+      "archive_sha256": "66f9251137900720964a5106f712e89a7c9c3ced2c5d70d6b68ef1bccf06df94",
+      "manifest_sha256": "985c38f1460e92506ec0a0c115b4dc8c6c23084f6d3e76a996868cf6b76f9e60",
+      "features": [
+        "file_worker",
+        "cognitive_tasks",
+        "memory_provider"
+      ],
+      "evidence": "docs/evidence/harness-compatibility/0.15.0.json"
     }
   },
   "checkpoint_policy": {
