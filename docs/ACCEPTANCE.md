@@ -1,3 +1,29 @@
+# Chelm 1.4.0 platform qualification — issue #59
+
+The release runtime at `cd38c45ef5789edbc5e2cef6ba4af32e9e1a9731` passed
+[all required PR platform checks](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45792926783):
+Ubuntu Node 22.12/24 and macOS Node 22.12 full builds, plus the Linux-built ZIP
+on Windows Node 22.12/24 with full IIS and IIS Express provider checks.
+[Focused IIS cognition](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45792926742)
+and [Harness qualification](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45792926848)
+also passed. All seven approved Harness releases passed their supported features;
+passing unapproved 0.15.0 was not promoted. Older unapproved-neighbor failures
+remain visible and non-gating. See [the exact job/source record](evidence/cognizer-routing-2026-11-26/platform-qualification-1.4.0.json).
+
+The initial macOS run failed three fixture cases because `/var` is a symlink.
+The fixture now resolves the OS temporary directory first; production symlink
+refusal is unchanged. The final 1.4.0 local build passed 174 host tests, 11 adapter
+checks and 9 Python checks with no failures/skips. VERSION, npm/CLI/MCP identities,
+README download/build names and operator examples agree on 1.4.0.
+
+The master workflow repeats the required package/platform gates before publishing
+[1.4.0 and its checksum/platform evidence](https://github.com/apenczolgolonabijorbiper/chelm-host/releases/tag/v1.4.0).
+The long supplemental Windows reliability comparison is outside those release
+dependencies. Shem execution, its qualified triplet and actual model cognition
+remain separate work in Shem #17; host configuration/handshake/rollback are in
+[the routing guide](COGNIZER_ROUTING.md). The following candidate records are
+historical evidence from before the release assembly.
+
 # Preferred cognizer routing — issue #59 / candidate 2026-11-26
 
 The final staged Linux reference package passed **174/174 host tests, 11/11

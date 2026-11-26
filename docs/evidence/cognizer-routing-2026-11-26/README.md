@@ -1,3 +1,7 @@
+This file records the pre-release candidate. For the later 1.4.0 platform
+qualification and publication gates, see [ACCEPTANCE.md](../../ACCEPTANCE.md)
+and [the qualified runtime/job record](platform-qualification-1.4.0.json).
+
 # Issue #59 routing acceptance — 2026-11-26
 
 Observed locally on Linux, Node 24.22.3 and Python 3.12.14. These are deterministic
