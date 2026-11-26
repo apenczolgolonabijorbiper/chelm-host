@@ -12,20 +12,29 @@ from the automated fixtures. Do not upgrade an application for this check.
   >=3.12, Git. Use a dedicated test hostname with a certificate trusted by B.
 - **B**: your Windows 11 workstation with Node and an MCP-capable inference
   client (for example Codex). B needs no harness, Python, server paths or share.
-- Use the published **1.3.0** release or its successful CI artifact
-  **chelm-release**. Verify `chelm-host-1.3.0.zip` against its adjacent `.sha256`
-  before extraction. Record the release target or artifact CI revision.
+- Use a verified published release or a successful candidate CI artifact
+  **chelm-release**. Record the exact release version/artifact revision. Use the
+  same package on A and B: the probe checks all 11 file-worker operations against
+  representative call shapes and retrieves the three remote prompts, comparing
+  their complete text with that package. Extra tools/prompts are allowed. This
+  checks schema/prompt delivery, not actual agent cognition or every schema edge.
+  A mixed-version bridge/package can fail discovery; align the packages before
+  testing. Read VERSION inside your extracted package to identify its version.
 - After unpacking `chelm-release.zip` into Downloads/chelm-release, on A:
 
 ```powershell
-$Archive = 'C:/Users/YOUR_USER/Downloads/chelm-release/chelm-host-1.3.0.zip'
+$ReleaseVersion = '1.4.0' # replace with the release/artifact you actually downloaded
+$Archive = "C:/Users/YOUR_USER/Downloads/chelm-release/chelm-host-$ReleaseVersion.zip"
 $Expected = ((Get-Content "$Archive.sha256" -Raw).Trim() -split '\s+')[0]
 if ((Get-FileHash $Archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne $Expected) { throw 'ZIP checksum mismatch' }
 if (Test-Path C:/GolemAcceptance/chelm-host) { throw 'Choose a fresh test folder' }
 Expand-Archive -LiteralPath $Archive -DestinationPath C:/GolemAcceptance
 ```
 
-- Install the exact published harness 0.13.0 on A. With Python available:
+- Use the deterministic reference harness 0.13.0 for this isolated config-2
+  file-worker fixture. Other releases require explicit file-worker approval in
+  the selected host's harness-compatibility.json; this is not an exact-version
+  requirement for every Chelm deployment. With Python available:
 
 ```powershell
 $Pkg = 'C:/GolemAcceptance/chelm-host'
@@ -151,7 +160,8 @@ node "$Pkg/tools/issue11-acceptance.mjs" probe --url $Url --token-env ISSUE11_WO
 ```
 
 Expected: `ok:true`; invalid_token=401, denied_runtime=403, denied_origin=403,
-discovery and authorized_read pass (at least 11 tools and three prompts). The tool
+discovery and authorized_read pass. Discovery reports empty incompatible_tools
+and incompatible_prompts arrays. Counts can exceed 11 tools/three prompts. The tool
 does not assign work. It records a hashed machine identifier, no token or content.
 If it fails, keep its JSON: 502 suggests backend/proxy, certificate failures mean
 trust/hostname problems, 401 a secret mismatch, 403 runtime/origin settings.

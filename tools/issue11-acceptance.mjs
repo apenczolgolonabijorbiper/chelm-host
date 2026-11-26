@@ -7,6 +7,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
+import {inspectRemoteDiscovery} from './remote-discovery.mjs';
 const pkg=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const argv=process.argv.slice(2), command=argv[0];
 const option=k=>{const i=argv.indexOf('--'+k);return i<0?undefined:argv[i+1];};
@@ -46,9 +47,9 @@ async function probe(){
       const code=await request(denied);check('denied_runtime',code===403,{http_status:code});}
     else check('denied_runtime',false,{state:'not_run'});
     await client.connect(new StreamableHTTPClientTransport(url,{requestInit:{headers:{Authorization:'Bearer '+token}}}));
-    const tools=(await client.listTools()).tools.map(t=>t.name), prompts=(await client.listPrompts()).prompts.map(p=>p.name);
+    const discovery=await inspectRemoteDiscovery(client);
     const result=await client.callTool({name:'chelm_list_work',arguments:{limit:1}}),v=JSON.parse(result.content[0].text);
-    check('discovery',tools.includes('chelm_submit_candidate')&&tools.length>=11&&prompts.length>=3,{tool_count:tools.length,prompt_count:prompts.length});
+    check('discovery',discovery.pass,discovery);
     check('authorized_read',!result.isError&&v.ok===true);
     report.server=client.getServerVersion();
   }catch(e){check('connection',false,{error_class:String(e.name??'Error').slice(0,80)});}
