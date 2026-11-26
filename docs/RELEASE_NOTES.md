@@ -1,5 +1,8 @@
 # Chelm-host 1.4.1 — Harness 0.15.0 approval and installer preflight
 
+Set the maintained qualification minimum to 0.11.0; omit obsolete older jobs
+and reject below-minimum manual candidates before package access.
+
 Approve the official Harness 0.15.0 package after 92 passing qualification cases
 against published host 1.4.0, including cognizer routing, file workers, cognition,
 providers and cross-package upgrade/checkpoint checks. Retain its exact archive

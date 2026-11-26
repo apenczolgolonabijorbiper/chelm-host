@@ -39,6 +39,8 @@ def qualify(version, output, archive=None, sha256=None, reference_archive=None):
     report['phase']='package verification'
     save()
     try:
+        report['phase']='version-policy'
+        module('qualification_plan','harness-qualification-plan.py').require_minimum(catalog,version)
         with tempfile.TemporaryDirectory(prefix='chelm-qualification-') as temp:
             temp = Path(temp)
             engine = temp / 'harness'
