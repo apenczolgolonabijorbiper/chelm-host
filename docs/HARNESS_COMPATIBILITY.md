@@ -31,7 +31,9 @@ daily at 06:27 UTC. It selects the reference, every approved release, two availa
 unapproved older neighbors and the latest unapproved newer stable release.
 Manual dispatch also accepts a specific published prerelease or a Harness Actions
 artifact ID plus candidate version and expected inner-ZIP SHA-256. Artifact jobs
-require read access to upstream Actions. Candidate failures retain failed steps,
+require read access to upstream Actions; configure `HARNESS_QUALIFICATION_TOKEN`
+when the default workflow token cannot read the upstream artifact. Candidate
+failures retain failed steps,
 reports, logs and summaries; approved-feature regressions fail the workflow.
 Windows release validation still consumes the Linux-built host ZIP immediately
 after its package job, with the focused #60 policy unchanged.

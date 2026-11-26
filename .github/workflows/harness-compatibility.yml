@@ -33,7 +33,15 @@ jobs:
       - id: plan
         env:
           CANDIDATE: ${{ inputs.candidate }}
+          ARTIFACT_ID: ${{ inputs.artifact_id }}
+          EXPECTED_SHA256: ${{ inputs.sha256 }}
         run: |
+          if [[ -n "$ARTIFACT_ID" ]]; then
+            if [[ -z "$CANDIDATE" || ! "$ARTIFACT_ID" =~ ^[0-9]+$ || ! "$EXPECTED_SHA256" =~ ^[a-f0-9]{64}$ ]]; then
+              echo "Artifact qualification requires candidate, numeric artifact_id and expected ZIP SHA-256" >&2
+              exit 2
+            fi
+          fi
           matrix=$(python tools/harness-qualification-plan.py "$CANDIDATE")
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
   qualify:
@@ -60,7 +68,7 @@ jobs:
           CANDIDATE: ${{ inputs.candidate }}
           ARTIFACT_ID: ${{ inputs.artifact_id }}
           EXPECTED_SHA256: ${{ inputs.sha256 }}
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.HARNESS_QUALIFICATION_TOKEN || github.token }}
         run: |
           args=()
           if [[ -n "$ARTIFACT_ID" && "$SELECTED_VERSION" == "$CANDIDATE" ]]; then
