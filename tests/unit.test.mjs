@@ -97,7 +97,7 @@ test('CON-2: launching a CLI through an OS path alias still emits JSON', async t
     encoding: 'utf8'
   });
   assert.equal(r.status, 0, r.stderr);
-  assert.equal(JSON.parse(r.stdout).package_version, '1.3.1');
+  assert.equal(JSON.parse(r.stdout).package_version, '1.4.0');
 });
 
 

@@ -6,14 +6,13 @@ independent synthetic clients and any conforming implementation. Existing
 installations keep unrestricted compatible-worker dispatch when the setting is
 absent or disabled; Shem is never selected automatically.
 
-This implementation is **unreleased**. Published Chelm 1.3.1 does not accept the
+Available from **Chelm 1.4.0**. Published Chelm 1.3.1 does not accept the
 setting. Negotiate `version.capabilities` and the routing tool definitions before
-using these examples. The reference for candidate tests is published Harness
+using these examples. The deterministic release reference is published Harness
 0.13.0. The approval catalog retains file workers from 0.11.0, cognition from
 0.12.0 and providers from 0.13.0 for its explicitly listed releases through
-0.14.0; routing never widens those feature approvals. The new contract needs a
-coordinated host release and version-qualified Shem switch-guide update before
-consumer rollout. See [Harness compatibility](HARNESS_COMPATIBILITY.md).
+0.14.0; routing never widens those feature approvals. Shem must negotiate the published routing capability and supported
+contracts before consumer rollout; a host release alone does not implement Shem. See [Harness compatibility](HARNESS_COMPATIBILITY.md).
 
 ## Configuration and effective policy
 
@@ -180,7 +179,7 @@ or null for unrestricted dispatch. None of these operations changes memory,
 provider, source identities, intake, guidance or Git HEAD, or reinitializes state.
 
 The companion [Shem switch guide](https://github.com/apenczolgolonabijorbiper/shem-cognizer/blob/8557d3cca94d3e3009557a9661247f484d7f0ce9/docs/SWITCHING_TO_SHEM.md)
-needs a release-qualified update after host publication. Shem #17/#16 track
+is pinned to the reviewed planning revision. Shem #17/#16 track
 transition/reference decisions. This host change neither promotes Shem to
 reference nor retires other conforming cognizers.
 

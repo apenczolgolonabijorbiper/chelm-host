@@ -28,7 +28,7 @@ const next=(f,p,request_id=p,extra={})=>call(f,p,'chelm_request_work',{request_i
 const refs=w=>({work_id:w.work_id,attempt:w.attempt});
 
 function cheap(t,p=policy()){
-  const root=fs.mkdtempSync(path.join(os.tmpdir(),'routing-test-'));
+  const root=fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()),'routing-test-'));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const cfg={...defaults(),harness:{root:harness},preferred_cognizer:p};
   const who=principal=>({transport:'remote',principal});
