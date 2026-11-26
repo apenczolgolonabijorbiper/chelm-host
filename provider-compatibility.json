@@ -8,5 +8,7 @@
   "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b",
   "provider_version": 1,
   "host_api_version": 2,
-  "production_enabled": true
+  "production_enabled": true,
+  "qualification_file": "harness-compatibility.json",
+  "reference_only": true
 }

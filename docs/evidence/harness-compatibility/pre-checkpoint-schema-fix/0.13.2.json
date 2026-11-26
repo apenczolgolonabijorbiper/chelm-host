@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-25T22:04:29.362990+00:00",
+  "host_version": "1.3.1",
+  "host_revision": "1b7072dcd29117130baada2a0b56a99436025dbc",
+  "platform": "linux",
+  "node": "v24.22.3",
+  "python": "3.12.14",
+  "version": "0.13.2",
+  "approved_at_start": false,
+  "checkpoint": {
+    "restore": "exact host code and Harness manifest identity",
+    "cross_package_restore": false,
+    "upgrade": "drain leases and assignments; explicit harness upgrade; checkpoint again"
+  },
+  "required": {
+    "file_worker": {
+      "contracts": {
+        "graph": 2,
+        "hypotheses": 1,
+        "adapter": 1
+      },
+      "capabilities": [
+        "candidate-validation-v1",
+        "purpose-guidance-v2",
+        "profile-install-v1",
+        "core-policies-v2"
+      ],
+      "files": [
+        "processor/init-instance.py",
+        "processor/process.py",
+        "processor/memory-tool.mjs",
+        "adapters/reference-git/adapter.mjs",
+        "adapters/conformance/adapter.test.mjs"
+      ]
+    },
+    "cognitive_tasks": {
+      "contracts": {
+        "cognitive_task": 1
+      },
+      "capabilities": [
+        "cognitive-task-v1",
+        "cognitive-context-v1",
+        "cognitive-result-v1",
+        "learning-hypothesis-v1",
+        "hypothesis-unknown-confidence-v1"
+      ],
+      "files": [
+        "server/cognitive-task.mjs",
+        "server/cognitive-reference.mjs"
+      ]
+    },
+    "memory_provider": {
+      "contracts": {
+        "provider_version": 1,
+        "logical_version": 2,
+        "host_api_version": 2
+      },
+      "capabilities": [
+        "record-reads-v1",
+        "paged-evidence-v1",
+        "semantic-changes-v1",
+        "candidate-isolation-v1",
+        "portable-export-v1"
+      ],
+      "files": [
+        "server/memory-contract.mjs",
+        "server/provider-memory.mjs",
+        "server/memory-transfer.mjs"
+      ]
+    }
+  },
+  "features": {
+    "file_worker": {
+      "status": "fail",
+      "missing": [],
+      "checks": [
+        {
+          "name": "file_worker",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "--test-timeout=600000",
+            "tests/harness-compatibility.test.mjs",
+            "tests/conformance/app-contract.test.mjs",
+            "tests/conformance/worker-contract.test.mjs",
+            "tests/conformance/release-pair.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 20,
+            "pass": 20,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.13.2-file_worker.log"
+        },
+        {
+          "name": "adapter",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "/tmp/chelm-qualification-d8b_c48t/harness/adapters/conformance/adapter.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 11,
+            "pass": 11,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.13.2-adapter.log"
+        },
+        {
+          "name": "upgrade",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "tests/harness-upgrade.test.mjs"
+          ],
+          "exit": 1,
+          "counts": {
+            "tests": 2,
+            "pass": 1,
+            "fail": 1,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.13.2-upgrade.log"
+        }
+      ]
+    },
+    "cognitive_tasks": {
+      "status": "pass",
+      "missing": [],
+      "checks": [
+        {
+          "name": "cognitive_tasks",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "--test-timeout=600000",
+            "tests/conformance/cognitive.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 12,
+            "pass": 12,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.13.2-cognitive_tasks.log"
+        }
+      ]
+    },
+    "memory_provider": {
+      "status": "pass",
+      "missing": [],
+      "checks": [
+        {
+          "name": "memory_provider",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "--test-timeout=600000",
+            "tests/conformance/memory-provider.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 31,
+            "pass": 31,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.13.2-memory_provider.log"
+        }
+      ]
+    }
+  },
+  "package": {
+    "version": "0.13.2",
+    "archive": "golem-cognitive-harness-0.13.2.zip",
+    "archive_sha256": "275f98b7fe5b3f1d237f9cd502359189f720be10aa05d708ac55816209f06366",
+    "manifest_sha256": "411fe117b61ffb1288e08fbe2d05223ac8b45c5558e2a4c2f97c515fe9f6878b",
+    "release_url": "local-build-artifact",
+    "files": 131,
+    "source": "isolated-candidate",
+    "production_approved": false
+  },
+  "detected": {
+    "contracts": {
+      "graph": 2,
+      "hypotheses": 1,
+      "cognitive_task": 1,
+      "provider_version": 1,
+      "logical_version": 2,
+      "host_api_version": 2,
+      "adapter": 1
+    },
+    "capabilities": [
+      "cognitive-task-v1",
+      "cognitive-context-v1",
+      "cognitive-result-v1",
+      "learning-hypothesis-v1",
+      "hypothesis-unknown-confidence-v1",
+      "record-reads-v1",
+      "paged-evidence-v1",
+      "semantic-changes-v1",
+      "candidate-isolation-v1",
+      "portable-export-v1",
+      "memory-provider-v1",
+      "candidate-validation-v1",
+      "purpose-guidance-v2",
+      "profile-install-v1",
+      "core-policies-v2"
+    ],
+    "errors": {}
+  },
+  "staged_host_manifest_sha256": "a968c4b562fe715e418e86a0fd5c9d0072f8ae5f30ce78d3bda69a3c8a3e42de",
+  "status": "fail",
+  "reference_feature_regressions": [
+    "file_worker"
+  ],
+  "promotion": "review required; candidate evidence never changes the production catalog"
+}

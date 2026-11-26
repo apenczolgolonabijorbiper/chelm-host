@@ -1,3 +1,20 @@
+# Harness compatibility qualification — issue #61
+
+The current implementation retains seven local Linux qualification reports for
+published Harness 0.11.0, 0.12.0, 0.13.0, 0.13.1, 0.13.2, 0.13.3 and 0.14.0:
+**449 passing cases** across file-worker/adapter, cognition/learning, provider and
+upgrade checks, with no failures, cancellations or skips in the approved reports.
+Feature-specific unsupported results remain explicit. See the
+[tested version matrix](HARNESS_COMPATIBILITY.md) and
+[retained failures and corrected evidence](evidence/harness-compatibility/README.md).
+The full staged candidate build also passed **158/158 host tests, 11/11 adapter
+checks and 9/9 Python checks**, plus the host and telemetry benchmarks. The suite
+took 153.22 seconds. The build exercised reference-to-0.14.0 upgrades and exact
+checkpoint restoration; see [staged build evidence](evidence/harness-compatibility/staged-build.json).
+The reference package remains 0.13.0. These results use Node 24.22.3 / Python
+3.12.14; the new Ubuntu qualification workflow is separate from the historical
+Windows/macOS platform results below.
+
 # Observed platform acceptance — plan #53 / reviewed 2026-11-25
 
 The cumulative implementation in PR #56 passed all five jobs in

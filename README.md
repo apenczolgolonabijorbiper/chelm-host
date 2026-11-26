@@ -2,7 +2,9 @@
 
 Chelm-host is where the Golem lives: a local and remote-worker host for
 [Golem XIV Harness](https://github.com/apenczolgolonabijorbiper/golem14-harness).
-Version **1.3.1** supports **harness 0.13.0 exactly**. App/read-model contracts
+Development from **1.3.1** supports the approved Harness releases and per-feature
+contracts in [the compatibility matrix](docs/HARNESS_COMPATIBILITY.md); **0.13.0**
+remains the deterministic build reference. App/read-model contracts
 remain v1; worker and runtime configuration contracts are v2.
 
 It supplies intake, conversation records, committed memory views, transactional
@@ -189,9 +191,9 @@ creates its own disposable runtime; it does not modify an application runtime.
 
 Durable memory-backed questions have an additive `task` API and bounded local /
 remote cognitive-worker binding. See [COGNITIVE_TASKS.md](docs/COGNITIVE_TASKS.md)
-and [COGNITIVE_ACCEPTANCE.md](docs/COGNITIVE_ACCEPTANCE.md). The pinned published
-Harness 0.13.0 provides these contracts. The same verified package is used for
-production loading and the full cognition test suite.
+and [COGNITIVE_ACCEPTANCE.md](docs/COGNITIVE_ACCEPTANCE.md). Select a release
+approved for cognitive tasks in the [compatibility matrix](docs/HARNESS_COMPATIBILITY.md).
+Routine release CI uses the published 0.13.0 reference.
 Existing retrieval-only `ask` and observation processing keep their semantics.
 
 ## Memory provider integration (#32)
@@ -199,8 +201,8 @@ Existing retrieval-only `ask` and observation processing keep their semantics.
 Phase A adds opt-in host-owned JSON/Git provider selection, bounded local/remote
 reads and semantic change sets through memory worker contract 3. Existing memory
 is audited and preserved byte-for-byte when selecting it. This integration uses
-the published Harness 0.13.0 package, with the same archive and manifest pins for
-config-2 and config-3 runtimes. See
+approved provider-capable Harness packages, with per-release archive and manifest
+identities for config-2 and config-3 runtimes. Routine CI retains 0.13.0. See
 [provider setup and ownership](docs/MEMORY_PROVIDERS.md) and
 [observed acceptance evidence](docs/MEMORY_PROVIDER_ACCEPTANCE.md). Optional
 SQLite and migration are separate follow-on work; neither is enabled here.

@@ -1,0 +1,34 @@
+{
+  "status": "pass",
+  "scope": "local staged candidate build; not a replacement for the existing published 1.3.1 asset",
+  "host_version": "1.3.1",
+  "harness_reference": "0.13.0",
+  "upgrade_target": "0.14.0",
+  "host_tests": {
+    "tests": 158,
+    "pass": 158,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "adapter_tests": {
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "skipped": 0
+  },
+  "python_tests": {
+    "tests": 9,
+    "pass": 9,
+    "fail": 0
+  },
+  "timing": {
+    "platform": "linux",
+    "harness_version": "0.13.0",
+    "suite_seconds": 153.22469124000008,
+    "tst9_under_10_minutes": true
+  },
+  "archive_sha256": "4c94b0b727738e45252ebf33370961e29c97012a01dda7009b344dfbb548045c",
+  "host_manifest_sha256": "6abe10e51f876b03a45faca5adda2dc9b48841408a75c9048f29e36bee752b53",
+  "suite_log_sha256": "cde0c5b8752a6d44e9ffce4a0386acf74effa0d58e6e8379d241b3ba4b81695c"
+}

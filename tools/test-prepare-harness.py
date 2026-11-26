@@ -59,5 +59,45 @@ class PublishedPackageTests(unittest.TestCase):
         self.save(self.members+[('golem-harness/unlisted',b'extra')])
         with self.assertRaisesRegex(ValueError, 'inventory'):module.prepare(self.root / 'out', archive=self.archive)
 
+    def test_unsupported_version_refused_before_output(self):
+        with self.assertRaisesRegex(ValueError,'Unsupported'):
+            module.prepare(self.root/'out',version='9.9.9',archive=self.archive)
+        self.assertFalse((self.root/'out').exists())
+
+    def test_candidate_requires_digest_and_does_not_change_approvals(self):
+        before = (self.root/'compatibility.json').read_bytes()
+        with self.assertRaisesRegex(ValueError,'explicit archive'):
+            module.prepare(self.root/'out',version='0.13.0',archive=self.archive,candidate=True)
+        result=module.prepare(self.root/'out',version='0.13.0',archive=self.archive,candidate=True,sha256=module.digest(self.archive.read_bytes()))
+        self.assertFalse(result['production_approved'])
+        self.assertEqual((self.root/'compatibility.json').read_bytes(),before)
+
+class QualificationTests(unittest.TestCase):
+    def load(self, name):
+        spec = importlib.util.spec_from_file_location(name.replace('-', '_'), Path(__file__).with_name(name+'.py'))
+        value = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(value)
+        return value
+
+    def test_plan_keeps_reference_approved_neighbors_and_newest(self):
+        planner = self.load('harness-qualification-plan')
+        releases = [{'tag_name':'v'+v,'prerelease':False,'assets':[{'name':'release.zip'}]} for v in ['0.10.0','0.11.0','0.12.0','0.13.0','0.13.3','0.14.0']]
+        plan = planner.plan({'reference_version':'0.13.0','approved_releases':{'0.13.0':{},'0.13.3':{}}},releases,'0.15.0-rc.1')['include']
+        self.assertEqual({r['version'] for r in plan},{'0.11.0','0.12.0','0.13.0','0.13.3','0.14.0','0.15.0-rc.1'})
+        self.assertEqual([r['version'] for r in plan if r['approved']],['0.13.0','0.13.3'])
+
+    def test_failed_stale_or_different_package_evidence_cannot_be_promoted(self):
+        promoter = self.load('promote-harness')
+        identity = {'version':'0.13.0','archive_sha256':'a'*64,'manifest_sha256':'b'*64}
+        catalog = {'requirements':{}}
+        report = {'status':'pass','required':{},'package':identity.copy(),'features':{'file_worker':{'status':'pass','checks':[{'name':n,'exit':0,'counts':{'tests':1,'pass':1}} for n in ['file_worker','adapter','upgrade']]}}}
+        self.assertEqual(promoter.validate(report,catalog,identity),['file_worker'])
+        report['package']['manifest_sha256']='c'*64
+        with self.assertRaisesRegex(ValueError,'official'):promoter.validate(report,catalog,identity)
+        report['package']=identity.copy();report['features']['file_worker']['checks'][0]['exit']=1
+        with self.assertRaisesRegex(ValueError,'conformance'):promoter.validate(report,catalog,identity)
+        report['required']={'new_contract':1}
+        with self.assertRaisesRegex(ValueError,'requirements'):promoter.validate(report,catalog,identity)
+
 if __name__ == '__main__':
     unittest.main()

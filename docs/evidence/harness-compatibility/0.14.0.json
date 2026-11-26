@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-25T22:09:18.575743+00:00",
+  "host_version": "1.3.1",
+  "host_revision": "c2a9ed4039a2e45aea45ef1cdbae426cbb2542b9",
+  "platform": "linux",
+  "node": "v24.22.3",
+  "python": "3.12.14",
+  "version": "0.14.0",
+  "approved_at_start": false,
+  "checkpoint": {
+    "restore": "exact host code and Harness manifest identity",
+    "cross_package_restore": false,
+    "upgrade": "drain leases and assignments; explicit harness upgrade; checkpoint again"
+  },
+  "required": {
+    "file_worker": {
+      "contracts": {
+        "graph": 2,
+        "hypotheses": 1,
+        "adapter": 1
+      },
+      "capabilities": [
+        "candidate-validation-v1",
+        "purpose-guidance-v2",
+        "profile-install-v1",
+        "core-policies-v2"
+      ],
+      "files": [
+        "processor/init-instance.py",
+        "processor/process.py",
+        "processor/memory-tool.mjs",
+        "adapters/reference-git/adapter.mjs",
+        "adapters/conformance/adapter.test.mjs"
+      ]
+    },
+    "cognitive_tasks": {
+      "contracts": {
+        "cognitive_task": 1
+      },
+      "capabilities": [
+        "cognitive-task-v1",
+        "cognitive-context-v1",
+        "cognitive-result-v1",
+        "learning-hypothesis-v1",
+        "hypothesis-unknown-confidence-v1"
+      ],
+      "files": [
+        "server/cognitive-task.mjs",
+        "server/cognitive-reference.mjs"
+      ]
+    },
+    "memory_provider": {
+      "contracts": {
+        "provider_version": 1,
+        "logical_version": 2,
+        "host_api_version": 2
+      },
+      "capabilities": [
+        "record-reads-v1",
+        "paged-evidence-v1",
+        "semantic-changes-v1",
+        "candidate-isolation-v1",
+        "portable-export-v1"
+      ],
+      "files": [
+        "server/memory-contract.mjs",
+        "server/provider-memory.mjs",
+        "server/memory-transfer.mjs"
+      ]
+    }
+  },
+  "features": {
+    "file_worker": {
+      "status": "pass",
+      "missing": [],
+      "checks": [
+        {
+          "name": "file_worker",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "--test-timeout=600000",
+            "tests/harness-compatibility.test.mjs",
+            "tests/conformance/app-contract.test.mjs",
+            "tests/conformance/worker-contract.test.mjs",
+            "tests/conformance/release-pair.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 20,
+            "pass": 20,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.14.0-file_worker.log",
+          "log_sha256": "9297c598e25740eae8aae9a811351e9e449c76000b2ad2389a989e4478f91e70"
+        },
+        {
+          "name": "adapter",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "/tmp/chelm-qualification-_sjpnyqx/harness/adapters/conformance/adapter.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 11,
+            "pass": 11,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.14.0-adapter.log",
+          "log_sha256": "86f86dd61da432decb4627c798ee67fa3d52ec2ee3f4b6cc4101053d8970e09c"
+        },
+        {
+          "name": "upgrade",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "tests/harness-upgrade.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 2,
+            "pass": 2,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.14.0-upgrade.log",
+          "log_sha256": "9d9ea40183e8e4111b339ebfdc865acf9cb7d1a08395c649a9452dcf5ee9030b"
+        }
+      ]
+    },
+    "cognitive_tasks": {
+      "status": "pass",
+      "missing": [],
+      "checks": [
+        {
+          "name": "cognitive_tasks",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "--test-timeout=600000",
+            "tests/conformance/cognitive.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 12,
+            "pass": 12,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.14.0-cognitive_tasks.log",
+          "log_sha256": "15a1880c6f5bed98a744522d615db2b9f43c480e589721eb49be7e490dba4b4a"
+        }
+      ]
+    },
+    "memory_provider": {
+      "status": "pass",
+      "missing": [],
+      "checks": [
+        {
+          "name": "memory_provider",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "--test-timeout=600000",
+            "tests/conformance/memory-provider.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 31,
+            "pass": 31,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.14.0-memory_provider.log",
+          "log_sha256": "6c29df6e58d3cd0e79d38a12bb757be3417e924faba941a379d14a8ec67efcb6"
+        }
+      ]
+    }
+  },
+  "status": "pass",
+  "phase": "complete",
+  "package": {
+    "version": "0.14.0",
+    "archive": "golem-cognitive-harness-0.14.0.zip",
+    "archive_sha256": "887f6b16b8c7c8c2b4a7b57de553e9bdf7e14f76f99adba493ac6cca45344a08",
+    "manifest_sha256": "b46a743656d9466d88228357aa2a2025d85ecaed22c9057e8b049c4f309665be",
+    "release_url": "local-build-artifact",
+    "files": 183,
+    "source": "isolated-candidate",
+    "production_approved": false
+  },
+  "detected": {
+    "contracts": {
+      "graph": 2,
+      "hypotheses": 1,
+      "cognitive_task": 1,
+      "provider_version": 1,
+      "logical_version": 2,
+      "host_api_version": 2,
+      "adapter": 1
+    },
+    "capabilities": [
+      "cognitive-task-v1",
+      "cognitive-context-v1",
+      "cognitive-result-v1",
+      "learning-hypothesis-v1",
+      "hypothesis-unknown-confidence-v1",
+      "record-reads-v1",
+      "paged-evidence-v1",
+      "semantic-changes-v1",
+      "candidate-isolation-v1",
+      "portable-export-v1",
+      "memory-provider-v1",
+      "candidate-validation-v1",
+      "purpose-guidance-v2",
+      "profile-install-v1",
+      "core-policies-v2"
+    ],
+    "errors": {}
+  },
+  "staged_host_manifest_sha256": "fb5a2cb3f640eeb9b2eed9986953c77daa06cad21948d22d1819d99d5810f7d7",
+  "reference_feature_regressions": [],
+  "promotion": "review required; candidate evidence never changes the production catalog"
+}

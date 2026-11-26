@@ -1,3 +1,13 @@
+# Unreleased — contract-qualified Harness compatibility (#61)
+
+Keep Harness 0.13.0 as the deterministic CI reference and approve other releases
+by verified package identity and per-feature contracts. Add a separate Ubuntu
+qualification workflow, retained reports, explicit promotion and audited drained
+runtime upgrades. `verify` exposes selected package and feature status; lease,
+provider snapshot and checkpoint bindings retain exact identities. The focused
+Windows release dependency policy is unchanged. See
+[the tested matrix and operator process](HARNESS_COMPATIBILITY.md).
+
 # Unreleased — portable local runtime sessions (#45–#48)
 
 - Add versioned complete-runtime checkpoint create/inspect/restore with retained

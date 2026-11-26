@@ -1,0 +1,103 @@
+name: Harness compatibility qualification
+on:
+  workflow_dispatch:
+    inputs:
+      candidate:
+        description: 'Optional published version, including a prerelease'
+        type: string
+      artifact_id:
+        description: 'Optional Harness Actions artifact ID containing a release ZIP (requires candidate and sha256)'
+        type: string
+      sha256:
+        description: 'Expected SHA-256 of the ZIP inside the optional build artifact'
+        type: string
+  schedule:
+    - cron: '27 6 * * *'
+  pull_request:
+    paths: ['harness-compatibility.json', 'compatibility.json', 'provider-compatibility.json', 'lib/**', 'bin/**', 'schemas/**', 'integration/**', 'package*.json', 'tests/**', 'tools/**', '.github/workflows/harness-compatibility.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.12'
+      - id: plan
+        env:
+          CANDIDATE: ${{ inputs.candidate }}
+        run: |
+          matrix=$(python tools/harness-qualification-plan.py "$CANDIDATE")
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+  qualify:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: ${{ !matrix.approved }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Qualify independently verified contracts
+        env:
+          SELECTED_VERSION: ${{ matrix.version }}
+          CANDIDATE: ${{ inputs.candidate }}
+          ARTIFACT_ID: ${{ inputs.artifact_id }}
+          EXPECTED_SHA256: ${{ inputs.sha256 }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          args=()
+          if [[ -n "$ARTIFACT_ID" && "$SELECTED_VERSION" == "$CANDIDATE" ]]; then
+            [[ "$ARTIFACT_ID" =~ ^[0-9]+$ && "$EXPECTED_SHA256" =~ ^[a-f0-9]{64}$ ]]
+            gh api "repos/apenczolgolonabijorbiper/golem14-harness/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/build-artifact.zip
+            python - <<'PY'
+          import zipfile
+          from pathlib import Path
+          with zipfile.ZipFile('/tmp/build-artifact.zip') as z:
+              members=[i for i in z.infolist() if i.filename.endswith('.zip')]
+              assert len(members)==1 and members[0].file_size<=32*1024*1024
+              Path('/tmp/harness-candidate.zip').write_bytes(z.read(members[0]))
+          PY
+            args=(--archive /tmp/harness-candidate.zip --sha256 "$EXPECTED_SHA256")
+          fi
+          python tools/qualify-harness.py --version "$SELECTED_VERSION" --output evidence "${args[@]}"
+      - name: Retain visible qualification verdict
+        if: always()
+        env:
+          SELECTED_VERSION: ${{ matrix.version }}
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json,os
+          from pathlib import Path
+          p=Path('evidence')/(os.environ['SELECTED_VERSION']+'.json')
+          if not p.exists():
+              print('Qualification did not produce a report. Inspect the failed step.')
+          else:
+              r=json.loads(p.read_text())
+              print('| Version | Approved | Overall | Feature | Verdict |\n|---|---|---|---|---|')
+              for name,row in r.get('features',{}).items():
+                  print(f"| {r['version']} | {r['approved_at_start']} | {r['status']} | {name} | {row['status']} |")
+              if r.get('diagnostic'):print(r['diagnostic'])
+          PY
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: harness-compatibility-${{ matrix.version }}
+          path: evidence/
+          if-no-files-found: error

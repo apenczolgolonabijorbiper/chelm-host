@@ -1,0 +1,213 @@
+TAP version 13
+# Subtest: provider selection preserves existing knowledge and rejects unsupported selections
+not ok 1 - provider selection preserves existing knowledge and rejects unsupported selections
+  ---
+  duration_ms: 4711.580764
+  type: 'test'
+  location: '/tmp/chelm-qualification-bl4hlruc/host/tests/scenario.mjs:7:10'
+  failureType: 'testCodeFailure'
+  error: |-
+    {"ok":false,"messages":[],"error":{"code":"busy","message":"Preserve and settle instance drafts before provider selection","details":{}},"exit":1}
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    ok (file:///tmp/chelm-qualification-bl4hlruc/host/tests/helpers.mjs:46:10)
+    TestContext.<anonymous> (file:///tmp/chelm-qualification-bl4hlruc/host/tests/conformance/memory-provider.test.mjs:45:13)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: local CLI semantic cycle isolates drafts, refuses graph workers and retains portable export
+ok 2 - local CLI semantic cycle isolates drafts, refuses graph workers and retains portable export
+  ---
+  duration_ms: 14841.556128
+  type: 'test'
+  ...
+# Subtest: remote semantic cycle enforces owner, attempt, exact evidence, bad quote and response-loss recovery
+ok 3 - remote semantic cycle enforces owner, attempt, exact evidence, bad quote and response-loss recovery
+  ---
+  duration_ms: 8255.037585
+  type: 'test'
+  ...
+# Subtest: publication rechecks source/policy and stale snapshots; renew supports semantic rebase
+ok 4 - publication rechecks source/policy and stale snapshots; renew supports semantic rebase
+  ---
+  duration_ms: 6863.654023
+  type: 'test'
+  ...
+# Subtest: local MCP advertises and completes a semantic cycle through shared schemas
+ok 5 - local MCP advertises and completes a semantic cycle through shared schemas
+  ---
+  duration_ms: 4696.516781
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: record reads, missing IDs, evidence paging, exact and scoped lookup
+ok 6 - Chelm JSON/Git provider: record reads, missing IDs, evidence paging, exact and scoped lookup
+  ---
+  duration_ms: 2492.658639
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: cursors bind snapshot, selector and collection; deterministic pages
+ok 7 - Chelm JSON/Git provider: cursors bind snapshot, selector and collection; deterministic pages
+  ---
+  duration_ms: 2537.735241
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: identical prepared retries, conflicting keys and cross-snapshot cursors
+ok 8 - Chelm JSON/Git provider: identical prepared retries, conflicting keys and cross-snapshot cursors
+  ---
+  duration_ms: 2526.992162
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: complete isolated cycle, history, artifacts, receipt recovery and idempotency
+ok 9 - Chelm JSON/Git provider: complete isolated cycle, history, artifacts, receipt recovery and idempotency
+  ---
+  duration_ms: 2899.299534
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses source changed without partial completion
+ok 10 - Chelm JSON/Git provider: refuses source changed without partial completion
+  ---
+  duration_ms: 2688.476449
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses policy changed without partial completion
+ok 11 - Chelm JSON/Git provider: refuses policy changed without partial completion
+  ---
+  duration_ms: 2549.419344
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses lease expiry without partial completion
+ok 12 - Chelm JSON/Git provider: refuses lease expiry without partial completion
+  ---
+  duration_ms: 2463.98303
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses base changed without partial completion
+ok 13 - Chelm JSON/Git provider: refuses base changed without partial completion
+  ---
+  duration_ms: 2452.603849
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses interruption before publish without partial completion
+ok 14 - Chelm JSON/Git provider: refuses interruption before publish without partial completion
+  ---
+  duration_ms: 2546.129405
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: response loss recovers durable receipt and does not process twice
+ok 15 - Chelm JSON/Git provider: response loss recovers durable receipt and does not process twice
+  ---
+  duration_ms: 2649.008546
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: candidate mutation and forged writes cannot publish
+ok 16 - Chelm JSON/Git provider: candidate mutation and forged writes cannot publish
+  ---
+  duration_ms: 2452.58575
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects exact quotes
+ok 17 - Chelm JSON/Git provider: semantic validator rejects exact quotes
+  ---
+  duration_ms: 2347.674212
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects attribution
+ok 18 - Chelm JSON/Git provider: semantic validator rejects attribution
+  ---
+  duration_ms: 2392.933908
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects dependency cycle
+ok 19 - Chelm JSON/Git provider: semantic validator rejects dependency cycle
+  ---
+  duration_ms: 2411.098158
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects missing replacement
+ok 20 - Chelm JSON/Git provider: semantic validator rejects missing replacement
+  ---
+  duration_ms: 2355.590982
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects question closure
+ok 21 - Chelm JSON/Git provider: semantic validator rejects question closure
+  ---
+  duration_ms: 2496.303125
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects hypothesis evidence
+ok 22 - Chelm JSON/Git provider: semantic validator rejects hypothesis evidence
+  ---
+  duration_ms: 2519.649493
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects verification pointer
+ok 23 - Chelm JSON/Git provider: semantic validator rejects verification pointer
+  ---
+  duration_ms: 2605.346196
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic rebase and abort retain the committed snapshot
+ok 24 - Chelm JSON/Git provider: semantic rebase and abort retain the committed snapshot
+  ---
+  duration_ms: 2502.745217
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: logical transfer preserves two snapshots, byte identities and receipts
+ok 25 - Chelm JSON/Git provider: logical transfer preserves two snapshots, byte identities and receipts
+  ---
+  duration_ms: 2741.442085
+  type: 'test'
+  ...
+# Subtest: HTTP MCP uses shared memory schemas, authenticated scope and byte-paged protocols
+ok 26 - HTTP MCP uses shared memory schemas, authenticated scope and byte-paged protocols
+  ---
+  duration_ms: 4983.222595
+  type: 'test'
+  ...
+# Subtest: cognition reads retained provider snapshots without a graph workspace
+ok 27 - cognition reads retained provider snapshots without a graph workspace
+  ---
+  duration_ms: 5295.708098
+  type: 'test'
+  ...
+# Subtest: memory SudoLang tool names exist in both published transports
+ok 28 - memory SudoLang tool names exist in both published transports
+  ---
+  duration_ms: 0.904751
+  type: 'test'
+  ...
+# Subtest: interrupted claim recovers the same assignment and admin cancellation releases its lease
+ok 29 - interrupted claim recovers the same assignment and admin cancellation releases its lease
+  ---
+  duration_ms: 4247.218249
+  type: 'test'
+  ...
+# Subtest: retained Work inference response is immutable and separately reviewed
+ok 30 - retained Work inference response is immutable and separately reviewed
+  ---
+  duration_ms: 0.701733
+  type: 'test'
+  ...
+# Subtest: all platforms use the identical published provider manifest
+ok 31 - all platforms use the identical published provider manifest
+  ---
+  duration_ms: 15.962106
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 30
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 104815.853794
