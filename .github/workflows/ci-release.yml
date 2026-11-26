@@ -3,9 +3,9 @@ on:
   push:
     branches: [master]
     tags: ['v*']
-    paths: ['provider-compatibility.json', 'compatibility.json', 'VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
+    paths: ['harness-compatibility.json', 'provider-compatibility.json', 'compatibility.json', 'VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
   pull_request:
-    paths: ['provider-compatibility.json', 'compatibility.json', 'VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
+    paths: ['harness-compatibility.json', 'provider-compatibility.json', 'compatibility.json', 'VERSION', 'bin/**', 'lib/**', 'schemas/**', 'integration/**', 'tests/**', 'tools/**', '.github/workflows/**', 'package.json', 'package-lock.json', 'prompts/**', 'docs/**']
   workflow_dispatch:
 permissions:
   contents: read

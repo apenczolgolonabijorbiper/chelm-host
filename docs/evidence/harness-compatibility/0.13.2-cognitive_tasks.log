@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: Cognition tool schemas and dependency-free stdio declarations agree
+ok 1 - Cognition tool schemas and dependency-free stdio declarations agree
+  ---
+  duration_ms: 12.420229
+  type: 'test'
+  ...
+# Subtest: Approved Harness creates cognition tasks through the production CLI
+ok 2 - Approved Harness creates cognition tasks through the production CLI
+  ---
+  duration_ms: 2576.459276
+  type: 'test'
+  ...
+# Subtest: Empty inbox lifecycle, exact/conflicting retries, atomic ownership, principal scoping and cancellation
+ok 3 - Empty inbox lifecycle, exact/conflicting retries, atomic ownership, principal scoping and cancellation
+  ---
+  duration_ms: 3621.400222
+  type: 'test'
+  ...
+# Subtest: Multi-source result, evidence scoping, exact bytes and response-loss recovery preserve canonical memory
+ok 4 - Multi-source result, evidence scoping, exact bytes and response-loss recovery preserve canonical memory
+  ---
+  duration_ms: 14620.687682
+  type: 'test'
+  ...
+# Subtest: Bounded reads deduplicate retries, reject forged citations and arbitrary canonical output slots
+ok 5 - Bounded reads deduplicate retries, reject forged citations and arbitrary canonical output slots
+  ---
+  duration_ms: 12236.559571
+  type: 'test'
+  ...
+# Subtest: Expired work resumes with a fresh owned attempt and total attempt/deadline budgets remain finite
+ok 6 - Expired work resumes with a fresh owned attempt and total attempt/deadline budgets remain finite
+  ---
+  duration_ms: 2678.017937
+  type: 'test'
+  ...
+# Subtest: Concurrent memory commits retain honest stale bindings, strict freshness and guidance policy refusal
+ok 7 - Concurrent memory commits retain honest stale bindings, strict freshness and guidance policy refusal
+  ---
+  duration_ms: 11423.802814
+  type: 'test'
+  ...
+# Subtest: Reviewed learning commits once; rejection preserves memory and bounded follow-up retains result history
+ok 8 - Reviewed learning commits once; rejection preserves memory and bounded follow-up retains result history
+  ---
+  duration_ms: 8585.911356
+  type: 'test'
+  ...
+# Subtest: Independent authenticated MCP client completes and reconnects to the same snapshot/result contract
+ok 9 - Independent authenticated MCP client completes and reconnects to the same snapshot/result contract
+  ---
+  duration_ms: 12396.906081
+  type: 'test'
+  ...
+# Subtest: MCP response loss after commit is labelled and reconciles one durable result after reconnect
+ok 10 - MCP response loss after commit is labelled and reconciles one durable result after reconnect
+  ---
+  duration_ms: 5053.906688
+  type: 'test'
+  ...
+# Subtest: Read-only/rejected/stale learning and policy drift cannot publish invalid canonical changes
+ok 11 - Read-only/rejected/stale learning and policy drift cannot publish invalid canonical changes
+  ---
+  duration_ms: 16412.32617
+  type: 'test'
+  ...
+# Subtest: Exhausted cognition budgets return stable errors while leaving memory untouched
+ok 12 - Exhausted cognition budgets return stable errors while leaving memory untouched
+  ---
+  duration_ms: 3036.851328
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 93297.446572

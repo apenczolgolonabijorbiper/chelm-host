@@ -1,8 +1,9 @@
-"""Download and verify the exact published harness package used by this host."""
+"""Verify approved release bytes, or prepare an explicitly isolated candidate."""
 import argparse
 import hashlib
 import io
 import json
+import re
 from pathlib import Path, PurePosixPath
 import shutil
 import tempfile
@@ -22,10 +23,43 @@ def download(url):
         raise ValueError('Published harness download exceeds 32 MiB')
     return payload
 
-def prepare(destination, version='0.13.0', archive=None):
-    pinned = json.loads((ROOT / 'compatibility.json').read_text())['published_harness']
-    if version != pinned['version']:
-        raise ValueError('Unsupported harness release')
+def approved():
+    catalog = ROOT / 'harness-compatibility.json'
+    if catalog.exists():
+        return json.loads(catalog.read_text())['approved_releases']
+    pin = json.loads((ROOT / 'compatibility.json').read_text())['published_harness']
+    return {pin['version']: pin}
+
+def candidate_identity(version, archive=None, sha256=None):
+    if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?', version):
+        raise ValueError('Invalid candidate version')
+    if archive:
+        if not sha256 or not re.fullmatch('[0-9a-f]{64}', sha256):
+            raise ValueError('Local candidates require an explicit archive SHA-256')
+        payload = Path(archive).read_bytes()
+        with zipfile.ZipFile(io.BytesIO(payload)) as package:
+            manifest_hash = digest(package.read('golem-harness/RELEASE.json'))
+        return {'version':version, 'archive':Path(archive).name, 'archive_sha256':sha256,
+                'manifest_sha256':manifest_hash, 'release_url':'local-build-artifact'}
+    base = 'https://api.github.com/repos/apenczolgolonabijorbiper/golem14-harness/releases/tags/v' + version
+    release = json.loads(download(base))
+    name = 'golem-cognitive-harness-' + version + '.zip'
+    asset = next(a for a in release['assets'] if a['name'] == name)
+    if not asset.get('digest', '').startswith('sha256:'):
+        raise ValueError('Official candidate asset has no trusted transport digest')
+    payload = download(asset['browser_download_url'])
+    if digest(payload) != asset['digest'][7:]:
+        raise ValueError('Candidate archive hash mismatch')
+    with zipfile.ZipFile(io.BytesIO(payload)) as package:
+        manifest_hash = digest(package.read('golem-harness/RELEASE.json'))
+    return {'version':version, 'archive':name, 'archive_sha256':asset['digest'][7:],
+            'manifest_sha256':manifest_hash, 'release_url':release['html_url']}
+
+def prepare(destination, version=None, archive=None, candidate=False, sha256=None):
+    version = version or json.loads((ROOT / 'compatibility.json').read_text())['published_harness']['version']
+    pinned = candidate_identity(version, archive, sha256) if candidate else approved().get(version)
+    if not pinned:
+        raise ValueError('Unsupported harness release; use isolated --candidate qualification')
     url = 'https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/download/v' + version + '/' + pinned['archive']
     payload = Path(archive).read_bytes() if archive else download(url)
     if digest(payload) != pinned['archive_sha256']:
@@ -46,12 +80,14 @@ def prepare(destination, version='0.13.0', archive=None):
             raise ValueError('Duplicate archive members')
         for entry in infos:
             parts = PurePosixPath(entry.filename).parts
-            if not parts or parts[0] != 'golem-harness' or len(parts) < 2 or any(p in {'.', '..'} for p in parts) or '\\' in entry.filename or entry.is_dir() or (entry.external_attr >> 16) & 0o170000 not in {0, 0o100000}:
+            if entry.filename.startswith('/') or ':' in entry.filename or not parts or parts[0] != 'golem-harness' or len(parts) < 2 or any(p in {'.', '..'} for p in parts) or '\\' in entry.filename or entry.is_dir() or (entry.external_attr >> 16) & 0o170000 not in {0, 0o100000}:
                 raise ValueError('Unsafe harness archive member')
         manifest_bytes = package.read('golem-harness/RELEASE.json')
         if digest(manifest_bytes) != pinned['manifest_sha256']:
             raise ValueError('Published harness manifest hash mismatch')
         manifest = json.loads(manifest_bytes)
+        if manifest.get('schema_version') != 1 or not isinstance(manifest.get('files'), dict):
+            raise ValueError('Invalid manifest schema')
         if manifest['version'] != version or package.read('golem-harness/VERSION').decode().strip() != version:
             raise ValueError('Published harness version mismatch')
         expected = {'golem-harness/' + name for name in manifest['files']} | {'golem-harness/RELEASE.json'}
@@ -71,12 +107,18 @@ def prepare(destination, version='0.13.0', archive=None):
             if destination.exists():
                 destination.rmdir()
             shutil.move(str(stage), str(destination))
-    print(json.dumps({'version': version, 'archive_sha256': pinned['archive_sha256'], 'manifest_sha256': pinned['manifest_sha256'], 'files': len(manifest['files']), 'source': 'published-release' if not archive else 'verified-local-release-archive'}))
+    report = {**pinned, 'files':len(manifest['files']),
+              'source':'isolated-candidate' if candidate else 'approved-release',
+              'production_approved':not candidate}
+    print(json.dumps(report))
+    return report
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--destination', required=True, type=Path)
-    parser.add_argument('--version', default='0.13.0')
+    parser.add_argument('--version')
+    parser.add_argument('--candidate', action='store_true', help='Isolated evidence only; does not approve production use')
+    parser.add_argument('--sha256', help='Required expected archive digest for a local candidate')
     parser.add_argument('--archive', type=Path, help='Offline copy of the same pinned published ZIP')
     args = parser.parse_args()
-    prepare(args.destination, args.version, args.archive)
+    prepare(args.destination, args.version, args.archive, args.candidate, args.sha256)

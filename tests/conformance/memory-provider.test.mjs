@@ -10,6 +10,7 @@ import {config} from '../../lib/runtime.mjs';
 import {openMemory,upgradeMemory} from '../../lib/memory-provider.mjs';
 import {remoteCall} from '../../lib/remote.mjs';
 import {createAdapter} from '../../lib/backend.mjs';
+import {verifyHarness} from '../../lib/harness.mjs';
 import {snapshot,hash} from '../../lib/util.mjs';
 const candidateHarness=process.env.CHELM_PROVIDER_HARNESS_ROOT;
 const providerTest=(name,fn)=>test(name,{skip:!candidateHarness?'Set CHELM_PROVIDER_HARNESS_ROOT to the published provider package':false},fn);
@@ -185,8 +186,8 @@ test('retained Work inference response is immutable and separately reviewed',()=
  assert.equal(JSON.parse(fs.readFileSync(path.join(dir,'semantic-verdict.json'))).independent,false);
 });
 providerTest('all platforms use the identical published provider manifest',()=>{
- const pin=JSON.parse(fs.readFileSync(path.join(source,'provider-compatibility.json')));
- assert.equal(pin.status,'published');assert.equal(pin.production_enabled,true);
+ const catalog=JSON.parse(fs.readFileSync(path.join(source,'harness-compatibility.json'))),v=JSON.parse(fs.readFileSync(path.join(candidateHarness,'RELEASE.json'))).version,pin=catalog.approved_releases[v];
+ assert.ok(pin.features.includes('memory_provider'));
  assert.equal(hash(fs.readFileSync(path.join(candidateHarness,'RELEASE.json'))),pin.manifest_sha256);
- assert.equal(pin.manifest_sha256,JSON.parse(fs.readFileSync(path.join(source,'compatibility.json'))).published_harness.manifest_sha256);
+ assert.equal(verifyHarness({harness:{root:candidateHarness},memory:{}}).compatibility.features.memory_provider.status,'pass');
 });

@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "reference_version": "0.13.0",
+  "requirements": {
+    "file_worker": {
+      "contracts": {
+        "graph": 2,
+        "hypotheses": 1,
+        "adapter": 1
+      },
+      "capabilities": [
+        "candidate-validation-v1",
+        "purpose-guidance-v2",
+        "profile-install-v1",
+        "core-policies-v2"
+      ],
+      "files": [
+        "processor/init-instance.py",
+        "processor/process.py",
+        "processor/memory-tool.mjs",
+        "adapters/reference-git/adapter.mjs",
+        "adapters/conformance/adapter.test.mjs"
+      ]
+    },
+    "cognitive_tasks": {
+      "contracts": {
+        "cognitive_task": 1
+      },
+      "capabilities": [
+        "cognitive-task-v1",
+        "cognitive-context-v1",
+        "cognitive-result-v1",
+        "learning-hypothesis-v1",
+        "hypothesis-unknown-confidence-v1"
+      ],
+      "files": [
+        "server/cognitive-task.mjs",
+        "server/cognitive-reference.mjs"
+      ]
+    },
+    "memory_provider": {
+      "contracts": {
+        "provider_version": 1,
+        "logical_version": 2,
+        "host_api_version": 2
+      },
+      "capabilities": [
+        "record-reads-v1",
+        "paged-evidence-v1",
+        "semantic-changes-v1",
+        "candidate-isolation-v1",
+        "portable-export-v1"
+      ],
+      "files": [
+        "server/memory-contract.mjs",
+        "server/provider-memory.mjs",
+        "server/memory-transfer.mjs"
+      ]
+    }
+  },
+  "approved_releases": {
+    "0.11.0": {
+      "version": "0.11.0",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.11.0",
+      "archive": "golem-cognitive-harness-0.11.0.zip",
+      "archive_sha256": "2f945cf38166f1878bfd4ea89b9d9ffb187f525269710a61016d0129b02f3ca2",
+      "manifest_sha256": "d130c465688874bceae2f5eb0bb113ddef740c95764256871bda6d51928355e7",
+      "features": [
+        "file_worker"
+      ],
+      "evidence": "docs/evidence/harness-compatibility/0.11.0.json"
+    },
+    "0.12.0": {
+      "version": "0.12.0",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.12.0",
+      "archive": "golem-cognitive-harness-0.12.0.zip",
+      "archive_sha256": "9bc17e21d0528e7359006b5bda6c17cce99df3021294e15e2d217d7330627522",
+      "manifest_sha256": "52c4fa98a06993bfa4f2504df58a82504e4303a20fd465a09c19140b8d3cfda6",
+      "features": [
+        "file_worker",
+        "cognitive_tasks"
+      ],
+      "evidence": "docs/evidence/harness-compatibility/0.12.0.json"
+    },
+    "0.13.0": {
+      "version": "0.13.0",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.13.0",
+      "archive": "golem-cognitive-harness-0.13.0.zip",
+      "archive_sha256": "25451b801f5d411d0e35d03567fe8e6cf78d304bcb288556e0566c883cd68a6f",
+      "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b",
+      "features": [
+        "file_worker",
+        "cognitive_tasks",
+        "memory_provider"
+      ],
+      "evidence": "docs/evidence/harness-compatibility/0.13.0.json"
+    },
+    "0.13.1": {
+      "version": "0.13.1",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.13.1",
+      "archive": "golem-cognitive-harness-0.13.1.zip",
+      "archive_sha256": "beaa756edb6dad1a9bc44dedfc9327497fdded3572d5184e107f9aa88c216557",
+      "manifest_sha256": "219a8d05e9bd8c844c8ffb4d7f2d251be074e0d928a6fd130c38dd0e14bc728e",
+      "features": [
+        "file_worker",
+        "cognitive_tasks",
+        "memory_provider"
+      ],
+      "evidence": "docs/evidence/harness-compatibility/0.13.1.json"
+    },
+    "0.13.2": {
+      "version": "0.13.2",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.13.2",
+      "archive": "golem-cognitive-harness-0.13.2.zip",
+      "archive_sha256": "275f98b7fe5b3f1d237f9cd502359189f720be10aa05d708ac55816209f06366",
+      "manifest_sha256": "411fe117b61ffb1288e08fbe2d05223ac8b45c5558e2a4c2f97c515fe9f6878b",
+      "features": [
+        "file_worker",
+        "cognitive_tasks",
+        "memory_provider"
+      ],
+      "evidence": "docs/evidence/harness-compatibility/0.13.2.json"
+    },
+    "0.13.3": {
+      "version": "0.13.3",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.13.3",
+      "archive": "golem-cognitive-harness-0.13.3.zip",
+      "archive_sha256": "e2dd5393d61929a0813b54b81497373ae391c04c349622134e63df62098cafe2",
+      "manifest_sha256": "f371d446bc227c75fa5f5cca87b393a0fc7c938494a659f352158eae7916af9f",
+      "features": [
+        "file_worker",
+        "cognitive_tasks",
+        "memory_provider"
+      ],
+      "evidence": "docs/evidence/harness-compatibility/0.13.3.json"
+    },
+    "0.14.0": {
+      "version": "0.14.0",
+      "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.14.0",
+      "archive": "golem-cognitive-harness-0.14.0.zip",
+      "archive_sha256": "887f6b16b8c7c8c2b4a7b57de553e9bdf7e14f76f99adba493ac6cca45344a08",
+      "manifest_sha256": "b46a743656d9466d88228357aa2a2025d85ecaed22c9057e8b049c4f309665be",
+      "features": [
+        "file_worker",
+        "cognitive_tasks",
+        "memory_provider"
+      ],
+      "evidence": "docs/evidence/harness-compatibility/0.14.0.json"
+    }
+  },
+  "checkpoint_policy": {
+    "restore": "exact host code and Harness manifest identity",
+    "cross_package_restore": false,
+    "upgrade": "drain leases and assignments; explicit harness upgrade; checkpoint again"
+  }
+}

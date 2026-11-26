@@ -1,8 +1,11 @@
 # Host-owned memory providers
 
 Chelm 1.3.0 supports host-owned JSON/Git provider selection with published
-Harness 0.13.0. Config-2 and config-3 runtimes use the identical verified archive
-and manifest, pinned in `compatibility.json` and `provider-compatibility.json`.
+Harness releases explicitly approved for the memory-provider feature in
+`harness-compatibility.json`. Config-2 and config-3 selections both check the
+selected release identity and contracts. The deterministic reference is still
+0.13.0 in `compatibility.json` and `provider-compatibility.json`. See
+[qualification, tested scope and upgrades](HARNESS_COMPATIBILITY.md).
 Source builds cannot substitute for the release. Provider selection is explicit;
 no consumer runtime is automatically changed. Optional SQLite/migration work
 remains separately gated by #35/#36 and is not enabled.

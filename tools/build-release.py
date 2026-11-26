@@ -33,6 +33,9 @@ def build(harness, output=None, provider_harness=None):
     version = (ROOT / 'VERSION').read_text().strip()
     compatibility = json.loads((ROOT / 'compatibility.json').read_text())
     published = compatibility['published_harness']
+    for selected in (harness, provider_harness):
+        if digest((selected / 'RELEASE.json').read_bytes()) != published['manifest_sha256']:
+            raise ValueError('Deterministic release builds require the published reference; use qualify-harness.py for other approved releases')
     output = Path(output or ROOT / 'dist' / f'chelm-host-{version}.zip').resolve()
     payload = entries()
     manifest = {'schema_version': 1, 'version': version,
@@ -40,6 +43,7 @@ def build(harness, output=None, provider_harness=None):
                               'runtime_config': 2, 'remote_worker': 2, 'cognitive_task': 1, 'memory_worker': 3, 'provider_runtime_config': 3,
                               'runtime_checkpoint': 1, 'durable_session': 1},
                 'provider_integration': json.loads((ROOT / 'provider-compatibility.json').read_text()),
+                'harness_qualification': json.loads((ROOT / 'harness-compatibility.json').read_text()),
                 'harness_supported': compatibility['harness_supported'], 'supported_harness_versions': compatibility['supported_harness_versions'],
                 'provenance': {'repository': 'https://github.com/apenczolgolonabijorbiper/chelm-host',
                                'design': 'docs/CHELM_HOST_DESIGN.md',
@@ -94,7 +98,7 @@ def build(harness, output=None, provider_harness=None):
                        cwd=stage, check=True, env=env)
         suite_seconds = time.monotonic() - started
         output.parent.mkdir(parents=True, exist_ok=True)
-        timing = {'platform': os.sys.platform, 'harness_version': '0.13.0', 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
+        timing = {'platform': os.sys.platform, 'harness_version': json.loads((harness / 'RELEASE.json').read_text())['version'], 'suite_seconds': suite_seconds, 'tst9_under_10_minutes': suite_seconds < 600}
         print('CHELM_TEST_TIMING ' + json.dumps(timing), flush=True)
         (output.parent / ('test-timing-' + os.sys.platform + '.json')).write_text(json.dumps(timing, indent=2) + '\n', encoding='utf-8')
         subprocess.run(['node', str(stage / 'tools/benchmark-host.mjs'), '--harness', str(harness),
