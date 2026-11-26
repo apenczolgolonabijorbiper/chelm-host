@@ -12,6 +12,11 @@ Git processing, local worker CLI/MCP, owner-hosted remote MCP workers, source tr
 approval records and runtime administration. It never invokes a language model
 or runs a background scheduler. Executors perform the analysis.
 
+Development also adds optional [preferred cognizer routing v1](docs/COGNIZER_ROUTING.md)
+for both worker queues: trusted identity/readiness, bounded preference, require
+mode, explicit fallback and revisioned preview/apply. This is unreleased; published
+1.3.1 does not accept the new setting. Absent/disabled policy retains existing dispatch.
+
 ## Requirements
 
 Node >=22.12, Python >=3.12, Git. Release ZIPs contain source and the npm lockfile, without node_modules. The installer restores production dependencies for remote MCP using npm (included with standard Node installations). Source checkouts use `npm ci --omit=dev --ignore-scripts`; no pip installation. Windows, Linux and macOS

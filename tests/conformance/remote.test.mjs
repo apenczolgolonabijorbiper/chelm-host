@@ -161,7 +161,7 @@ test('MCP Streamable HTTP: official client, auth, runtime scope and remote cycle
     })
   );
   t.after(() => client.close());
-  assert.equal((await client.listTools()).tools.length, 25);
+  assert.equal((await client.listTools()).tools.length, 28);
   assert.equal((await client.listPrompts()).prompts.length, 7);
   assert(
     (await client.getPrompt({ name: 'chelm_remote_loop' })).messages[0].content.text.includes(
@@ -388,7 +388,7 @@ test('stdio bridge exposes remote tools through a separate Node process', async 
     stderr: 'pipe'
   });
   await client.connect(transport);
-  assert.equal((await client.listTools()).tools.length, 25);
+  assert.equal((await client.listTools()).tools.length, 28);
   const r = await client.callTool({ name: 'chelm_list_work', arguments: {} });
   assert.equal(JSON.parse(r.content[0].text).ok, true);
   // The bridge intentionally forwards worker tools only; native HTTP clients also get MCP prompts.

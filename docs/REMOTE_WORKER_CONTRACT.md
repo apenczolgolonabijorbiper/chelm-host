@@ -116,3 +116,12 @@ receipts. Full schemas/defaults and local aliases: COGNITIVE_TASKS.md. Remote MC
 publishes `chelm_cognitive_once`, `chelm_cognitive_resume`, `chelm_cognitive_loop`
 SudoLang prompts. Runtime/principal remain endpoint/authentication properties,
 not fields in tool arguments. Existing observation request defaults are retained.
+# Optional dispatch routing
+
+Unreleased `cognizer-routing-v1` adds authenticated registration, finite readiness,
+prefer/require policy, explicit fallback and scoped `deferred`/`busy` diagnostics.
+It applies to new observation and cognitive assignments across all bindings;
+existing owners and exact retries retain their original work/receipts.
+See [routing contract](COGNIZER_ROUTING.md). Executor provenance cannot grant
+priority or identify a trusted implementation. Absent/disabled policy preserves
+the contract below. No worker tool exposes routing administration.

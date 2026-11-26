@@ -94,7 +94,7 @@ test('two independent HTTP clients through proxy survive service kill/restart an
     { env: { ...process.env, PROBE_TOKEN: tokenA }, timeout: 30000 },
     (error, stdout, stderr) => error ? reject(Error(stderr || error.message)) : resolve(stdout)));
   const probe = JSON.parse(fs.readFileSync(probePath));
-  assert.equal(probe.ok, true); assert.equal(probe.tools.length, 25); assert.equal(probe.prompts.length, 7);
+  assert.equal(probe.ok, true); assert.equal(probe.tools.length, 28); assert.equal(probe.prompts.length, 7);
   assert.equal(fs.readFileSync(probePath, 'utf8').includes(tokenA), false);
   const a = measured(pa.child), b = measured(pb.child), request = { executor, request_id: randomUUID(), max: 1 };
   const wa = await a('chelm_request_work', request);

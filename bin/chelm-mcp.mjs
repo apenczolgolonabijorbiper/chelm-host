@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import memoryTools from '../schemas/memory-worker-tools.json' with {type:'json'};
 import cognitiveTools from '../schemas/cognitive-worker-tools.json' with {type:'json'};
+import routingTools from '../schemas/routing-worker-tools.json' with {type:'json'};
 
 import readline from 'node:readline';
 import {
@@ -140,7 +141,7 @@ export const toolDefinitions = names.map(name => ({
     additionalProperties: false
   }
 }));
-toolDefinitions.push(...cognitiveTools,...memoryTools);
+toolDefinitions.push(...cognitiveTools,...memoryTools,...routingTools);
 export async function handle(message, runtime) {
   const response = {
     jsonrpc: '2.0',
@@ -174,7 +175,7 @@ export async function handle(message, runtime) {
         return response;
       }
       try {
-        const result = await execute(tool.startsWith('chelm_memory_')?'memory-worker':tool.startsWith('chelm_cognitive_')?'cognitive-worker':'worker', tool.startsWith('chelm_memory_')?tool.slice(13):tool.startsWith('chelm_cognitive_')?tool.slice(16):tool.slice(6), {
+        const result = await execute(tool.startsWith('chelm_routing_')?'routing-worker':tool.startsWith('chelm_memory_')?'memory-worker':tool.startsWith('chelm_cognitive_')?'cognitive-worker':'worker', tool.startsWith('chelm_routing_')?tool.slice(14):tool.startsWith('chelm_memory_')?tool.slice(13):tool.startsWith('chelm_cognitive_')?tool.slice(16):tool.slice(6), {
           runtime
         }, message.params.arguments ?? {});
         response.result = {

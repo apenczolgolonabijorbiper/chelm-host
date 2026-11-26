@@ -1,0 +1,962 @@
+{
+  "schema_version": 1,
+  "issue": 59,
+  "recorded_date": "2026-11-26",
+  "environment": {
+    "platform": "linux",
+    "node": "v24.22.3",
+    "python": "Python 3.12.14"
+  },
+  "source_base": "1c0e79ec35ba03b25a2bca2d80ab9bb16f474ff4",
+  "source_state": "working-tree implementation; runtime/test/tool bytes match the staged package; final documentation/evidence added after the test build",
+  "runtime_code_sha256": "4985b303a5e0f71d9c2bd3f2cd38ba2210461bbab1ed724b318b6e2460c0c4e3",
+  "tested_files_sha256": {
+    "bin/chelm-mcp.mjs": "82e02457c497fb7ba975962821c4535f96220912f9c9085e1ebf1822f9bce36e",
+    "bin/chelm-remote-mcp.mjs": "6cfacbfb45ea53697f09791eeed4bafe8a448aacc6230de43ebaddfc3c4887e9",
+    "bin/chelm-serve.mjs": "514bfc3614bec440e1d703c2efda4cd99b19cab4c94559779469b7deb3eee44e",
+    "bin/chelm.mjs": "d0ac7e6a8c9277fb38c054573156f698d218a8d07bcc8df980d1596625095481",
+    "integration/AGENTS.application.md": "aba836a51cb338c648212225302a52892b6020e58bb1391610f7673c388802fa",
+    "integration/cursor-rule.mdc": "3bd26e4db54f505255330557502f715da44c750da9d9010e1ae0c2af298fee81",
+    "integration/install-dependencies.mjs": "4d2f08486371cbbc7c3c1067d7eb6707589e09544ec60561e7663aae42a9ba52",
+    "integration/install.mjs": "1c51fa0a33ce618baf37292c7cea0828a94d044bf7d3899272d374e13748d401",
+    "integration/local-session/0001_sessions.sql": "1cc75995e491a9d81f3ac08e4bffdcb776849f2df3bcdb71ff92b1e13153bebd",
+    "integration/local-session/d1-r2-store.mjs": "790bed3e26a12d0acc0fe353cf7d0b822ea01b48fad62c6ef231d6b4b6b4118a",
+    "integration/local-session/file-store.mjs": "b1eb35e9d8974debf7474a94e60c87ec4087d49cdcb0bb5f4ed7b814c94f0e12",
+    "integration/local-session/transport.mjs": "8838468835bfbc7488d6507177fc8232f7c0d19303b74a1142a5e25f51a17383",
+    "integration/local-session/worker.mjs": "7376d3a2ab87b5001d14233152cd67581affd155112c11787b2fe889a163440a",
+    "integration/mcp.example.json": "07c1cf25389f0248309df7f67bcb64f2241b33d25dd3d036ba333f8cf8da32a8",
+    "lib/app.mjs": "8d1447ff3b19d2d62a63f8ba8dd65ef4e402f373bc32fe5e133506f61bb01100",
+    "lib/application-source.mjs": "b89b4900b894bc740fc46a93116ff9bc0f76939409e7e6a34338d5ae0b585092",
+    "lib/backend-support.mjs": "be4cdaae3b135f9f8ba3f95c5ed34d477bedeb1adefd7f617a530f5156f65ee8",
+    "lib/backend.mjs": "e00a1794a44cb22298af7b24d5e453decbae76973b42d4586f85678929270bf6",
+    "lib/checkpoint-format.mjs": "206f98ee1bef8949f8c94d52fc3366eaa784417a9bf4ccbf590ecc99a3d0c746",
+    "lib/checkpoint-pack.mjs": "1458813e05d2497338b24a660666cf2b65c122467f12447af7f15242ad34f5f9",
+    "lib/checkpoint.mjs": "f0ccb836d95145c50f3e143ab0d4ccf36452c95f3465b0ef292ec89515e7f0ba",
+    "lib/cognitive.mjs": "de6656005be18b003edccdfac19cd138dea39d9e4560c6503a27e8d867e5266a",
+    "lib/cutover.mjs": "7c6d29a7af45e8182a20ffc07d0294f1dfc67bdb436f766fa5a68ec39eb8a1d1",
+    "lib/dependencies.mjs": "c587d556023e0fb5cd81b7a19033db36311e4510e0616147a0a8c038580c125b",
+    "lib/durable-session.mjs": "2b83bdfe2158e984ded2ad609cdc9ca3eb45ff5bc8cdf44a2f1b35b99bebcf18",
+    "lib/guidance.mjs": "bffb3a64a1432337584112f708f5e52acfa4c61acb0734ab8a4e751db3dfa7f8",
+    "lib/harness-upgrade.mjs": "fd69cd629db00167edc198c252dd92e38ca1b03eaeee63c3467928e3de5ea612",
+    "lib/harness.mjs": "3b5cce1658801159f26335fefe61e0ad96314227aa6d122303cfae03b4b8ee67",
+    "lib/instance-operational.mjs": "102195d102784eeae2ba5e09a5adc744b0410e2d7885dc8acb63911cfdeffb19",
+    "lib/intake.mjs": "c328502016a92310a69858e154711db4818f1cbdf1ac9d469f23732354b803f0",
+    "lib/local-session.mjs": "bfaf8e2c30825b1c0048ea00ecd5ce6e8070a2e18568008557104dfd16444833",
+    "lib/memory-provider.mjs": "014baad5a4516393f7d83e17ba374054554dff8e86630aa1515ff68fb2c1aa54",
+    "lib/operation-metrics.mjs": "7ecea25d4a23919f7abd21f9617520f2d4e758132f594c642ff58b876b32b468",
+    "lib/profile-install.mjs": "b0bbce334ec0947cdbb47f517848d8fbd6ca8f7171a3b155bcc50be757cb98ec",
+    "lib/profile.mjs": "e2edb6ccfc969d6e451a7dd8e8f69584d9982f55ffeef291674c555e08222f8e",
+    "lib/provider-views.mjs": "c290df42a1fc7b1f30258e6ee8222370356298170f76ff98500387e145f4860e",
+    "lib/provider-worker.mjs": "5278c15f888265cbc660975b249a2fc67c9ecdc619b4429d2d9d1043edadd2e5",
+    "lib/publication.mjs": "4340816469a9c7071e23c2defa40c210078ce08bcaec96ded772d98a02ce437f",
+    "lib/read-model.mjs": "9fdb303e3a89f7bb0ea4bb17c89aee12e315f6708d8b657071eeca34b2155415",
+    "lib/remote-admin.mjs": "3d294bf4d433f310f3c15ac0575ad08c8302fecf039d6ab788c955abf2347193",
+    "lib/remote-server.mjs": "e6496394214e6dc40bd23e92c1b262f87ab077270c7211bbac5319fd37d735db",
+    "lib/remote-state.mjs": "46da724bd13931d0e0a8e5c27f62b82657d396c26401f3d1f19c2f73b974e0c2",
+    "lib/remote-tools.mjs": "15f7917ef2c0eb1e416c533596f902089d7fc569faf1584678e4d2b3ebe9953f",
+    "lib/remote.mjs": "c8ecc7c69cd808f85985724d245cf3b3a1b8efd75cf71ac31f8244b0d60a0d60",
+    "lib/requests.mjs": "48e8df25cf5eadf040f3f91a9e208b3faaa9567b0954786d29af09aeab304441",
+    "lib/routing.mjs": "d712239037ef75c8b3e2a6d5467b70ed8e5561af090fa11e3c20d8098cd482dc",
+    "lib/runtime-readiness.mjs": "c3df40a15ade2b06e9cee5f7d06150162d146d664feb82365ee9dc18e005c398",
+    "lib/runtime.mjs": "008a0e1200a4c59db7f7f95dbbaf80e0b0428dbdcd6cacdeff4348a59a8ea144",
+    "lib/schema.mjs": "55d3dfedba275fda22745108f55b416c45b8a9555220923f3ceadfbbd1897334",
+    "lib/telemetry.mjs": "8021f8edfd8242a96a8ff41ee7cceb82358be4d66e5dc854ea6892d5d76cedb7",
+    "lib/util.mjs": "c99a13c4ce98e44fe77ac021e2bda538c9c3d9603fbbf28995cf6ea76fbc6e77",
+    "lib/vocabulary.mjs": "55242a37b2068aafc6cd53a2041795d952bfd8b2faf8b7d5ffea606b972dba9c",
+    "lib/work-artifacts.mjs": "f7386f81efd618c524c0cb4623fa9247c97dc15c23dc41b18cb1fa0f98a10c81",
+    "lib/worker.mjs": "b3c2099e3894e28015a7db2bae2b79c1c28026eb88f767e645c141d44437c582",
+    "schemas/cognitive-task-create.schema.json": "59c5307df3836c58e034f3c11fd705a2268310736ffd2e17d3a4f7418a47b181",
+    "schemas/cognitive-worker-tools.json": "3f7f2fdeff1445561b0544006b62c7f170ac98f68491d580c3a9da842abc56fb",
+    "schemas/cognizer-routing.schema.json": "68651d7a2b8fe3903235c3cb700a184dcfed00ddfd217deb69f92860db0b662d",
+    "schemas/conversation-turn.schema.json": "13687ecffff4691eb786139035d226847bcc5a9a387f17ef46036b96ba1b1bc7",
+    "schemas/intake-registry.schema.json": "411760e4cb955b97c214d8e27debcb51540f555dd5e83cd211654132f5884a40",
+    "schemas/legacy/runtime-config-v1.schema.json": "e96c414807b5a13562f9c40b9925228dac2ce63b3eccd06a56ea8db3dbd1d4a0",
+    "schemas/memory-worker-tools.json": "0ddcf6a33e3fd37e8dd8e941b42a9859b436fe56da3807533d7342ef5318a31e",
+    "schemas/read-model/answers.schema.json": "5ccfa6fb2b36db36e9f1bb5c5b3d7a09028ac63b455db835642e884423c0a9bb",
+    "schemas/read-model/delegations.schema.json": "eadc9ff821684ff0bcb0ec070a68724f6e57473cbb44e9f1c00f1017a111725e",
+    "schemas/read-model/journals.schema.json": "eadc9ff821684ff0bcb0ec070a68724f6e57473cbb44e9f1c00f1017a111725e",
+    "schemas/read-model/observations.schema.json": "eadc9ff821684ff0bcb0ec070a68724f6e57473cbb44e9f1c00f1017a111725e",
+    "schemas/read-model/questions.schema.json": "eadc9ff821684ff0bcb0ec070a68724f6e57473cbb44e9f1c00f1017a111725e",
+    "schemas/read-model/requests.schema.json": "eadc9ff821684ff0bcb0ec070a68724f6e57473cbb44e9f1c00f1017a111725e",
+    "schemas/read-model/subjects.schema.json": "5ccfa6fb2b36db36e9f1bb5c5b3d7a09028ac63b455db835642e884423c0a9bb",
+    "schemas/read-model/summary.schema.json": "3e0bb4deb3c81543cc0cab20fc9156242ebebcbb8511b5f03087e5a767dd07a0",
+    "schemas/read-model/tasks.schema.json": "6f25e215fb045aef23c54a079339b13470f3e550286e35e603c4928d9f3a242d",
+    "schemas/read-model/warnings.schema.json": "eadc9ff821684ff0bcb0ec070a68724f6e57473cbb44e9f1c00f1017a111725e",
+    "schemas/request.schema.json": "8bf8171c5383407ba7686ffe35352b9bebf50a18d6045f0ea91239a78af63b85",
+    "schemas/routing-worker-tools.json": "26d4d67a71352669e4b219fa4671d49953d697d451972d53e7c729babe93eb98",
+    "schemas/runtime-checkpoint.schema.json": "4b70ad328b6fa505e64f1417924b38d3b82845af50980cf9a616981a34f06ee7",
+    "schemas/runtime-config.schema.json": "88a41711e4fae07e7e0d83029aacacd91bde969198f0a4548bd1fe8df1bdba3a",
+    "specifications/COGNIZER_ROUTING.sudo.md": "cf8c020544dd3a9c9309ebaec66ec4aee3585ee7ac6867366fca4d6f163c70b2",
+    "tests/checkpoint.test.mjs": "e8277fb6e753097c8abdfdc3388cb9f5a26646427a24d2e07f822d39bbb74e23",
+    "tests/conformance/alignment.test.mjs": "cd83a002d9920c50b71b4acd2e0b8dd6ec94a19249c8a99940888fe3ee869bc7",
+    "tests/conformance/app-contract.test.mjs": "7695344f52780856d49f5b396669e9720b3261c11eab8df7404f1d1414cf3fbd",
+    "tests/conformance/cognitive.test.mjs": "f4d0ac493463ca7190feb8206ee5675121c856920c026f69120421ba0975e3f6",
+    "tests/conformance/mcp-success.test.mjs": "a8a32be3b24f3ee8c91d9b01d457271dfcd3867ea82b83c1b9d8a8b61f1c7b5e",
+    "tests/conformance/memory-provider.test.mjs": "584b084080f5cd6ed636f756b7706afc0beda28d459104494e3c940f16ae576c",
+    "tests/conformance/package.test.mjs": "63defc6cf00dfeadfc18fd549bdb6d8d9e7a8617aaadf5901a0b39fc33919722",
+    "tests/conformance/process-recovery.test.mjs": "d906d5ab5d85b77e50b6ada51556b2b83ded630970eacc477a1b7269bdbab457",
+    "tests/conformance/recovery.test.mjs": "070be6fb0d916e150534fb35f8c3251e0a9015bdbb1b12c9600d32f1668acd91",
+    "tests/conformance/release-pair.test.mjs": "37241d822e6f246d08fb1876613e613e47c2a454a6229bd1d0c394adeba454a5",
+    "tests/conformance/remote-boundaries.test.mjs": "c0a34620e4a9545c07526fb17b8c5f23d5724c1acba7cb5e27e9e7762a111a08",
+    "tests/conformance/remote.test.mjs": "09e8a3eabb4d9320291880af350bf77aeac91601bed3d0fd0101df5db669fd40",
+    "tests/conformance/requirement-map.test.mjs": "5e95a793206b68bb96323afeaa48bdb1b07978e448832c2edc6644e99a5adf3e",
+    "tests/conformance/worker-contract.test.mjs": "b3a67a2310f5e8eef13e500bf0714ea8c8b6d7737d4de464645a151bed566ff1",
+    "tests/dependencies.test.mjs": "4cbd912cbafb289aa03ef690971bbd1ee4c8932c10ea06acbd0cbbd18747d64b",
+    "tests/durable-session.test.mjs": "c69929c1169b9fc4bd475b743d3da53f982bee730da23c1a4e41af8a57a945d3",
+    "tests/harness-compatibility.test.mjs": "4d3980c7f57eba9c968e574f2228dbb11bdf19f1f2a54a54fbc6ef060bbe89c5",
+    "tests/harness-upgrade.test.mjs": "1f7c51dd8df5a842d43442926c74fcd3f1adebed12155f5abf0f1da148675b2d",
+    "tests/helpers.mjs": "2e837c7ecdb26f17288425e02e8b419e00a9af09c7852aea5d9ea704e2c998e9",
+    "tests/index.mjs": "e913ff1dae5d727f31668596c331dd8b884180858422d6795a3fd554dec16005",
+    "tests/issue11-acceptance.test.mjs": "db03dea4346e8ab8a33f69ceec93bfd75612a8fd21d73f7a8f119d4e6389e065",
+    "tests/mcp-session.mjs": "2eacfeeebe866c7d37d4c290374c9d54daa9b1641ba707936609f8eddacd8223",
+    "tests/migration-guidance.test.mjs": "d98611fcfdedeff543691fabfc423c9d17af89a2f5ec93a5feabeb9047560b03",
+    "tests/owned-process.test.mjs": "11da10be4130aa165ec8ceee91cec490d7d2f32fb36d880a279d9c6258f8bc04",
+    "tests/package.json": "c163c2ce55f6b66ced4b8ae6a24ddca9569e49f92104d56e325b51e7d6dddc79",
+    "tests/parity/boundaries.expected.json": "ea2f2f4d51246040e195fe0e2a6c256b244f9b2b9e4d8b9340cd34e71e80f3e3",
+    "tests/parity/boundaries.test.mjs": "d7b8c1540c22ac8133f37469106f1d8dddc63568e7101fbdabc49408b9d5499a",
+    "tests/parity/expected.json": "b8aae7323ff811a6c2df01748195083b3cde7e5cbba3f02760f0593596590108",
+    "tests/parity/host/conversation/turns.jsonl": "1caff755dd9137323b5bdfc1355695b905d158aee184c1c02a69ff999b4af140",
+    "tests/parity/host/intake/registry.json": "4c22f316cb19ea0b891be2e32fec28417f01c7a878a074c90b94efa9fc4a522a",
+    "tests/parity/host/requests/requests.json": "fcd943930911ab4b9931adc24e15ef9a00ee819869a829197fec8747e33ea2e5",
+    "tests/parity/instance/evidence/00000000-0000-4000-8000-000000000001.json": "bdb3b592a61853d99e9dab3dd94201a749acce54ab7af97254121fcb3d9b4ca3",
+    "tests/parity/instance/evidence/00000000-0000-4000-8000-000000000002.json": "633f68e97cf23ca9659741877a9c2f43f64380e1ac442fa9879c8a788949d612",
+    "tests/parity/instance/evidence/00000000-0000-4000-8000-000000000003.json": "d7027922a7a9e16fd896766094022c727b6200201604ec3efe7b977d5ae9e7e5",
+    "tests/parity/instance/inbox/00000000-0000-4000-8000-000000000001.md": "46378282745f77f72484d43ceafb9c68477e4d540d7118581dc9b5d2e4116ea2",
+    "tests/parity/instance/inbox/00000000-0000-4000-8000-000000000002.md": "ffde03ddd0f94165432dceaec9005affa42cda1b587123ced47d994c880a51e4",
+    "tests/parity/instance/inbox/00000000-0000-4000-8000-000000000003.md": "e892b6dad6d7702ba939761d605880ba0d6a3cefd7a4610515393af0465ec9c4",
+    "tests/parity/instance/instance/purpose.md": "4ae932131f173f8b2d64621199942bb172a722ccbd12253b8e7596216fc482d1",
+    "tests/parity/instance/memory/events/chat/00000000-0000-4000-8000-000000000003.json": "08d923c5ec9b1a833d9048ea171f3f7fc4cb95c20a86e367690308d6536f97ee",
+    "tests/parity/instance/memory/graph.json": "238e41f705f73715b0f3bbd387862b7624e4f66b72b839b0198929fe0d986e3e",
+    "tests/parity/instance/memory/hypotheses.json": "79ddf9350b82c5a7bc890659d5639b07c311dee6c66de3c4f094489a3be8fe1c",
+    "tests/parity/instance/memory/index.md": "692fd37e90222203f96e78a9468a85ab92cc084da334e0d74bf9a1bb8f754cb0",
+    "tests/parity/instance/memory/processed.json": "13e130c1a76d0346a22d2dddc3ce088fffdcb69c9291414ac33eb5ccef98cc74",
+    "tests/parity/instance/memory/processing-lock.json": "55e0317ea183c91f261af9f682d38e218958027968525514b934c44987ec1335",
+    "tests/parity/instance/memory/runs/00000000-0000-4000-8000-000000000900.md": "68fa1d22b8fccdc7f2819a625c060bf2ec2be51218e2b16f740ab46957e69f89",
+    "tests/parity/instance/questions/queue.json": "86c3418d2cd14bee8a29046d022d8da070195efb494b6371a008adf2d05eb17f",
+    "tests/parity/instance/questions/queue.md": "300a746560e3869ae2fa36a6edbe739997ffe8706c54f9edfe4ca0a6c68d8380",
+    "tests/parity/intake-worker.test.mjs": "98b13addaea3d100e4500e83c4f7ad26c2a5d34cfe5d3fb5fb481021059908dd",
+    "tests/parity/parity.test.mjs": "74efc78c5a81ccd1f859f859aa5200534a5226f5265a2a0d4e10a6958a2fc0d8",
+    "tests/parity/protocol.expected.json": "641ba3ed508b5df8c518969e167fd4a6b6f12df4f74d48823872289bfb93ccda",
+    "tests/process/d1-fixture.py": "a53468034368c5354164bda1b6e7ab2f079898c5fc6aee84961d7857079868e0",
+    "tests/process/publication-crash.mjs": "c3ab671e049c9abae514194937020b60cb500804d3da542957cd34f7ced29a48",
+    "tests/process/remote-peer.mjs": "4071240b7c23bd141132d1cc74f2b9ccd82b16826d4988a8910a2e4a0d21f986",
+    "tests/process/remote-service.mjs": "efc12441da4761aee7e30226ab8d69242a76e15404e548c25482a2cf0d1efaeb",
+    "tests/process/submit-crash.mjs": "6175770c2fb5190000012a9aaeed344d76678c20186d466c01707fb8cedcab26",
+    "tests/process/telemetry-peer.mjs": "3c429eb7017c1b7385bd8ec568dc42d700f6619a22bff2969bda053cfbf1dce7",
+    "tests/remote-helpers.mjs": "c3e837a9dd107ea8f5ec8c6133fe4f147d3f45e9680e5fc9d5fe5eb21f967cfc",
+    "tests/routing.test.mjs": "9cc630e449233736e538ec74db08a8d2c1a06c74361f56db9aafce95bf87fa41",
+    "tests/scenario.mjs": "f0ce626cbae3f9cc79e29bf513ee166df5aa9108f3b7a26e28d24d912b450d1c",
+    "tests/session-fixture.mjs": "582b1624d611706d29c8a8a504c2453c0b6d66b6207ccc136a898891c5b99c65",
+    "tests/session-transport.test.mjs": "a1b30b8ae3944719750432ae8559610d6ccd36e5f10f7040383ad8fada9fb219",
+    "tests/telemetry-acceptance.test.mjs": "1713f680779309603a383230e1e8f7e2ce48d17ceb1ef28df01fff859bbe7025",
+    "tests/telemetry.test.mjs": "29e7662a24bfd10be2bee307a20cb0e06f3331cc0f1adcc2f33d6dfb7c94e75a",
+    "tests/unit.test.mjs": "6a41e0ae3bbe2f361384eff50212eba0389a91b1663ee077427bd2da108cf935",
+    "tools/Test-IisIdentity.ps1": "0b3d330d663d1a3e4fa0fc64905aa908cacd84336291cca07c19d114c41496fd",
+    "tools/acceptance-mcp.mjs": "c11ecdb64b1fd0b7a73c699184c0c6b955a103dfd5152c57d8ad1d6b1e11d1be",
+    "tools/benchmark-capacity.mjs": "4adca0c2c54e115ea9ba488dd28f57e039c24ade01608ab873c74a80a497dd37",
+    "tools/benchmark-host.mjs": "2fa0f0c60af141439435e55a206d8340ec19ae261bb0bc613a70e2f89c8a2311",
+    "tools/benchmark-provider.mjs": "0819157b2e8d1a15807040691a88e7e38e3a8172976d38f3fa1a6b85c8ccdec6",
+    "tools/benchmark-telemetry.mjs": "f4a2ae7ebc549c01db30d44c3f0951050b066b3fbc35be155a0d8bbf85d2e6bb",
+    "tools/build-cognitive-tools.mjs": "fea5e6b06ba7be1f2655431ab57a58e895744d8fba143f67028ca04a521f0a0f",
+    "tools/build-release.py": "8498be62e2905c7afb3ba69ef6089c6ac1efdfebd89ef3a01a180b9f87b4a231",
+    "tools/check-cognitive-evidence.mjs": "ce47fe358c6a6f63b860c5b4d586eaa8eee1ca3d8de613ff992eb15c641923e0",
+    "tools/cognitive-acceptance.mjs": "21a147adf5125617835a26c805122a0d4c2806ea34c20e61c9886a9721072f98",
+    "tools/harness-qualification-plan.py": "51c5d8fc7a439ee74831e9afbaa3ad2be61d21dc85120ad9a8fa608a6c00348d",
+    "tools/issue11-acceptance.mjs": "369d68e4f93d9bca1ce7899acbb28a47665de2f83d4d452d842a59a7f2315362",
+    "tools/owned-process.mjs": "202e26b00aa7833466c2c2326c7feefd85ee799a53d4efe397ff7c5579b08659",
+    "tools/owned-process.py": "61b7c431a344ba4764b0f400d596ad298f98b46f334aa4384240a53e7c7113f9",
+    "tools/prepare-harness.py": "2bdf3aaab9c0f6fa0bb04b498f1c08a61c02b05d5e95539a729a96e6cc866dcd",
+    "tools/prepare-provider-harness.py": "d929a2c5896534ee36d3464d5c4a5003bb68a90c20a1c469e3413e84de9e4708",
+    "tools/probe-harness.mjs": "7c9613926fbfc9e456b8e6c5692992465271b6a901183ac00efd0cf42e6c7160",
+    "tools/probe-remote.mjs": "a7ef95ccfcc979c759333895ef835ff9d8e659666ee6edf6f673bdb1806d64a1",
+    "tools/promote-harness.py": "5f7dc517126af0ae07241ec764bf6a8b4ffb6bf19c4cadca8d7dae230be90ba2",
+    "tools/qualify-harness.py": "ba79d6e19ef4bc88c71579eb9819fd015efaea67752706b447b8db2cc9390654",
+    "tools/qualify-windows-reliability.py": "155d55019292ab847a14fdb3945e155bde4ee09a87ea2e4edc25035b7af29df3",
+    "tools/run-remote-agent.mjs": "789d4c7ed2a9948af002fe67383d120f7853e05f1b98cb7729687840b2cb2d94",
+    "tools/run-tests.mjs": "041f19565d5a547791c93ce1a6f09957d4f0f55f3cd68c219474463b53cffd3f",
+    "tools/service-probe.mjs": "b41ca92e4c75d870c90376cb9cb4440979817dffcd0fc836a27822f458877bce",
+    "tools/session-store-server.mjs": "24127addc190b7455a1cb6e069cd989f26fecc8319735593512dc1d1e3e27b6a",
+    "tools/test-prepare-harness.py": "6084a8aa762c96cc5573f284842904211f2baa61936e29f846ae2dae0ac5955f"
+  },
+  "staged_build": {
+    "exit": 0,
+    "host_tests": {
+      "tests": 174,
+      "pass": 174,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "host_suite_elapsed_ms": 143651,
+    "adapter_tests": {
+      "pass": 11,
+      "fail": 0
+    },
+    "python_tests": {
+      "pass": 9,
+      "fail": 0
+    },
+    "suite_seconds": 157.63423195799987,
+    "benchmarks": [
+      "host",
+      "telemetry"
+    ],
+    "candidate_archive": {
+      "name": "chelm-host-1.3.1-routing-candidate.zip",
+      "sha256": "e50627a88d492c5acbb280c75f332820fb95ae9600395f5aebed4eccf9bd71d7",
+      "manifest_sha256": "564dc40d560313663d26697d6af370cf7ea290d3e10832a6289c6c3648c5e4ff",
+      "inventory_files": 380,
+      "published": false
+    }
+  },
+  "qualification_scope": "Full unchanged feature qualifications precede the final local held-lease guard. The final guard was separately checked on all six non-reference releases, and the final reference package runs the complete suite.",
+  "final_lease_guard": [
+    {
+      "version": "0.11.0",
+      "exit": 0,
+      "scope": "Final local file-worker held-lease check; all unchanged feature qualifications are retained separately.",
+      "log": "0.11.0.log",
+      "log_sha256": "39aa5c2ac7b6e9c375df15a11e34ea36a3e8153a16516f38fa06b6386a944d5c"
+    },
+    {
+      "version": "0.12.0",
+      "exit": 0,
+      "scope": "Final local file-worker held-lease check; all unchanged feature qualifications are retained separately.",
+      "log": "0.12.0.log",
+      "log_sha256": "5845ede62dde3ebe64ad5e2b98053f319c07bcef57fd05f0f92a944c38d4d3d7"
+    },
+    {
+      "version": "0.13.1",
+      "exit": 0,
+      "scope": "Final local file-worker held-lease check; all unchanged feature qualifications are retained separately.",
+      "log": "0.13.1.log",
+      "log_sha256": "4ac6c8f35dde30d576b63edb8d699203600a9d68df79ac15761e32cbe84f5791"
+    },
+    {
+      "version": "0.13.2",
+      "exit": 0,
+      "scope": "Final local file-worker held-lease check; all unchanged feature qualifications are retained separately.",
+      "log": "0.13.2.log",
+      "log_sha256": "04413cdb8ea5f17ed605194cb4de8624b4d5f7fa5382c6d101bf858359dfb4ef"
+    },
+    {
+      "version": "0.13.3",
+      "exit": 0,
+      "scope": "Final local file-worker held-lease check; all unchanged feature qualifications are retained separately.",
+      "log": "0.13.3.log",
+      "log_sha256": "4748feb0f23d812379ccf01b15d6970530c9b9d8a21ebdbeffbad139740c6329"
+    },
+    {
+      "version": "0.14.0",
+      "exit": 0,
+      "scope": "Final local file-worker held-lease check; all unchanged feature qualifications are retained separately.",
+      "log": "0.14.0.log",
+      "log_sha256": "90ffa9cb0faed3bf388a817fd48db731ac00061cde2539a36bb9e9c685893357"
+    }
+  ],
+  "qualification": [
+    {
+      "version": "0.11.0",
+      "status": "pass",
+      "manifest_sha256": "d130c465688874bceae2f5eb0bb113ddef740c95764256871bda6d51928355e7",
+      "features": {
+        "file_worker": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 20,
+                "pass": 20,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 10,
+                "pass": 10,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "adapter",
+              "exit": 0,
+              "counts": {
+                "tests": 11,
+                "pass": 11,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "upgrade",
+              "exit": 0,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "cognitive_tasks": {
+          "status": "unsupported",
+          "checks": []
+        },
+        "memory_provider": {
+          "status": "unsupported",
+          "checks": []
+        }
+      }
+    },
+    {
+      "version": "0.12.0",
+      "status": "pass",
+      "manifest_sha256": "52c4fa98a06993bfa4f2504df58a82504e4303a20fd465a09c19140b8d3cfda6",
+      "features": {
+        "file_worker": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 20,
+                "pass": 20,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 10,
+                "pass": 10,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "adapter",
+              "exit": 0,
+              "counts": {
+                "tests": 11,
+                "pass": 11,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "upgrade",
+              "exit": 0,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "cognitive_tasks": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 12,
+                "pass": 12,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "memory_provider": {
+          "status": "unsupported",
+          "checks": []
+        }
+      }
+    },
+    {
+      "version": "0.13.1",
+      "status": "pass",
+      "manifest_sha256": "219a8d05e9bd8c844c8ffb4d7f2d251be074e0d928a6fd130c38dd0e14bc728e",
+      "features": {
+        "file_worker": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 20,
+                "pass": 20,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 10,
+                "pass": 10,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "adapter",
+              "exit": 0,
+              "counts": {
+                "tests": 11,
+                "pass": 11,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "upgrade",
+              "exit": 0,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "cognitive_tasks": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 12,
+                "pass": 12,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "memory_provider": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "memory_provider",
+              "exit": 0,
+              "counts": {
+                "tests": 31,
+                "pass": 31,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-memory_provider",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "version": "0.13.2",
+      "status": "pass",
+      "manifest_sha256": "411fe117b61ffb1288e08fbe2d05223ac8b45c5558e2a4c2f97c515fe9f6878b",
+      "features": {
+        "file_worker": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 20,
+                "pass": 20,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 10,
+                "pass": 10,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "adapter",
+              "exit": 0,
+              "counts": {
+                "tests": 11,
+                "pass": 11,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "upgrade",
+              "exit": 0,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "cognitive_tasks": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 12,
+                "pass": 12,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "memory_provider": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "memory_provider",
+              "exit": 0,
+              "counts": {
+                "tests": 31,
+                "pass": 31,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-memory_provider",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "version": "0.13.3",
+      "status": "pass",
+      "manifest_sha256": "f371d446bc227c75fa5f5cca87b393a0fc7c938494a659f352158eae7916af9f",
+      "features": {
+        "file_worker": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 20,
+                "pass": 20,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 10,
+                "pass": 10,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "adapter",
+              "exit": 0,
+              "counts": {
+                "tests": 11,
+                "pass": 11,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "upgrade",
+              "exit": 0,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "cognitive_tasks": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 12,
+                "pass": 12,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "memory_provider": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "memory_provider",
+              "exit": 0,
+              "counts": {
+                "tests": 31,
+                "pass": 31,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-memory_provider",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "version": "0.14.0",
+      "status": "pass",
+      "manifest_sha256": "b46a743656d9466d88228357aa2a2025d85ecaed22c9057e8b049c4f309665be",
+      "features": {
+        "file_worker": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 20,
+                "pass": 20,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-file_worker",
+              "exit": 0,
+              "counts": {
+                "tests": 10,
+                "pass": 10,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "adapter",
+              "exit": 0,
+              "counts": {
+                "tests": 11,
+                "pass": 11,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "upgrade",
+              "exit": 0,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "cognitive_tasks": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 12,
+                "pass": 12,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-cognitive_tasks",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        },
+        "memory_provider": {
+          "status": "pass",
+          "checks": [
+            {
+              "name": "memory_provider",
+              "exit": 0,
+              "counts": {
+                "tests": 31,
+                "pass": 31,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            },
+            {
+              "name": "routing-memory_provider",
+              "exit": 0,
+              "counts": {
+                "tests": 3,
+                "pass": 3,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "independent_public_schema_check": {
+    "positive": 2,
+    "negative": 6,
+    "validator": "Python jsonschema Draft202012Validator",
+    "result": "pass"
+  },
+  "failure_history": [
+    {
+      "logs": "routing-local-lease-initial-*",
+      "reason": "Initial delta-test setup assumed extracted cache paths that did not exist for five versions. Official archives were then verified/extracted and all six final delta checks passed."
+    },
+    {
+      "log": "initial-focused-tests.log",
+      "reason": "HTTP fixture token below the existing 32-byte minimum; fixed before final tests."
+    },
+    {
+      "log": "initial-source-tests.log",
+      "reason": "Four pre-existing discovery assertions expected the former MCP tool count; updated for the three routing tools. Initial source run also skipped seven staged-package-only checks. Final staged run passes all 174 with no skips."
+    }
+  ],
+  "remaining_gates": [
+    "Hosted Windows/macOS CI for this PR; focused Windows routing cases are configured, not yet observed here.",
+    "Publish a new host release with aligned version metadata.",
+    "Shem negotiates the published routing capability and updates exact switch recipes; real Shem/LLM qualification is separate."
+  ],
+  "retained_files_sha256": {
+    "0.11.0-adapter.log": "4cf3cb7cc97f315108b3f03e376b835e5ae3a0eae13ae7d41f612b76d6bb78b1",
+    "0.11.0-file_worker.log": "17effcf244074721136c3968a4be0413fb5e635291132d070d2ecb1737bdee27",
+    "0.11.0-routing-file_worker.log": "a400a384cd2946ac18992d253c3a49652f7d2bd99a65b225fba91a790a6f5f2f",
+    "0.11.0-runner.log": "d28c728f9646efbf21c820e8a5d2bfc15e28712ffd82810ae6d3a754051147b2",
+    "0.11.0-upgrade.log": "712683f1f6b6dec284aa112277655a3ec5592af7f10f0a1735a17ed206c5a9ba",
+    "0.11.0.json": "8ecbf5a49f636db6eca36b41b1f47ea741c858300599a2e008ad5fddfbd4764f",
+    "0.12.0-adapter.log": "afb61175a22781dd9fc38952be89906b92e7d3d3e28d299951a981822315941c",
+    "0.12.0-cognitive_tasks.log": "398c9c7fd3bae24de8e14919b77bffb0906ce7a0edc96802be11fd4d70415fb2",
+    "0.12.0-file_worker.log": "158be23ff108214d39bcadb998d1223a1c2aa6c925f191c03a30a6d8e209198a",
+    "0.12.0-routing-cognitive_tasks.log": "8b1a8b10368d855800da5b93383c3a37ccc76e9a4e9abafc7b73d7c6e6c59d82",
+    "0.12.0-routing-file_worker.log": "4ccfe7179495bdb70a2a49d680ea95804ad702a0b2f64b7df184872686b74707",
+    "0.12.0-runner.log": "942dcf3ad82af92ac527d55bc937b2d685efb2f1d4d9776e6244b6cc655f626e",
+    "0.12.0-upgrade.log": "5e77687c58481b81436077f54f84669d21d7d936ce3a52e4e1343d2bfdb1e1e0",
+    "0.12.0.json": "1a078af3ff1075724e30c6f982c090d1a406e80a0b11ee3419185ec80509e8ca",
+    "0.13.1-adapter.log": "633406e3af4d59a8066820836d6aa5745d5019982fb69588fa7db1d277498166",
+    "0.13.1-cognitive_tasks.log": "1bd88b4fefb1d0bce818a2c885288677c3d17ede3cedd9218431ad78a1b67ae4",
+    "0.13.1-file_worker.log": "a47dafddef4a6ccef4b5e223df4f0731546913c98a98c791f8ec0eaf17070fc1",
+    "0.13.1-memory_provider.log": "0182c3dd471d1b960602d22a949684d00480f2c8624ea4276282d36371250277",
+    "0.13.1-routing-cognitive_tasks.log": "9ba17c9288b6135f7203238991bf70ab0709d301ac18a120d82b9b2b99225a9d",
+    "0.13.1-routing-file_worker.log": "866f6dcc5f3eb1cd856f88c3ee1ed7c16abcb4419f5fe3ead98cff1f65debda1",
+    "0.13.1-routing-memory_provider.log": "0c1f5984781f3f26257ef73ce1b11a843438368ea1d278e4d14032761e39327f",
+    "0.13.1-runner.log": "0bfe8bba83462df556275d9544ca124833e89f08d3533e63997a5286d1c550b9",
+    "0.13.1-upgrade.log": "baf6400d4d59c23a3afa8b3771f471b29e497d0c628bfec339a26821d5a46aeb",
+    "0.13.1.json": "4de49722e6ebf979921eb557403f4d41bb94ee0204454648e2c7c56287e6c78d",
+    "0.13.2-adapter.log": "08381b06ce41e303e241ba8d4df759598fbe217bda81a3092d9111f404fd68a0",
+    "0.13.2-cognitive_tasks.log": "7290c22b04b5526ca80652b149e3b862409223fc6f4282222d0cb221834907d6",
+    "0.13.2-file_worker.log": "110cfa3bbaa57dda3b3e120b043ec60e7606d58da07a62453664d7d7a99b0204",
+    "0.13.2-memory_provider.log": "058a093aa1f17f30fbdb2dd61ae7aca847f1704fb936c58de9089e761ad3dd9a",
+    "0.13.2-routing-cognitive_tasks.log": "f8283738554e059ecd6a2150c4d38b72466e169fa2863c1f0d9199afed964985",
+    "0.13.2-routing-file_worker.log": "e68271c64a3a9f3ef3d3782c524ed6e19d3f82e20b920930151d1b39c3983a96",
+    "0.13.2-routing-memory_provider.log": "98a48684e1d625e98eff03880fdb5c9a369f7ce99e36c58d21b5c0c6e13d6e62",
+    "0.13.2-runner.log": "0b859f038608ee4aced198f8a782725f570651713b0ffb11e8b5f1f98b576dac",
+    "0.13.2-upgrade.log": "d0243aaa75024afbfe7498728eee919e6effc078da7c5373c68cc93c3d2f9591",
+    "0.13.2.json": "a3909dd5075b3d383fc58f53ca2e6ab1f6d25687d81e4431aed95a438b177963",
+    "0.13.3-adapter.log": "d20ec8a67bdd49a69a46250c0d7e7d7295c0e61b8f089652d02400d6e9741fdb",
+    "0.13.3-cognitive_tasks.log": "446e8b8f9f5391e82e74010591fbe883329d72b382d198034e1ea217542a8fa9",
+    "0.13.3-file_worker.log": "62cd26bd6c8bdc80638b5b8510636ad19c8ec2743eb8e0c1c7493744196074e6",
+    "0.13.3-memory_provider.log": "9d64c4c7e597f81833c87dcb866a5d32b4606da957b32984d176e445bc99bd11",
+    "0.13.3-routing-cognitive_tasks.log": "b61529bd26440e495446391cb6ecc24922a67193ed4f8a86f3a6611a3abb7237",
+    "0.13.3-routing-file_worker.log": "c173bc15a5679890f4e4c7e0d3c4b46084f1d7aed0c965dddd16411fd30d3b6f",
+    "0.13.3-routing-memory_provider.log": "38112db3cdfefcd435d2714cf6977830b89d9bd275c0cffe83fe7c154d99d572",
+    "0.13.3-runner.log": "e5f9d7d998ba894023ccb7f94f84700d95d1b00b9ddc5e1e99eda4a6a6021e2b",
+    "0.13.3-upgrade.log": "e8ad8d131cf7c45e8ca72c61653455a4a5d44d766d77b80a32f3f6710050ad45",
+    "0.13.3.json": "d481e235e89d39395d4a3bce8a5c45209ee4e1421a2a0cc3929a676fccd38f41",
+    "0.14.0-adapter.log": "2890cdeb57855ed6886b53ff74170408bf82a78d3a884018cc7d09852bbecf3a",
+    "0.14.0-cognitive_tasks.log": "81c220cd2b2fafff4664e467710df2df1f9135338c0d8a6a86a3439e3b168d7a",
+    "0.14.0-file_worker.log": "5f975c58f4475a1278bb8d8748f0be175de9aa6c9861972ff2a9d9240f610515",
+    "0.14.0-memory_provider.log": "6ad35063069da28ed56cc0626ec2281198834d4e2407b47aaa8f5d60b3e765a3",
+    "0.14.0-routing-cognitive_tasks.log": "921e5bb770a56850b84d29c288ae83fe2a022af3e0bcc0410e771f11f5f8151c",
+    "0.14.0-routing-file_worker.log": "51459c25a207207f467ca84eba41c36ead3d9aa3d11e74333fc7ce40e0bb9ada",
+    "0.14.0-routing-memory_provider.log": "a3731c0919ced01ce87d10ab2c2c3e8871cc03e2150d371d414e3ab09775b29d",
+    "0.14.0-runner.log": "1401960ad88954b6d0dac2b995c1e2d095d9c844a1546cfea8bde844a0afa55d",
+    "0.14.0-upgrade.log": "70df4daa922ceae8aa843af47329b12fa1c4039c1613647c09c644c94fbb8a98",
+    "0.14.0.json": "1f99f0724dfc99e52b4af4e3d5840960defe5f9d6f601c51264a98806761aaa5",
+    "benchmark-linux.json": "3226f306fb0ecf4141e5a9d31296ba459e8edd17c62da6d05576e0a50ee8797b",
+    "initial-focused-tests.log": "9357411257b9ae733a36a9ab1474450da2a271a7913564b2bc087cab9fc5e43e",
+    "initial-source-tests.log": "55e195d250b56371ed6857e8f3a3424aec15b302a3406808c97806f808b84818",
+    "routing-local-lease-0.11.0.json": "d9595962be883277bc629bdf5bace989c45c30f34ed3a191079d89842c99cb25",
+    "routing-local-lease-0.11.0.log": "39aa5c2ac7b6e9c375df15a11e34ea36a3e8153a16516f38fa06b6386a944d5c",
+    "routing-local-lease-0.12.0.json": "48af425277b73f9ed783b12a301bfc0f8522b77d5ee8a85cda039fbaaac4287f",
+    "routing-local-lease-0.12.0.log": "5845ede62dde3ebe64ad5e2b98053f319c07bcef57fd05f0f92a944c38d4d3d7",
+    "routing-local-lease-0.13.1.json": "6eb32787ff8cff36e1abcf1555b7fd2e7dd1f02f44225aa84d323b17e9b6563d",
+    "routing-local-lease-0.13.1.log": "4ac6c8f35dde30d576b63edb8d699203600a9d68df79ac15761e32cbe84f5791",
+    "routing-local-lease-0.13.2.json": "620a75c388c9ea315593b1a590682ea4db2b7d8a25415ffd85fe0032733349ad",
+    "routing-local-lease-0.13.2.log": "04413cdb8ea5f17ed605194cb4de8624b4d5f7fa5382c6d101bf858359dfb4ef",
+    "routing-local-lease-0.13.3.json": "545f2a694f3e641c084293f5ad7348a8fa4c24d6884947a70c9b6a1c1d1c6745",
+    "routing-local-lease-0.13.3.log": "4748feb0f23d812379ccf01b15d6970530c9b9d8a21ebdbeffbad139740c6329",
+    "routing-local-lease-0.14.0.json": "4dc345f1cbdba876720aefc2122e5d741560175acb2bc8367dde5d3008a30165",
+    "routing-local-lease-0.14.0.log": "90ffa9cb0faed3bf388a817fd48db731ac00061cde2539a36bb9e9c685893357",
+    "routing-local-lease-initial-0.11.0.json": "9a45575d03278f2b12875a02babe547a2fd422d35bb10afdee3fed5d8bf1d71b",
+    "routing-local-lease-initial-0.11.0.log": "7ddafadcc18d0a2e10e5110be286068ebd26a02df82d6801d23f21a9a7e30d73",
+    "routing-local-lease-initial-0.12.0.json": "b645a09c0c9340c57aa6c44e0be339807ebe4d192144f59ecdef54f77e2ceabd",
+    "routing-local-lease-initial-0.12.0.log": "c7d6f0905fc64c8970613d05c54b234832839bc2dbe9f9295eb707e740db2342",
+    "routing-local-lease-initial-0.13.1.json": "3ad52c3e59cfd947d3909d75788895bfa8a4aee4d09a2cb1eeb4b9828a0cd25f",
+    "routing-local-lease-initial-0.13.1.log": "5b5b865f6c58e1799f0c8968d9a850f9bf010bc4bcceb36231f9f1c36c77b698",
+    "routing-local-lease-initial-0.13.2.json": "da919228ded517f127dd5221b44f5ed4b27fb34e82b59fe08b64dcd302714c39",
+    "routing-local-lease-initial-0.13.2.log": "7d055e58e5ddd3de8f86714e36eca9d5f8f1eaed6f701ce3a54bf853314683d9",
+    "routing-local-lease-initial-0.13.3.json": "c7685b3b710fd042ee188ca24c4e5aa5ffccc61d603767743741fdcea76ab95b",
+    "routing-local-lease-initial-0.13.3.log": "332735a9acbedf85bc37d86c04cc363abac6b440719698577e4555046a57178f",
+    "routing-local-lease-initial-0.14.0.json": "3903ef650f676cfe384148f796e8f44052da4e5b0bce05b6f6b28805e58d009e",
+    "routing-local-lease-initial-0.14.0.log": "8f60ef7b0af900bdd3219fcb4738d1c028d097786dbe2eea3a023bce33cbf184",
+    "staged-build.log": "92254ffe8bd8c4bf5b493ee5d1bb7e791864ff45b033679f781ada080ace8faf",
+    "staged-host-tests.log": "c9620821bdf9c5ce91df57c886a5d34c41e5b2b494d9a4b188372fa9dde37964",
+    "telemetry-linux.json": "f17a6c903f63c1fd43fffca229726751fe62e532c971544d93c67c088b11ede2",
+    "test-timing-linux.json": "36d0ffb6296188f983a92941b2ec27debcaa453909a8bdb38e49c58aa9db9f11"
+  }
+}

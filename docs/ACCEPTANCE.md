@@ -1,3 +1,20 @@
+# Preferred cognizer routing — issue #59 / candidate 2026-11-26
+
+The final staged Linux reference package passed **174/174 host tests, 11/11
+adapter checks and 9/9 Python checks**, with no host skips, failures or
+cancellations. Host and telemetry benchmarks passed; the suite/adapter phase took
+157.63 seconds. Six other approved Harness versions completed **469 passing
+feature checks** with unsupported features explicit, plus six final local lease
+regression checks. See [retained results, exact scope and earlier failures](evidence/cognizer-routing-2026-11-26/README.md)
+and the [hashed summary](evidence/cognizer-routing-2026-11-26/summary.json).
+
+This candidate adds `cognizer-routing-v1` across both queues and worker bindings,
+with trusted readiness/identity, bounded prefer/require policies, revisioned admin
+operations and retained ownership/recovery. [Configuration and operations](COGNIZER_ROUTING.md)
+are unreleased. Platform CI for this revision and host publication remain separate
+gates; existing published 1.3.1 evidence below does not certify the new code.
+Real Shem/LLM qualification and the coordinated switch-guide update are separate.
+
 # Harness compatibility qualification — issue #61
 
 The current implementation retains seven local Linux qualification reports for

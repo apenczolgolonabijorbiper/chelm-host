@@ -177,6 +177,6 @@ test('WRK MCP: initialize, notifications, tools and all seven local method round
   const messages = r.stdout.trim().split('\n').map(s => JSON.parse(s));
   assert.equal(messages.length, 9);
   assert.equal(messages[0].result.serverInfo.version, '1.3.1');
-  assert.equal(messages[1].result.tools.length, 31);
+  assert.equal(messages[1].result.tools.length, 34);
   for (const reply of messages.slice(2)) assert(reply.result.content[0].text);
 });

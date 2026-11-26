@@ -1,0 +1,36 @@
+TAP version 13
+# Subtest: Runtime schema seed, local preferred registration and reserved-principal refusal are explicit
+not ok 1 - Runtime schema seed, local preferred registration and reserved-principal refusal are explicit
+  ---
+  duration_ms: 210.827227
+  type: 'test'
+  location: '/workspace/scratch/31a97e36311f/chelm-host/tests/scenario.mjs:6:41'
+  failureType: 'testCodeFailure'
+  error: |-
+    {"ok":false,"messages":[],"error":{"code":"package_invalid","message":"Harness release integrity unavailable","details":{"diagnostic":"ENOENT: no such file or directory, open '/workspace/scratch/22d42d40dab6/harness-0.13.2/RELEASE.json'"}},"exit":1}
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    ok (file:///workspace/scratch/31a97e36311f/chelm-host/tests/helpers.mjs:46:10)
+    fixture (file:///workspace/scratch/31a97e36311f/chelm-host/tests/helpers.mjs:67:3)
+    TestContext.<anonymous> (file:///workspace/scratch/31a97e36311f/chelm-host/tests/routing.test.mjs:223:11)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 574.1342

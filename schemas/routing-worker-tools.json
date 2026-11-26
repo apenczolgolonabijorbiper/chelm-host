@@ -1,0 +1,64 @@
+[
+  {
+    "name": "chelm_routing_register",
+    "description": "Register declared routing readiness for your authenticated, administrator-provisioned binding. Exact Harness digest and supported host contracts required. Declarations do not grant runtime authority.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "host_contracts": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "file-worker-v1",
+              "remote-worker-v2",
+              "memory-worker-v3",
+              "cognitive-worker-v2"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 4
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "minItems": 1,
+          "maxItems": 64
+        },
+        "harness_manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "host_contracts",
+        "capabilities",
+        "harness_manifest_sha256"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_routing_heartbeat",
+    "description": "Renew finite routing readiness. Does not reset pending work grace or existing ownership.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "chelm_routing_status",
+    "description": "Inspect only your configured routing identity and readiness. No other principal assignments are disclosed.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  }
+]

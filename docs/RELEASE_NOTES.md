@@ -1,3 +1,23 @@
+# Unreleased — preferred cognizer dispatch (#59)
+
+Add optional `cognizer-routing-v1` on runtime configs 2/3, both observation and
+cognitive queues, and CLI/stdio/authenticated HTTP worker paths. Bind logical
+implementations to configured authenticated principals or actual local OS
+account/hostname; negotiate readiness and exact Harness identities. Prefer mode
+uses durable bounded work grace and an explicit fallback allowlist; require mode
+never falls back. Add local admin preview/apply with revision CAS, scoped worker
+diagnostics and status/doctor visibility. Preserve existing owned work and
+integration/review across switches, retain uncertain claim/publication reservations
+past expiry, and keep policy/clocks in settled checkpoints while clearing readiness.
+
+Absent/disabled policy preserves current clients and dispatch. No Shem/LLM install,
+reference promotion, inference or process scheduler is included. Source version
+remains 1.3.1; these additions require a new host release and coordinated Shem
+negotiation/switch-guide update. See [accepted configuration and operations](COGNIZER_ROUTING.md)
+and [routing SudoLang parity specification](../specifications/COGNIZER_ROUTING.sudo.md).
+Published feature-qualified Harness support remains the existing catalog through
+0.14.0 with 0.13.0 as reference; this feature does not widen it.
+
 # Unreleased — contract-qualified Harness compatibility (#61)
 
 Keep Harness 0.13.0 as the deterministic CI reference and approve other releases

@@ -1,0 +1,1127 @@
+TAP version 13
+# Subtest: Complete checkpoint preserves history, queued tasks, exact results, receipts and historical citations at a moved root
+ok 1 - Complete checkpoint preserves history, queued tasks, exact results, receipts and historical citations at a moved root
+  ---
+  duration_ms: 8104.961863
+  type: 'test'
+  ...
+# Subtest: Checkpoint CLI restore refuses implicit owner binding; includes no Git remotes, credentials, hooks, locks, packages or auth canaries
+ok 2 - Checkpoint CLI restore refuses implicit owner binding; includes no Git remotes, credentials, hooks, locks, packages or auth canaries
+  ---
+  duration_ms: 2242.65374
+  type: 'test'
+  ...
+# Subtest: Checkpoint refuses active/expired work, unresolved publication, changed protocol/drafts and external roots
+ok 3 - Checkpoint refuses active/expired work, unresolved publication, changed protocol/drafts and external roots
+  ---
+  duration_ms: 2565.793701
+  type: 'test'
+  ...
+# Subtest: Checkpoint validates all archive paths, required inventory, bytes, versions and budgets before activation
+ok 4 - Checkpoint validates all archive paths, required inventory, bytes, versions and budgets before activation
+  ---
+  duration_ms: 865.831974
+  type: 'test'
+  ...
+# Subtest: Unsupported historical secret paths and links are refused rather than exported or followed
+ok 5 - Unsupported historical secret paths and links are refused rather than exported or followed
+  ---
+  duration_ms: 836.280644
+  type: 'test'
+  ...
+# Subtest: Config-3 checkpoint keeps provider snapshot receipts and passes public audit after restore
+ok 6 - Config-3 checkpoint keeps provider snapshot receipts and passes public audit after restore
+  ---
+  duration_ms: 6009.511224
+  type: 'test'
+  ...
+# Subtest: Archive and compressed Git budgets refuse before import; hardlinks and edited owners cannot gain access
+ok 7 - Archive and compressed Git budgets refuse before import; hardlinks and edited owners cannot gain access
+  ---
+  duration_ms: 1425.066858
+  type: 'test'
+  ...
+# Subtest: VF-3: explicit store subjects, generic-name preflight and consumer jobs wrapper
+ok 8 - VF-3: explicit store subjects, generic-name preflight and consumer jobs wrapper
+  ---
+  duration_ms: 2896.825578
+  type: 'test'
+  ...
+# Subtest: VF-4: mirrored profiles retain exact bytes; status and enforced next detect source drift
+ok 9 - VF-4: mirrored profiles retain exact bytes; status and enforced next detect source drift
+  ---
+  duration_ms: 4912.648785
+  type: 'test'
+  ...
+# Subtest: VF-4: invalid or reserved profile mirrors do not change installed bytes or HEAD
+ok 10 - VF-4: invalid or reserved profile mirrors do not change installed bytes or HEAD
+  ---
+  duration_ms: 1162.302709
+  type: 'test'
+  ...
+# Subtest: VF-6: bounded Windows sharing retries preserve atomic replacement and propagate other failures
+ok 11 - VF-6: bounded Windows sharing retries preserve atomic replacement and propagate other failures
+  ---
+  duration_ms: 0.957917
+  type: 'test'
+  ...
+# Subtest: VF-2: rebased adapter batches index metadata and exposes safe 0.9.x timings
+ok 12 - VF-2: rebased adapter batches index metadata and exposes safe 0.9.x timings
+  ---
+  duration_ms: 1891.07487
+  type: 'test'
+  ...
+# Subtest: APP-10..16/PAR-1..4: intake, exact headers, dedupe, receipt conflict and atomic refusal
+ok 13 - APP-10..16/PAR-1..4: intake, exact headers, dedupe, receipt conflict and atomic refusal
+  ---
+  duration_ms: 2788.66096
+  type: 'test'
+  ...
+# Subtest: APP-20..24/PAR-5..8: conversation limits, pending/retrieval and open-question answers
+ok 14 - APP-20..24/PAR-5..8: conversation limits, pending/retrieval and open-question answers
+  ---
+  duration_ms: 2384.340672
+  type: 'test'
+  ...
+# Subtest: APP-30..41: read views, inspection, lookup, counts, source-only transfer
+ok 15 - APP-30..41: read views, inspection, lookup, counts, source-only transfer
+  ---
+  duration_ms: 7453.950547
+  type: 'test'
+  ...
+# Subtest: APP-50..52/PAR-18: explicit request transitions, duplicate and kind bounds
+ok 16 - APP-50..52/PAR-18: explicit request transitions, duplicate and kind bounds
+  ---
+  duration_ms: 2977.604544
+  type: 'test'
+  ...
+# Subtest: RT-10..12/PAR-19..23: canonical layout, busy reset, safe archive and incompatible adoption
+ok 17 - RT-10..12/PAR-19..23: canonical layout, busy reset, safe archive and incompatible adoption
+  ---
+  duration_ms: 5041.01097
+  type: 'test'
+  ...
+# Subtest: APP-20/21/22: retrieved claims and committed answers are distinct from queued messages
+ok 18 - APP-20/21/22: retrieved claims and committed answers are distinct from queued messages
+  ---
+  duration_ms: 3906.647777
+  type: 'test'
+  ...
+# Subtest: APP-10/34: opaque subject IDs cannot collide with JavaScript object prototypes
+ok 19 - APP-10/34: opaque subject IDs cannot collide with JavaScript object prototypes
+  ---
+  duration_ms: 2333.181464
+  type: 'test'
+  ...
+# Subtest: VI-016 explicit chunks enforce bounds and preflight the entire submission
+ok 20 - VI-016 explicit chunks enforce bounds and preflight the entire submission
+  ---
+  duration_ms: 2371.532149
+  type: 'test'
+  ...
+# Subtest: VI-016 internal conversation intake preserves the entire accepted message
+ok 21 - VI-016 internal conversation intake preserves the entire accepted message
+  ---
+  duration_ms: 1845.129956
+  type: 'test'
+  ...
+# Subtest: Cognition tool schemas and dependency-free stdio declarations agree
+ok 22 - Cognition tool schemas and dependency-free stdio declarations agree
+  ---
+  duration_ms: 12.311903
+  type: 'test'
+  ...
+# Subtest: Approved Harness creates cognition tasks through the production CLI
+ok 23 - Approved Harness creates cognition tasks through the production CLI
+  ---
+  duration_ms: 1332.517849
+  type: 'test'
+  ...
+# Subtest: Empty inbox lifecycle, exact/conflicting retries, atomic ownership, principal scoping and cancellation
+ok 24 - Empty inbox lifecycle, exact/conflicting retries, atomic ownership, principal scoping and cancellation
+  ---
+  duration_ms: 1334.592963
+  type: 'test'
+  ...
+# Subtest: Multi-source result, evidence scoping, exact bytes and response-loss recovery preserve canonical memory
+ok 25 - Multi-source result, evidence scoping, exact bytes and response-loss recovery preserve canonical memory
+  ---
+  duration_ms: 5372.779232
+  type: 'test'
+  ...
+# Subtest: Bounded reads deduplicate retries, reject forged citations and arbitrary canonical output slots
+ok 26 - Bounded reads deduplicate retries, reject forged citations and arbitrary canonical output slots
+  ---
+  duration_ms: 4783.475177
+  type: 'test'
+  ...
+# Subtest: Expired work resumes with a fresh owned attempt and total attempt/deadline budgets remain finite
+ok 27 - Expired work resumes with a fresh owned attempt and total attempt/deadline budgets remain finite
+  ---
+  duration_ms: 1086.11434
+  type: 'test'
+  ...
+# Subtest: Concurrent memory commits retain honest stale bindings, strict freshness and guidance policy refusal
+ok 28 - Concurrent memory commits retain honest stale bindings, strict freshness and guidance policy refusal
+  ---
+  duration_ms: 4105.533214
+  type: 'test'
+  ...
+# Subtest: Reviewed learning commits once; rejection preserves memory and bounded follow-up retains result history
+ok 29 - Reviewed learning commits once; rejection preserves memory and bounded follow-up retains result history
+  ---
+  duration_ms: 2586.11739
+  type: 'test'
+  ...
+# Subtest: Independent authenticated MCP client completes and reconnects to the same snapshot/result contract
+ok 30 - Independent authenticated MCP client completes and reconnects to the same snapshot/result contract
+  ---
+  duration_ms: 5052.596458
+  type: 'test'
+  ...
+# Subtest: MCP response loss after commit is labelled and reconciles one durable result after reconnect
+ok 31 - MCP response loss after commit is labelled and reconciles one durable result after reconnect
+  ---
+  duration_ms: 1641.958646
+  type: 'test'
+  ...
+# Subtest: Read-only/rejected/stale learning and policy drift cannot publish invalid canonical changes
+ok 32 - Read-only/rejected/stale learning and policy drift cannot publish invalid canonical changes
+  ---
+  duration_ms: 6571.127988
+  type: 'test'
+  ...
+# Subtest: Exhausted cognition budgets return stable errors while leaving memory untouched
+ok 33 - Exhausted cognition budgets return stable errors while leaving memory untouched
+  ---
+  duration_ms: 1204.953147
+  type: 'test'
+  ...
+# Subtest: local MCP: nine successful scenarios cover all seven current tools and a real publication
+ok 34 - local MCP: nine successful scenarios cover all seven current tools and a real publication
+  ---
+  duration_ms: 2929.552905
+  type: 'test'
+  ...
+# Subtest: provider selection preserves existing knowledge and rejects unsupported selections
+ok 35 - provider selection preserves existing knowledge and rejects unsupported selections
+  ---
+  duration_ms: 5686.754652
+  type: 'test'
+  ...
+# Subtest: local CLI semantic cycle isolates drafts, refuses graph workers and retains portable export
+ok 36 - local CLI semantic cycle isolates drafts, refuses graph workers and retains portable export
+  ---
+  duration_ms: 11209.112294
+  type: 'test'
+  ...
+# Subtest: remote semantic cycle enforces owner, attempt, exact evidence, bad quote and response-loss recovery
+ok 37 - remote semantic cycle enforces owner, attempt, exact evidence, bad quote and response-loss recovery
+  ---
+  duration_ms: 6526.596034
+  type: 'test'
+  ...
+# Subtest: publication rechecks source/policy and stale snapshots; renew supports semantic rebase
+ok 38 - publication rechecks source/policy and stale snapshots; renew supports semantic rebase
+  ---
+  duration_ms: 5754.661591
+  type: 'test'
+  ...
+# Subtest: local MCP advertises and completes a semantic cycle through shared schemas
+ok 39 - local MCP advertises and completes a semantic cycle through shared schemas
+  ---
+  duration_ms: 3781.624742
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: record reads, missing IDs, evidence paging, exact and scoped lookup
+ok 40 - Chelm JSON/Git provider: record reads, missing IDs, evidence paging, exact and scoped lookup
+  ---
+  duration_ms: 2221.060551
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: cursors bind snapshot, selector and collection; deterministic pages
+ok 41 - Chelm JSON/Git provider: cursors bind snapshot, selector and collection; deterministic pages
+  ---
+  duration_ms: 2129.23969
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: identical prepared retries, conflicting keys and cross-snapshot cursors
+ok 42 - Chelm JSON/Git provider: identical prepared retries, conflicting keys and cross-snapshot cursors
+  ---
+  duration_ms: 2282.069657
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: complete isolated cycle, history, artifacts, receipt recovery and idempotency
+ok 43 - Chelm JSON/Git provider: complete isolated cycle, history, artifacts, receipt recovery and idempotency
+  ---
+  duration_ms: 2348.706465
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses source changed without partial completion
+ok 44 - Chelm JSON/Git provider: refuses source changed without partial completion
+  ---
+  duration_ms: 2259.392406
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses policy changed without partial completion
+ok 45 - Chelm JSON/Git provider: refuses policy changed without partial completion
+  ---
+  duration_ms: 2434.169937
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses lease expiry without partial completion
+ok 46 - Chelm JSON/Git provider: refuses lease expiry without partial completion
+  ---
+  duration_ms: 2395.419176
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses base changed without partial completion
+ok 47 - Chelm JSON/Git provider: refuses base changed without partial completion
+  ---
+  duration_ms: 2491.046647
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: refuses interruption before publish without partial completion
+ok 48 - Chelm JSON/Git provider: refuses interruption before publish without partial completion
+  ---
+  duration_ms: 2387.411124
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: response loss recovers durable receipt and does not process twice
+ok 49 - Chelm JSON/Git provider: response loss recovers durable receipt and does not process twice
+  ---
+  duration_ms: 2525.060516
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: candidate mutation and forged writes cannot publish
+ok 50 - Chelm JSON/Git provider: candidate mutation and forged writes cannot publish
+  ---
+  duration_ms: 2101.490262
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects exact quotes
+ok 51 - Chelm JSON/Git provider: semantic validator rejects exact quotes
+  ---
+  duration_ms: 2055.972873
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects attribution
+ok 52 - Chelm JSON/Git provider: semantic validator rejects attribution
+  ---
+  duration_ms: 2112.978585
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects dependency cycle
+ok 53 - Chelm JSON/Git provider: semantic validator rejects dependency cycle
+  ---
+  duration_ms: 2254.657124
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects missing replacement
+ok 54 - Chelm JSON/Git provider: semantic validator rejects missing replacement
+  ---
+  duration_ms: 2217.405317
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects question closure
+ok 55 - Chelm JSON/Git provider: semantic validator rejects question closure
+  ---
+  duration_ms: 2261.036145
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects hypothesis evidence
+ok 56 - Chelm JSON/Git provider: semantic validator rejects hypothesis evidence
+  ---
+  duration_ms: 2324.286138
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic validator rejects verification pointer
+ok 57 - Chelm JSON/Git provider: semantic validator rejects verification pointer
+  ---
+  duration_ms: 2077.547828
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: semantic rebase and abort retain the committed snapshot
+ok 58 - Chelm JSON/Git provider: semantic rebase and abort retain the committed snapshot
+  ---
+  duration_ms: 2230.864648
+  type: 'test'
+  ...
+# Subtest: Chelm JSON/Git provider: logical transfer preserves two snapshots, byte identities and receipts
+ok 59 - Chelm JSON/Git provider: logical transfer preserves two snapshots, byte identities and receipts
+  ---
+  duration_ms: 2242.819066
+  type: 'test'
+  ...
+# Subtest: HTTP MCP uses shared memory schemas, authenticated scope and byte-paged protocols
+ok 60 - HTTP MCP uses shared memory schemas, authenticated scope and byte-paged protocols
+  ---
+  duration_ms: 4391.892039
+  type: 'test'
+  ...
+# Subtest: cognition reads retained provider snapshots without a graph workspace
+ok 61 - cognition reads retained provider snapshots without a graph workspace
+  ---
+  duration_ms: 4473.809656
+  type: 'test'
+  ...
+# Subtest: memory SudoLang tool names exist in both published transports
+ok 62 - memory SudoLang tool names exist in both published transports
+  ---
+  duration_ms: 0.875122
+  type: 'test'
+  ...
+# Subtest: interrupted claim recovers the same assignment and admin cancellation releases its lease
+ok 63 - interrupted claim recovers the same assignment and admin cancellation releases its lease
+  ---
+  duration_ms: 3686.13108
+  type: 'test'
+  ...
+# Subtest: retained Work inference response is immutable and separately reviewed
+ok 64 - retained Work inference response is immutable and separately reviewed
+  ---
+  duration_ms: 0.75453
+  type: 'test'
+  ...
+# Subtest: all platforms use the identical published provider manifest
+ok 65 - all platforms use the identical published provider manifest
+  ---
+  duration_ms: 8.69424
+  type: 'test'
+  ...
+# Subtest: PKG/INS-1..6: release integrity, installer idempotence and conflict preflight
+ok 66 - PKG/INS-1..6: release integrity, installer idempotence and conflict preflight # SKIP Run by the release builder against the staged distribution
+  ---
+  duration_ms: 2.029425
+  type: 'test'
+  ...
+# Subtest: Schemas: runtime and all published read views satisfy the distributed schemas
+ok 67 - Schemas: runtime and all published read views satisfy the distributed schemas
+  ---
+  duration_ms: 2271.545997
+  type: 'test'
+  ...
+# Subtest: VF-5: deferred integration leaves agent files untouched and resolves a repository-relative runtime
+ok 68 - VF-5: deferred integration leaves agent files untouched and resolves a repository-relative runtime # SKIP Staged distribution check
+  ---
+  duration_ms: 0.393695
+  type: 'test'
+  ...
+# Subtest: VF-7: packaged service probe completes a synthetic lease under the executing identity
+ok 69 - VF-7: packaged service probe completes a synthetic lease under the executing identity # SKIP Staged distribution check
+  ---
+  duration_ms: 0.302457
+  type: 'test'
+  ...
+# Subtest: installer upgrade replaces old package and refuses managed AGENTS/MCP conflicts before mutation
+ok 70 - installer upgrade replaces old package and refuses managed AGENTS/MCP conflicts before mutation # SKIP Staged distribution check
+  ---
+  duration_ms: 0.535538
+  type: 'test'
+  ...
+# Subtest: two independent HTTP clients through proxy survive service kill/restart and lost receipts
+not ok 71 - two independent HTTP clients through proxy survive service kill/restart and lost receipts
+  ---
+  duration_ms: 3802.325404
+  type: 'test'
+  location: '/workspace/scratch/31a97e36311f/chelm-host/tests/scenario.mjs:6:41'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    28 !== 25
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 25
+  actual: 28
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/31a97e36311f/chelm-host/tests/conformance/process-recovery.test.mjs:97:40)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: publication survives process termination beforeCAS, reconciles once and preserves drafts
+ok 72 - publication survives process termination beforeCAS, reconciles once and preserves drafts
+  ---
+  duration_ms: 2184.048888
+  type: 'test'
+  ...
+# Subtest: publication survives process termination afterCAS, reconciles once and preserves drafts
+ok 73 - publication survives process termination afterCAS, reconciles once and preserves drafts
+  ---
+  duration_ms: 2279.15241
+  type: 'test'
+  ...
+# Subtest: full candidate submit killed beforeCAS recovers through public status/submit exactly once
+ok 74 - full candidate submit killed beforeCAS recovers through public status/submit exactly once
+  ---
+  duration_ms: 4298.180755
+  type: 'test'
+  ...
+# Subtest: full candidate submit killed afterCAS recovers through public status/submit exactly once
+ok 75 - full candidate submit killed afterCAS recovers through public status/submit exactly once
+  ---
+  duration_ms: 3952.028598
+  type: 'test'
+  ...
+# Subtest: NFR-8: post-CAS interruption recovers once and preserves unrelated drafts
+ok 76 - NFR-8: post-CAS interruption recovers once and preserves unrelated drafts
+  ---
+  duration_ms: 2524.183382
+  type: 'test'
+  ...
+# Subtest: HAR-4: compare-and-swap refuses concurrent HEAD movement and keeps the lease
+ok 77 - HAR-4: compare-and-swap refuses concurrent HEAD movement and keeps the lease
+  ---
+  duration_ms: 1649.496637
+  type: 'test'
+  ...
+# Subtest: RT-11/TST-7: in-place adoption preserves Git HEAD and imports missing-key/orphaned stores
+ok 78 - RT-11/TST-7: in-place adoption preserves Git HEAD and imports missing-key/orphaned stores
+  ---
+  duration_ms: 3845.897766
+  type: 'test'
+  ...
+# Subtest: release pair pins the published harness identity and exercises its new command surface
+ok 79 - release pair pins the published harness identity and exercises its new command surface
+  ---
+  duration_ms: 1393.988087
+  type: 'test'
+  ...
+# Subtest: the coordinated host refuses unsupported versions and changed manifest identity
+ok 80 - the coordinated host refuses unsupported versions and changed manifest identity
+  ---
+  duration_ms: 45.140831
+  type: 'test'
+  ...
+# Subtest: remote upload boundaries: Unicode byte offsets, truncation, concurrent retries and quota refusal
+ok 81 - remote upload boundaries: Unicode byte offsets, truncation, concurrent retries and quota refusal
+  ---
+  duration_ms: 2417.657738
+  type: 'test'
+  ...
+# Subtest: integration attempts recheck changed policy and another publication before committing
+ok 82 - integration attempts recheck changed policy and another publication before committing
+  ---
+  duration_ms: 8986.675187
+  type: 'test'
+  ...
+# Subtest: committed raw tree bound counts duplicate blobs and refuses before loading oversized memory
+ok 83 - committed raw tree bound counts duplicate blobs and refuses before loading oversized memory
+  ---
+  duration_ms: 1326.326094
+  type: 'test'
+  ...
+# Subtest: HTTP token revocation, runtime denial and executor spoofing preserve authenticated ownership and redact logs
+ok 84 - HTTP token revocation, runtime denial and executor spoofing preserve authenticated ownership and redact logs
+  ---
+  duration_ms: 2231.664012
+  type: 'test'
+  ...
+# Subtest: remote contract: immutable artifacts, idempotent assignment/publication, ownership, retry and local coordination
+ok 85 - remote contract: immutable artifacts, idempotent assignment/publication, ownership, retry and local coordination
+  ---
+  duration_ms: 4245.375137
+  type: 'test'
+  ...
+# Subtest: remote contract: validation repair, expiry, policy drift and chunk refusal
+ok 86 - remote contract: validation repair, expiry, policy drift and chunk refusal
+  ---
+  duration_ms: 2661.484507
+  type: 'test'
+  ...
+# Subtest: remote concurrent batches: moved-head merge and remote integration review
+ok 87 - remote concurrent batches: moved-head merge and remote integration review
+  ---
+  duration_ms: 6344.913581
+  type: 'test'
+  ...
+# Subtest: MCP Streamable HTTP: official client, auth, runtime scope and remote cycle
+not ok 88 - MCP Streamable HTTP: official client, auth, runtime scope and remote cycle
+  ---
+  duration_ms: 1840.922796
+  type: 'test'
+  location: '/workspace/scratch/31a97e36311f/chelm-host/tests/scenario.mjs:6:41'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    28 !== 25
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 25
+  actual: 28
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/31a97e36311f/chelm-host/tests/conformance/remote.test.mjs:164:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: cutover preflight: retain memory, archive legacy metadata, explicit cancellation
+ok 89 - cutover preflight: retain memory, archive legacy metadata, explicit cancellation
+  ---
+  duration_ms: 993.386387
+  type: 'test'
+  ...
+# Subtest: owner publication recovery: durable receipt after CAS, preserve unrelated drafts
+ok 90 - owner publication recovery: durable receipt after CAS, preserve unrelated drafts
+  ---
+  duration_ms: 2288.590309
+  type: 'test'
+  ...
+# Subtest: remote context artifact manifest pages; forbidden slots and changed sources refuse
+ok 91 - remote context artifact manifest pages; forbidden slots and changed sources refuse
+  ---
+  duration_ms: 2348.969332
+  type: 'test'
+  ...
+# Subtest: OAuth JWT worker authorization verifies signature, issuer, audience, scope and expiry
+ok 92 - OAuth JWT worker authorization verifies signature, issuer, audience, scope and expiry
+  ---
+  duration_ms: 59.717266
+  type: 'test'
+  ...
+# Subtest: remote SudoLang prompts name only shipped tools and runner passes one-cycle prompt
+ok 93 - remote SudoLang prompts name only shipped tools and runner passes one-cycle prompt
+  ---
+  duration_ms: 904.306356
+  type: 'test'
+  ...
+# Subtest: stdio bridge exposes remote tools through a separate Node process
+not ok 94 - stdio bridge exposes remote tools through a separate Node process
+  ---
+  duration_ms: 1158.562951
+  type: 'test'
+  location: '/workspace/scratch/31a97e36311f/chelm-host/tests/scenario.mjs:6:41'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    28 !== 25
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 25
+  actual: 28
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/31a97e36311f/chelm-host/tests/conformance/remote.test.mjs:391:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: remote moved-head record conflict refuses publication and records an owner-visible diagnostic
+ok 95 - remote moved-head record conflict refuses publication and records an owner-visible diagnostic
+  ---
+  duration_ms: 7571.398164
+  type: 'test'
+  ...
+# Subtest: remote assignment preserves CRLF reviewed guidance despite committed Git attributes
+ok 96 - remote assignment preserves CRLF reviewed guidance despite committed Git attributes
+  ---
+  duration_ms: 2922.096876
+  type: 'test'
+  ...
+# Subtest: 0.10 guidance rejects invalid declarative vocabulary before remote assignment
+ok 97 - 0.10 guidance rejects invalid declarative vocabulary before remote assignment
+  ---
+  duration_ms: 2255.969399
+  type: 'test'
+  ...
+# Subtest: TST-1: every declared requirement has an evidence path and an explicit scope classification
+ok 98 - TST-1: every declared requirement has an evidence path and an explicit scope classification
+  ---
+  duration_ms: 6.207164
+  type: 'test'
+  ...
+# Subtest: WRK-1..6/HAR-4: source selectors, owner renewal, isolated candidate, successful completion
+ok 99 - WRK-1..6/HAR-4: source selectors, owner renewal, isolated candidate, successful completion
+  ---
+  duration_ms: 6895.85662
+  type: 'test'
+  ...
+# Subtest: WRK-4/6: validation errors restore protocol outputs and safely release the lease
+ok 100 - WRK-4/6: validation errors restore protocol outputs and safely release the lease
+  ---
+  duration_ms: 2885.88955
+  type: 'test'
+  ...
+# Subtest: HAR-10: committed policy change refuses completion and permits explicit reclaim
+ok 101 - HAR-10: committed policy change refuses completion and permits explicit reclaim
+  ---
+  duration_ms: 4201.47747
+  type: 'test'
+  ...
+# Subtest: WRK-3/4: missing journal and unsafe outputs retain the lease for correction
+ok 102 - WRK-3/4: missing journal and unsafe outputs retain the lease for correction
+  ---
+  duration_ms: 3424.650922
+  type: 'test'
+  ...
+# Subtest: WRK MCP: initialize, notifications, tools and all seven local method round trips
+not ok 103 - WRK MCP: initialize, notifications, tools and all seven local method round trips
+  ---
+  duration_ms: 1707.98908
+  type: 'test'
+  location: '/workspace/scratch/31a97e36311f/chelm-host/tests/scenario.mjs:6:41'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    34 !== 31
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 31
+  actual: 34
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/scratch/31a97e36311f/chelm-host/tests/conformance/worker-contract.test.mjs:180:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: managed dependencies are excluded only by an explicit thin manifest; source integrity stays strict
+ok 104 - managed dependencies are excluded only by an explicit thin manifest; source integrity stays strict
+  ---
+  duration_ms: 4.890736
+  type: 'test'
+  ...
+# Subtest: npm executes through node with an argv path containing spaces; failed repair preserves dependencies
+ok 105 - npm executes through node with an argv path containing spaces; failed repair preserves dependencies
+  ---
+  duration_ms: 64.052438
+  type: 'test'
+  ...
+# Subtest: thin installer skips dependencies, reports remote setup steps and retains old version on failed upgrade
+ok 106 - thin installer skips dependencies, reports remote setup steps and retains old version on failed upgrade # SKIP Staged release check
+  ---
+  duration_ms: 0.455678
+  type: 'test'
+  ...
+# Subtest: restored release dependencies carry a locked receipt and installation is idempotent
+ok 107 - restored release dependencies carry a locked receipt and installation is idempotent # SKIP Staged release check
+  ---
+  duration_ms: 0.249977
+  type: 'test'
+  ...
+# Subtest: Independent durable instances fence competing sessions and survive coordinator/process replacement
+ok 108 - Independent durable instances fence competing sessions and survive coordinator/process replacement
+  ---
+  duration_ms: 1174.066072
+  type: 'test'
+  ...
+# Subtest: Unknown upload and publication outcomes recover the same immutable object/receipt; newly arrived input is never replaced
+ok 109 - Unknown upload and publication outcomes recover the same immutable object/receipt; newly arrived input is never replaced
+  ---
+  duration_ms: 911.601989
+  type: 'test'
+  ...
+# Subtest: Reset fences an in-flight upload first, inventories the late bytes and preserves honest pending purge for unknown outcomes
+ok 110 - Reset fences an in-flight upload first, inventories the late bytes and preserves honest pending purge for unknown outcomes
+  ---
+  duration_ms: 869.661734
+  type: 'test'
+  ...
+# Subtest: Storage failures never acknowledge local-only work; unobserved uploads remain inventoried across reset
+ok 111 - Storage failures never acknowledge local-only work; unobserved uploads remain inventoried across reset
+  ---
+  duration_ms: 968.268053
+  type: 'test'
+  ...
+# Subtest: CAS at the actual head update rejects divergent same-base publication and corrupt or mismatched checkpoints
+ok 112 - CAS at the actual head update rejects divergent same-base publication and corrupt or mismatched checkpoints
+  ---
+  duration_ms: 861.194937
+  type: 'test'
+  ...
+# Subtest: Concurrent retries of one upload retain every late writer in reset inventory
+ok 113 - Concurrent retries of one upload retain every late writer in reset inventory
+  ---
+  duration_ms: 917.256802
+  type: 'test'
+  ...
+# Subtest: contract decisions reject missing capabilities and incompatible schema versions independently
+ok 114 - contract decisions reject missing capabilities and incompatible schema versions independently
+  ---
+  duration_ms: 2.243198
+  type: 'test'
+  ...
+# Subtest: approved release still rejects changed bytes in the same process after discovery was cached
+ok 115 - approved release still rejects changed bytes in the same process after discovery was cached
+  ---
+  duration_ms: 208.2254
+  type: 'test'
+  ...
+# Subtest: an approved identity with incompatible contracts fails closed before runtime work
+ok 116 - an approved identity with incompatible contracts fails closed before runtime work
+  ---
+  duration_ms: 284.884359
+  type: 'test'
+  ...
+# Subtest: only the empty untracked indexer lock is operational state
+ok 117 - only the empty untracked indexer lock is operational state
+  ---
+  duration_ms: 808.674793
+  type: 'test'
+  ...
+# Subtest: approved Harness upgrade preserves knowledge, drains work and retains exact checkpoint identities
+ok 118 - approved Harness upgrade preserves knowledge, drains work and retains exact checkpoint identities
+  ---
+  duration_ms: 10753.754444
+  type: 'test'
+  ...
+# Subtest: config-3 upgrade preserves the provider selection and reopens its snapshot
+ok 119 - config-3 upgrade preserves the provider selection and reopens its snapshot
+  ---
+  duration_ms: 4829.976815
+  type: 'test'
+  ...
+# Subtest: issue11 operator toolkit: isolated preparation, auth refusals, measured bridge and content-free collection
+ok 120 - issue11 operator toolkit: isolated preparation, auth refusals, measured bridge and content-free collection
+  ---
+  duration_ms: 4349.823504
+  type: 'test'
+  ...
+# Subtest: Recognized v0.2.0 config: common commands give runnable preflight, preserve bytes, explicit apply archives metadata
+ok 121 - Recognized v0.2.0 config: common commands give runnable preflight, preserve bytes, explicit apply archives metadata
+  ---
+  duration_ms: 2093.897854
+  type: 'test'
+  ...
+# Subtest: Malformed/unknown versions and corrupt current configs do not masquerade as migratable
+ok 122 - Malformed/unknown versions and corrupt current configs do not masquerade as migratable
+  ---
+  duration_ms: 2485.281303
+  type: 'test'
+  ...
+# Subtest: Installer reports legacy migration in ordinary and deferred modes without changing the runtime
+ok 123 - Installer reports legacy migration in ordinary and deferred modes without changing the runtime # SKIP Staged distribution check
+  ---
+  duration_ms: 0.645535
+  type: 'test'
+  ...
+# Subtest: Installer read-only readiness distinguishes unresolved, absent and corrupt hints; schema 3 remains supported
+ok 124 - Installer read-only readiness distinguishes unresolved, absent and corrupt hints; schema 3 remains supported
+  ---
+  duration_ms: 1771.41152
+  type: 'test'
+  ...
+# Subtest: Owned timeout occurs after child startup, kills descendants, preserves unrelated sentinel
+ok 125 - Owned timeout occurs after child startup, kills descendants, preserves unrelated sentinel
+  ---
+  duration_ms: 3093.943545
+  type: 'test'
+  ...
+# Subtest: Abrupt caller termination leaves supervisor able to clean its owned child tree
+ok 126 - Abrupt caller termination leaves supervisor able to clean its owned child tree
+  ---
+  duration_ms: 315.013496
+  type: 'test'
+  ...
+# Subtest: Owned normal success and thrown error preserve exit/output and remove descendants
+ok 127 - Owned normal success and thrown error preserve exit/output and remove descendants
+  ---
+  duration_ms: 483.172879
+  type: 'test'
+  ...
+# Subtest: CLI finite stdin EOF: empty/malformed input is usage; valid JSON reaches runtime handling
+ok 128 - CLI finite stdin EOF: empty/malformed input is usage; valid JSON reaches runtime handling
+  ---
+  duration_ms: 305.810267
+  type: 'test'
+  ...
+# Subtest: Injected async scenario hang reaches its own finite budget before the file/suite limit
+ok 129 - Injected async scenario hang reaches its own finite budget before the file/suite limit
+  ---
+  duration_ms: 236.845817
+  type: 'test'
+  ...
+# Subtest: PAR-12/13/15/20/22: fixed lease, inspection, lookup, baseline and sandbox boundaries
+ok 130 - PAR-12/13/15/20/22: fixed lease, inspection, lookup, baseline and sandbox boundaries
+  ---
+  duration_ms: 3364.683222
+  type: 'test'
+  ...
+# Subtest: PAR-1..5: fixed byte-format/chunk/key fixtures, exactly one indexing pass and message limits
+ok 131 - PAR-1..5: fixed byte-format/chunk/key fixtures, exactly one indexing pass and message limits
+  ---
+  duration_ms: 2891.495307
+  type: 'test'
+  ...
+# Subtest: PAR-18/19/21/22/23: fixed request/claim bounds, archived baseline and safe sandbox recreation
+ok 132 - PAR-18/19/21/22/23: fixed request/claim bounds, archived baseline and safe sandbox recreation
+  ---
+  duration_ms: 5643.463937
+  type: 'test'
+  ...
+# Subtest: TST-5: published synthetic parity fixture preserves history, views, answers, journals and subject counts
+ok 133 - TST-5: published synthetic parity fixture preserves history, views, answers, journals and subject counts
+  ---
+  duration_ms: 4349.029087
+  type: 'test'
+  ...
+# Subtest: Routing policy schema rejects ambiguous trust, unsupported modes/scopes/bounds and require fallback
+ok 134 - Routing policy schema rejects ambiguous trust, unsupported modes/scopes/bounds and require fallback
+  ---
+  duration_ms: 2.242858
+  type: 'test'
+  ...
+# Subtest: Durable bounded grace survives polls, heartbeats, restart, expiry, incompatibility and rollback without starvation
+ok 135 - Durable bounded grace survives polls, heartbeats, restart, expiry, incompatibility and rollback without starvation
+  ---
+  duration_ms: 30.015094
+  type: 'test'
+  ...
+# Subtest: Scope, capability negotiation, allowlist, queue order and request-supplied identity do not grant eligibility
+ok 136 - Scope, capability negotiation, allowlist, queue order and request-supplied identity do not grant eligibility
+  ---
+  duration_ms: 6.639116
+  type: 'test'
+  ...
+# Subtest: CAS preview/apply is atomic and read-only preview leaves memory, intake, pending and guidance intact
+ok 137 - CAS preview/apply is atomic and read-only preview leaves memory, intake, pending and guidance intact
+  ---
+  duration_ms: 2238.589764
+  type: 'test'
+  ...
+# Subtest: Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch
+ok 138 - Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch
+  ---
+  duration_ms: 4699.333283
+  type: 'test'
+  ...
+# Subtest: Two independent authenticated MCP clients compete, server restart retains clocks, runtime access precedes registration
+ok 139 - Two independent authenticated MCP clients compete, server restart retains clocks, runtime access precedes registration
+  ---
+  duration_ms: 2607.579801
+  type: 'test'
+  ...
+# Subtest: Require mode covers no-inbox cognitive tasks, multi-instance disjoint quotas, local identity and owner recovery
+ok 140 - Require mode covers no-inbox cognitive tasks, multi-instance disjoint quotas, local identity and owner recovery
+  ---
+  duration_ms: 2874.32836
+  type: 'test'
+  ...
+# Subtest: Provider memory-worker v3 local/remote enforcement and unchanged request retry survive policy change and lost claim response
+ok 141 - Provider memory-worker v3 local/remote enforcement and unchanged request retry survive policy change and lost claim response
+  ---
+  duration_ms: 7038.026698
+  type: 'test'
+  ...
+# Subtest: Complete checkpoints retain effective policy/grace and clear readiness; disabled configuration preserves legacy clients
+ok 142 - Complete checkpoints retain effective policy/grace and clear readiness; disabled configuration preserves legacy clients
+  ---
+  duration_ms: 3381.125772
+  type: 'test'
+  ...
+# Subtest: Unknown claim/publication remains reserved past expiry and cannot be rerouted by fallback
+ok 143 - Unknown claim/publication remains reserved past expiry and cannot be rerouted by fallback
+  ---
+  duration_ms: 3001.129315
+  type: 'test'
+  ...
+# Subtest: Integration/review stays with original owner through require-policy switch and unknown commit reconciliation
+ok 144 - Integration/review stays with original owner through require-policy switch and unknown commit reconciliation
+  ---
+  duration_ms: 6096.061221
+  type: 'test'
+  ...
+# Subtest: Runtime schema seed, local preferred registration and reserved-principal refusal are explicit
+ok 145 - Runtime schema seed, local preferred registration and reserved-principal refusal are explicit
+  ---
+  duration_ms: 2889.286492
+  type: 'test'
+  ...
+# Subtest: Routing schema/tool/spec declarations stay aligned across optional bindings
+ok 146 - Routing schema/tool/spec declarations stay aligned across optional bindings
+  ---
+  duration_ms: 1.780549
+  type: 'test'
+  ...
+# Subtest: Provider publication response loss is recovered once after switch and expired owner deadline
+ok 147 - Provider publication response loss is recovered once after switch and expired owner deadline
+  ---
+  duration_ms: 4013.263716
+  type: 'test'
+  ...
+# Subtest: Independent work clocks allow oldest fallback without a newer item renewing its grace
+ok 148 - Independent work clocks allow oldest fallback without a newer item renewing its grace
+  ---
+  duration_ms: 3.659035
+  type: 'test'
+  ...
+# Subtest: Cognitive result response loss recovers the same receipt after require selection changes
+ok 149 - Cognitive result response loss recovers the same receipt after require selection changes
+  ---
+  duration_ms: 2123.854816
+  type: 'test'
+  ...
+# Subtest: Optional D1/R2 adapter executes conditional SQL on independent SQLite connections and immutable bucket semantics
+ok 150 - Optional D1/R2 adapter executes conditional SQL on independent SQLite connections and immutable bucket semantics
+  ---
+  duration_ms: 1732.323605
+  type: 'test'
+  ...
+# Subtest: Authenticated real HTTP binding saves, loses workspace, restores exact history/citations, accepts new evidence and fences a late reset worker
+ok 151 - Authenticated real HTTP binding saves, loses workspace, restores exact history/citations, accepts new evidence and fences a late reset worker
+  ---
+  duration_ms: 7246.128976
+  type: 'test'
+  ...
+# Subtest: Transport rejects redirects, unauthenticated reads and oversized bodies without falling back
+ok 152 - Transport rejects redirects, unauthenticated reads and oversized bodies without falling back
+  ---
+  duration_ms: 2.66831
+  type: 'test'
+  ...
+# Subtest: VP-021 phases: disabled fields, enabled refresh/submit/failure, no carryover
+ok 153 - VP-021 phases: disabled fields, enabled refresh/submit/failure, no carryover
+  ---
+  duration_ms: 5129.475305
+  type: 'test'
+  ...
+# Subtest: VP-021 overlapping operation contexts isolate successful and failing phases
+ok 154 - VP-021 overlapping operation contexts isolate successful and failing phases
+  ---
+  duration_ms: 800.794007
+  type: 'test'
+  ...
+# Subtest: VP-021 kill before shard persistence does not invent a completed sample
+ok 155 - VP-021 kill before shard persistence does not invent a completed sample
+  ---
+  duration_ms: 177.254945
+  type: 'test'
+  ...
+# Subtest: VP-021 out-of-order summary publisher preserves persisted counters and restart repairs cache
+ok 156 - VP-021 out-of-order summary publisher preserves persisted counters and restart repairs cache
+  ---
+  duration_ms: 162.717971
+  type: 'test'
+  ...
+# Subtest: VP-021 killed summary publisher preserves persisted counters and restart repairs cache
+ok 157 - VP-021 killed summary publisher preserves persisted counters and restart repairs cache
+  ---
+  duration_ms: 164.071485
+  type: 'test'
+  ...
+# Subtest: VP-021 retention, corrupt shards, saturation and bounded percentile window
+ok 158 - VP-021 retention, corrupt shards, saturation and bounded percentile window
+  ---
+  duration_ms: 853.716374
+  type: 'test'
+  ...
+# Subtest: operation logs contain baseline identity, optional real phases, nullable usage and no private content
+ok 159 - operation logs contain baseline identity, optional real phases, nullable usage and no private content
+  ---
+  duration_ms: 4702.512224
+  type: 'test'
+  ...
+# Subtest: read metrics track 100 results, failures and lock-free concurrent processes; status writes nothing
+ok 160 - read metrics track 100 results, failures and lock-free concurrent processes; status writes nothing
+  ---
+  duration_ms: 3736.666002
+  type: 'test'
+  ...
+# Subtest: 24-hour summary handles rotation, cutoff and partial/corrupt records without writes
+ok 161 - 24-hour summary handles rotation, cutoff and partial/corrupt records without writes
+  ---
+  duration_ms: 708.7519
+  type: 'test'
+  ...
+# Subtest: remote usage is durable, retry-fenced and correlated with publication run
+ok 162 - remote usage is durable, retry-fenced and correlated with publication run
+  ---
+  duration_ms: 2948.174164
+  type: 'test'
+  ...
+# Subtest: VI-021: intake, duplicate, refresh, failure and reset emit the exact baseline envelope; reads stay unlogged
+ok 163 - VI-021: intake, duplicate, refresh, failure and reset emit the exact baseline envelope; reads stay unlogged
+  ---
+  duration_ms: 2717.990764
+  type: 'test'
+  ...
+# Subtest: VI-021: local and remote no-work preserve validated executor; rejected ownership exposes none
+ok 164 - VI-021: local and remote no-work preserve validated executor; rejected ownership exposes none
+  ---
+  duration_ms: 2137.56254
+  type: 'test'
+  ...
+# Subtest: VI-021: stale-lock recovery and failed logging preserve committed results and original errors
+ok 165 - VI-021: stale-lock recovery and failed logging preserve committed results and original errors
+  ---
+  duration_ms: 1132.98312
+  type: 'test'
+  ...
+# Subtest: VI-021: actual rotation retains five files and independent process appends remain parseable
+ok 166 - VI-021: actual rotation retains five files and independent process appends remain parseable
+  ---
+  duration_ms: 1049.273154
+  type: 'test'
+  ...
+# Subtest: VI-021: all private content classes are excluded on real command, upload and error paths
+ok 167 - VI-021: all private content classes are excluded on real command, upload and error paths
+  ---
+  duration_ms: 2001.560449
+  type: 'test'
+  ...
+# Subtest: APP-11/12: parity chunking and byte identity
+ok 168 - APP-11/12: parity chunking and byte identity
+  ---
+  duration_ms: 2.034923
+  type: 'test'
+  ...
+# Subtest: SEC-2: paths reject traversal, drives, reserved Git and links
+ok 169 - SEC-2: paths reject traversal, drives, reserved Git and links
+  ---
+  duration_ms: 1.080482
+  type: 'test'
+  ...
+# Subtest: NFR-5: conversation tail reads bounded blocks and preserves UTF-8
+ok 170 - NFR-5: conversation tail reads bounded blocks and preserves UTF-8
+  ---
+  duration_ms: 44.804953
+  type: 'test'
+  ...
+# Subtest: NFR-6: exclusive cross-process operation lock refuses a second caller
+ok 171 - NFR-6: exclusive cross-process operation lock refuses a second caller
+  ---
+  duration_ms: 3.483771
+  type: 'test'
+  ...
+# Subtest: CON-1: CLI rejects duplicate/incomplete flags
+ok 172 - CON-1: CLI rejects duplicate/incomplete flags
+  ---
+  duration_ms: 0.290259
+  type: 'test'
+  ...
+# Subtest: CON-2: launching a CLI through an OS path alias still emits JSON
+ok 173 - CON-2: launching a CLI through an OS path alias still emits JSON
+  ---
+  duration_ms: 97.14848
+  type: 'test'
+  ...
+# Subtest: NFR-1: unloaded Windows profiles use the actual OS SID and fail closed on lookup errors
+ok 174 - NFR-1: unloaded Windows profiles use the actual OS SID and fail closed on lookup errors
+  ---
+  duration_ms: 0.635029
+  type: 'test'
+  ...
+1..174
+# tests 174
+# suites 0
+# pass 163
+# fail 4
+# cancelled 0
+# skipped 7
+# todo 0
+# duration_ms 120112.814016
+
+CHELM_PROCESS {"phase": "supported suite attempt 1", "pid": 16, "reason": "exit", "elapsed_ms": 120237, "limit_ms": 600000, "exit": 1}

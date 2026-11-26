@@ -100,10 +100,16 @@ def qualify(version, output, archive=None, sha256=None, reference_archive=None):
                 'file_worker':['tests/harness-compatibility.test.mjs','tests/conformance/app-contract.test.mjs','tests/conformance/worker-contract.test.mjs','tests/conformance/release-pair.test.mjs'],
                 'cognitive_tasks':['tests/conformance/cognitive.test.mjs'],
                 'memory_provider':['tests/conformance/memory-provider.test.mjs']}
+            routing_patterns = {
+                'file_worker': 'Routing policy schema|Durable bounded grace|CAS preview|Config-2 local|Two independent authenticated|Complete checkpoints|Integration/review|Runtime schema|Routing schema|Independent work clocks',
+                'cognitive_tasks': 'Require mode covers|Scope, capability|Cognitive result response loss',
+                'memory_provider': 'Provider memory-worker|Unknown claim/publication|Provider publication'}
             for feature, files in suites.items():
                 if report['features'][feature]['status']=='unsupported':
                     continue
                 check(feature,feature,['node','--test','--test-reporter=tap','--test-timeout=600000',*files])
+                check(feature,'routing-'+feature,['node','--test','--test-reporter=tap','--test-timeout=600000',
+                      '--test-name-pattern='+routing_patterns[feature],'tests/routing.test.mjs'])
                 if feature=='file_worker':
                     check(feature,'adapter',['node','--test','--test-reporter=tap',str(engine/'adapters/conformance/adapter.test.mjs')],
                           {'GOLEM_ADAPTER':json.dumps(['node',str(stage/'lib/backend.mjs')])})

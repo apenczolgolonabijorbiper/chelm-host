@@ -44,6 +44,10 @@ workflow; maintain per-release feature evidence and trusted digests in
 harness-compatibility.json. Never widen approval from version strings alone.
 See docs/HARNESS_COMPATIBILITY.md. Provider package preparation and published pair acceptance are in
 docs/MEMORY_PROVIDERS.md.
+Optional cognizer-routing-v1 is specified in docs/COGNIZER_ROUTING.md. Keep
+lib/routing.mjs, public schemas, specifications/COGNIZER_ROUTING.sudo.md and
+tests/routing.test.mjs in parity in the same change/release. Routing readiness
+is declared capability, not actual LLM/Shem qualification; preserve owner recovery.
 Keep docs/ACCEPTANCE.md accurate; never equate configured CI with observed results.
 
 Remote workers: use docs/REMOTE_WORKER_CONTRACT.md and the shipped SudoLang prompts.

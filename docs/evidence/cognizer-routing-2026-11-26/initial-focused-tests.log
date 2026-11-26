@@ -1,0 +1,71 @@
+TAP version 13
+# Subtest: Routing policy schema rejects ambiguous trust, unsupported modes/scopes/bounds and require fallback
+ok 1 - Routing policy schema rejects ambiguous trust, unsupported modes/scopes/bounds and require fallback
+  ---
+  duration_ms: 3.788662
+  type: 'test'
+  ...
+# Subtest: Durable bounded grace survives polls, heartbeats, restart, expiry, incompatibility and rollback without starvation
+ok 2 - Durable bounded grace survives polls, heartbeats, restart, expiry, incompatibility and rollback without starvation
+  ---
+  duration_ms: 31.519136
+  type: 'test'
+  ...
+# Subtest: Scope, capability negotiation, allowlist, queue order and request-supplied identity do not grant eligibility
+ok 3 - Scope, capability negotiation, allowlist, queue order and request-supplied identity do not grant eligibility
+  ---
+  duration_ms: 9.534951
+  type: 'test'
+  ...
+# Subtest: CAS preview/apply is atomic and read-only preview leaves memory, intake, pending and guidance intact
+ok 4 - CAS preview/apply is atomic and read-only preview leaves memory, intake, pending and guidance intact
+  ---
+  duration_ms: 2049.848181
+  type: 'test'
+  ...
+# Subtest: Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch
+ok 5 - Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch
+  ---
+  duration_ms: 3798.892723
+  type: 'test'
+  ...
+# Subtest: Two independent authenticated MCP clients compete, server restart retains clocks, runtime access precedes registration
+not ok 6 - Two independent authenticated MCP clients compete, server restart retains clocks, runtime access precedes registration
+  ---
+  duration_ms: 1443.817773
+  type: 'test'
+  location: '/workspace/scratch/31a97e36311f/chelm-host/tests/scenario.mjs:6:41'
+  failureType: 'testCodeFailure'
+  error: 'Streamable HTTP error: Error POSTing to endpoint: {"error":"unauthorized"}'
+  code: 401
+  stack: |-
+    StreamableHTTPClientTransport.send (file:///workspace/scratch/31a97e36311f/chelm-host/node_modules/@modelcontextprotocol/sdk/dist/esm/client/streamableHttp.js:378:23)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+  ...
+# Subtest: Require mode covers no-inbox cognitive tasks, multi-instance disjoint quotas, local identity and owner recovery
+ok 7 - Require mode covers no-inbox cognitive tasks, multi-instance disjoint quotas, local identity and owner recovery
+  ---
+  duration_ms: 2354.335438
+  type: 'test'
+  ...
+# Subtest: Provider memory-worker v3 local/remote enforcement and unchanged request retry survive policy change and lost claim response
+ok 8 - Provider memory-worker v3 local/remote enforcement and unchanged request retry survive policy change and lost claim response
+  ---
+  duration_ms: 3890.043068
+  type: 'test'
+  ...
+# Subtest: Complete checkpoints retain effective policy/grace and clear readiness; disabled configuration preserves legacy clients
+ok 9 - Complete checkpoints retain effective policy/grace and clear readiness; disabled configuration preserves legacy clients
+  ---
+  duration_ms: 3130.055761
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 8
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17202.126079

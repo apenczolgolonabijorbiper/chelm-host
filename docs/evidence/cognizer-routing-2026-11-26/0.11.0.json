@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-26T09:00:24.810062+00:00",
+  "host_version": "1.3.1",
+  "host_revision": "1c0e79ec35ba03b25a2bca2d80ab9bb16f474ff4",
+  "platform": "linux",
+  "node": "v24.22.3",
+  "python": "3.12.14",
+  "version": "0.11.0",
+  "approved_at_start": true,
+  "checkpoint": {
+    "restore": "exact host code and Harness manifest identity",
+    "cross_package_restore": false,
+    "upgrade": "drain leases and assignments; explicit harness upgrade; checkpoint again"
+  },
+  "required": {
+    "file_worker": {
+      "contracts": {
+        "graph": 2,
+        "hypotheses": 1,
+        "adapter": 1
+      },
+      "capabilities": [
+        "candidate-validation-v1",
+        "purpose-guidance-v2",
+        "profile-install-v1",
+        "core-policies-v2"
+      ],
+      "files": [
+        "processor/init-instance.py",
+        "processor/process.py",
+        "processor/memory-tool.mjs",
+        "adapters/reference-git/adapter.mjs",
+        "adapters/conformance/adapter.test.mjs"
+      ]
+    },
+    "cognitive_tasks": {
+      "contracts": {
+        "cognitive_task": 1
+      },
+      "capabilities": [
+        "cognitive-task-v1",
+        "cognitive-context-v1",
+        "cognitive-result-v1",
+        "learning-hypothesis-v1",
+        "hypothesis-unknown-confidence-v1"
+      ],
+      "files": [
+        "server/cognitive-task.mjs",
+        "server/cognitive-reference.mjs"
+      ]
+    },
+    "memory_provider": {
+      "contracts": {
+        "provider_version": 1,
+        "logical_version": 2,
+        "host_api_version": 2
+      },
+      "capabilities": [
+        "record-reads-v1",
+        "paged-evidence-v1",
+        "semantic-changes-v1",
+        "candidate-isolation-v1",
+        "portable-export-v1"
+      ],
+      "files": [
+        "server/memory-contract.mjs",
+        "server/provider-memory.mjs",
+        "server/memory-transfer.mjs"
+      ]
+    }
+  },
+  "features": {
+    "file_worker": {
+      "status": "pass",
+      "missing": [],
+      "checks": [
+        {
+          "name": "file_worker",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "--test-timeout=600000",
+            "tests/harness-compatibility.test.mjs",
+            "tests/conformance/app-contract.test.mjs",
+            "tests/conformance/worker-contract.test.mjs",
+            "tests/conformance/release-pair.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 20,
+            "pass": 20,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.11.0-file_worker.log",
+          "log_sha256": "17effcf244074721136c3968a4be0413fb5e635291132d070d2ecb1737bdee27"
+        },
+        {
+          "name": "routing-file_worker",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "--test-timeout=600000",
+            "--test-name-pattern=Routing policy schema|Durable bounded grace|CAS preview|Config-2 local|Two independent authenticated|Complete checkpoints|Integration/review|Runtime schema|Routing schema|Independent work clocks",
+            "tests/routing.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 10,
+            "pass": 10,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.11.0-routing-file_worker.log",
+          "log_sha256": "a400a384cd2946ac18992d253c3a49652f7d2bd99a65b225fba91a790a6f5f2f"
+        },
+        {
+          "name": "adapter",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "/tmp/chelm-qualification-lqg6lx7x/harness/adapters/conformance/adapter.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 11,
+            "pass": 11,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.11.0-adapter.log",
+          "log_sha256": "4cf3cb7cc97f315108b3f03e376b835e5ae3a0eae13ae7d41f612b76d6bb78b1"
+        },
+        {
+          "name": "upgrade",
+          "command": [
+            "node",
+            "--test",
+            "--test-reporter=tap",
+            "tests/harness-upgrade.test.mjs"
+          ],
+          "exit": 0,
+          "counts": {
+            "tests": 2,
+            "pass": 2,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          },
+          "log": "0.11.0-upgrade.log",
+          "log_sha256": "712683f1f6b6dec284aa112277655a3ec5592af7f10f0a1735a17ed206c5a9ba"
+        }
+      ]
+    },
+    "cognitive_tasks": {
+      "status": "unsupported",
+      "missing": [
+        "contract cognitive_task=1",
+        "cognitive-task-v1",
+        "cognitive-context-v1",
+        "cognitive-result-v1",
+        "learning-hypothesis-v1",
+        "hypothesis-unknown-confidence-v1",
+        "file server/cognitive-task.mjs",
+        "file server/cognitive-reference.mjs"
+      ],
+      "checks": []
+    },
+    "memory_provider": {
+      "status": "unsupported",
+      "missing": [
+        "contract provider_version=1",
+        "contract logical_version=2",
+        "contract host_api_version=2",
+        "record-reads-v1",
+        "paged-evidence-v1",
+        "semantic-changes-v1",
+        "candidate-isolation-v1",
+        "portable-export-v1",
+        "file server/memory-contract.mjs",
+        "file server/provider-memory.mjs",
+        "file server/memory-transfer.mjs"
+      ],
+      "checks": []
+    }
+  },
+  "status": "pass",
+  "phase": "complete",
+  "package": {
+    "version": "0.11.0",
+    "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.11.0",
+    "archive": "golem-cognitive-harness-0.11.0.zip",
+    "archive_sha256": "2f945cf38166f1878bfd4ea89b9d9ffb187f525269710a61016d0129b02f3ca2",
+    "manifest_sha256": "d130c465688874bceae2f5eb0bb113ddef740c95764256871bda6d51928355e7",
+    "features": [
+      "file_worker"
+    ],
+    "evidence": "docs/evidence/harness-compatibility/0.11.0.json",
+    "files": 79,
+    "source": "approved-release",
+    "production_approved": true
+  },
+  "detected": {
+    "contracts": {
+      "graph": 2,
+      "hypotheses": 1,
+      "cognitive_task": null,
+      "adapter": 1
+    },
+    "capabilities": [
+      "candidate-validation-v1",
+      "purpose-guidance-v2",
+      "profile-install-v1",
+      "core-policies-v2"
+    ],
+    "errors": {
+      "server/cognitive-task.mjs": "Cannot find module '/tmp/chelm-qualification-lqg6lx7x/harness/server/cognitive-task.mjs' imported from /workspace/scratch/31a97e36311f/chelm-host/tools/probe-harness.mjs",
+      "server/memory-contract.mjs": "Cannot find module '/tmp/chelm-qualification-lqg6lx7x/harness/server/memory-contract.mjs' imported from /workspace/scratch/31a97e36311f/chelm-host/tools/probe-harness.mjs"
+    }
+  },
+  "staged_host_manifest_sha256": "8f5a2b3f860be21428275bcab1faa4bec33d70d7ff30aaf92e9e6e885b1e38b0",
+  "reference_feature_regressions": [],
+  "promotion": "review required; candidate evidence never changes the production catalog"
+}
