@@ -1,7 +1,49 @@
 # Issue 53 implementation and evidence boundaries
 
 Tracks VI-024 (#49), VI-023 (#50), VI-022 (#51) and VI-018 (#52).
-Published Harness 0.13.0 stays pinned; no consumer runtime is modified.
+The published 1.3.1 delivery uses Harness 0.13.0; no consumer runtime is modified.
+
+## Published delivery verified — 2026-11-26
+
+PR #58 integrated the complete stack into master at `1b7072d`. Release
+[1.3.1](https://github.com/apenczolgolonabijorbiper/chelm-host/releases/tag/v1.3.1)
+was published by successful [run 45706395650](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45706395650).
+The downloaded published ZIP matches its checksum and GitHub asset digest:
+`37389d4f7cee7db44898423de8e2303b11e232b1e84b96778e3b1dd6c9e48807`.
+All 285 entries match the exact manifest inventory and all 284 file hashes;
+there are no node_modules entries. The manifest SHA-256 is
+`c8560031da4ef356509b54f62950d3abcab2fea34b9d019d711f714f7dbb9fa0`.
+
+The final pre-merge [Windows comparison run 45646296935](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45646296935)
+used head `26023b3`, Windows Server 2022 build 20348 and published Harness 0.13.0:
+
+| Node | Three supported concurrency-2 attempts | Concurrency-4 qualification | Serial diagnostic | Individual files |
+| --- | --- | --- | --- | --- |
+| 22.12.0 | 152/152 each; 487.324 / 470.478 / 477.296 seconds | 152/152; 338.241 seconds | Timeout after 600.222 seconds | 26/26 files; 152 passing cases total |
+| 24.22.3 | 152/152 each; 604.549 / 589.575 / 590.526 seconds | 152/152; 400.053 seconds | Timeout after 600.241 seconds | 26/26 files; 152 passing cases total |
+
+Node 24 also passed ten standalone MCP attempts. Serial attempts remain failed
+diagnostics. Their zero aggregate counts mean that no final TAP summary was
+emitted before termination; they do not mean no tests executed. The owner's
+four historical filenames remain unavailable; the individual checks cover all
+26 files. These measurements establish the comparison, not the historical cause.
+
+The comparison ZIP (`34eba840…`) is a separate pre-merge artifact, not the
+published ZIP. Published release reports independently bind to the published
+manifest: Linux Node 22/24 and macOS Node 22 each passed 152/152; Windows Node 22
+passed its smoke check and Node 24 passed the focused profile (31 reported
+passes, including all nine required named cases). Full IIS file/provider and
+IIS Express provider probes passed on Node 24 against the published ZIP.
+Routine Windows coverage follows the focused policy in TEST_POLICY.md.
+
+[Retained delivery evidence](evidence/reliability-2026-11-24/published-1.3.1.json)
+records artifact/report/log hashes, individual filenames, all attempts, package
+identities and the two serial failures. Historical causes, live-client gates
+#7/#10/#11 and consumer-machine performance remain unconfirmed. Child #49/#51
+forensic items remain open; publication does not resolve them. The post-release
+compatibility change #61 has separate evidence: master `ad32d5f` run 45771977587
+failed one macOS provider semantic-cycle test with Git ETIMEDOUT. This delivery
+record does not certify that newer tree's platform status.
 
 ## Observed cumulative acceptance, reviewed 2026-11-25
 
@@ -20,7 +62,7 @@ The earlier #55 Windows Node 22 job failed to connect to the IIS provider probe
 after all its suites/adapter checks passed; it remains a failed historical run,
 with unconfirmed startup cause. The final cumulative run passing does not explain
 that failure or the owner's intermittent ECONNRESET. No original VI-023 logs were
-recovered and the final source was not rerun at concurrency 1. The historical
+recovered and that cumulative source was not rerun at concurrency 1. The historical
 failed serial policy remains in linux-revised-policy.json. These evidence limits
 are preserved rather than converting a passing test into a root-cause claim.
 
@@ -103,5 +145,6 @@ as a diagnostic result; every individual-file run must pass. Reports retain
 package/report hashes and all failures. This optional qualification does not add
 work to ordinary future CI unless its workflow/tool changes or it is dispatched.
 
-Finalization results and actual published asset verification are pending until
-observed. Historical root causes and live-client external gates remain separate.
+Finalization and published asset verification are observed in the delivery record
+above. These preparation notes retain the earlier package identities. Historical
+root causes and live-client external gates remain separate.
