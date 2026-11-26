@@ -109,6 +109,20 @@ for each of its three required attempts. The file (600 seconds), scenario
 (180 seconds), standalone MCP (180 seconds) and command (60 seconds) bounds
 still apply. Diagnostic comparisons use the default 600-second outer bound.
 
+## Observed final integration comparison — 2026-11-26 review
+
+Run [45646296935](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45646296935)
+on final PR #58 head `26023b3` observed the extended policy on Windows Node
+22.12.0 and 24.22.3: three complete 152/152 attempts each, concurrency-4
+comparisons, and all 26 files individually (152 total cases each) passed.
+Node 24 passed ten standalone MCP attempts. Both concurrency-1 diagnostics
+exceeded the unchanged 600-second bound; they remain failed attempts. No final
+TAP summary was produced, so their aggregate zero counts are incomplete counts.
+See [exact timings and package boundaries](WINDOWS_RELIABILITY.md) and
+[retained report/log hashes](evidence/reliability-2026-11-24/published-1.3.1.json).
+This supersedes the earlier missing final-tree comparison evidence, without
+diagnosing the owner's original timeout/reset failures or changing any budget.
+
 ## Optional complete serial comparison
 
 Run the Windows reliability comparison workflow to supplement ordinary

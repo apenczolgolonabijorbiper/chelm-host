@@ -15,7 +15,25 @@ The reference package remains 0.13.0. These results use Node 24.22.3 / Python
 3.12.14; the new Ubuntu qualification workflow is separate from the historical
 Windows/macOS platform results below.
 
-# Observed platform acceptance — plan #53 / reviewed 2026-11-25
+# Published reliability delivery — plan #53 / reviewed 2026-11-26
+
+The complete stack reached master through PR #58 and was published as
+[Chelm 1.3.1](https://github.com/apenczolgolonabijorbiper/chelm-host/releases/tag/v1.3.1)
+by successful run 45706395650. The published ZIP's checksum, exact 285-entry
+inventory and all 284 file hashes were independently verified. Final Windows
+comparison run 45646296935 passed three 152/152 supported-policy attempts on
+each of Node 22.12.0 and 24.22.3, all 26 test files individually and ten standalone
+Node 24 MCP attempts. Both 600-second serial diagnostics timed out and remain
+failures. The comparison artifact and published merge package have distinct
+identities; published Linux/macOS full suites, Windows focused checks and
+IIS probes bind to the published package. See
+[delivery measurements and limitations](WINDOWS_RELIABILITY.md) and
+[hashed evidence](evidence/reliability-2026-11-24/published-1.3.1.json).
+Historical consumer root causes and live HTTPS/client gates remain unresolved.
+The following sections retain earlier observations rather than certify newer
+post-release changes.
+
+# Historical platform acceptance — plan #53 / reviewed 2026-11-25
 
 The cumulative implementation in PR #56 passed all five jobs in
 [run 45468016957](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45468016957).
@@ -61,12 +79,11 @@ the historical aggregate `tst9_under_10_minutes` field. Windows capacity runs
 also miss the separate 3-second regeneration target. Correctness passes do not
 establish those performance targets.
 
-Implementation and synthetic platform verification are available for maintainer
-review in order **#54 → #55 → #56**. Retarget each successor to master after its
-predecessor merges. Manual review/merge, version selection/publication and live
-HTTPS/ARR/inference-client gates #7/#10/#11 remain separate. No consumer runtime
-was reset, migrated or upgraded. Specification parity obligations #38–#41 remain
-as stated in [WINDOWS_RELIABILITY.md](WINDOWS_RELIABILITY.md).
+At this historical checkpoint, review/integration and publication were still
+pending. PR #58 and release 1.3.1 subsequently completed those steps, as recorded
+above. Live HTTPS/ARR/inference-client gates #7/#10/#11 remain separate. No
+consumer runtime was reset, migrated or upgraded. Specification parity
+obligations #38–#41 remain as stated in [WINDOWS_RELIABILITY.md](WINDOWS_RELIABILITY.md).
 
 ---
 

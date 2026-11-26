@@ -1,0 +1,2337 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-26",
+  "scope": "Issue 53 published delivery and final Windows comparison; historical consumer causes remain unconfirmed",
+  "integration": {
+    "pr": 58,
+    "commit": "1b7072dcd29117130baada2a0b56a99436025dbc"
+  },
+  "release": {
+    "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/tag/v1.3.1",
+    "published_at": "2026-11-25T21:51:49Z",
+    "workflow_run": 45706395650,
+    "archive_sha256": "37389d4f7cee7db44898423de8e2303b11e232b1e84b96778e3b1dd6c9e48807",
+    "manifest_sha256": "c8560031da4ef356509b54f62950d3abcab2fea34b9d019d711f714f7dbb9fa0",
+    "inventory_entries": 285,
+    "manifest_files": 284,
+    "checksum_verified": true,
+    "inventory_and_all_hashes_verified": true,
+    "node_modules_entries": 0
+  },
+  "comparison": {
+    "workflow_run": 45646296935,
+    "head": "26023b3b919f2471d69e35e87e6a5faed591881a",
+    "platforms": [
+      {
+        "artifact_id": 15044016729,
+        "artifact_sha256": "afc8b47dd1dfedb59e4d97739db75ee2524956c0a34a306beda466b0e9d39a2f",
+        "package_sha256": "34eba84070b575928b4045af5b2036beddced1b0f651e006e499e8620bd50198",
+        "manifest_sha256": "a3b5c126e2c59e28adf12151ef70b16cb565c7a1fa3a1d06cc0301b209bbff18",
+        "reports": [
+          {
+            "file": "tests-supported-win32.json",
+            "sha256": "9565dc106a296789b832afdd3adbd201c792bfdcbf2657aed16c5449a7b733c6",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 2,
+              "repeat": 3,
+              "label": "supported",
+              "attempt-ms": 750000
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 487324,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 2,
+                "log_sha256": "44a6c794245673f6d8c4cba07b5cdb9914270d0e59d35a8cce2dd182c740e16d"
+              },
+              {
+                "attempt": 2,
+                "elapsed_ms": 470478,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 2,
+                "log_sha256": "0c31ba4bc7b888ec08e3bb40b8065d6408321fe917fb9eb352c7522b4b080e31"
+              },
+              {
+                "attempt": 3,
+                "elapsed_ms": 477296,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 2,
+                "log_sha256": "f9c1af1da1032b9bc501c4f444fb4030c539959861ccf20d03901bcc9a389c2b"
+              }
+            ]
+          },
+          {
+            "file": "tests-parallel-baseline-win32.json",
+            "sha256": "733033df7fe0ff6f6c08114facf83c85f4afe2a2a92d27cf062a7be044dc2824",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 4,
+              "repeat": 1,
+              "label": "parallel-baseline",
+              "attempt-ms": 600000
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 332894,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 4,
+                "log_sha256": "29c9c3def3a9260dae2fec39a2c2b1cd90cc40a6b5954d80e871a532c805b888"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-concurrency-1-win32.json",
+            "sha256": "fc16f280a693a3f7d53b5be15c4af68b01b7db448eb88409ae6ea4a22d96f08c",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-concurrency-1",
+              "attempt-ms": 600000
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 600222,
+                "exit": 124,
+                "signal": null,
+                "error": "operation_timeout",
+                "counts": {
+                  "tests": 0,
+                  "pass": 0,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "50f57a992ada74c6a0a3fdc588b33fa8a8bd1e0d6813bb1c4c51cd4dc41c2cc7",
+                "observed_ok_lines_before_termination": 86,
+                "complete_tap_summary": false
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-concurrency-4-win32.json",
+            "sha256": "d5deed9cf29fa0d808e15c9f857ca1f1ed7be2173f092d0684debc3da5eb4885",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 4,
+              "repeat": 1,
+              "label": "qualification-concurrency-4",
+              "attempt-ms": 600000
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 338241,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 4,
+                "log_sha256": "288aab14631085831a5b936543c04863c274f2f66b3e3d5404c34f99c0276d05"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-00-win32.json",
+            "sha256": "e1fc381871b04a2e13f9e704d96e00b67cc5e0b5668edbdba377217a2352402e",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-00",
+              "attempt-ms": 600000,
+              "file": "tests/checkpoint.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 46850,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 7,
+                  "pass": 7,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "ad61001e53815134b4f1150f1484347b76ddde4a9b676d5b8160e5d68167e277"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-01-win32.json",
+            "sha256": "f391e9fccbabd80b149c7a88517927ecbb2a3e55f743a31ec9b791976fcf9d06",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-01",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/alignment.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 16573,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "f6f79bbc767088af193a63050298b8daf360061294424e2d75f91274f1a6546b"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-02-win32.json",
+            "sha256": "8671283a737ea77c4c07b4221987367319d43e93317ab37b2b2f770c3561faf2",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-02",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/app-contract.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 36482,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 9,
+                  "pass": 9,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "a8d9731cc5b44a0089f7c1916e6b65fd95116641b010ef885b2a0220cb049dcb"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-03-win32.json",
+            "sha256": "5240b02afa527541966d74de58c4349461044daee5c2636bd3f75c622e13915a",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-03",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/cognitive.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 87669,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 12,
+                  "pass": 12,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "5bc614776774f7e497103337ccedf1cf2afb53b4dd6c861e60e23c71acd36a9b"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-04-win32.json",
+            "sha256": "ab05c03eca62e2a2bea81b7f2cd57ef202e85099479b5a32b698b3c0469bc49c",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-04",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/mcp-success.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 7847,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "e0a469c11a5dfa245dd9141e7d93940cd31e92f105735ee999bac5562abf447e"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-05-win32.json",
+            "sha256": "232ab6a62e8c4b519c9770fd41c782ae630fb0d89aa28db9b9f1de7de224d3bc",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-05",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/memory-provider.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 190980,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 31,
+                  "pass": 31,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "3f09cba2cf9c2b7a89b19db4e9c76c4e88277164324bca2a21cd8420bf1856d5"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-06-win32.json",
+            "sha256": "68d7030ac2d167c58034013045570b11f0bf3c9b32e4ba690eab6cca93de399d",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-06",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/package.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 83937,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "7c119f2821daded224f08a2e601e7561eda07633a8d1f1cc7116155d928d11cd"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-07-win32.json",
+            "sha256": "9219018670a7d0cf453abdbb6f7e8f07f91490cdc31fb3c222e426224092a7ad",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-07",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/process-recovery.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 45826,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "adaffb42594080b77fad00dee8c9c3f28f6519fbaa9a79754dabb3fc2d06fea8"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-08-win32.json",
+            "sha256": "9bfd3efafc9f0c9d7f0b7f047bdb0fb867d670b733e5128a661637d8f9aa3209",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-08",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/recovery.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 11350,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 3,
+                  "pass": 3,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "0e3eddbbd004beb379d2bb6d1742f09a76e12f026098e8fba7182f27e125a764"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-09-win32.json",
+            "sha256": "716c99702dc062cb048799290e1bda02718788eb8626c09022789e1c35fa6afc",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-09",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/release-pair.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 1756,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "7058dadf3240bca851f1734754e4e30e06279294462278c121320d3167fb28ce"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-10-win32.json",
+            "sha256": "e8ba30868bf2898f06a708f21feb2a9990ab43efac72a7957b10c6d7436e97da",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-10",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/remote-boundaries.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 33540,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "87eae6262c9048220339cf764fc95fe0fe988fedd37e116bcb0c0b57fdd251e4"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-11-win32.json",
+            "sha256": "b4b628d32dbfb0fd437e57e401ca7e131bc950fe47056038220450e0e81398a3",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-11",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/remote.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 75089,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 13,
+                  "pass": 13,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "3fa9e7562a6e4c7028c54428f0b9fdabe158cac1915312872433c0f9b22c5c1d"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-12-win32.json",
+            "sha256": "efc77d2a4df7c797009913fa697b1e1001f485da16eda5b5ad8c1bc1fec5640f",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-12",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/requirement-map.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 177,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "1d175de9e11bb07bb72e5401e3dfb91ff9b271e4c5e7be02e3eb8e27fd091fb1"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-13-win32.json",
+            "sha256": "07aaf2783ffe5c4448412c6cb7d2a2a2608f18f82f510e4f9652e210096d8c3b",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-13",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/worker-contract.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 29723,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "9a537f025440374ddf41d8cd5334d9c6978c51fe1bf2c5dfd590792dfe8bcf5e"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-14-win32.json",
+            "sha256": "55a52c3e52b1fa16aef67d65a60aff62b76be2c1128fabccb3584c103014bd0f",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-14",
+              "attempt-ms": 600000,
+              "file": "tests/dependencies.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 3728,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "0131278b9886c68dc09a39b52f4b48d80a4fa2929a5d9ab4578426f99e103719"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-15-win32.json",
+            "sha256": "a308b77e5cacf981874c20da4d56dd91b033310ee80ab70d36c01190cc7cf7c6",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-15",
+              "attempt-ms": 600000,
+              "file": "tests/durable-session.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 11797,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 6,
+                  "pass": 6,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "28bcb1f70d55341eec4894f72be7328867c79f6e9bb6fe50be1a959c566ebca5"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-16-win32.json",
+            "sha256": "f79ed425c04c365da7ec4eadca00d65bc0b95c741c9695992ad2d5d8deb09f88",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-16",
+              "attempt-ms": 600000,
+              "file": "tests/issue11-acceptance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 5077,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "986f4790ff1a6b244ef33b5cb6866d1e7f91c39c2ffe98d0a3f1d5530fbed705"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-17-win32.json",
+            "sha256": "308a9d501959611cce45666680551a83ad69156a0061ec126865856026c56c3b",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-17",
+              "attempt-ms": 600000,
+              "file": "tests/migration-guidance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 12926,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "f98212c7f309f6fe8a6ed8eb06886e9ee116bf1dac8917ab15d5caa3016a1a5a"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-18-win32.json",
+            "sha256": "c0827cc41d039dd32270718eabc8b133ed5616eb7ec6ef7a0abf6c646dd4cc61",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-18",
+              "attempt-ms": 600000,
+              "file": "tests/owned-process.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 4254,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "19e7d02defec0da0c0c910426c9cc32d3bcdb8674c062c8b058230f7205ed205"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-19-win32.json",
+            "sha256": "ac29d3c4b92bd250d7e3ba74d3abfba8009991ea6a608682961e50559cdb0386",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-19",
+              "attempt-ms": 600000,
+              "file": "tests/parity/boundaries.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 3874,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "10cb44c25d33e92034f06bea776ca0604bc637881090274c05d5ea5918944cd6"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-20-win32.json",
+            "sha256": "b187d2e40b669df27cbd716da20c5c2197a5a504ee59f32f7184a7a0fb089379",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-20",
+              "attempt-ms": 600000,
+              "file": "tests/parity/intake-worker.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 12111,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "e6d8bbe514505fba3814ff1f2d2cecc985fc546c6dd579ca090b22464a0b0958"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-21-win32.json",
+            "sha256": "0f909aadf47a4956b1149c34d9ee05d021558f82fe16df636d67aad971765672",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-21",
+              "attempt-ms": 600000,
+              "file": "tests/parity/parity.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 5096,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "e695dcf8f763ad82cea24f7822730a887f40409a5458a3ff8a06fc87bd617464"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-22-win32.json",
+            "sha256": "02fa3efa38b78349a4723a3a2cabc2f1dd7a4e1abc5ff9ba0064e303b67cf58b",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-22",
+              "attempt-ms": 600000,
+              "file": "tests/session-transport.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 19360,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 3,
+                  "pass": 3,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "f04a0df21ac6296cb92c4477174e35b9a1678059b2303f7a9fb8f9b4f0ef1845"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-23-win32.json",
+            "sha256": "4dc07ea351cbcec9367c25cbe3cb7c752f0716d9c79fb5a1cb1770fea189a236",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-23",
+              "attempt-ms": 600000,
+              "file": "tests/telemetry-acceptance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 19440,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 6,
+                  "pass": 6,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "89e0b5fc7a7be72c0e75b69cc0f8baa22ece8b7ea2391dec75d2a982f9761ed9"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-24-win32.json",
+            "sha256": "5413ab81b6eea328a8d3f82061592ce0ae84a026686950d4aa9285821fd05178",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-24",
+              "attempt-ms": 600000,
+              "file": "tests/telemetry.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 49677,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 9,
+                  "pass": 9,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "7b980421f75c6d1b3edc88e90407e50383b3b68e75ec8e7318d25399c74f02ae"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-25-win32.json",
+            "sha256": "de4601a86e3c2f11a1487112082c4d28ad393976eba7eaefcc2d74411231edad",
+            "node": "v22.12.0",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-25",
+              "attempt-ms": 600000,
+              "file": "tests/unit.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 358,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 7,
+                  "pass": 7,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "755314d161c5e891359ccfb4d6bb9332f0d6cee4275554219fc3ec6148f3f684"
+              }
+            ]
+          }
+        ],
+        "individual_file_count": 26
+      },
+      {
+        "artifact_id": 15045085485,
+        "artifact_sha256": "7275994a9d9ec3980947ce5257a9923b3c1f11adec7a07212bf3c7c4d62c2000",
+        "package_sha256": "34eba84070b575928b4045af5b2036beddced1b0f651e006e499e8620bd50198",
+        "manifest_sha256": "a3b5c126e2c59e28adf12151ef70b16cb565c7a1fa3a1d06cc0301b209bbff18",
+        "reports": [
+          {
+            "file": "tests-supported-win32.json",
+            "sha256": "30c4f9f823f8a2ef44b197b172003811cd946afd64a655a941c5084c6dcf217f",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 2,
+              "repeat": 3,
+              "label": "supported",
+              "attempt-ms": 750000
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 604549,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 2,
+                "log_sha256": "95cef4d3e980ff21770da792b7d89db81ed0d9a158c9dd554842c2866e22d8f0"
+              },
+              {
+                "attempt": 2,
+                "elapsed_ms": 589575,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 2,
+                "log_sha256": "679ff18c972d326ee6c43eaafa92c0954dbbafba54ce8a93cb0cd4454a034fe9"
+              },
+              {
+                "attempt": 3,
+                "elapsed_ms": 590526,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 2,
+                "log_sha256": "cad652bd57d37688313cf10fd4e226ca8226b01eee803b0796b87128e4cef371"
+              }
+            ]
+          },
+          {
+            "file": "tests-parallel-baseline-win32.json",
+            "sha256": "eceb274a1a1bce2bb31d7d1ac850a6498b85b61179f5578c304ba8ee9d44fd73",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 4,
+              "repeat": 1,
+              "label": "parallel-baseline",
+              "attempt-ms": 600000
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 401495,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 4,
+                "log_sha256": "d97732cd26556478a8c0203356d47c3b6a8d3b5c7de66cfc3924792705fcfa7e"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-concurrency-1-win32.json",
+            "sha256": "307a7a4bb1bcd76bd20b4e51708e3ea8fd77b7851326a08f879795ee843041b8",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-concurrency-1",
+              "attempt-ms": 600000
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 600241,
+                "exit": 124,
+                "signal": null,
+                "error": "operation_timeout",
+                "counts": {
+                  "tests": 0,
+                  "pass": 0,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "ccae9b0675ee46c430f414666c4ab38e471c1fb363ec5073cbc2a5f3bf8fe435",
+                "observed_ok_lines_before_termination": 71,
+                "complete_tap_summary": false
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-concurrency-4-win32.json",
+            "sha256": "64cd0447c5d28009d2c489c7e4604ab1d06555bcf2281c3dd3431447f2610863",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 4,
+              "repeat": 1,
+              "label": "qualification-concurrency-4",
+              "attempt-ms": 600000
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 400053,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 152,
+                  "pass": 152,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 4,
+                "log_sha256": "b505ba6ff07bc7496c236bea34ea1f1041efa21ebf19ef5a1aaa8141b2b56cd0"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-00-win32.json",
+            "sha256": "70a1b355c88c7021992e4b4a9d94e867a030ba43494b0f072d060ea3c47ab80b",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-00",
+              "attempt-ms": 600000,
+              "file": "tests/checkpoint.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 60212,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 7,
+                  "pass": 7,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "470c7b5cb88a17bc82e09945e06d395465ca6748ae959749413eebb12e358303"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-01-win32.json",
+            "sha256": "11c9124942f10fbd494e5dfbc70583b2a9d27c48822d70b8ac6c58d93f1aa4ef",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-01",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/alignment.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 20946,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "369dc87725eb2b079b3d2bf14a625054a4d7ad273f3881857aaca4d0b46159b1"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-02-win32.json",
+            "sha256": "a54d9054c50458727375c379596e06022602f948d02648c31045c9106833d7a7",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-02",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/app-contract.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 44060,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 9,
+                  "pass": 9,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "1d25d55dd0c87536c92827fd07e2d59f6e8740588f9ab36801efd7c536252f8b"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-03-win32.json",
+            "sha256": "b2e5e9d5bcf4e0339e3ae05278e429e5eea0929bb6d32c436cd93da0f916de03",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-03",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/cognitive.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 109788,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 12,
+                  "pass": 12,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "9d79f4d49c37b62d0f8d3cc99761c53fa5140718e002da335212ea3557a8a408"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-04-win32.json",
+            "sha256": "04f66c80d3c2db19ed70ac2a3d1f5486722d17e4771aefcbf413723e9ff8a8c1",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-04",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/mcp-success.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 10370,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "34dd3e7237b57fbcff3cfd24cae41dbe05f42d8e0448936e0e9420fe1bd46aff"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-05-win32.json",
+            "sha256": "f4ee7593e80ea1de917c54036c22cfa594ea0fa82f9497cc4b057fbd034053e3",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-05",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/memory-provider.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 240429,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 31,
+                  "pass": 31,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "ca427642729c50c1de754e1ae9f58b38c91d49720b546cd8cf953730c423d1d2"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-06-win32.json",
+            "sha256": "96bfb11caa51dc7cd0292b2e4da2fdbfe3bb600ba79d9c9e259075b38ebc2dca",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-06",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/package.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 90060,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "b572cd0462f205b733e5a3c31f518b9634c915d84013278d35c5a5ddf982a0b7"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-07-win32.json",
+            "sha256": "96a31785ba3f237ab38110c08dc710b15997a2d6d2f0a56fbda62becd28ac9ae",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-07",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/process-recovery.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 52366,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "42e02ae42cb4eece0587ad98bed3d9d43abc49bd4053de2c3a3ed4406320f9b0"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-08-win32.json",
+            "sha256": "a8aea396dbd1c2884e4e209a28024541d4add47e04fe973fe24ccb8fadc2dce5",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-08",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/recovery.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 14013,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 3,
+                  "pass": 3,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "a8bc6847f377ce5a84139b8407108f5354bc0e66d20e13e2ab5cf1807664340c"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-09-win32.json",
+            "sha256": "ed2dcccc397403a2ff543fb0226a1e8e12aa04f6387c987ef0e4d1249170a6c2",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-09",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/release-pair.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 2057,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "e92edec52232643fff0b3ac5fcadd9618244ac131d1f5f34e02a4150cdcfe034"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-10-win32.json",
+            "sha256": "4d20a92748d7b6ded94d2f0b3503302d474697b1dd827b238cce267dbbc3ba93",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-10",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/remote-boundaries.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 39550,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "3763af8f79c4cee9ce29dd612d016c0f1c687eb971c01839df61a9820727098a"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-11-win32.json",
+            "sha256": "af673244ee376d7cbbc17eff8b476714a8f40284045cedc4b4be2a5829d5a6b7",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-11",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/remote.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 87995,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 13,
+                  "pass": 13,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "1b52880f20070bcee4ef7eba589ae600a661761c9c35a8bcc314b5bc9fbfa5a3"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-12-win32.json",
+            "sha256": "9bd467cbe1dbce52234afebd236244146f9259d8000fb37571e59f9e2b36bcdd",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-12",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/requirement-map.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 228,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "03b298fcc342f43d5c6d0bd8d2977e8353acf5e07ba564ada4b0dc26be7ec896"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-13-win32.json",
+            "sha256": "e2494b2756b7f167d503d4c8eca7af4c5b8de5fbbd8ea2afcc95a6f4eae5ac46",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-13",
+              "attempt-ms": 600000,
+              "file": "tests/conformance/worker-contract.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 36085,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "c395d0dd9345a4092f90a83086e32721299548ec04f1dea75dce07e985fb6317"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-14-win32.json",
+            "sha256": "e01469b61056add946978ad01ebd2595aa5c15eb3552f10ea83d4fc1441bbed1",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-14",
+              "attempt-ms": 600000,
+              "file": "tests/dependencies.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 3729,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "292e75e61266ef5e4b84addac749225164e15cadbd6850a20faf3f482a4babbe"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-15-win32.json",
+            "sha256": "0cce8db93c884f98be23af154c8d1703dc5f180d3d71d5061a787bbbfdb2af99",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-15",
+              "attempt-ms": 600000,
+              "file": "tests/durable-session.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 13940,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 6,
+                  "pass": 6,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "58d9f347895fd3c7d54149d9592c990c73588e2fd3c426117c80285d58e0c385"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-16-win32.json",
+            "sha256": "53b0e3d701eee6543beebd59a281a880820e3826c5d70d2937e830e9ac14df77",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-16",
+              "attempt-ms": 600000,
+              "file": "tests/issue11-acceptance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 5489,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "3afd2a2ba1345e8ddbd749e9788b6847d7ecc27a4a78ea411d67e1f6cd9ba6bf"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-17-win32.json",
+            "sha256": "274ab1370260d54876815f92d40a337ec3a9330fc8afe3b1bde9601f6944ba09",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-17",
+              "attempt-ms": 600000,
+              "file": "tests/migration-guidance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 14577,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "b052a0bcca860dfc8c0ebefe330f5362c53489c916cd2361cb7a59442aad4250"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-18-win32.json",
+            "sha256": "770ca161796dcb2dacd044bcfe4fdb1eaa9ce91ff0bfc617ab60ec1f97f399b8",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-18",
+              "attempt-ms": 600000,
+              "file": "tests/owned-process.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 4538,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "8fcf2fa51c9d6c21025c0398b5a48815e6d4db5aa363f14e39c66ec6753744c2"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-19-win32.json",
+            "sha256": "63c7b2fe63d0c058cbaef505d221ac710d07ce09f65904a2dbe634c6633d9cf6",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-19",
+              "attempt-ms": 600000,
+              "file": "tests/parity/boundaries.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 4723,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "e7b249251800f6b6df9497125bd822a4c70e75f5ffa6f6c7f64dd7b032924708"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-20-win32.json",
+            "sha256": "4584f3723484f724a723196346b7bd077764d2207fec0b020c70c3ad71672dcd",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-20",
+              "attempt-ms": 600000,
+              "file": "tests/parity/intake-worker.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 13144,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "49ae1a6148c8b1c9dccf57471728b4151d1a9a86108d28731e354c906476a15d"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-21-win32.json",
+            "sha256": "33a5f30e2ae1476188e09b6663032a696f4323afa84d6aeb1a02fee52663d295",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-21",
+              "attempt-ms": 600000,
+              "file": "tests/parity/parity.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 5778,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "10ba98e3cd26d76d50b3cfb4b470cc63a28480dd52fc6fa917aed98f50a3ac16"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-22-win32.json",
+            "sha256": "89a1de68fe5aa9acd3d1f26e88cea158866d1bdfd350e004878a8b91c2d25fdd",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-22",
+              "attempt-ms": 600000,
+              "file": "tests/session-transport.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 22706,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 3,
+                  "pass": 3,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "32d50a5d0c1f76c9f30821b199ecbc719f810b1490ad1231bffe0184e0d05a6d"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-23-win32.json",
+            "sha256": "ff05293ba0db3bb011006cce8740ca264ab74cc38a0bc34e23fbf10729669a26",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-23",
+              "attempt-ms": 600000,
+              "file": "tests/telemetry-acceptance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 21103,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 6,
+                  "pass": 6,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "aeede9a7c607af78133e64211677670c99446570d5b45e88d792d8c82bc189ec"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-24-win32.json",
+            "sha256": "3e8ea99782f04a17002c53860005e6c65c0bdcd6ea5ecded5b59218f1e300a0a",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-24",
+              "attempt-ms": 600000,
+              "file": "tests/telemetry.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 56900,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 9,
+                  "pass": 9,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "93a36a6be103f1bb8345abdccfc6c759e3b6b924e8939190659c2bfb97a3c526"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-25-win32.json",
+            "sha256": "4f9b3f1e9d068adf4b2e51a3c58c723c4874aa6d802fa4199c43668a54581f48",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-25",
+              "attempt-ms": 600000,
+              "file": "tests/unit.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 435,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 7,
+                  "pass": 7,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 0,
+                "log_sha256": "3416a3c89e65fdf5a5dc662113cafe6c3d94c051aace4515abd4b11e7db234ac"
+              }
+            ]
+          },
+          {
+            "file": "tests-mcp-standalone-win32.json",
+            "sha256": "b1bd8ce0ffae2395f793693c78450ef98dc476ef05ea4bb40efb90d3793f5ea7",
+            "node": "v24.22.3",
+            "policy": {
+              "concurrency": 2,
+              "repeat": 10,
+              "label": "mcp-standalone",
+              "attempt-ms": 180000,
+              "file": "tests/conformance/cognitive.test.mjs",
+              "name": "Independent authenticated MCP client"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 14270,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "42d2d2173bec7cd1d9a963ceedcb25903ac67e7845d5766ac3d445e08f6b4a20"
+              },
+              {
+                "attempt": 2,
+                "elapsed_ms": 14081,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "6e2d8cc7e0073b73ae142773508a07ad2f85f9bd93d2a4cf3affe160e872bf28"
+              },
+              {
+                "attempt": 3,
+                "elapsed_ms": 14321,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "c8895543ee028e2e46eb0a7b302b98e008554363b6b109c1a902ccae66074d94"
+              },
+              {
+                "attempt": 4,
+                "elapsed_ms": 14285,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "42dd0d8f353252e28732f04475326442c24d73f02e69a3068997b6a9c97248d7"
+              },
+              {
+                "attempt": 5,
+                "elapsed_ms": 14285,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "865c656384b4e01e27bd12dc018e79e685f707ffe89e1a165c65a0225e8543de"
+              },
+              {
+                "attempt": 6,
+                "elapsed_ms": 14323,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "ea52c5c5173826f545f75a01097756dabb7c7c591d7ceb49ba38bcd304717273"
+              },
+              {
+                "attempt": 7,
+                "elapsed_ms": 14245,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "26cec132e40ad43626b32f3932d9005d5cf356ba462dfb3210e3bcb79a089a6f"
+              },
+              {
+                "attempt": 8,
+                "elapsed_ms": 14315,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "97880987496a42a69551b9522638a09fe987771a87e2f7747bc91a67f99ea9f4"
+              },
+              {
+                "attempt": 9,
+                "elapsed_ms": 14428,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "b684a16e5cb48f3beab6e050eb15c27ff4f6014b41229ddd4ebdbff71cf50254"
+              },
+              {
+                "attempt": 10,
+                "elapsed_ms": 14261,
+                "exit": 0,
+                "signal": null,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "max_concurrent_supervised_commands": 1,
+                "log_sha256": "3c89a4c66b3231dacf21cef42d191f02a4697593ed953e4182628ac6a7dbdfe0"
+              }
+            ]
+          }
+        ],
+        "individual_file_count": 26
+      }
+    ]
+  },
+  "published_reports": [
+    {
+      "asset": "chelm-evidence-macos-latest-22.12.0-tests-supported-darwin.json",
+      "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/download/v1.3.1/chelm-evidence-macos-latest-22.12.0-tests-supported-darwin.json",
+      "sha256": "42483570ec661412e5ee7deb8f4fc6c61c580359187d46c552e6bd64bd7cd684",
+      "platform": "darwin",
+      "os_release": "25.6.0",
+      "node": "v22.12.0",
+      "packages": {
+        "host": {
+          "version": "1.3.1",
+          "manifest_sha256": "c8560031da4ef356509b54f62950d3abcab2fea34b9d019d711f714f7dbb9fa0"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "elapsed_ms": 215475,
+          "exit": 0,
+          "counts": {
+            "tests": 152,
+            "pass": 152,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          }
+        }
+      ]
+    },
+    {
+      "asset": "chelm-evidence-ubuntu-latest-22.12.0-tests-supported-linux.json",
+      "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/download/v1.3.1/chelm-evidence-ubuntu-latest-22.12.0-tests-supported-linux.json",
+      "sha256": "a92ebdb570c59c95c5f4e365ea9c3b49852a7a46b4ede8fd80a5089ebfadf60e",
+      "platform": "linux",
+      "os_release": "7.0.0-1016-aws",
+      "node": "v22.12.0",
+      "packages": {
+        "host": {
+          "version": "1.3.1",
+          "manifest_sha256": "c8560031da4ef356509b54f62950d3abcab2fea34b9d019d711f714f7dbb9fa0"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "elapsed_ms": 65726,
+          "exit": 0,
+          "counts": {
+            "tests": 152,
+            "pass": 152,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          }
+        }
+      ]
+    },
+    {
+      "asset": "chelm-evidence-windows-2022-22.12.0-tests-smoke-win32.json",
+      "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/download/v1.3.1/chelm-evidence-windows-2022-22.12.0-tests-smoke-win32.json",
+      "sha256": "123fb87a6f23369ed2d81e0ecfbf630080564433543753ac174bfca5c1cfbee4",
+      "platform": "win32",
+      "os_release": "10.0.20348",
+      "node": "v22.12.0",
+      "packages": {
+        "host": {
+          "version": "1.3.1",
+          "manifest_sha256": "c8560031da4ef356509b54f62950d3abcab2fea34b9d019d711f714f7dbb9fa0"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "elapsed_ms": 16662,
+          "exit": 0,
+          "counts": {
+            "tests": 1,
+            "pass": 1,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          }
+        }
+      ]
+    },
+    {
+      "asset": "chelm-evidence-windows-2022-24-iis-express-provider.json",
+      "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/download/v1.3.1/chelm-evidence-windows-2022-24-iis-express-provider.json",
+      "sha256": "91320842133039c00c715137888cbd8db8263c88e201431769525b31060ca725",
+      "mode": "IisExpress",
+      "provider_mode": true,
+      "passed": true,
+      "host_archive_sha256": "37389d4f7cee7db44898423de8e2303b11e232b1e84b96778e3b1dd6c9e48807"
+    },
+    {
+      "asset": "chelm-evidence-windows-2022-24-iis-identity.json",
+      "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/download/v1.3.1/chelm-evidence-windows-2022-24-iis-identity.json",
+      "sha256": "fa342727bac950e675847feb4caff22f63fb809c1b866ec290119245467fcfb8",
+      "mode": "FullIis",
+      "provider_mode": false,
+      "passed": true,
+      "host_archive_sha256": "37389d4f7cee7db44898423de8e2303b11e232b1e84b96778e3b1dd6c9e48807"
+    },
+    {
+      "asset": "chelm-evidence-windows-2022-24-iis-provider.json",
+      "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/download/v1.3.1/chelm-evidence-windows-2022-24-iis-provider.json",
+      "sha256": "5e7f13720f1761633d6152d0b1ff184cacab242a9c2f7f19fa6cac98dc7ed3d8",
+      "mode": "FullIis",
+      "provider_mode": true,
+      "passed": true,
+      "host_archive_sha256": "37389d4f7cee7db44898423de8e2303b11e232b1e84b96778e3b1dd6c9e48807"
+    },
+    {
+      "asset": "chelm-evidence-windows-2022-24-tests-focused-win32.json",
+      "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/download/v1.3.1/chelm-evidence-windows-2022-24-tests-focused-win32.json",
+      "sha256": "bfe8620b6b6c11a30c3bdf5ba470ccc5c95047533fb486bb42efc610d1b13d47",
+      "platform": "win32",
+      "os_release": "10.0.20348",
+      "node": "v24.22.3",
+      "packages": {
+        "host": {
+          "version": "1.3.1",
+          "manifest_sha256": "c8560031da4ef356509b54f62950d3abcab2fea34b9d019d711f714f7dbb9fa0"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "elapsed_ms": 23701,
+          "exit": 0,
+          "counts": {
+            "tests": 31,
+            "pass": 31,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          }
+        }
+      ]
+    },
+    {
+      "asset": "tests-supported-linux.json",
+      "url": "https://github.com/apenczolgolonabijorbiper/chelm-host/releases/download/v1.3.1/tests-supported-linux.json",
+      "sha256": "0a827e324471e9525bb14b71b15994f6ed16a9e25ebf4465360792f6e852b7ac",
+      "platform": "linux",
+      "os_release": "7.0.0-1020-azure",
+      "node": "v24.22.3",
+      "packages": {
+        "host": {
+          "version": "1.3.1",
+          "manifest_sha256": "c8560031da4ef356509b54f62950d3abcab2fea34b9d019d711f714f7dbb9fa0"
+        },
+        "harness": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        },
+        "provider": {
+          "version": "0.13.0",
+          "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "elapsed_ms": 72632,
+          "exit": 0,
+          "counts": {
+            "tests": 152,
+            "pass": 152,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Serial diagnostic attempts exceeded the 600-second limit on both Windows Node versions and remain failures, not full-suite passes. Their zero aggregate counts reflect missing final TAP summaries, not zero executed tests.",
+    "The Windows comparison package is a retained pre-merge artifact; its digest differs from the published merge package. Published package evidence is recorded separately.",
+    "Original VI-023 logs, historical orphan waiting point and original intermittent ECONNRESET cause remain unavailable/unconfirmed.",
+    "Live HTTPS/client gates #7/#10/#11 and consumer-machine performance are not certified.",
+    "Post-release master ad32d5f run 45771977587 failed one macOS provider semantic-cycle test with git ETIMEDOUT; this release verification does not label that newer tree green."
+  ],
+  "local_published_package_verification": {
+    "date": "2026-11-26",
+    "node": "v24.22.3",
+    "platform": "linux",
+    "report_sha256": "7cbb9eb520f36273e84b3c37f58eb167a107cd51f16a6aea68ad9eee4165ae93",
+    "host": {
+      "elapsed_ms": 72369,
+      "exit": 0,
+      "counts": {
+        "tests": 152,
+        "pass": 152,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    "host_adapter": {
+      "pass": 11,
+      "fail": 0,
+      "skipped": 0,
+      "log_sha256": "abc7aa6d9c732ed2ebc9f48462aeac72f8774087b2e0b6f62b34a8e505c023b0"
+    },
+    "cli_verify": {
+      "ok": true,
+      "messages": [],
+      "problems": []
+    },
+    "retained_setup_attempts": [
+      {
+        "description": "Harness reference adapter, GOLEM_ADAPTER unset; not the host adapter check",
+        "pass": 19,
+        "log_sha256": "e8c1216e2c1a077fd9a9b4c265c6441a9bb58191fa60a38e6573285a7db75bdd"
+      },
+      {
+        "description": "Host adapter invoked without CHELM_HARNESS_ROOT; all 11 failed configuration, corrected by setting the documented environment variable",
+        "pass": 0,
+        "fail": 11,
+        "log_sha256": "14a45b8d5699cc7b3fd550b0922c98ac8e84fe051521b3a2adff060318be68d5"
+      }
+    ]
+  }
+}
