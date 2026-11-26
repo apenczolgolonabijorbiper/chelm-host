@@ -19,6 +19,14 @@ Each attempt is retained and any failure fails its step; subsequent comparisons
 still run. There is no mutation retry wrapper. The existing forced response-loss
 case queries status after reconnect before repeating the exact idempotent submit.
 Ordinary release checks retain their existing budgets and do not add idle waits.
+The source-load comparison uses the runner's default 600-second attempt bound;
+the separate supported staged Windows release suite uses its existing
+750-second bound. A source comparison timeout remains a failed comparison,
+even when its MCP cases completed successfully.
+These waits bracket the server's configured idle deadline; they do not force the
+client to reuse that socket. The native fetch pool may retire a connection
+earlier. Check socket IDs and `socket_timeout` events before attributing any
+failure or pass to the server's keep-alive boundary.
 
 ## Reading evidence
 
@@ -48,8 +56,10 @@ $env:CHELM_HARNESS_ROOT = (Resolve-Path ../harness-release).Path
 $env:CHELM_PROVIDER_HARNESS_ROOT = $env:CHELM_HARNESS_ROOT
 $env:CHELM_ACCEPTANCE_REPORT_DIR = "$PWD/dist/mcp-reset"
 node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client|MCP response loss after commit" --repeat 10 --concurrency 1 --label standalone
-$env:CHELM_MCP_IDLE_EDGE = 'before' # repeat with 'after'
-node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client" --repeat 10 --concurrency 1 --label idle
+$env:CHELM_MCP_IDLE_EDGE = 'before'
+node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client" --repeat 10 --concurrency 1 --label idle-before-expiry
+$env:CHELM_MCP_IDLE_EDGE = 'after'
+node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client" --repeat 10 --concurrency 1 --label idle-after-expiry
 Remove-Item Env:CHELM_MCP_IDLE_EDGE
 node tools/run-tests.mjs --label suite-load
 ```
@@ -61,3 +71,9 @@ reset remains unresolved. Live HTTPS/ARR and physical clients remain #7/#11 gate
 Portability (#38–#41): this changes optional HTTP diagnostics and investigation
 tests only. CLI, local worker, persistence, routing and public remote contracts
 are unchanged; no shipped local SudoLang specification requires a contract change.
+
+## Observed results
+
+See [the retained investigation evidence](evidence/mcp-reset-2026-11-26/README.md)
+for exact tested revisions, platform and package identities, passing MCP
+repetitions, failed whole-suite comparisons and remaining closure requirements.
