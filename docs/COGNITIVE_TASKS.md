@@ -6,7 +6,7 @@ ordinary observation workers nor canonical chat events change meaning.
 
 ## Dependency and availability
 
-The supported pair is Chelm 1.3.1 / published Harness 0.13.0, with exact ZIP and
+The supported pair is Chelm 1.4.0 / published Harness 0.13.0 (deterministic reference), with exact ZIP and
 manifest hashes in compatibility.json. Production and conformance use that same
 verified package; no source checkout, test engine injection or runtime bypass is
 needed. Required capabilities are cognitive-task-v1, cognitive-context-v1,

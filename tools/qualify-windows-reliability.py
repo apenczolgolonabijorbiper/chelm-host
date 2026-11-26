@@ -75,6 +75,8 @@ def qualify(package, harness, output, profile='qualification'):
                     'SEC-2: paths reject traversal, drives, reserved Git and links',
                     'CON-2: launching a CLI through an OS path alias still emits JSON',
                     'NFR-1: unloaded Windows profiles use the actual OS SID and fail closed on lookup errors',
+                    'Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch',
+                    'Runtime schema seed, local preferred registration and reserved-principal refusal are explicit',
                 ])
             pattern = '^(' + '|'.join(cases) + ')$'
             args = ['--name', pattern, '--attempt-ms', '180000']

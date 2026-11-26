@@ -1,0 +1,17 @@
+{"version": "0.12.0", "release_url": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.12.0", "archive": "golem-cognitive-harness-0.12.0.zip", "archive_sha256": "9bc17e21d0528e7359006b5bda6c17cce99df3021294e15e2d217d7330627522", "manifest_sha256": "52c4fa98a06993bfa4f2504df58a82504e4303a20fd465a09c19140b8d3cfda6", "features": ["file_worker", "cognitive_tasks"], "evidence": "docs/evidence/harness-compatibility/0.12.0.json", "files": 114, "source": "approved-release", "production_approved": true}
+TAP version 13
+# Subtest: Runtime schema seed, local preferred registration and reserved-principal refusal are explicit
+ok 1 - Runtime schema seed, local preferred registration and reserved-principal refusal are explicit
+  ---
+  duration_ms: 4567.97594
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5031.850648

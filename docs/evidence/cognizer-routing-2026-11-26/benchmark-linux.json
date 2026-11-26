@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-26T09:10:24.168Z",
+  "environment": {
+    "platform": "linux",
+    "os_release": "6.18.57",
+    "arch": "x64",
+    "cpus": 9,
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "total_memory_bytes": 10451427328,
+    "load_average": [
+      5.53,
+      4.78,
+      2.84
+    ],
+    "python": "Python 3.12.14",
+    "git": "git version 2.56.1",
+    "node": "v24.22.3"
+  },
+  "harness_version": "0.13.0",
+  "fixture": "Fresh canonical empty memory; submit 10 synthetic groups, ask once, then status per sample.",
+  "method": "Wall time includes CLI startup. NFR-4 excludes measured indexer/validator children; ask retains retrieval time. This is not a capacity benchmark or reference-consumer measurement.",
+  "node_process_start_ms": [
+    54.1900370000003,
+    51.232460000000174,
+    53.26139400000011
+  ],
+  "commands": {
+    "submit": {
+      "target_ms": 2000,
+      "median_ms": 303.0047629999999,
+      "max_ms": 315.8896209999997,
+      "target_met": true,
+      "samples": [
+        {
+          "elapsed_ms": 321.758836,
+          "excluded_ms": 28.495435000000015,
+          "nfr_ms": 293.26340099999993,
+          "retrieval_ms": 0
+        },
+        {
+          "elapsed_ms": 339.29653899999994,
+          "excluded_ms": 36.291776,
+          "nfr_ms": 303.0047629999999,
+          "retrieval_ms": 0
+        },
+        {
+          "elapsed_ms": 348.14878599999975,
+          "excluded_ms": 32.25916500000005,
+          "nfr_ms": 315.8896209999997,
+          "retrieval_ms": 0
+        }
+      ]
+    },
+    "ask": {
+      "target_ms": 3000,
+      "median_ms": 392.09175899999934,
+      "max_ms": 752.2516229999999,
+      "target_met": true,
+      "samples": [
+        {
+          "elapsed_ms": 781.2464529999999,
+          "excluded_ms": 28.99482999999998,
+          "nfr_ms": 752.2516229999999,
+          "retrieval_ms": 84.26280799999995
+        },
+        {
+          "elapsed_ms": 418.393501,
+          "excluded_ms": 28.26961400000002,
+          "nfr_ms": 390.12388699999997,
+          "retrieval_ms": 75.03500199999996
+        },
+        {
+          "elapsed_ms": 423.2415379999993,
+          "excluded_ms": 31.149778999999995,
+          "nfr_ms": 392.09175899999934,
+          "retrieval_ms": 76.21347400000002
+        }
+      ]
+    },
+    "status": {
+      "target_ms": 1000,
+      "median_ms": 90.43612099999996,
+      "max_ms": 97.2826500000001,
+      "target_met": true,
+      "samples": [
+        {
+          "elapsed_ms": 90.43612099999996,
+          "excluded_ms": 0,
+          "nfr_ms": 90.43612099999996,
+          "retrieval_ms": 0
+        },
+        {
+          "elapsed_ms": 81.91418199999998,
+          "excluded_ms": 0,
+          "nfr_ms": 81.91418199999998,
+          "retrieval_ms": 0
+        },
+        {
+          "elapsed_ms": 97.2826500000001,
+          "excluded_ms": 0,
+          "nfr_ms": 97.2826500000001,
+          "retrieval_ms": 0
+        }
+      ]
+    }
+  }
+}

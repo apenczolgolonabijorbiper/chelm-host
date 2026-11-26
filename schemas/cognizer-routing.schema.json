@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "mode": {
+      "enum": [
+        "disabled",
+        "prefer",
+        "require"
+      ]
+    },
+    "cognizer_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+    },
+    "work_kinds": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "observation",
+          "cognitive"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "grace_seconds": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3600
+    },
+    "fallback": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+      },
+      "minItems": 0,
+      "maxItems": 32,
+      "uniqueItems": true
+    },
+    "readiness_ttl_seconds": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 300
+    },
+    "workers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "binding_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          },
+          "transport": {
+            "enum": [
+              "local",
+              "remote"
+            ]
+          },
+          "principal": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\x00-\\x1f]+$"
+          },
+          "host": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[^\\x00-\\x1f]+$"
+          },
+          "cognizer_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        },
+        "required": [
+          "binding_id",
+          "transport",
+          "principal",
+          "cognizer_id"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "transport": {
+                  "const": "local"
+                }
+              },
+              "required": [
+                "transport"
+              ]
+            },
+            "then": {
+              "required": [
+                "host"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "transport": {
+                  "const": "remote"
+                }
+              },
+              "required": [
+                "transport"
+              ]
+            },
+            "then": {
+              "not": {
+                "required": [
+                  "host"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 64
+    }
+  },
+  "required": [
+    "schema_version",
+    "mode"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "enum": [
+              "prefer",
+              "require"
+            ]
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "required": [
+          "cognizer_id",
+          "work_kinds",
+          "grace_seconds",
+          "fallback",
+          "readiness_ttl_seconds",
+          "workers"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "require"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "fallback": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "disabled"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "schema_version": {},
+          "mode": {}
+        },
+        "additionalProperties": false
+      }
+    }
+  ]
+}

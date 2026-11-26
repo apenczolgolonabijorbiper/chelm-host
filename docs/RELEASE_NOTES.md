@@ -1,4 +1,25 @@
-# Unreleased — contract-qualified Harness compatibility (#61)
+# Chelm-host 1.4.0 — preferred cognizer routing and qualified compatibility
+
+## Preferred cognizer dispatch (#59)
+
+Add optional `cognizer-routing-v1` on runtime configs 2/3, both observation and
+cognitive queues, and CLI/stdio/authenticated HTTP worker paths. Bind logical
+implementations to configured authenticated principals or actual local OS
+account/hostname; negotiate readiness and exact Harness identities. Prefer mode
+uses durable bounded work grace and an explicit fallback allowlist; require mode
+never falls back. Add local admin preview/apply with revision CAS, scoped worker
+diagnostics and status/doctor visibility. Preserve existing owned work and
+integration/review across switches, retain uncertain claim/publication reservations
+past expiry, and keep policy/clocks in settled checkpoints while clearing readiness.
+
+Absent/disabled policy preserves current clients and dispatch. No Shem/LLM install,
+reference promotion, inference or process scheduler is included. Shem must negotiate the published capability before using host-enforced
+selection; Shem execution and reference promotion remain separate work. See [accepted configuration and operations](COGNIZER_ROUTING.md)
+and [routing SudoLang parity specification](../specifications/COGNIZER_ROUTING.sudo.md).
+Published feature-qualified Harness support remains the existing catalog through
+0.14.0 with 0.13.0 as reference; this feature does not widen it.
+
+## Contract-qualified Harness compatibility (#61)
 
 Keep Harness 0.13.0 as the deterministic CI reference and approve other releases
 by verified package identity and per-feature contracts. Add a separate Ubuntu
@@ -8,7 +29,7 @@ provider snapshot and checkpoint bindings retain exact identities. The focused
 Windows release dependency policy is unchanged. See
 [the tested matrix and operator process](HARNESS_COMPATIBILITY.md).
 
-# Unreleased — portable local runtime sessions (#45–#48)
+## Portable local runtime sessions (#45–#48)
 
 - Add versioned complete-runtime checkpoint create/inspect/restore with retained
   Git history, task results/receipts and exact historical citation bytes; settled
@@ -17,7 +38,7 @@ Windows release dependency policy is unchanged. See
   durable intake/acknowledgements, same-submission receipt recovery, reset/purge
   inventory and honest pending cleanup of unknown uploads/detached copies.
 - Ship agent lifecycle CLI/prompts, a private authenticated HTTP fixture and an
-  optional D1/R2 Worker binding/recipe. Exact supported Harness remains 0.13.0.
+  optional D1/R2 Worker binding/recipe. The deterministic reference remains 0.13.0.
 
 These features are not part of the already-published 1.3.0 package. Checkpoints
 require the exact creating host implementation. External model, fresh agent

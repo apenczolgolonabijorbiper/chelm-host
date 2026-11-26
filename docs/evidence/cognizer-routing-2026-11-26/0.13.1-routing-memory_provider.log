@@ -1,0 +1,28 @@
+TAP version 13
+# Subtest: Provider memory-worker v3 local/remote enforcement and unchanged request retry survive policy change and lost claim response
+ok 1 - Provider memory-worker v3 local/remote enforcement and unchanged request retry survive policy change and lost claim response
+  ---
+  duration_ms: 6698.056418
+  type: 'test'
+  ...
+# Subtest: Unknown claim/publication remains reserved past expiry and cannot be rerouted by fallback
+ok 2 - Unknown claim/publication remains reserved past expiry and cannot be rerouted by fallback
+  ---
+  duration_ms: 3046.990018
+  type: 'test'
+  ...
+# Subtest: Provider publication response loss is recovered once after switch and expired owner deadline
+ok 3 - Provider publication response loss is recovered once after switch and expired owner deadline
+  ---
+  duration_ms: 3814.491281
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13895.086697

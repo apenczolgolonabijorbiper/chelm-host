@@ -20,3 +20,4 @@ import './conformance/release-pair.test.mjs';
 import './conformance/cognitive.test.mjs';
 
 import './conformance/memory-provider.test.mjs';
+import './routing.test.mjs';

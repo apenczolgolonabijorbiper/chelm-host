@@ -1,4 +1,4 @@
-Current supported pair: Chelm 1.3.1 / published Harness 0.13.0. The full
+Current supported pair: Chelm 1.4.0 / published Harness 0.13.0 (deterministic reference). The full
 cognition suite is rerun by the provider-pair release checks; current package
 pins and deployment evidence are described in MEMORY_PROVIDER_ACCEPTANCE.md.
 The 1.2.0 / 0.12.0 observations below remain historical, including the original

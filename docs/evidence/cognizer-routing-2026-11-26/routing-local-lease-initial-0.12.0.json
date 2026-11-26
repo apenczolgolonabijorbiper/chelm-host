@@ -1,0 +1,7 @@
+{
+  "version": "0.12.0",
+  "exit": 1,
+  "scope": "Final local file-worker held-lease check; all unchanged feature qualifications are retained separately.",
+  "log": "0.12.0.log",
+  "log_sha256": "c7d6f0905fc64c8970613d05c54b234832839bc2dbe9f9295eb707e740db2342"
+}

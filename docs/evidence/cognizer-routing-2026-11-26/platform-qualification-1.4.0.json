@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "issue": 59,
+  "pr": 64,
+  "version": "1.4.0",
+  "qualified_runtime_commit": "cd38c45ef5789edbc5e2cef6ba4af32e9e1a9731",
+  "initial_macos_failure": {
+    "run_id": 45790130179,
+    "job_id": 139806750212,
+    "failed_cases": 3,
+    "reason": "Routing fixture used noncanonical macOS /var temporary alias; production safeAbs correctly rejected the symlink.",
+    "fix": "Resolve os.tmpdir() with fs.realpathSync before creating the fixture. Production path enforcement unchanged."
+  },
+  "required_runs": [
+    {
+      "id": 45792926848,
+      "name": "Harness compatibility qualification",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45792926742,
+      "name": "Focused IIS cognitive acceptance",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45792926783,
+      "name": "Validate and release",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "platform_jobs": [
+    {
+      "id": 139816219339,
+      "name": "package / build",
+      "conclusion": "success"
+    },
+    {
+      "id": 139816219762,
+      "name": "validate (macos-latest) / build",
+      "conclusion": "success"
+    },
+    {
+      "id": 139816219999,
+      "name": "validate (ubuntu-latest) / build",
+      "conclusion": "success"
+    },
+    {
+      "id": 139818563892,
+      "name": "windows (22.12.0)",
+      "conclusion": "success"
+    },
+    {
+      "id": 139818564015,
+      "name": "windows (24)",
+      "conclusion": "success"
+    }
+  ],
+  "harness_jobs": [
+    {
+      "name": "plan",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.12.0, true)",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.11.0, true)",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.15.0, false)",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.13.1, true)",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.10.0, false)",
+      "conclusion": "failure"
+    },
+    {
+      "name": "qualify (0.13.2, true)",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.13.3, true)",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.13.0, true)",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.14.0, true)",
+      "conclusion": "success"
+    },
+    {
+      "name": "qualify (0.9.1, false)",
+      "conclusion": "failure"
+    }
+  ],
+  "qualification_scope": "Seven approved releases pass. Older unapproved neighbors are expected non-gating failures; passing candidate 0.15.0 was not promoted.",
+  "local_build": {
+    "version": "1.4.0",
+    "host_tests": 174,
+    "adapter_checks": 11,
+    "python_checks": 9,
+    "failures": 0,
+    "skips": 0
+  },
+  "publication": "Merge triggers the master workflow; publication requires Linux/macOS builds, Windows Linux-ZIP checks and IIS/provider gates. Published assets remain immutable.",
+  "diagnostics": "The separate long Windows comparison is supplemental and remains outside the release workflow dependencies."
+}

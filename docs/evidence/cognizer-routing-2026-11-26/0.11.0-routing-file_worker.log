@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: Routing policy schema rejects ambiguous trust, unsupported modes/scopes/bounds and require fallback
+ok 1 - Routing policy schema rejects ambiguous trust, unsupported modes/scopes/bounds and require fallback
+  ---
+  duration_ms: 3.153923
+  type: 'test'
+  ...
+# Subtest: Durable bounded grace survives polls, heartbeats, restart, expiry, incompatibility and rollback without starvation
+ok 2 - Durable bounded grace survives polls, heartbeats, restart, expiry, incompatibility and rollback without starvation
+  ---
+  duration_ms: 27.082019
+  type: 'test'
+  ...
+# Subtest: CAS preview/apply is atomic and read-only preview leaves memory, intake, pending and guidance intact
+ok 3 - CAS preview/apply is atomic and read-only preview leaves memory, intake, pending and guidance intact
+  ---
+  duration_ms: 2223.394384
+  type: 'test'
+  ...
+# Subtest: Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch
+ok 4 - Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch
+  ---
+  duration_ms: 4455.000952
+  type: 'test'
+  ...
+# Subtest: Two independent authenticated MCP clients compete, server restart retains clocks, runtime access precedes registration
+ok 5 - Two independent authenticated MCP clients compete, server restart retains clocks, runtime access precedes registration
+  ---
+  duration_ms: 2752.164997
+  type: 'test'
+  ...
+# Subtest: Complete checkpoints retain effective policy/grace and clear readiness; disabled configuration preserves legacy clients
+ok 6 - Complete checkpoints retain effective policy/grace and clear readiness; disabled configuration preserves legacy clients
+  ---
+  duration_ms: 4265.143758
+  type: 'test'
+  ...
+# Subtest: Integration/review stays with original owner through require-policy switch and unknown commit reconciliation
+ok 7 - Integration/review stays with original owner through require-policy switch and unknown commit reconciliation
+  ---
+  duration_ms: 6754.90634
+  type: 'test'
+  ...
+# Subtest: Runtime schema seed, local preferred registration and reserved-principal refusal are explicit
+ok 8 - Runtime schema seed, local preferred registration and reserved-principal refusal are explicit
+  ---
+  duration_ms: 3527.738916
+  type: 'test'
+  ...
+# Subtest: Routing schema/tool/spec declarations stay aligned across optional bindings
+ok 9 - Routing schema/tool/spec declarations stay aligned across optional bindings
+  ---
+  duration_ms: 4.659627
+  type: 'test'
+  ...
+# Subtest: Independent work clocks allow oldest fallback without a newer item renewing its grace
+ok 10 - Independent work clocks allow oldest fallback without a newer item renewing its grace
+  ---
+  duration_ms: 8.613368
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 24415.564907

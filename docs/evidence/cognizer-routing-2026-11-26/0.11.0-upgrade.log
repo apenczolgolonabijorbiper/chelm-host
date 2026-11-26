@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: approved Harness upgrade preserves knowledge, drains work and retains exact checkpoint identities
+ok 1 - approved Harness upgrade preserves knowledge, drains work and retains exact checkpoint identities
+  ---
+  duration_ms: 12523.399066
+  type: 'test'
+  ...
+# Subtest: config-3 upgrade preserves the provider selection and reopens its snapshot
+ok 2 - config-3 upgrade preserves the provider selection and reopens its snapshot
+  ---
+  duration_ms: 0.752716
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12631.012381
