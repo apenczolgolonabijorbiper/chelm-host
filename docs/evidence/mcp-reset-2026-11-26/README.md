@@ -55,8 +55,41 @@ adapter cases and 9/9 Python checks. Local before/after idle cases each passed.
 
 The separate extended Windows comparison
 [run 45896467513](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45896467513)
-was still running at this checkpoint. Its 750-second staged attempts and later
-serial/per-file diagnostics are not claimed as observed passes here.
+has completed. Its Node 22.12.0 job passed: all three staged attempts passed
+177/177 cases, both concurrency-four comparisons passed 177/177, all 29 test
+files passed individually, and the capacity/provider checks passed. Its serial
+aggregate comparison still failed at the 600-second bound; the successful job
+does not erase that diagnostic failure.
+
+The Node 24.22.3 job failed all three staged attempts at the unchanged 750-second
+bound: two `operation_timeout` exits (124), then `tree_cleanup_failed` (125).
+The partial logs contain 117, 131 and 131 passing case lines, with no assertion-
+failing TAP lines. Both cognitive MCP cases passed in every attempt before
+termination. No final TAP summary was emitted, so the zero aggregate counts
+are not evidence that no tests ran. Subsequent comparison/per-file/capacity
+steps were skipped after the build failed. None is counted as a pass.
+
+## Merge review controls (2026-11-27)
+
+The Node 24 failure pattern predates PR #67. In
+[run 45792926709](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45792926709),
+job `139827165528` tested Node 24.22.3 and the ancestor revision
+`cd38c45ef5789edbc5e2cef6ba4af32e9e1a9731`. Its three 750-second staged
+attempts ended with `operation_timeout`, `tree_cleanup_failed` and
+`tree_cleanup_failed`. That is historical evidence, not an exact-master control.
+
+The exact current master revision `efda2493583921a31e30b3e46353310f5b553172`
+is being tested by the unchanged Windows reliability workflow in
+[run 45959438457](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45959438457).
+Its outcome remains pending. The extended Windows workflow supplements the
+ordinary release workflow; the latter passed its Windows focused and IIS gates.
+No timeout budgets, retries, required checks or workflow failure semantics were
+changed during this review.
+
+[The merge-review supplement](merge-review.json) retains authenticated artifact
+digests and every extended comparison report/log hash, including the failed
+serial comparison and the incomplete Node 24 attempts. The original
+[summary](summary.json) remains the evidence checkpoint for the earlier runs.
 
 [The machine-readable summary](summary.json) retains artifact digests,
 individual attempt outcomes, report/log/trace hashes and package identities.

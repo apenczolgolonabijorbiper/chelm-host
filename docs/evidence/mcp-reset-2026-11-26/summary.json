@@ -11,7 +11,7 @@
     "release_validation": 45896467587,
     "investigation": 45896467652,
     "compatibility": 45896467540,
-    "extended_windows_pending": 45896467513
+    "extended_windows": 45896467513
   },
   "initial_linux_setup_failure": {
     "job_id": 140171483564,
@@ -2493,5 +2493,6 @@
     "root_cause_confirmed": false,
     "windows_source_load_attempts": "both failed at 600-second bound; current Node also reported tree_cleanup_failed",
     "original_machine_trace_required": true
-  }
+  },
+  "merge_review_supplement": "merge-review.json"
 }

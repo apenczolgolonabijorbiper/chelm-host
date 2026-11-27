@@ -1,0 +1,1822 @@
+{
+  "schema_version": 1,
+  "issue": 51,
+  "reviewed_head": "4e8d8b13cd9d79fafc5327853ab70ba51b5a6303",
+  "tested_runtime_head": "38bf2d79d4fdf55303f186341f2960b4abdf604d",
+  "extended_windows_run": 45896467513,
+  "extended_windows": {
+    "node_22_job": {
+      "id": 140171483057,
+      "conclusion": "success"
+    },
+    "node_24_job": {
+      "id": 140171483280,
+      "conclusion": "failure"
+    },
+    "artifacts": [
+      {
+        "artifact_id": 15158260485,
+        "archive_sha256": "ebb32c53168414b63688a3111060c0e01ecd2cfbd0748b669d961729ba0177df",
+        "reports": [
+          {
+            "file": "qualification/tests-qualification-concurrency-1-win32.json",
+            "sha256": "634f5da86cb14b802dda0fdcf04b20348cfc83f9fe09a30b00b48bb4899a080b",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-concurrency-1",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 600200,
+                "exit": 124,
+                "error": "operation_timeout",
+                "counts": {
+                  "tests": 0,
+                  "pass": 0,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 70,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-concurrency-1-win32-1.log",
+                "log_sha256": "2a1d95b2f64939a750530c87b05c76ab299b4f046a9f43dacdb1d53b254e1d8b"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-concurrency-4-win32.json",
+            "sha256": "f997b6dd141531aa5f7fbeb025da9a75dd060bda2faccc90082515b2abc9d11b",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 4,
+              "repeat": 1,
+              "label": "qualification-concurrency-4",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 481952,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 177,
+                  "pass": 177,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 177,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-concurrency-4-win32-1.log",
+                "log_sha256": "6db8f94a2901c28d60189c8dd53d6e8594182da5a5e8d4e4df146b593db2b253"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-00-win32.json",
+            "sha256": "074f70a669e02fc429bca3f4d3f2a16c87e29090007d8275a5d016ef58b47922",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-00",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/checkpoint.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 61140,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 7,
+                  "pass": 7,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 7,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-00-win32-1.log",
+                "log_sha256": "388d61bdab6d39488d55d1f1706ce858d7ae277903c11354d69d79b1224459ec"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-01-win32.json",
+            "sha256": "201c7ae3fe64f7d2c4faf5219cc6644a12748c7fef1c9c94cb343aaa03fc8abb",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-01",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/alignment.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 24307,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 5,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-01-win32-1.log",
+                "log_sha256": "ce38ca7f4a2446dc1deaea85498f37f94cb1b0807909c03a8e8d6f5083a4f82e"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-02-win32.json",
+            "sha256": "ea90af156c9138d493b729e122321382ecd388af598992b143385c0be5168793",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-02",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/app-contract.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 60639,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 9,
+                  "pass": 9,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 9,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-02-win32-1.log",
+                "log_sha256": "bfecbabee51640775d53dfdc94b9b564e50de2252892de09429ef11cd5246dff"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-03-win32.json",
+            "sha256": "01cb45b51ae072489e34b05d2b3b5ae69eca1bdb61159f150eab0975666f2f01",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-03",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/cognitive.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 106183,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 12,
+                  "pass": 12,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 12,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-03-win32-1.log",
+                "log_sha256": "5f2c2eea02bb8e51022fb43c29d55aa726f3370a66eddaa9b4283f9a1875bc00"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-04-win32.json",
+            "sha256": "19a27763f4b495249844c291e15f7dbf9b4d0398affc17e01683da546d3e6655",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-04",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/mcp-success.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 10364,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 1,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-04-win32-1.log",
+                "log_sha256": "1693ecc6857b138c3397fdca56096be08fd0dc0e5daab680784bab4432f93485"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-05-win32.json",
+            "sha256": "2cac7b1b5682590deaaaf0daba88c107edf5595233b65f9d4bb7c119ca6c52e3",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-05",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/memory-provider.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 247412,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 31,
+                  "pass": 31,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 31,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-05-win32-1.log",
+                "log_sha256": "cfd0a6960c365e982969a5fd489600e9be998f23ac34621ab01ec430f329321b"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-06-win32.json",
+            "sha256": "b7967e96a6d871687bd2fe579d499e890db823413d1b17a4e4ce0581439fbe91",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-06",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/package.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 91579,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 5,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-06-win32-1.log",
+                "log_sha256": "92905321496ad9397156a3bfeec1b4df4e11c183faab6397d56e2a2abc9708fe"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-07-win32.json",
+            "sha256": "06798a47ecd2b4261b81564e0da1550dfccb68d22a8c2f2066342fc3ccafde0b",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-07",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/process-recovery.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 52826,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 5,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-07-win32-1.log",
+                "log_sha256": "7eca8ffd4556de155d2e62cd35324294260acec74c77683617d8ddf29ce448b5"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-08-win32.json",
+            "sha256": "07859205c1120177ac5220e40cd8f74c129721348c7e699c7e65dfd8580251c6",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-08",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/recovery.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 16793,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 3,
+                  "pass": 3,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 3,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-08-win32-1.log",
+                "log_sha256": "3372dfa7c40039b92d5c6d310ec19be9816ae006caf24632436c0843adf1e999"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-09-win32.json",
+            "sha256": "32c9cf58fcb7eee48b65872e1a05f0fa171319fb4ae280099c232c9ddf92b9f0",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-09",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/release-pair.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 2499,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 2,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-09-win32-1.log",
+                "log_sha256": "709be4e045f16f296c39a5d0620e0e1662781f27f5eaf88ef522b0c671afb869"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-10-win32.json",
+            "sha256": "5b5f0e9b818213c18634262be46a28f2276447e5b94ed55477783550a5c51956",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-10",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/remote-boundaries.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 38637,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 4,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-10-win32-1.log",
+                "log_sha256": "eadf79aeb4eca6f8e65c88ccf79772bdb98f232b6edd6a7fb2a5cdfc2e462589"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-11-win32.json",
+            "sha256": "3bdf7ed68eb6795c4819764ed6e9bec7f2ccd880da1d362b050474c6e5cc7bf7",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-11",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/remote.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 90300,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 13,
+                  "pass": 13,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 13,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-11-win32-1.log",
+                "log_sha256": "325a20deb52456c35c0200effd529381ec39d46c71764b553505b56f29831d6e"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-12-win32.json",
+            "sha256": "1dc76d5857202c4235cfc618a85907b8d3ac340364cdc3744e9c84b04ce586de",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-12",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/requirement-map.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 155,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 1,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-12-win32-1.log",
+                "log_sha256": "8227f39537f3eca207863ea35c4809755768e5f6768dd6c099f0838a109329ec"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-13-win32.json",
+            "sha256": "338f5218de336ca55c37d348e69d5bdc20e47bad0a22dd9dbd952a0430b58f44",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-13",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/conformance/worker-contract.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 43340,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 5,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-13-win32-1.log",
+                "log_sha256": "164ea9e0574d6c5dec4a937df4c57efefe41c609fb7c2a776582a33f7c7ebc8c"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-14-win32.json",
+            "sha256": "907128c28f55bfe9745d06a8ea2383c77224537dca345e4e4f34536bd7ca9011",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-14",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/dependencies.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 4432,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 4,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-14-win32-1.log",
+                "log_sha256": "179e6a8a5288ed9a8c54abf16c0129ef91a79642874c60960051866b2d8dcd88"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-15-win32.json",
+            "sha256": "3bd69a1872c1da1f71e7564a083d9c746ddf3740ce24a06ff5450438cef30d1d",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-15",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/durable-session.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 14853,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 6,
+                  "pass": 6,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 6,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-15-win32-1.log",
+                "log_sha256": "a1c9253f375e20593d377ce7973f26293feffe1099aca9a45d8aa20ea455ec93"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-16-win32.json",
+            "sha256": "134da4f7f6189d18f07d80231fd332cc659a4c0135f8c5df3ee2617dece76642",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-16",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/harness-compatibility.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 3281,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 4,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-16-win32-1.log",
+                "log_sha256": "790c90ee804d2fff524eee0cf86da48e11b09acba02489adfabf1cca35933326"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-17-win32.json",
+            "sha256": "8b6805b312bdd6c5ed1e0bdf2cf3689e39ec97f8677cc61a7b72b8caf962b7e4",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-17",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/harness-upgrade.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 38220,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 2,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-17-win32-1.log",
+                "log_sha256": "ac543bf0cba036d7f8347914ca7cdd2f5669475e2ac941e5d46562f839fe60c5"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-18-win32.json",
+            "sha256": "73533ced21d2bfd6078095816fa064e6423fab41b7a98ba71d88f0b585b8e3f0",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-18",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/issue11-acceptance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 6377,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 2,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-18-win32-1.log",
+                "log_sha256": "8c76ddfb943b26957fc69371c61f0345cec76e98f187ef8dee6246550b8694d1"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-19-win32.json",
+            "sha256": "576180defcf87356656889301ee1e582fedb4b61f11a0b7439b1c2edc1779e1c",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-19",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/migration-guidance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 16400,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 4,
+                  "pass": 4,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 4,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-19-win32-1.log",
+                "log_sha256": "1af88c880ffacc4aea9cee2554018ead3aef6ca265f433a89af1af76c64178f2"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-20-win32.json",
+            "sha256": "fe9eed5d42db4feeae3f6925d10b1102bb21470b4f71a00948df3ca7a2e88ac2",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-20",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/owned-process.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 4088,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 5,
+                  "pass": 5,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 5,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-20-win32-1.log",
+                "log_sha256": "e1cd10965c29b3e9dc3b00afff69e9f91c68a2c96fbcf85fadf089cd35106597"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-21-win32.json",
+            "sha256": "5e5590ba9a56d2c9999f91282872bd4dac0b9e2640946595e32428b9e4fa8eed",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-21",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/parity/boundaries.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 5399,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 1,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-21-win32-1.log",
+                "log_sha256": "d999a0281f6d3b8d773c2e0df05ff8e4fc1d303a67f49a3f7203a58ab9623c0f"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-22-win32.json",
+            "sha256": "91c33c375b235858427074238f883fac21885c0e6190da666ac1c77d7dbb8f4d",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-22",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/parity/intake-worker.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 18610,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 2,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-22-win32-1.log",
+                "log_sha256": "fc74dfc72b4179f9a363639566ef7558c10969fffe93249af111a797e09db18d"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-23-win32.json",
+            "sha256": "e9bde346f4fbcee8222fa0086cd154e7e05c5a55b60623bea1e58da87b0c0f87",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-23",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/parity/parity.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 10189,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 1,
+                  "pass": 1,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 1,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-23-win32-1.log",
+                "log_sha256": "1cc391c37b49fa0ae9a2de7f694fc87034d9b89d4792553844a415dcc6f2f99f"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-24-win32.json",
+            "sha256": "1577980a95f2ab27715827b61bd001a7cc3a634945507ff3d192b5f063a05fc6",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-24",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/remote-diagnostics.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 461,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 2,
+                  "pass": 2,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 2,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-24-win32-1.log",
+                "log_sha256": "45f3504410f9bfc915a4d71e532cfbf6ad6eea457e1431d469bc24293d4e5c90"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-25-win32.json",
+            "sha256": "9f0be2daf3db63c467087c5897010a34f992b657666330d9a16b0f5dc10d3e96",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-25",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/routing.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 113502,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 16,
+                  "pass": 16,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 16,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-25-win32-1.log",
+                "log_sha256": "4fe02e50e868a4a5f9d0d85451b18f852e1b530309606b6380e7da0e604e1d0f"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-26-win32.json",
+            "sha256": "2143363b8460680a715a9b6090b8a26ee32aafba9daab2690ca386e1e567202f",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-26",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/session-transport.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 22340,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 3,
+                  "pass": 3,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 3,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-26-win32-1.log",
+                "log_sha256": "61aa64e27949c9b11358eb9ed1acd5f509ca690132c8640f6ccc93e37a08bf00"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-27-win32.json",
+            "sha256": "ac47322a2ab79cde698cbd0d904886b8af4e091589387a0482cd91e525dac24b",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-27",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/telemetry-acceptance.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 19978,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 6,
+                  "pass": 6,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 6,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-27-win32-1.log",
+                "log_sha256": "4a43e57e68ad67fde8500c09e9219ecc01ebc5656fb26b198725bac22ceb2479"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-28-win32.json",
+            "sha256": "21794a12d918572907556dcb52b68d80910d580ca6298bc6fb132d73d10fc1c1",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-28",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/telemetry.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 56546,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 9,
+                  "pass": 9,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 9,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-28-win32-1.log",
+                "log_sha256": "441f47166e4e76875556aaaa0a94e54f1a97c78d07688f3cf3938432fab567a4"
+              }
+            ]
+          },
+          {
+            "file": "qualification/tests-qualification-file-29-win32.json",
+            "sha256": "2f34502f5ba5e98538c5a17c2d1398c5c9a2f13f9164a74177079eb851100f6e",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 1,
+              "repeat": 1,
+              "label": "qualification-file-29",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist\\qualification",
+              "file": "tests/unit.test.mjs"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 298,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 7,
+                  "pass": 7,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 7,
+                "partial_failing_case_lines": 0,
+                "log": "qualification/tests-qualification-file-29-win32-1.log",
+                "log_sha256": "af5465030cf4531229cd545450812f118883def1ba5fae097e77cc06707564e9"
+              }
+            ]
+          },
+          {
+            "file": "tests-parallel-baseline-win32.json",
+            "sha256": "0ae22c4ed4cca4c8037c11999a2a40398d8f9a6cfa082d581246751ce292d031",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 4,
+              "repeat": 1,
+              "label": "parallel-baseline",
+              "attempt-ms": 600000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 482948,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 177,
+                  "pass": 177,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 177,
+                "partial_failing_case_lines": 0,
+                "log": "tests-parallel-baseline-win32-1.log",
+                "log_sha256": "7c2e203649e0bb64e1a4c0fe45d596dab15cea518dd7367a6458e908a3f9006d"
+              }
+            ]
+          },
+          {
+            "file": "tests-supported-win32.json",
+            "sha256": "f4b789f643b104a3754b9a88db50fd8ffc6ddb7c251c1802c314caca9b57330a",
+            "node": "v22.12.0",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 2,
+              "repeat": 3,
+              "label": "supported",
+              "attempt-ms": 750000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 645673,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 177,
+                  "pass": 177,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 177,
+                "partial_failing_case_lines": 0,
+                "log": "tests-supported-win32-1.log",
+                "log_sha256": "43cdd4147176a2d51f94cdd9b76fa57e9cbc3b238baab3dd5c9980e85b5124a8"
+              },
+              {
+                "attempt": 2,
+                "elapsed_ms": 634311,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 177,
+                  "pass": 177,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 177,
+                "partial_failing_case_lines": 0,
+                "log": "tests-supported-win32-2.log",
+                "log_sha256": "07953cb182f9e7d2ea29765cb3144c64790e5d9841c0a20843974aa3d736a3cc"
+              },
+              {
+                "attempt": 3,
+                "elapsed_ms": 631333,
+                "exit": 0,
+                "error": null,
+                "counts": {
+                  "tests": 177,
+                  "pass": 177,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 177,
+                "partial_failing_case_lines": 0,
+                "log": "tests-supported-win32-3.log",
+                "log_sha256": "3c82019027ad92866f3594452af6ed926c8fc134036c9ed9ebdbf276b847f0c4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "artifact_id": 15156355538,
+        "archive_sha256": "5388eb2cfba470d59ddeee00f01692754f893a50de3719446a018dd62ee11f3b",
+        "reports": [
+          {
+            "file": "tests-supported-win32.json",
+            "sha256": "3b0f7aba64d7f53bc4de8df69be80c5fa1011afcc54fa14e18fae34da34f2d83",
+            "node": "v24.22.3",
+            "platform": "win32",
+            "os_release": "10.0.20348",
+            "packages": {
+              "host": {
+                "version": "1.4.0",
+                "manifest_sha256": "857ea030524de388d773cb0afe659f0327f8851e86b7511dc8f64c9416fd4501"
+              },
+              "harness": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              },
+              "provider": {
+                "version": "0.13.0",
+                "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+              }
+            },
+            "policy": {
+              "concurrency": 2,
+              "repeat": 3,
+              "label": "supported",
+              "attempt-ms": 750000,
+              "report": "D:\\a\\chelm-host\\chelm-host\\dist"
+            },
+            "attempts": [
+              {
+                "attempt": 1,
+                "elapsed_ms": 750360,
+                "exit": 124,
+                "error": "operation_timeout",
+                "counts": {
+                  "tests": 0,
+                  "pass": 0,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 117,
+                "partial_failing_case_lines": 0,
+                "log": "tests-supported-win32-1.log",
+                "log_sha256": "f57bc397149f76f6cec521750336764b23d56017b2f39a8d86492bfb47aaf77d"
+              },
+              {
+                "attempt": 2,
+                "elapsed_ms": 750353,
+                "exit": 124,
+                "error": "operation_timeout",
+                "counts": {
+                  "tests": 0,
+                  "pass": 0,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 131,
+                "partial_failing_case_lines": 0,
+                "log": "tests-supported-win32-2.log",
+                "log_sha256": "8bbf9bb951c4edf4a107877e2b5fa39ac561f6ddd4f65d592806c2c800f837e5"
+              },
+              {
+                "attempt": 3,
+                "elapsed_ms": 750340,
+                "exit": 125,
+                "error": "tree_cleanup_failed",
+                "counts": {
+                  "tests": 0,
+                  "pass": 0,
+                  "fail": 0,
+                  "cancelled": 0,
+                  "skipped": 0
+                },
+                "partial_passing_case_lines": 131,
+                "partial_failing_case_lines": 0,
+                "log": "tests-supported-win32-3.log",
+                "log_sha256": "95318f9c33db46dc14de0d1ec7eb58c48c27a7ab56b6141d3108b4ad2211b53c"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "A successful Node 22 job retains its failed serial aggregate comparison.",
+      "The three Node 24 aggregate attempts failed; no final TAP summary was emitted.",
+      "Zero summary counts on terminated attempts are not zero executed tests.",
+      "No assertion-failing TAP lines were observed in the partial Node 24 logs.",
+      "Passing MCP cases before termination do not make a whole-suite attempt pass."
+    ]
+  },
+  "historical_pre_pr_control": {
+    "run_id": 45792926709,
+    "job_id": 139827165528,
+    "tested_merge": "42aa974",
+    "source_head": "cd38c45ef5789edbc5e2cef6ba4af32e9e1a9731",
+    "source_is_ancestor_of_master": true,
+    "node": "v24.22.3",
+    "attempts": [
+      {
+        "attempt": 1,
+        "limit_ms": 750000,
+        "reason": "operation_timeout"
+      },
+      {
+        "attempt": 2,
+        "limit_ms": 750000,
+        "reason": "tree_cleanup_failed"
+      },
+      {
+        "attempt": 3,
+        "limit_ms": 750000,
+        "reason": "tree_cleanup_failed"
+      }
+    ],
+    "limitations": [
+      "Historical control predates PR 67 but is not the exact current master revision."
+    ]
+  },
+  "exact_master_control": {
+    "run_id": 45959438457,
+    "source_sha": "efda2493583921a31e30b3e46353310f5b553172",
+    "workflow": ".github/workflows/windows-reliability.yml",
+    "status": "in_progress",
+    "outcome_claimed": false
+  },
+  "verdict": {
+    "status": "awaiting_exact_master_control",
+    "original_reset_fixed": false,
+    "close_issue_51": false,
+    "release_authorized": false
+  }
+}
