@@ -81,8 +81,14 @@ attempts ended with `operation_timeout`, `tree_cleanup_failed` and
 The exact current master revision `efda2493583921a31e30b3e46353310f5b553172`
 is being tested by the unchanged Windows reliability workflow in
 [run 45959438457](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45959438457).
-Its outcome remains pending. The extended Windows workflow supplements the
-ordinary release workflow; the latter passed its Windows focused and IIS gates.
+Its first Node 24 staged attempt reproduced the failure at 750,125 ms with
+`tree_cleanup_failed` (job `140373499554`, step 7, line 886, observed in the
+live Actions log). The remaining repetitions are still running; no completed
+whole-job outcome or artifact digest is claimed for this live control.
+This establishes that the exact base revision also exhibits the timeout/cleanup
+failure class. It does not establish its cause or rule out every regression.
+The extended Windows workflow supplements the ordinary release workflow;
+the latter passed its Windows focused and IIS gates.
 No timeout budgets, retries, required checks or workflow failure semantics were
 changed during this review.
 
@@ -104,6 +110,41 @@ Supported Harness 0.12.0 and 0.14.0 qualification initially failed during
 package-download timeouts; their individual reruns passed. Earlier failed
 reports remain retained. Below-0.11 candidate failures are outside the supported
 scope; the separate approval/policy work in PR #65 is not changed here.
+
+## Fresh review validation
+
+Evidence-only head `a13ad0957f670ba4d0f3ecb556dd153b2dde47ec` runs the same
+runtime/tests as the original investigated revision.
+[Release validation 45960060939](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45960060939)
+passed its Linux builds and Windows smoke, focused, full IIS and IIS Express
+checks. The initial macOS build and 177-test suite passed, then the provider
+benchmark failed with `git add ETIMEDOUT`. Its individual rerun passed the build,
+177-test suite and both benchmarks. All five platform jobs are now successful;
+release publication was skipped for the pull request. The original failed
+attempt remains retained in the workflow history.
+[Harness qualification 45960060834](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45960060834)
+passed all seven approved versions after its initial planning-only HTTP 403
+rate-limit failure was individually rerun. Below-0.11 candidate failures remain
+outside the supported scope.
+
+Fresh local Node 24.22.3 source verification with the integrity-verified Harness
+0.13.0 passed 170 cases with seven explicit unstaged-distribution skips. An
+initial local run had used a pre-existing 0.12.0 package and failed provider
+approval checks; correcting that test setup required no host code change.
+
+## Merge assessment
+
+PR #67 is reasonable to merge as a diagnostics improvement: ordinary release
+validation and approved Harness qualification passed, while the exact base
+revision reproduced the Windows timeout/cleanup failure class. This assessment
+does not mark the supplemental full-Windows comparisons as passing or establish
+the historical ECONNRESET cause. Issue #51 remains open, with manual merge and
+release publication separate.
+
+The exact-master control and supplemental same-code PR repetitions continue
+in Actions; their unobserved remaining attempts are not counted as passes.
+The final review commit changes evidence only, with no runtime, test, timeout
+or workflow changes beyond the originally tested implementation.
 
 ## Closure boundary
 

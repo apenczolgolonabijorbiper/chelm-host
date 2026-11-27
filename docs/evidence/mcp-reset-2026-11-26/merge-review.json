@@ -1811,12 +1811,124 @@
     "source_sha": "efda2493583921a31e30b3e46353310f5b553172",
     "workflow": ".github/workflows/windows-reliability.yml",
     "status": "in_progress",
-    "outcome_claimed": false
+    "outcome_claimed": false,
+    "job_id": 140373499554,
+    "observed_attempts": [
+      {
+        "attempt": 1,
+        "phase": "supported suite attempt 1",
+        "elapsed_ms": 750125,
+        "limit_ms": 750000,
+        "error": "tree_cleanup_failed",
+        "supervisor_exit": 1,
+        "source": "GitHub Actions live job log, step 7 line 886",
+        "source_url": "https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45959438457/job/140373499554#step:7:886"
+      }
+    ],
+    "observation": "The exact master control reproduced the 750-second timeout/cleanup failure class before the PR diagnostics. Remaining repetitions are still running and are not claimed as passes or completed."
   },
   "verdict": {
-    "status": "awaiting_exact_master_control",
+    "status": "reasonable_to_merge_as_diagnostics_improvement",
     "original_reset_fixed": false,
     "close_issue_51": false,
-    "release_authorized": false
+    "release_authorized": false,
+    "limits": [
+      "Matching failure class does not establish the underlying cause or prove absence of every regression.",
+      "The original Windows 10 ECONNRESET remains unreproduced."
+    ],
+    "basis": [
+      "Fresh ordinary release validation passed all five platform jobs; release publication was skipped.",
+      "Fresh qualification passed all seven approved Harness versions.",
+      "The exact master revision reproduced the same 750-second timeout/cleanup failure class in its first staged attempt.",
+      "Changes made during this review affect documentation/evidence only."
+    ]
+  },
+  "local_source_verification": {
+    "node": "v24.22.3",
+    "harness": "0.13.0",
+    "harness_manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b",
+    "exit": 0,
+    "counts": {
+      "tests": 177,
+      "pass": 170,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 7
+    },
+    "log_sha256": "bb1539f19e67a4ae180115115ada18c82abd7f7492b1042692d996620612a238",
+    "initial_setup_failure": "An initial run used a pre-existing 0.12.0 Harness and failed provider approval checks; corrected to the verified reference 0.13.0 package without changing host code."
+  },
+  "fresh_validation": {
+    "head": "a13ad0957f670ba4d0f3ecb556dd153b2dde47ec",
+    "release_run": 45960060939,
+    "compatibility_run": 45960060834,
+    "compatibility_initial_failure": {
+      "job_id": 140375516810,
+      "phase": "planning before test execution",
+      "error": "HTTP 403: rate limit exceeded",
+      "action": "rerun failed jobs; original attempt retained",
+      "rerun_outcome": "planning passed; all seven approved versions passed"
+    },
+    "macos_initial_failure": {
+      "job_id": 140375518072,
+      "phase": "provider benchmark after staged build and host tests passed",
+      "error": "git add ETIMEDOUT",
+      "action": "individual macOS job rerun; original failure retained",
+      "host_tests": {
+        "tests": 177,
+        "pass": 177,
+        "fail": 0,
+        "skipped": 0
+      },
+      "individual_rerun_outcome": "success; original failed job and attempt retained"
+    },
+    "compatibility_approved_versions": [
+      "0.11.0",
+      "0.12.0",
+      "0.13.0",
+      "0.13.1",
+      "0.13.2",
+      "0.13.3",
+      "0.14.0"
+    ],
+    "compatibility_supported_features": "pass for every approved version",
+    "windows_node_22_smoke": "pass",
+    "windows_node_24_focused_and_iis": "pass",
+    "macos_individual_rerun_job_id": 140379195454,
+    "release_conclusion": "success",
+    "release_publication": "skipped (pull request)",
+    "jobs": [
+      {
+        "id": 140379195454,
+        "name": "macOS Node 22 build, 177-case staged suite and benchmarks",
+        "conclusion": "success"
+      },
+      {
+        "id": 140379197352,
+        "name": "Linux Node 22 build",
+        "conclusion": "success"
+      },
+      {
+        "id": 140379198214,
+        "name": "Linux Node 24 package build",
+        "conclusion": "success"
+      },
+      {
+        "id": 140379198394,
+        "name": "Windows Node 24 focused, full IIS and IIS Express",
+        "conclusion": "success"
+      },
+      {
+        "id": 140379243117,
+        "name": "Windows Node 22 smoke",
+        "conclusion": "success"
+      }
+    ],
+    "supplemental_same_code_runs": {
+      "windows_reliability": 45960060522,
+      "mcp_reset_investigation": 45960060535,
+      "status_at_review": "in_progress",
+      "passes_claimed": false
+    }
   }
 }
