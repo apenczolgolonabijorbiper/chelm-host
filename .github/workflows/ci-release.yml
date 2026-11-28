@@ -71,6 +71,12 @@ jobs:
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
           ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Output dist/windows/iis-provider.json
           ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Mode IisExpress -Output dist/windows/iis-express-provider.json
+      - name: Verify authenticated MCP through IIS HTTPS and ARR
+        if: matrix.node == '24'
+        shell: powershell
+        run: |
+          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
+          ./tools/Test-IisHttpsProxy.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/windows/iis-https-proxy.json -InstallPrerequisites -DisposableServer
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
