@@ -50,7 +50,8 @@ def qualify(package, harness, output, profile='qualification', shard=None):
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(data)
         env = {**os.environ, 'CHELM_HARNESS_ROOT': str(harness),
-               'CHELM_PROVIDER_HARNESS_ROOT': str(harness), 'GOLEM_PYTHON': sys.executable}
+               'CHELM_PROVIDER_HARNESS_ROOT': str(harness), 'GOLEM_PYTHON': sys.executable,
+               'CHELM_ACCEPTANCE_REPORT_DIR': str(output)}
         subprocess.run(['node', str(stage / 'integration/install-dependencies.mjs')], cwd=stage, env=env, check=True)
         base = ['node', str(stage / 'tools/run-tests.mjs'), '--report', str(output)]
         all_files = sorted(test.relative_to(stage).as_posix() for test in (stage / 'tests').rglob('*.test.mjs'))
