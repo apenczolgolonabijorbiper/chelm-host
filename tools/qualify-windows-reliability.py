@@ -91,6 +91,7 @@ def qualify(package, harness, output, profile='qualification', shard=None):
                     'NFR-1: unloaded Windows profiles use the actual OS SID and fail closed on lookup errors',
                     'Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch',
                     'Runtime schema seed, local preferred registration and reserved-principal refusal are explicit',
+                    'Installer reports legacy migration in ordinary and deferred modes without changing the runtime',
                 ])
             pattern = '^(' + '|'.join(cases) + ')$'
             args = ['--name', pattern, '--attempt-ms', '180000']
