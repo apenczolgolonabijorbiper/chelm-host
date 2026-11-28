@@ -59,6 +59,12 @@ jobs:
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
           $testProfile = if ('${{ matrix.node }}' -eq '24') { 'focused' } else { 'smoke' }
           python tools/qualify-windows-reliability.py --package $archive --harness ../harness-release --output dist/windows --profile $testProfile
+      - name: Verify authenticated MCP through IIS HTTPS and ARR
+        if: ${{ !cancelled() && matrix.node == '24' && steps.packaged.outcome == 'success' }}
+        shell: powershell
+        run: |
+          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
+          ./tools/Test-IisHttpsProxy.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/windows/iis-https-proxy.json -InstallPrerequisites -DisposableServer
       - name: Verify default full IIS application pool identity
         if: matrix.node == '24'
         shell: powershell
@@ -72,12 +78,6 @@ jobs:
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
           ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Output dist/windows/iis-provider.json
           ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Mode IisExpress -Output dist/windows/iis-express-provider.json
-      - name: Verify authenticated MCP through IIS HTTPS and ARR
-        if: ${{ !cancelled() && matrix.node == '24' && steps.packaged.outcome == 'success' }}
-        shell: powershell
-        run: |
-          $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
-          ./tools/Test-IisHttpsProxy.ps1 -HostZip $archive -HarnessRoot ../harness-release -Output dist/windows/iis-https-proxy.json -InstallPrerequisites -DisposableServer
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:

@@ -49,6 +49,7 @@ try {
     }
   }
   Import-Module WebAdministration
+  Add-Type -Path "$env:windir\System32\inetsrv\Microsoft.Web.Administration.dll"
   Start-Service W3SVC
   $manager = New-Object Microsoft.Web.Administration.ServerManager
   try {
