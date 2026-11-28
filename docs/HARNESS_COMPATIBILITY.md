@@ -1,7 +1,9 @@
 # Harness compatibility qualification
 
 `harness-compatibility.json` is the production approval catalog. An entry approves
-specific release bytes and specific features. A matching version string alone
+specific release bytes and specific features. The qualification minimum is
+**0.11.0**; earlier versions are outside the maintained compatibility scope.
+A matching version string alone
 grants no support. `compatibility.json` and `provider-compatibility.json` retain
 the published **0.13.0 reference** for deterministic release builds; the provider
 file describes that reference, rather than restricting all runtime selections.
@@ -28,7 +30,9 @@ every extracted file, including missing, additional and linked files.
 
 The separate Ubuntu workflow runs on contract-sensitive PRs, manual dispatch and
 daily at 06:27 UTC. It selects the reference, every approved release, two available
-unapproved older neighbors and the latest unapproved newer stable release.
+unapproved older neighbors at or above 0.11.0 and the latest unapproved newer
+stable release. Releases below the configured minimum are never scheduled, and
+manual requests below it are rejected before downloading or testing a package.
 Manual dispatch also accepts a specific published prerelease or a Harness Actions
 artifact ID plus candidate version and expected inner-ZIP SHA-256. Artifact jobs
 require read access to upstream Actions; configure `HARNESS_QUALIFICATION_TOKEN`

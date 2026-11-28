@@ -1,4 +1,4 @@
-"""Select the reference, all approved versions, two older neighbors and newest candidate."""
+"""Select the reference, all approved versions, eligible older neighbors and newest candidate."""
 import importlib.util
 import json
 from pathlib import Path
@@ -10,17 +10,40 @@ spec=importlib.util.spec_from_file_location('prepare_harness',ROOT/'tools/prepar
 download=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(download)
 
+DEFAULT_MINIMUM = '0.11.0'
+
+def version_core(value):
+    match = re.fullmatch(r'(\d+)\.(\d+)\.(\d+)(?:-[A-Za-z0-9.-]+)?', value)
+    if not match:
+        raise ValueError('Invalid Harness version: ' + value)
+    return tuple(map(int, match.groups()))
+
+def qualification_minimum(catalog):
+    minimum = catalog.get('minimum_harness_version', DEFAULT_MINIMUM)
+    if not re.fullmatch(r'\d+\.\d+\.\d+', minimum):
+        raise ValueError('Qualification minimum must be a stable version')
+    return minimum
+
+def require_minimum(catalog, value):
+    minimum = qualification_minimum(catalog)
+    core, floor = version_core(value), version_core(minimum)
+    if core < floor or core == floor and '-' in value:
+        raise ValueError('Harness ' + value + ' is below the qualification minimum ' + minimum)
+
 def plan(catalog,releases,candidate=None):
-    def version(v):
-        return tuple(map(int,v.split('.')))
+    version=version_core
+    floor=version(qualification_minimum(catalog))
     reference=version(catalog['reference_version'])
-    stable=sorted({r['tag_name'][1:] for r in releases if not r.get('draft') and not r.get('prerelease') and re.fullmatch(r'v\d+\.\d+\.\d+',r['tag_name']) and any(a['name'].endswith('.zip') for a in r.get('assets',[]))},key=version)
+    stable=sorted({r['tag_name'][1:] for r in releases if not r.get('draft') and not r.get('prerelease') and re.fullmatch(r'v\d+\.\d+\.\d+',r['tag_name']) and any(a['name'].endswith('.zip') for a in r.get('assets',[])) and version_core(r['tag_name'][1:])>=floor},key=version)
     selected=set(catalog['approved_releases'])|{catalog['reference_version']}
+    for value in selected:require_minimum(catalog,value)
     selected.update([v for v in stable if version(v)<reference and v not in selected][-2:])
     newer=[v for v in stable if version(v)>reference and v not in selected]
     if newer:selected.add(newer[-1])
-    if candidate:selected.add(candidate)
-    return {'include':[{'version':v,'approved':v in catalog['approved_releases']} for v in sorted(selected)]}
+    if candidate:
+        require_minimum(catalog,candidate)
+        selected.add(candidate)
+    return {'include':[{'version':v,'approved':v in catalog['approved_releases']} for v in sorted(selected,key=lambda v:(version(v), '-' not in v, v))]}
 
 if __name__=='__main__':
     releases=[]
