@@ -49,12 +49,28 @@ round trip. Node 24 also covers Windows paths, file sharing, process ownership
 and cleanup, response-loss recovery, and full IIS/IIS Express. Publication
 requires both Windows jobs.
 
-The Windows reliability comparison workflow runs the extended release builder
-on Node 22.12 and 24. It retains three required full attempts, the diagnostic
-concurrency-4 comparison and ten standalone MCP attempts on Node 24. It also
-retains capacity measurements and serial/per-file diagnostics. Use it for
-process supervision, remote transport or benchmark changes, or dispatch it
-manually. Each standalone MCP attempt retains its 180-second outer bound.
+The Windows reliability comparison workflow builds one tested ZIP on Ubuntu
+Node 24, then starts four Windows Node 24 jobs as soon as that ZIP is available.
+Each job verifies the checksum/inventory/hashes and tests a disjoint file subset
+selected by `--shard INDEX/4` from the sorted complete file list (round robin).
+Each subset has three required concurrency-2 attempts, within 600 seconds each,
+plus retained concurrency-4/1 diagnostics and a required individual run of each
+assigned file. Shard 1 also requires ten standalone MCP attempts, bounded at
+180 seconds each, and runs the Windows capacity/provider measurements.
+
+The final coverage job requires all four summaries, the same package/manifest
+identity, the complete disjoint test inventory, every supported attempt passing
+without skips, every file passing individually and all ten standalone MCP passes.
+No failed required attempt can be hidden by a later pass. Comparisons are within
+a subset; they are not a new unsharded full-suite concurrency comparison. Routine
+release CI still covers Node 22.12 as described above. Use this supplemental
+workflow for process supervision, remote transport, benchmark or scheduling
+changes, or dispatch it manually. Its configuration is not observed acceptance.
+
+For equivalent local subset runs, invoke `node tools/run-tests.mjs --shard 1/4
+--repeat 3 --concurrency 2`, then repeat for 2/4, 3/4 and 4/4 using separate report
+directories or labels. Reports include the complete and selected file inventories.
+`--file` and `--shard` cannot be combined.
 
 For comparison, master cd14af4's successful Windows Node 22 suite took 277 seconds
 at concurrency 4, with 999 seconds of summed per-test elapsed time. Those are
@@ -71,6 +87,28 @@ No minimum hardware capacity or historical timeout root cause is established by
 the supplied index alone. Compare the retained phases and concurrency before
 changing the policy for a consumer. A full staged run has no intentional skips;
 unstaged source runs explicitly skip package-only checks.
+
+## Expanded-suite timeout correction — 2026-11-28
+
+The latest failed comparison [run 45960060522](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45960060522)
+and its master control [45959438457](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45959438457)
+ran three unsharded supported attempts per Node version. All hit the 750-second
+aggregate bound, with no failed assertions emitted before termination. On the
+latest run Node 24 emitted 146 passing cases per attempt and Node 22 emitted
+117; buffered TAP after termination is not a complete suite count. In the first
+attempt their summed reported case durations were about 1361 and 1434 seconds
+respectively, while only two files could run at once. Completed case maxima were
+about 41 and 47 seconds. The logs establish aggregate exhaustion with healthy
+progress; they do not establish a particular machine bottleneck or rule out an
+unreported hang. Some timeout cleanups additionally reported tree_cleanup_failed;
+those remain failures, not an MCP reset diagnosis.
+
+The earlier 152-case Windows acceptance remains historical. The expanded suite
+now uses the four bounded subsets above; no command, scenario, file or attempt
+limit is increased. A new Windows workflow run must pass before claiming observed
+acceptance for this scheduling change. The direct Windows release-builder path
+retains its older unsharded three-attempt/750-second policy; the supplemental
+workflow consumes the Ubuntu-built ZIP and does not invoke that Windows path.
 
 ## Observed final-policy measurements
 

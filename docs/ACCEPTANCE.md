@@ -1,3 +1,21 @@
+# Windows reliability scheduling correction — 2026-11-28
+
+Supplemental run [45960060522](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45960060522)
+and master control [45959438457](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45959438457)
+exhausted all three 750-second unsharded attempts on both Windows Node versions.
+No assertion failure was emitted before termination; some attempts additionally
+reported cleanup failure. Their comparisons and per-file stages were skipped.
+This is separate from the successful routine release gates and the historical
+152-case qualification, and those older results do not certify the expanded suite.
+
+The correction tests one Ubuntu-built ZIP in four disjoint Windows Node 24 file
+subsets, three required concurrency-2 attempts each with a 600-second bound.
+It preserves serial/parallel diagnostics, individual-file checks and ten
+standalone MCP attempts. A final evidence gate requires complete, disjoint file
+coverage of the same package and rejects skipped/failed required attempts.
+See [policy and evidence limits](TEST_POLICY.md). Windows results for this change
+remain pending until the workflow is observed; configured jobs are not acceptance.
+
 # Chelm 1.4.0 platform qualification — issue #59
 
 The release runtime at `cd38c45ef5789edbc5e2cef6ba4af32e9e1a9731` passed
