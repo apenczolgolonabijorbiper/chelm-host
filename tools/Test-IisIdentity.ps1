@@ -112,6 +112,7 @@ public class ChelmProbe : IHttpHandler {
   $handler = $handler.Replace('NODE_EXE',$nodeExe.Replace('"','""')).Replace('SCRIPT_PATH',$script.Replace('\','\\')).Replace('CONFIG_PATH',$settingsPath.Replace('\','\\'))
   [System.IO.File]::WriteAllText((Join-Path $webRoot 'probe.ashx'),$handler,[System.Text.UTF8Encoding]::new($false))
   [System.IO.File]::WriteAllText((Join-Path $webRoot 'web.config'),'<configuration><system.web><identity impersonate="false"/><compilation targetFramework="4.8"/><httpRuntime targetFramework="4.8" executionTimeout="240"/></system.web></configuration>')
+  [System.IO.File]::WriteAllText((Join-Path $webRoot 'ready.txt'),'ready')
   if ($Mode -eq 'FullIis') {
     New-WebAppPool -Name $pool | Out-Null
     Set-ItemProperty "IIS:\AppPools\$pool" -Name 'processModel.identityType' -Value 'ApplicationPoolIdentity'
@@ -133,17 +134,20 @@ public class ChelmProbe : IHttpHandler {
     $expectedIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
     $identityType = 'InteractiveDeveloper'
     $profileLoaded = $null
-    [System.IO.File]::WriteAllText((Join-Path $webRoot 'ready.txt'),'ready')
-    # Wait only for the static file; never repeat the mutating synthetic probe.
-    $ready = $false
-    for ($attempt=0; $attempt -lt 30; $attempt++) {
-      try { Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:$port/ready.txt" -TimeoutSec 1 | Out-Null; $ready=$true; break } catch {}
-      if ($expressProcess.HasExited) { throw ('IIS Express exited: '+(Get-Content (Join-Path $probeRoot 'express.stderr') -Raw)) }
-      Start-Sleep -Milliseconds 500
-    }
-    if (!$ready) { throw 'IIS Express did not become ready' }
   }
   $probeHost = if ($Mode -eq 'FullIis') { '127.0.0.1' } else { 'localhost' }
+  # Site creation does not guarantee the HTTP listener is ready. Retry only this
+  # static resource under either IIS host; invoke the mutating probe exactly once.
+  $ready = $false
+  for ($attempt=0; $attempt -lt 30; $attempt++) {
+    try {
+      $response = Invoke-WebRequest -UseBasicParsing -Uri "http://${probeHost}:$port/ready.txt" -TimeoutSec 1
+      if ($response.Content -eq 'ready') { $ready=$true; break }
+    } catch {}
+    if ($expressProcess -and $expressProcess.HasExited) { throw ('IIS Express exited: '+(Get-Content (Join-Path $probeRoot 'express.stderr') -Raw)) }
+    Start-Sleep -Milliseconds 500
+  }
+  if (!$ready) { throw "$Mode static readiness check did not pass" }
   $response = Invoke-RestMethod -Uri "http://${probeHost}:$port/probe.ashx" -TimeoutSec 240
   if (!$response.probe.passed -or $response.iis_identity -ne $expectedIdentity) { throw 'The probe did not execute successfully as the expected Windows identity' }
   if ($MemoryProvider -and (!$response.probe.memory_provider.semantic_only -or $response.probe.memory_provider.worker_contract -ne 3)) { throw 'Provider-mode semantic acceptance missing' }

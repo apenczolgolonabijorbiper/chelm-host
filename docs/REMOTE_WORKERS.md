@@ -240,6 +240,11 @@ Do not serve private runtime directories as static IIS content.
 
 ## Acceptance evidence
 
+The staged suite exercises a real TLS reverse proxy. A separate packaged Windows
+check provisions an isolated IIS HTTPS/ARR site and inspects its actual access
+logs. See [HTTPS_PROXY_ACCEPTANCE.md](HTTPS_PROXY_ACCEPTANCE.md) for commands,
+coverage and the distinction between fixture evidence and target deployment.
+
 See [EXTERNAL_ACCEPTANCE.md](EXTERNAL_ACCEPTANCE.md) for the target IIS proxy,
 reference workstation, two-machine inference and consumer checks. Run the
 read-only `tools/probe-remote.mjs` from a worker machine to capture actual
@@ -251,4 +256,4 @@ the owner service between requests. It also kills publication fixture processes
 immediately before and after Git CAS. `remote-phases-<platform>.json` records
 per-tool wall times and JSON payload sizes; inference time, provider token use
 and cost are explicitly unknown. These are deterministic fixtures on one machine.
-They do not certify an IDE/provider, TLS deployment or unattended approval policy.
+They do not certify an IDE/provider, the owner's TLS deployment or unattended approval policy.

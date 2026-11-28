@@ -9,6 +9,11 @@ files to return, use [the issue #11 operator runbook](ISSUE_11_ACCEPTANCE.md).
 
 ## E-1: Windows/IIS HTTPS service
 
+For isolated hosted IIS HTTPS/ARR verification of the packaged backend, use
+[HTTPS_PROXY_ACCEPTANCE.md](HTTPS_PROXY_ACCEPTANCE.md). It creates its own test
+site/runtime and checks service and proxy logs. It does not certify the owner's
+deployed network or OAuth client registration; the target check below still applies.
+
 Follow REMOTE_WORKERS.md to install the persistent loopback service and IIS ARR
 HTTPS proxy. Run tools/Test-IisIdentity.ps1 on the Windows Server 2022 target;
 retain its JSON output. Record Windows edition/build, Node/Python/Git versions,
