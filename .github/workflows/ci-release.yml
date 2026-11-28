@@ -53,6 +53,7 @@ jobs:
       - name: Verify published Harness
         run: python tools/prepare-harness.py --destination ../harness-release
       - name: Verify packaged Chelm on Windows
+        id: packaged
         shell: powershell
         run: |
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
@@ -72,7 +73,7 @@ jobs:
           ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Output dist/windows/iis-provider.json
           ./tools/Test-IisIdentity.ps1 -HostZip $archive -HarnessRoot ../harness-release -MemoryProvider -Mode IisExpress -Output dist/windows/iis-express-provider.json
       - name: Verify authenticated MCP through IIS HTTPS and ARR
-        if: matrix.node == '24'
+        if: ${{ !cancelled() && matrix.node == '24' && steps.packaged.outcome == 'success' }}
         shell: powershell
         run: |
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
