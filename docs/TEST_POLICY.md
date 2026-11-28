@@ -88,6 +88,23 @@ the supplied index alone. Compare the retained phases and concurrency before
 changing the policy for a consumer. A full staged run has no intentional skips;
 unstaged source runs explicitly skip package-only checks.
 
+## Installer migration test timeout — 2026-11-28
+
+[Run 46129017533, shard 4](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/46129017533/job/140937638366)
+retained one failed supported attempt: the installer migration case reported
+`null !== 0` at its direct `spawnSync` installer call with a 10-second timeout.
+Later supported attempts and the individual file passed; those passes do not
+cancel the earlier failure. The log did not retain the child error, so it does
+not establish a particular filesystem or runner-load cause.
+
+Migration test installer/preflight commands now use the existing supervised
+60-second CLI policy. Failures retain the supervisor error and phase, and timeout
+cleanup covers the owned process tree. The 180-second scenario and 600-second
+file/attempt bounds still apply. Both installer modes still execute their returned
+preflight directly and through the platform shell and verify unchanged runtime
+bytes. The packaged focused Windows checks now require this installer case too.
+Windows confirmation requires a new successful workflow run.
+
 ## Expanded-suite timeout correction — 2026-11-28
 
 The latest failed comparison [run 45960060522](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45960060522)

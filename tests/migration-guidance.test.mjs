@@ -4,8 +4,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fixture,ok,refuse,source,harness} from './helpers.mjs';
 import {inspectRuntime,legacyConfig} from '../lib/runtime-readiness.mjs';
-import {spawnSync} from 'node:child_process';
+import {ownedProcess} from '../tools/owned-process.mjs';
 import {hash} from '../lib/util.mjs';
+
+function runCommand(executable,args,phase) {
+  // Installation copies the complete staged package. Use the same bounded
+  // command policy as other CLI checks, including owned-tree cleanup on expiry.
+  const r=ownedProcess(executable,args,{timeout:60000,phase});
+  assert.ifError(r.error);
+  assert.equal(r.status,0,`${phase}: signal=${r.signal}\n${r.stdout}${r.stderr}`);
+  return r;
+}
 
 function legacy(f) {
   // v0.2.0 config defaults: current synthetic instance/harness paths only;
@@ -20,8 +29,7 @@ test('Recognized v0.2.0 config: common commands give runnable preflight, preserv
   for(const command of ['status','refresh']) {
     const value=refuse('migration_required',command,null,f.root);
     const d=value.error.details;assert.deepEqual(d.supported_versions,[2,3]);assert.equal(d.detected_version,1);
-    const r=spawnSync(d.preflight.executable,d.preflight.argv,{encoding:'utf8',timeout:5000});
-    assert.equal(r.status,0,r.stdout+r.stderr);
+    const r=runCommand(d.preflight.executable,d.preflight.argv,'migration '+command+' preflight');
     const result=JSON.parse(r.stdout);assert.equal(result.migration_required,true);assert.equal(result.changed,false);
   }
   assert.deepEqual(fs.readFileSync(config),before);assert.deepEqual(fs.readFileSync(path.join(f.instance,'memory/graph.json')),graph);
@@ -45,15 +53,15 @@ test('Installer reports legacy migration in ordinary and deferred modes without 
     const app=path.join(f.base,'application '+deferred+" 'quote $value");fs.mkdirSync(app);
     const args=[path.join(source,'integration/install.mjs'),'--repo',app,'--runtime-hint',f.root,'--skip-dependencies',
       ...(deferred?['--defer-agent-integration']:[])];
-    const r=spawnSync(process.execPath,args,{encoding:'utf8',timeout:10000});assert.equal(r.status,0,r.stdout+r.stderr);
+    const r=runCommand(process.execPath,args,'migration installer '+(deferred?'deferred':'ordinary'));
     const v=JSON.parse(r.stdout);assert.equal(v.runtime_status.status,'migration_required');
     assert(v.messages.some(m=>m.includes('migration required')));
-    const p=v.runtime_status.preflight;const preflight=spawnSync(p.executable,p.argv,{encoding:'utf8',timeout:5000});
-    assert.equal(preflight.status,0,preflight.stdout+preflight.stderr);assert.equal(JSON.parse(preflight.stdout).changed,false);
+    const p=v.runtime_status.preflight;const preflight=runCommand(p.executable,p.argv,'installed migration preflight');
+    assert.equal(JSON.parse(preflight.stdout).changed,false);
     const quoted=process.platform==='win32'
-      ? spawnSync('powershell.exe',['-NoProfile','-NonInteractive','-Command',p.powershell],{encoding:'utf8',timeout:10000})
-      : spawnSync('sh',['-c',p.posix],{encoding:'utf8',timeout:5000});
-    assert.equal(quoted.status,0,quoted.stdout+quoted.stderr);assert.equal(JSON.parse(quoted.stdout).changed,false);
+      ? runCommand('powershell.exe',['-NoProfile','-NonInteractive','-Command',p.powershell],'PowerShell migration preflight')
+      : runCommand('sh',['-c',p.posix],'POSIX migration preflight');
+    assert.equal(JSON.parse(quoted.stdout).changed,false);
     assert.equal(hash(fs.readFileSync(config)),before);assert.equal(hash(fs.readFileSync(path.join(f.instance,'memory/graph.json'))),graph);
   }
 });
