@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 
 spec = importlib.util.spec_from_file_location('prepare_harness', Path(__file__).with_name('prepare-harness.py'))
@@ -81,10 +82,33 @@ class QualificationTests(unittest.TestCase):
 
     def test_plan_keeps_reference_approved_neighbors_and_newest(self):
         planner = self.load('harness-qualification-plan')
-        releases = [{'tag_name':'v'+v,'prerelease':False,'assets':[{'name':'release.zip'}]} for v in ['0.10.0','0.11.0','0.12.0','0.13.0','0.13.3','0.14.0']]
+        releases = [{'tag_name':'v'+v,'prerelease':False,'assets':[{'name':'release.zip'}]} for v in ['0.9.1','0.10.0','0.11.0','0.12.0','0.13.0','0.13.3','0.14.0']]
         plan = planner.plan({'reference_version':'0.13.0','approved_releases':{'0.13.0':{},'0.13.3':{}}},releases,'0.15.0-rc.1')['include']
         self.assertEqual({r['version'] for r in plan},{'0.11.0','0.12.0','0.13.0','0.13.3','0.14.0','0.15.0-rc.1'})
         self.assertEqual([r['version'] for r in plan if r['approved']],['0.13.0','0.13.3'])
+
+    def test_plan_never_selects_releases_below_the_supported_minimum(self):
+        planner = self.load('harness-qualification-plan')
+        catalog = {'minimum_harness_version':'0.11.0','reference_version':'0.13.0',
+                   'approved_releases':{'0.11.0':{},'0.13.0':{},'0.15.0':{}}}
+        releases = [{'tag_name':'v'+v,'prerelease':False,'assets':[{'name':'release.zip'}]}
+                    for v in ['0.8.0','0.9.1','0.10.0','0.11.0','0.12.0','0.13.0','0.14.0','0.15.0','0.16.0']]
+        selected = planner.plan(catalog,releases)['include']
+        self.assertEqual([r['version'] for r in selected],['0.11.0','0.12.0','0.13.0','0.15.0','0.16.0'])
+        for candidate in ['0.9.1','0.10.0','0.11.0-rc.1']:
+            with self.assertRaisesRegex(ValueError,'minimum 0.11.0'):
+                planner.plan(catalog,releases,candidate)
+        self.assertIn('0.16.0-rc.1',[r['version'] for r in planner.plan(catalog,releases,'0.16.0-rc.1')['include']])
+
+    def test_manual_qualification_rejects_below_floor_before_package_access(self):
+        qualifier = self.load('qualify-harness')
+        planner = self.load('harness-qualification-plan')
+        with tempfile.TemporaryDirectory() as output, patch.object(qualifier,'module',return_value=planner):
+            self.assertFalse(qualifier.qualify('0.10.0',output))
+            report = json.loads((Path(output)/'0.10.0.json').read_text())
+            self.assertEqual(report['phase'],'version-policy')
+            self.assertIn('minimum 0.11.0',report['diagnostic'])
+            self.assertNotIn('package',report)
 
     def test_failed_stale_or_different_package_evidence_cannot_be_promoted(self):
         promoter = self.load('promote-harness')
