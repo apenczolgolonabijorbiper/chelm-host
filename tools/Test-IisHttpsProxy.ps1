@@ -108,7 +108,14 @@ try {
   $logText = ''
   for ($attempt=0; $attempt -lt 30; $attempt++) {
     $files = @(Get-ChildItem -LiteralPath $logs -Filter '*.log' -Recurse)
-    $logText = ($files | ForEach-Object { [System.IO.File]::ReadAllText($_.FullName) }) -join "`n"
+    $logText = ($files | ForEach-Object {
+      # HTTP.sys keeps the active W3C file open for writing. A reader must allow
+      # that writer (and rotation) to retain its handle while we inspect it.
+      $stream = [System.IO.File]::Open($_.FullName, [System.IO.FileMode]::Open,
+        [System.IO.FileAccess]::Read, ([System.IO.FileShare]::ReadWrite -bor [System.IO.FileShare]::Delete))
+      $reader = [System.IO.StreamReader]::new($stream)
+      try { $reader.ReadToEnd() } finally { $reader.Dispose() }
+    }) -join "`n"
     if ($logText -match ' /mcp/app 200 ' -and $logText -match ' 401 ') { break }
     Start-Sleep -Milliseconds 200
   }
