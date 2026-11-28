@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "kind": "issue3-service",
+  "started_at": "2026-11-28T09:35:11.964Z",
+  "context": "local",
+  "machine_label": "Wrong identity refusal test",
+  "operator_load_note": "Local validation only",
+  "samples": 5,
+  "suite_repeat": 1,
+  "phases": [],
+  "load_before": {
+    "at": "2026-11-28T09:35:11.964Z",
+    "free_memory_bytes": 9745203200,
+    "load_average": [
+      1.9,
+      1.52,
+      0.63
+    ],
+    "cpu_times": [
+      {
+        "user": 38590,
+        "nice": 0,
+        "sys": 19460,
+        "idle": 1070480,
+        "irq": 0
+      },
+      {
+        "user": 40810,
+        "nice": 0,
+        "sys": 18370,
+        "idle": 1069120,
+        "irq": 0
+      },
+      {
+        "user": 39480,
+        "nice": 0,
+        "sys": 17480,
+        "idle": 1071520,
+        "irq": 0
+      },
+      {
+        "user": 41010,
+        "nice": 0,
+        "sys": 17510,
+        "idle": 1070080,
+        "irq": 0
+      },
+      {
+        "user": 44320,
+        "nice": 0,
+        "sys": 20860,
+        "idle": 1062850,
+        "irq": 0
+      },
+      {
+        "user": 41470,
+        "nice": 0,
+        "sys": 18420,
+        "idle": 1068440,
+        "irq": 0
+      },
+      {
+        "user": 37950,
+        "nice": 0,
+        "sys": 16800,
+        "idle": 1073860,
+        "irq": 0
+      },
+      {
+        "user": 38480,
+        "nice": 0,
+        "sys": 17340,
+        "idle": 1072480,
+        "irq": 0
+      },
+      {
+        "user": 39280,
+        "nice": 0,
+        "sys": 18210,
+        "idle": 1070870,
+        "irq": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Synthetic disposable runtimes; no inference or consuming-application HTTP/export acceptance.",
+    "Context and load note are operator declarations; CI/local results do not certify a reference workstation."
+  ],
+  "complete": false,
+  "environment": {
+    "platform": "linux",
+    "os_release": "6.18.57",
+    "windows_os": null,
+    "arch": "x64",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "cpus": 9,
+    "total_memory_bytes": 10451427328,
+    "node": "v24.22.3",
+    "python": "Python 3.12.14",
+    "git": "git version 2.56.1",
+    "identity": {
+      "name": "agent",
+      "sid": null
+    },
+    "detected_ci": false
+  },
+  "host": {
+    "version": "1.4.0",
+    "manifest_sha256": "125e36293fe31aec75304b83391cb5ff3b84945e8df97f106703bb0f41507e3f",
+    "integrity": "verified"
+  },
+  "harness": {
+    "version": "0.13.0",
+    "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+  },
+  "service": {
+    "expected_identity": "deliberately-wrong-account",
+    "actual_identity": {
+      "name": "agent",
+      "sid": null
+    },
+    "launch_context": "Negative simulation",
+    "invocation_evidence": "operator-declared; independently confirm this command was launched by the consuming service",
+    "identity_match": false
+  },
+  "error": {
+    "code": null,
+    "message": "Actual OS process identity differs from --expected-identity"
+  },
+  "finished_at": "2026-11-28T09:35:12.309Z",
+  "load_after": {
+    "at": "2026-11-28T09:35:12.309Z",
+    "free_memory_bytes": 9713627136,
+    "load_average": [
+      1.9,
+      1.52,
+      0.63
+    ],
+    "cpu_times": [
+      {
+        "user": 38620,
+        "nice": 0,
+        "sys": 19490,
+        "idle": 1070770,
+        "irq": 0
+      },
+      {
+        "user": 40810,
+        "nice": 0,
+        "sys": 18370,
+        "idle": 1069450,
+        "irq": 0
+      },
+      {
+        "user": 39490,
+        "nice": 0,
+        "sys": 17490,
+        "idle": 1071860,
+        "irq": 0
+      },
+      {
+        "user": 41010,
+        "nice": 0,
+        "sys": 17510,
+        "idle": 1070420,
+        "irq": 0
+      },
+      {
+        "user": 44370,
+        "nice": 0,
+        "sys": 20870,
+        "idle": 1063130,
+        "irq": 0
+      },
+      {
+        "user": 41570,
+        "nice": 0,
+        "sys": 18470,
+        "idle": 1068650,
+        "irq": 0
+      },
+      {
+        "user": 37970,
+        "nice": 0,
+        "sys": 16810,
+        "idle": 1074160,
+        "irq": 0
+      },
+      {
+        "user": 38510,
+        "nice": 0,
+        "sys": 17370,
+        "idle": 1072750,
+        "irq": 0
+      },
+      {
+        "user": 39290,
+        "nice": 0,
+        "sys": 18210,
+        "idle": 1071200,
+        "irq": 0
+      }
+    ]
+  }
+}

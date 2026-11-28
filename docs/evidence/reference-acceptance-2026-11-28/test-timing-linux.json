@@ -1,0 +1,6 @@
+{
+  "platform": "linux",
+  "harness_version": "0.13.0",
+  "suite_seconds": 128.60558447400012,
+  "tst9_under_10_minutes": true
+}

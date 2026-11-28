@@ -1,0 +1,33 @@
+{
+  "scope": "Linux collector implementation validation only; Windows reference workstation and actual consuming service remain pending",
+  "candidate_manifest_sha256": "125e36293fe31aec75304b83391cb5ff3b84945e8df97f106703bb0f41507e3f",
+  "candidate_archive_sha256": "b56fc349646517958a0094ab449853072e6a6d0ac199d67ac58bdab4f6774998",
+  "tested_code_sha256": {
+    "tools/reference-acceptance.mjs": "7ca98714537d5e2423f5cda1c0b0632f5e41dce1c0be3cd5bc0c960217522196",
+    "tests/reference-acceptance.test.mjs": "ecf3087cff37e9894408929f95baadf3a9b995f9ca2f216d7a3f8f49669c0cf2",
+    "specifications/REFERENCE_ACCEPTANCE.sudo.md": "419920af39afac20e583a3a556b8da8c0dab529c2dfd4527acf05ddf9097cceb"
+  },
+  "host_attempts": [
+    {
+      "counts": {
+        "tests": 182,
+        "pass": 182,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "elapsed_ms": 117481
+    }
+  ],
+  "adapter_conformance": {
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "skipped": 0
+  },
+  "checksums_verified": {
+    "performance_bundle_files": 20,
+    "service_bundle_files": 3
+  },
+  "retained": "Selected unedited JSON reports; full TAP/phase logs and archive were reviewed locally and are not included in this subset."
+}
