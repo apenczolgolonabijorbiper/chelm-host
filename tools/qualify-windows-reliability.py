@@ -16,7 +16,14 @@ import tempfile
 import zipfile
 
 
-def qualify(package, harness, output, profile='qualification'):
+def qualify(package, harness, output, profile='qualification', shard=None):
+    shard_index, shard_count = 1, 1
+    if shard is not None:
+        if profile != 'reliability' or not re.fullmatch(r'[1-9]\d*/[1-9]\d*', shard):
+            raise ValueError('Shards require the reliability profile and INDEX/COUNT')
+        shard_index, shard_count = map(int, shard.split('/'))
+        if shard_index > shard_count:
+            raise ValueError('Invalid shard')
     package, harness, output = (Path(p).resolve() for p in (package, harness, output))
     output.mkdir(parents=True, exist_ok=True)
     archive_hash = hashlib.sha256(package.read_bytes()).hexdigest()
@@ -46,21 +53,27 @@ def qualify(package, harness, output, profile='qualification'):
                'CHELM_PROVIDER_HARNESS_ROOT': str(harness), 'GOLEM_PYTHON': sys.executable}
         subprocess.run(['node', str(stage / 'integration/install-dependencies.mjs')], cwd=stage, env=env, check=True)
         base = ['node', str(stage / 'tools/run-tests.mjs'), '--report', str(output)]
+        all_files = sorted(test.relative_to(stage).as_posix() for test in (stage / 'tests').rglob('*.test.mjs'))
+        if shard_count > len(all_files):
+            raise ValueError('Shard count exceeds test file count')
+        selected_files = [test for i, test in enumerate(all_files) if i % shard_count == shard_index - 1]
         summary = {'archive_sha256': archive_hash, 'version': manifest['version'],
                    'manifest_sha256': hashlib.sha256((stage / 'RELEASE.json').read_bytes()).hexdigest(),
+                   'profile': profile, 'shard': shard or '1/1',
+                   'all_test_files': all_files, 'test_files': selected_files,
                    'comparisons': [], 'individual_files': []}
 
         def run(label, args, group):
             result = subprocess.run([*base, '--label', label, *args], cwd=stage, env=env)
-            report = output / ('tests-' + label + '-win32.json')
+            report = output / ('tests-' + label + '-' + sys.platform + '.json')
             if not report.is_file():
                 raise RuntimeError('Missing retained attempt report: ' + label)
-            summary[group].append({'label': label, 'exit': result.returncode, 'report': report.name,
+            summary[group].append({'label': label, 'exit': result.returncode, 'args': args, 'report': report.name,
                                    'report_sha256': hashlib.sha256(report.read_bytes()).hexdigest()})
             (output / 'windows-qualification.json').write_text(json.dumps(summary, indent=2) + '\n')
             return result.returncode
 
-        if profile != 'qualification':
+        if profile in {'smoke', 'focused'}:
             subprocess.run(['node', str(stage / 'bin/chelm.mjs'), 'verify',
                             '--harness', str(harness), '--python', sys.executable],
                            cwd=stage, env=env, check=True)
@@ -84,25 +97,35 @@ def qualify(package, harness, output, profile='qualification'):
                 args += ['--file', 'tests/conformance/cognitive.test.mjs']
             if run(profile, args, 'comparisons'):
                 raise RuntimeError('Packaged Windows ' + profile + ' checks failed')
-            log = (output / ('tests-' + profile + '-win32-1.log')).read_text(encoding='utf-8')
+            log = (output / ('tests-' + profile + '-' + sys.platform + '-1.log')).read_text(encoding='utf-8')
             for case in cases:
                 if not re.search(r'^ok \d+ - ' + re.escape(case) + '$', log, re.MULTILINE):
                     raise RuntimeError('Required Windows case did not pass: ' + case)
             return
 
+        failures = []
+        subset = ['--shard', shard] if shard else []
+        if profile == 'reliability':
+            # Three independent complete passes of this disjoint file subset.
+            # No deadline is enlarged and a failed attempt cannot be retried away.
+            if run('supported', [*subset, '--concurrency', '2', '--repeat', '3'], 'comparisons'):
+                failures.append('supported attempts')
+            if shard_index == 1:
+                if run('mcp-standalone', ['--repeat', '10', '--concurrency', '1', '--attempt-ms', '180000',
+                       '--file', 'tests/conformance/cognitive.test.mjs',
+                       '--name', '^Independent authenticated MCP client completes and reconnects to the same snapshot/result contract$'], 'comparisons'):
+                    failures.append('standalone MCP')
         # Both use the same immutable package, fixture code and finite budget.
         for concurrency in (4, 1):
-            run('qualification-concurrency-' + str(concurrency), ['--concurrency', str(concurrency)], 'comparisons')
+            run('qualification-concurrency-' + str(concurrency), [*subset, '--concurrency', str(concurrency)], 'comparisons')
         # The owner's index omits the four historical filenames. Cover all files
         # separately rather than guessing which four produced its 34 tests.
-        failures = []
-        for index, test in enumerate(sorted((stage / 'tests').rglob('*.test.mjs'))):
-            relative = test.relative_to(stage).as_posix()
+        for index, relative in enumerate(selected_files):
             label = 'qualification-file-' + str(index).zfill(2)
             if run(label, ['--concurrency', '1', '--file', relative], 'individual_files'):
                 failures.append(relative)
         if failures:
-            raise RuntimeError('Individual-file failures retained: ' + ', '.join(failures))
+            raise RuntimeError('Required qualification failures retained: ' + ', '.join(failures))
 
 
 if __name__ == '__main__':
@@ -110,8 +133,9 @@ if __name__ == '__main__':
     parser.add_argument('--package', required=True, type=Path)
     parser.add_argument('--harness', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
-    parser.add_argument('--profile', choices=['qualification', 'smoke', 'focused'], default='qualification')
+    parser.add_argument('--profile', choices=['qualification', 'smoke', 'focused', 'reliability'], default='qualification')
+    parser.add_argument('--shard', help='Disjoint sorted-file subset INDEX/COUNT (reliability profile only)')
     args = parser.parse_args()
     if os.name != 'nt':
         parser.error('Windows qualification requires Windows')
-    qualify(args.package, args.harness, args.output, args.profile)
+    qualify(args.package, args.harness, args.output, args.profile, args.shard)

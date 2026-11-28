@@ -1,7 +1,7 @@
 name: Windows reliability comparison
 on:
   pull_request:
-    paths: ['tools/owned-process.*', 'lib/remote*.mjs', 'tools/benchmark-capacity.mjs', 'tools/benchmark-provider.mjs']
+    paths: ['tools/owned-process.*', 'lib/remote*.mjs', 'tools/benchmark-capacity.mjs', 'tools/benchmark-provider.mjs', 'tools/run-tests.mjs', 'tools/qualify-windows-reliability.py', 'tools/check-windows-reliability.py', 'tests/test-policy.test.mjs', '.github/workflows/windows-reliability.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -9,43 +9,73 @@ concurrency:
   group: windows-reliability-${{ github.ref }}
   cancel-in-progress: false
 jobs:
+  package:
+    uses: ./.github/workflows/build-package.yml
+    with:
+      os: ubuntu-latest
+      node: '24'
+      publish-package: true
   qualify:
+    needs: package
     runs-on: windows-2022
-    # Includes repeated gates, two comparisons, every test file and capacity.
-    timeout-minutes: 120
+    # Each job covers one disjoint subset, without enlarging any attempt bound.
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       matrix:
-        node: ['22.12.0', '24']
+        shard: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '24'
       - uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.12'
-      - run: npm ci --ignore-scripts
-      - run: python tools/prepare-harness.py --destination ../harness-release
-      - run: python tools/build-release.py --harness ../harness-release --provider-harness ../harness-release
-      - name: Compare serial/parallel and verify each file in the same package
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          name: chelm-release
+          path: dist
+      - run: python tools/prepare-harness.py --version 0.13.0 --destination ../harness-release
+      - name: Repeat supported policy, compare concurrency and verify every assigned file
         shell: powershell
         run: |
           $archive = (Get-ChildItem dist/chelm-host-*.zip | Select-Object -First 1).FullName
-          python tools/qualify-windows-reliability.py --package $archive --harness ../harness-release --output dist/qualification
+          python tools/qualify-windows-reliability.py --package $archive --harness ../harness-release --output dist/qualification --profile reliability --shard ${{ matrix.shard }}/4
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Measure Windows capacity and provider boundary
+        if: matrix.shard == 1
         run: |
+          npm ci --ignore-scripts
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node tools/benchmark-capacity.mjs --harness ../harness-release --output dist/capacity-Windows.json
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node tools/benchmark-provider.mjs --harness ../harness-release --provider-harness ../harness-release --output dist/provider-Windows.json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
-          name: windows-reliability-comparison-${{ matrix.node }}
+          name: windows-reliability-shard-${{ matrix.shard }}
           path: |
             dist/*.json
             dist/*.log
-            dist/*.sha256
             dist/qualification/
           if-no-files-found: error
+  coverage:
+    needs: qualify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          pattern: windows-reliability-shard-*
+          path: evidence
+      - name: Require complete disjoint coverage of the same immutable package
+        run: python tools/check-windows-reliability.py evidence

@@ -12,7 +12,7 @@ for (const key of ['CHELM_HARNESS_ROOT','CHELM_PROVIDER_HARNESS_ROOT'])
 const options = {concurrency: process.platform === 'win32' ? 2 : 4, repeat: 1, label: 'supported', 'attempt-ms':600000};
 for (let i=2; i<process.argv.length; i+=2) {
   const key=process.argv[i].slice(2), value=process.argv[i+1];
-  if (!['concurrency','repeat','report','label','name','file','attempt-ms'].includes(key) || !value) throw Error('Unknown/missing test policy option');
+  if (!['concurrency','repeat','report','label','name','file','shard','attempt-ms'].includes(key) || !value) throw Error('Unknown/missing test policy option');
   options[key]=['concurrency','repeat','attempt-ms'].includes(key)?Number(value):value;
 }
 for (const k of ['concurrency','repeat']) if (!Number.isInteger(options[k]) || options[k]<1 || options[k]>10) throw Error('Invalid '+k);
@@ -20,10 +20,19 @@ const maxAttemptMs = process.platform === 'win32' ? 750000 : 600000;
 if (!Number.isInteger(options['attempt-ms']) || options['attempt-ms'] < 1000 || options['attempt-ms'] > maxAttemptMs) {
   throw Error('Invalid attempt budget');
 }
-const tests = fs.readdirSync(path.join(root,'tests'), {recursive:true}).filter(p=>p.endsWith('.test.mjs')).sort().map(p=>path.join('tests',p)).filter(p=>!options.file || p.replaceAll('\\','/')===options.file);
+const allTests = fs.readdirSync(path.join(root,'tests'), {recursive:true}).filter(p=>p.endsWith('.test.mjs')).map(p=>'tests/'+p.replaceAll('\\','/')).sort();
+let tests = allTests.filter(p=>!options.file || p===options.file);
+if (options.shard) {
+  const match = /^([1-9]\d*)\/([1-9]\d*)$/.exec(options.shard);
+  if (!match || options.file) throw Error('Invalid shard or shard combined with file');
+  const index=Number(match[1]), count=Number(match[2]);
+  if (!Number.isSafeInteger(count) || index>count || count>allTests.length) throw Error('Invalid shard');
+  tests=allTests.filter((_,i)=>i%count===index-1);
+}
 if (!tests.length) throw Error('No matching test files');
 const report={platform:process.platform,os_release:os.release(),node:process.version,policy:options,
-  harness:process.env.CHELM_HARNESS_ROOT??null,provider_harness:process.env.CHELM_PROVIDER_HARNESS_ROOT??null,attempts:[]};
+  harness:process.env.CHELM_HARNESS_ROOT??null,provider_harness:process.env.CHELM_PROVIDER_HARNESS_ROOT??null,
+  all_test_files:allTests,test_files:tests,attempts:[]};
 const destination=path.resolve(options.report??process.env.CHELM_ACCEPTANCE_REPORT_DIR??path.join(root,'dist'));
 fs.mkdirSync(destination,{recursive:true});
 report.packages={};
