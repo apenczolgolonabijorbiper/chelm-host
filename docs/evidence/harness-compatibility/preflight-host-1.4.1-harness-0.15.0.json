@@ -1,0 +1,125 @@
+{
+  "status": "pass",
+  "host_version": "1.4.1",
+  "host_archive_sha256": "d512ced71df5481d28c26faee0d6ab14dac1739786717211d5af8229e0aac586",
+  "host_manifest_sha256": "5041dc8a044e0281f0165176f22560bfb8f5cd3f6e74493acc7ec19f94dd1129",
+  "command": "node <delivery>/bin/chelm.mjs verify --harness <official-Harness-0.15.0>",
+  "exit": 0,
+  "result": {
+    "ok": true,
+    "messages": [],
+    "problems": [],
+    "selected_harness": {
+      "version": "0.15.0",
+      "origin": "https://github.com/apenczolgolonabijorbiper/golem14-harness/releases/tag/v0.15.0",
+      "archive": "golem-cognitive-harness-0.15.0.zip",
+      "archive_sha256": "66f9251137900720964a5106f712e89a7c9c3ced2c5d70d6b68ef1bccf06df94",
+      "manifest_sha256": "985c38f1460e92506ec0a0c115b4dc8c6c23084f6d3e76a996868cf6b76f9e60",
+      "required": {
+        "file_worker": {
+          "contracts": {
+            "graph": 2,
+            "hypotheses": 1,
+            "adapter": 1
+          },
+          "capabilities": [
+            "candidate-validation-v1",
+            "purpose-guidance-v2",
+            "profile-install-v1",
+            "core-policies-v2"
+          ],
+          "files": [
+            "processor/init-instance.py",
+            "processor/process.py",
+            "processor/memory-tool.mjs",
+            "adapters/reference-git/adapter.mjs",
+            "adapters/conformance/adapter.test.mjs"
+          ]
+        },
+        "cognitive_tasks": {
+          "contracts": {
+            "cognitive_task": 1
+          },
+          "capabilities": [
+            "cognitive-task-v1",
+            "cognitive-context-v1",
+            "cognitive-result-v1",
+            "learning-hypothesis-v1",
+            "hypothesis-unknown-confidence-v1"
+          ],
+          "files": [
+            "server/cognitive-task.mjs",
+            "server/cognitive-reference.mjs"
+          ]
+        },
+        "memory_provider": {
+          "contracts": {
+            "provider_version": 1,
+            "logical_version": 2,
+            "host_api_version": 2
+          },
+          "capabilities": [
+            "record-reads-v1",
+            "paged-evidence-v1",
+            "semantic-changes-v1",
+            "candidate-isolation-v1",
+            "portable-export-v1"
+          ],
+          "files": [
+            "server/memory-contract.mjs",
+            "server/provider-memory.mjs",
+            "server/memory-transfer.mjs"
+          ]
+        }
+      },
+      "detected": {
+        "contracts": {
+          "graph": 2,
+          "hypotheses": 1,
+          "cognitive_task": 1,
+          "provider_version": 1,
+          "logical_version": 2,
+          "host_api_version": 2,
+          "adapter": 1
+        },
+        "capabilities": [
+          "cognitive-task-v1",
+          "cognitive-context-v1",
+          "cognitive-result-v1",
+          "learning-hypothesis-v1",
+          "hypothesis-unknown-confidence-v1",
+          "record-reads-v1",
+          "paged-evidence-v1",
+          "semantic-changes-v1",
+          "candidate-isolation-v1",
+          "portable-export-v1",
+          "memory-provider-v1",
+          "candidate-validation-v1",
+          "purpose-guidance-v2",
+          "profile-install-v1",
+          "core-policies-v2"
+        ],
+        "errors": {}
+      },
+      "features": {
+        "file_worker": {
+          "status": "pass",
+          "missing": []
+        },
+        "cognitive_tasks": {
+          "status": "pass",
+          "missing": []
+        },
+        "memory_provider": {
+          "status": "pass",
+          "missing": []
+        }
+      },
+      "checkpoint": {
+        "restore": "exact host code and Harness manifest identity",
+        "cross_package_restore": false,
+        "upgrade": "drain leases and assignments; explicit harness upgrade; checkpoint again"
+      }
+    }
+  }
+}

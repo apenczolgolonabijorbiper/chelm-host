@@ -1,7 +1,9 @@
 # Harness compatibility qualification
 
 `harness-compatibility.json` is the production approval catalog. An entry approves
-specific release bytes and specific features. A matching version string alone
+specific release bytes and specific features. The qualification minimum is
+**0.11.0**; earlier versions are outside the maintained compatibility scope.
+A matching version string alone
 grants no support. `compatibility.json` and `provider-compatibility.json` retain
 the published **0.13.0 reference** for deterministic release builds; the provider
 file describes that reference, rather than restricting all runtime selections.
@@ -24,11 +26,44 @@ instance, never application data. Missing contracts/capabilities yield
 checked during preparation; runtime verification checks the trusted manifest and
 every extracted file, including missing, additional and linked files.
 
+## Application-owned installers
+
+`harness_supported` is a descriptive summary, not a version-range expression.
+Do not compare a selected package against that string. Likewise,
+`RELEASE.json.provenance.harness_release_sha256` identifies the deterministic
+build reference; it is not the only permitted runtime package identity.
+
+Before installing or replacing a host, delegate compatibility preflight to the
+incoming verified host package:
+
+```powershell
+node "$DeliveryRoot\bin\chelm.mjs" verify --harness "$RepoRoot\vendor\golem-harness"
+if ($LASTEXITCODE -ne 0) { throw 'Incoming host rejected the selected Harness; installation stopped.' }
+```
+
+`$DeliveryRoot` must name the unpacked host delivery containing `RELEASE.json`,
+not a source checkout without that manifest. Use the actual application-owned
+Harness path if it differs. Require the command
+to succeed before changing vendor files or runtime configuration. Its JSON
+`selected_harness` result identifies the selected version and trusted manifest,
+reports per-feature status and validates extracted package integrity. A config-3
+application must also require `selected_harness.features.memory_provider.status`
+to be `pass`; cognition users must require the corresponding `cognitive_tasks`
+feature. `supported_harness_versions` and the approved catalog may be used for
+diagnostic messages, but checking membership alone does not verify package bytes
+or feature contracts. Leave failed preflight diagnostic output visible.
+
+After installation, verify the actual runtime and use the explicit drained
+upgrade process below. Do not weaken preflight, edit a released package's
+catalog/manifest, or interpret a successful candidate run as production approval.
+
 ## Test and promote
 
 The separate Ubuntu workflow runs on contract-sensitive PRs, manual dispatch and
 daily at 06:27 UTC. It selects the reference, every approved release, two available
-unapproved older neighbors and the latest unapproved newer stable release.
+unapproved older neighbors at or above 0.11.0 and the latest unapproved newer
+stable release. Releases below the configured minimum are never scheduled, and
+manual requests below it are rejected before downloading or testing a package.
 Manual dispatch also accepts a specific published prerelease or a Harness Actions
 artifact ID plus candidate version and expected inner-ZIP SHA-256. Artifact jobs
 require read access to upstream Actions; configure `HARNESS_QUALIFICATION_TOKEN`
@@ -109,6 +144,7 @@ from the endpoint versions; releases in gaps remain unapproved until qualified.
 | 0.13.2 | pass | pass | pass | 76 | [report](evidence/harness-compatibility/0.13.2.json) |
 | 0.13.3 | pass | pass | pass | 76 | [report](evidence/harness-compatibility/0.13.3.json) |
 | 0.14.0 | pass | pass | pass | 76 | [report](evidence/harness-compatibility/0.14.0.json) |
+| 0.15.0 | pass | pass | pass | 92 | [report](evidence/harness-compatibility/0.15.0.json) |
 
 All advertised rows passed without failed, cancelled or skipped cases. The tested
 feature floors are 0.11.0 for file workers, 0.12.0 for cognition/learning and

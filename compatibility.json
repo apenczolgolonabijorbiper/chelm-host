@@ -8,7 +8,8 @@
     "0.13.1",
     "0.13.2",
     "0.13.3",
-    "0.14.0"
+    "0.14.0",
+    "0.15.0"
   ],
   "versions": {
     "0.13.0": {
@@ -78,6 +79,18 @@
       "runtimes": "Drain leases/assignments and use harness upgrade; checkpoints retain exact package identities."
     },
     "0.14.0": {
+      "graph": 2,
+      "hypotheses": 1,
+      "cognitive_task": 1,
+      "layout": "canonical",
+      "features": [
+        "file_worker",
+        "cognitive_tasks",
+        "memory_provider"
+      ],
+      "runtimes": "Drain leases/assignments and use harness upgrade; checkpoints retain exact package identities."
+    },
+    "0.15.0": {
       "graph": 2,
       "hypotheses": 1,
       "cognitive_task": 1,

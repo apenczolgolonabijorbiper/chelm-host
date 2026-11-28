@@ -1,3 +1,20 @@
+# 1.4.1 candidate — Harness 0.15.0 approval
+
+Official Harness 0.15.0 passed **92 qualification cases** against host 1.4.0,
+including routing, cognition/learning, providers and upgrade/checkpoint checks.
+The prepared host 1.4.1 delivery then passed **174/174 host tests, 11/11 adapter
+checks and 9/9 Python checks**, plus the host/telemetry benchmarks, with reference
+0.13.0 and upgrade target 0.15.0. The full suite took 144.17 seconds locally.
+
+The packaged delivery's exact `verify --harness` preflight accepted the official
+0.15.0 package and its manifest `985c38f1460e92506ec0a0c115b4dc8c6c23084f6d3e76a996868cf6b76f9e60`.
+See [qualification](evidence/harness-compatibility/0.15.0.json),
+[staged build](evidence/harness-compatibility/staged-host-1.4.1.json) and
+[packaged preflight](evidence/harness-compatibility/preflight-host-1.4.1-harness-0.15.0.json).
+These are local Linux results; publication and the application-owned installer
+are separate checks. The external FeatureExplorer PowerShell script was not
+available for inspection or modification.
+
 # Chelm 1.4.0 platform qualification — issue #59
 
 The release runtime at `cd38c45ef5789edbc5e2cef6ba4af32e9e1a9731` passed

@@ -2,7 +2,7 @@
 
 Chelm-host is where the Golem lives: a local and remote-worker host for
 [Golem XIV Harness](https://github.com/apenczolgolonabijorbiper/golem14-harness).
-**1.4.0** supports the approved Harness releases and per-feature
+**1.4.1** supports the approved Harness releases and per-feature
 contracts in [the compatibility matrix](docs/HARNESS_COMPATIBILITY.md); **0.13.0**
 remains the deterministic build reference. App/read-model contracts
 remain v1; worker and runtime configuration contracts are v2.
@@ -24,7 +24,7 @@ are CI targets. Use the same OS identity for a lease owner across worker calls.
 
 ## Install and initialize
 
-Download chelm-host-1.4.0.zip and its adjacent checksum from Releases. Check the
+Download chelm-host-1.4.1.zip and its adjacent checksum from Releases. Check the
 checksum before extraction. Install from the clean extracted chelm-host folder:
 
 ```sh
@@ -153,7 +153,7 @@ python3 tools/build-release.py --harness "$CHELM_HARNESS_ROOT" --provider-harnes
 ```
 
 The builder runs all Chelm tests and applicable harness backend conformance before
-creating dist/chelm-host-1.4.0.zip and its .sha256. Releases have one chelm-host/
+creating dist/chelm-host-1.4.1.zip and its .sha256. Releases have one chelm-host/
 folder and an exhaustive RELEASE.json. GitHub Actions performs the same checks
 on Windows, Linux and macOS; a v* tag publishes the validated ZIP and checksum.
 
