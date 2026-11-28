@@ -1,3 +1,21 @@
+# MCP investigation scheduling — 2026-11-28
+
+Job [140995977083](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45896467652/job/140995977083)
+passed in 22m 15s: standalone repetitions 3m 16s, before-idle repetitions
+4m 20s, after-idle repetitions 4m 21s and the source suite 9m 55s.
+The source suite passed 170 tests with seven package-only skips; it is not a
+complete staged acceptance. Its measured 594.6 seconds nearly exhausted the
+unchanged 600-second attempt budget.
+
+The revised PR workflow selects current Node 24 on Windows/Linux, two repetitions
+per scenario group and no full-suite comparison. Manual dispatch preserves ten
+repetitions, historical Node controls and the full load comparison. The runner
+adds progress messages while retaining supervised cleanup and failure evidence.
+See [scope and manual invocation](MCP_RESET_INVESTIGATION.md). New Windows timings
+remain pending until CI is observed; the earlier job does not certify this change.
+
+---
+
 # Reference-machine acceptance collection (#3)
 
 The collector and [operator runbook](ISSUE_3_ACCEPTANCE.md) now retain repeated

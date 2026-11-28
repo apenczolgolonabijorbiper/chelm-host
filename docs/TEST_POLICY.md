@@ -42,6 +42,18 @@ phases/bounds and peak concurrent supervised commands. This peak counts owned
 CLI commands, not all Git/Python grandchildren. Failed attempts remain failures.
 `--repeat N` runs and retains N attempts and fails if any failed; it is not a retry.
 
+The runner awaits the same owned Python supervisor asynchronously, so it can
+print an attempt start/completion and a heartbeat every 15 seconds while tests
+run. Each stream remains bounded to 16 MiB. TAP logs and JSON reports preserve
+all completed/failed/timed-out attempts; the synchronous operation/probe callers
+keep their existing API. Windows Job Objects, POSIX sessions, parent-death
+cleanup and operation/file/suite bounds are unchanged.
+
+The separate [MCP reset workflow](MCP_RESET_INVESTIGATION.md) runs two repetitions
+per scenario group on Windows/Linux current Node 24 for PRs. Manual dispatch
+retains ten repetitions, historical Node 24.14.0 controls and the full source-load
+comparison. Routine PR results do not satisfy the ten-attempt qualification gate.
+
 Routine release CI builds and runs the full staged suite on Ubuntu (Node 22.12
 and 24) and macOS (Node 22.12). Both Windows jobs verify the Ubuntu Node 24
 ZIP and manifest, install dependencies, verify the CLI and exercise an MCP

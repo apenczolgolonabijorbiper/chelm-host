@@ -1,7 +1,7 @@
 name: MCP reset investigation
 on:
   pull_request:
-    paths: ['lib/remote-server.mjs', 'tests/mcp-session.mjs', 'tests/conformance/cognitive.test.mjs', '.github/workflows/mcp-reset-investigation.yml']
+    paths: ['lib/remote-server.mjs', 'tests/mcp-session.mjs', 'tests/conformance/cognitive.test.mjs', 'tools/run-tests.mjs', 'tools/owned-process.*', '.github/workflows/mcp-reset-investigation.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -13,19 +13,14 @@ jobs:
     timeout-minutes: 25
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - os: windows-2022
-            node: '24.14.0'
-          - os: windows-2022
-            node: '24'
-          - os: ubuntu-latest
-            node: '24.14.0'
+      # Historical Node and full load comparisons remain manual diagnostics.
+      matrix: ${{ fromJSON(github.event_name == 'workflow_dispatch' && '{"include":[{"os":"windows-2022","node":"24.14.0"},{"os":"windows-2022","node":"24"},{"os":"ubuntu-latest","node":"24.14.0"}]}' || '{"include":[{"os":"windows-2022","node":"24"},{"os":"ubuntu-latest","node":"24"}]}') }}
     runs-on: ${{ matrix.os }}
     env:
       CHELM_HARNESS_ROOT: ${{ github.workspace }}/../harness-release
       CHELM_PROVIDER_HARNESS_ROOT: ${{ github.workspace }}/../harness-release
       CHELM_ACCEPTANCE_REPORT_DIR: ${{ github.workspace }}/dist/mcp-reset
+      CHELM_MCP_REPEATS: ${{ github.event_name == 'workflow_dispatch' && '10' || '2' }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -39,20 +34,20 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: python tools/prepare-harness.py --destination ../harness-release
         id: harness
-      - name: Ten independent cognition and forced response-loss attempts
-        run: node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client|MCP response loss after commit" --repeat 10 --concurrency 1 --attempt-ms 180000 --label standalone
-      - name: Ten attempts just before keep-alive expiry
+      - name: Independent cognition and forced response-loss attempts
+        run: node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client|MCP response loss after commit" --repeat ${{ env.CHELM_MCP_REPEATS }} --concurrency 1 --attempt-ms 180000 --label standalone
+      - name: Attempts just before keep-alive expiry
         if: ${{ !cancelled() && steps.harness.outcome == 'success' }}
         env:
           CHELM_MCP_IDLE_EDGE: before
-        run: node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client" --repeat 10 --concurrency 1 --attempt-ms 180000 --label idle-before-expiry
-      - name: Ten attempts after keep-alive expiry
+        run: node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client" --repeat ${{ env.CHELM_MCP_REPEATS }} --concurrency 1 --attempt-ms 180000 --label idle-before-expiry
+      - name: Attempts after keep-alive expiry
         if: ${{ !cancelled() && steps.harness.outcome == 'success' }}
         env:
           CHELM_MCP_IDLE_EDGE: after
-        run: node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client" --repeat 10 --concurrency 1 --attempt-ms 180000 --label idle-after-expiry
+        run: node tools/run-tests.mjs --file tests/conformance/cognitive.test.mjs --name "Independent authenticated MCP client" --repeat ${{ env.CHELM_MCP_REPEATS }} --concurrency 1 --attempt-ms 180000 --label idle-after-expiry
       - name: Compare full suite under supported load
-        if: ${{ !cancelled() && steps.harness.outcome == 'success' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && !cancelled() && steps.harness.outcome == 'success' }}
         run: node tools/run-tests.mjs --label suite-load
       - uses: actions/upload-artifact@v7.0.2
         if: always()

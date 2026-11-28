@@ -4,25 +4,36 @@ PR #55 already added phase labels, awaited cleanup and post-commit response-loss
 reconciliation. Its merged tests passed ten Windows Node 24 attempts. Those
 passes did not identify the historical Windows 10 / Node 24.14.0 reset cause.
 
-The focused `MCP reset investigation` workflow compares the reported Node
-24.14.0 with current Node 24 on Windows Server 2022, with a Linux 24.14.0 control.
-It uses the integrity-verified published reference Harness from compatibility.json
-(currently 0.13.0), synthetic private runtimes and the locked MCP SDK. It runs:
+The `MCP reset investigation` workflow uses the integrity-verified published
+reference Harness from compatibility.json (currently 0.13.0), synthetic private
+runtimes and the locked MCP SDK. Its scope depends on the trigger:
 
-- Ten standalone cognition/reconnect and forced response-loss cases.
-- Ten cognition cases 50 ms before, then ten 50 ms after the effective idle
-  deadline: the unchanged 5,000 ms keep-alive timeout plus Node's buffer, when
-  available. With a 1,000 ms buffer these waits are 5,950 and 6,050 ms.
-- The complete suite under the supported platform concurrency policy.
+| Trigger | Platforms | Repetitions per scenario group | Complete suite/load comparison |
+| --- | --- | --- | --- |
+| Pull request | Windows Server 2022 and Linux, current Node 24 | Two | Covered separately by regular validation; omitted here |
+| Manual `workflow_dispatch` | Windows Node 24.14.0 and current Node 24; Linux Node 24.14.0 control | Ten | Included on every matrix entry |
 
-Each attempt is retained and any failure fails its step; subsequent comparisons
-still run. There is no mutation retry wrapper. The existing forced response-loss
-case queries status after reconnect before repeating the exact idempotent submit.
+Both modes cover standalone cognition/reconnect and forced response loss, plus
+cognition 50 ms before and after the effective idle deadline: the unchanged
+5,000 ms keep-alive timeout plus Node's buffer, when available. With a 1,000 ms
+buffer these waits are 5,950 and 6,050 ms, twice per cognition case.
+
+Use **Actions → MCP reset investigation → Run workflow** on the desired ref for
+the complete historical-version and load investigation. Two PR repetitions are
+regression coverage, not the ten-attempt qualification required by issue #51.
+Each requested attempt is retained and any failure fails its step; subsequent
+comparisons still run. There is no mutation retry wrapper. The existing forced
+response-loss case queries status after reconnect before repeating the exact
+idempotent submit. Artifacts and labels remain the same in both modes; the JSON
+policy and exact Node version identify their scope.
+
 Ordinary release checks retain their existing budgets and do not add idle waits.
-The source-load comparison uses the runner's default 600-second attempt bound;
-the separate supported staged Windows release suite uses its existing
+The manual source-load comparison uses the runner's default 600-second attempt
+bound; the separate supported staged Windows release suite uses its existing
 750-second bound. A source comparison timeout remains a failed comparison,
-even when its MCP cases completed successfully.
+even when its MCP cases completed successfully. No attempt bound was increased.
+The runner prints attempt start/completion and a heartbeat every 15 seconds;
+TAP output is still retained and printed when each supervised attempt exits.
 These waits bracket the server's configured idle deadline; they do not force the
 client to reuse that socket. The native fetch pool may retire a connection
 earlier. Check socket IDs and `socket_timeout` events before attributing any

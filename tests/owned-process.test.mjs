@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawn, spawnSync} from 'node:child_process';
 import net from 'node:net';
-import {ownedProcess} from '../tools/owned-process.mjs';
+import {ownedProcess, ownedProcessAsync} from '../tools/owned-process.mjs';
 import {source} from './helpers.mjs';
 
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -35,11 +35,12 @@ function fixture(t) {
       if(process.argv[3]==='success'){process.stdout.write('done');process.exit(0);}setInterval(()=>{},1000);});`);
   return {base, pidFile, script};
 }
-test('Owned timeout occurs after child startup, kills descendants, preserves unrelated sentinel', async t => {
+for (const run of [ownedProcess, ownedProcessAsync]) {
+test(`${run.name}: timeout after child startup kills descendants and preserves unrelated sentinel`, async t => {
   const f = fixture(t), sentinel = spawn(process.execPath, ['-e','setInterval(()=>{},1000)'], {stdio:'ignore'});
   t.after(() => sentinel.kill());
   const started = Date.now();
-  const r = ownedProcess(process.execPath, [f.script, f.pidFile], {timeout:3000, phase:'synthetic delayed descendant'});
+  const r = await run(process.execPath, [f.script, f.pidFile], {timeout:3000, phase:'synthetic delayed descendant'});
   assert.equal(r.error?.code, 'operation_timeout', r.stderr);
   assert.match(r.stderr, /synthetic delayed descendant/);
   assert.match(r.stderr, /operation_timeout/);
@@ -50,10 +51,10 @@ test('Owned timeout occurs after child startup, kills descendants, preserves unr
   assert(Date.now() - started < 8000);
   assert(alive(sentinel.pid));
 });
-test('Abrupt caller termination leaves supervisor able to clean its owned child tree', async t => {
+test(`${run.name}: abrupt caller termination leaves supervisor able to clean its owned child tree`, async t => {
   const f = fixture(t), caller = path.join(f.base, 'caller.mjs');
-  fs.writeFileSync(caller, `import {ownedProcess} from ${JSON.stringify(new URL('../tools/owned-process.mjs', import.meta.url).href)};
-    ownedProcess(process.execPath,${JSON.stringify([f.script,f.pidFile])},{timeout:30000,phase:'abrupt caller'});`);
+  fs.writeFileSync(caller, `import {${run.name}} from ${JSON.stringify(new URL('../tools/owned-process.mjs', import.meta.url).href)};
+    await ${run.name}(process.execPath,${JSON.stringify([f.script,f.pidFile])},{timeout:30000,phase:'abrupt caller'});`);
   const parent = spawn(process.execPath, [caller], {stdio:'ignore'});
   t.after(() => { if (parent.exitCode === null) parent.kill('SIGKILL'); });
   await until(() => fs.existsSync(f.pidFile));
@@ -62,16 +63,28 @@ test('Abrupt caller termination leaves supervisor able to clean its owned child 
   await until(() => pids.every(pid => !alive(pid)));
   await closed(port);
 });
-test('Owned normal success and thrown error preserve exit/output and remove descendants', async t => {
+test(`${run.name}: normal success and thrown error preserve exit/output and remove descendants`, async t => {
   const f=fixture(t);
-  const normal = ownedProcess(process.execPath, [f.script,f.pidFile,'success'], {timeout:3000});
+  const normal = await run(process.execPath, [f.script,f.pidFile,'success'], {timeout:3000});
   assert.equal(normal.status, 0, normal.stderr); assert.equal(normal.stdout, 'done');
   await until(()=>JSON.parse(fs.readFileSync(f.pidFile)).pids.every(pid=>!alive(pid)));
   await closed(JSON.parse(fs.readFileSync(f.pidFile)).port);
-  const thrown = ownedProcess(process.execPath, [f.script,f.pidFile,'throw'], {timeout:3000});
+  const thrown = await run(process.execPath, [f.script,f.pidFile,'throw'], {timeout:3000});
   assert.equal(thrown.status, 1); assert.match(thrown.stderr, /synthetic/);
   await until(()=>JSON.parse(fs.readFileSync(f.pidFile)).pids.every(pid=>!alive(pid)));
   await closed(JSON.parse(fs.readFileSync(f.pidFile)).port);
+});
+}
+test('Async supervision preserves finite stdin/output and reports spawn and buffer failures', async () => {
+  const echoed=await ownedProcessAsync(process.execPath,['-e',
+    "process.stdin.pipe(process.stdout);process.stderr.write('diagnostic');"],{input:'finite input',timeout:3000});
+  assert.equal(echoed.status,0,echoed.stderr);
+  assert.equal(echoed.stdout,'finite input');assert.equal(echoed.stderr,'diagnostic');
+  const absent=await ownedProcessAsync(process.execPath,[],{python:path.join(os.tmpdir(),'missing-python-'+process.pid)});
+  assert.equal(absent.error?.code,'ENOENT');
+  const oversized=await ownedProcessAsync(process.execPath,['-e',"process.stdout.write('x'.repeat(17*1024*1024));"],{timeout:3000});
+  assert.equal(oversized.error?.code,'ENOBUFS');
+  assert.equal(Buffer.byteLength(oversized.stdout),16*1024*1024);
 });
 test('CLI finite stdin EOF: empty/malformed input is usage; valid JSON reaches runtime handling', () => {
   for (const input of ['', '{', '{}']) {

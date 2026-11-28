@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import {fileURLToPath} from 'node:url';
-import {ownedProcess} from './owned-process.mjs';
+import {ownedProcessAsync} from './owned-process.mjs';
 import {createHash} from 'node:crypto';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -49,7 +49,13 @@ for(let attempt=1;attempt<=options.repeat;attempt++) {
   const metrics=fs.mkdtempSync(path.join(os.tmpdir(),'chelm-test-metrics-'));
   const args=['--test','--test-reporter=tap',`--test-concurrency=${options.concurrency}`,'--test-timeout=600000',
     ...(options.name?['--test-name-pattern='+options.name]:[]),...tests];
-  const r=ownedProcess(process.execPath,args,{cwd:root,timeout:options['attempt-ms'],phase,env:{...process.env,CHELM_PROCESS_REPORT_DIR:metrics}});
+  const progress=()=>process.stdout.write(`[tests] ${phase}/${options.repeat}: ${Math.round((Date.now()-started)/1000)}s elapsed; budget ${options['attempt-ms']/1000}s; ${tests.length} file(s), concurrency ${options.concurrency}\n`);
+  progress();
+  const heartbeat=setInterval(progress,15000);
+  let r;
+  try {
+    r=await ownedProcessAsync(process.execPath,args,{cwd:root,timeout:options['attempt-ms'],phase,env:{...process.env,CHELM_PROCESS_REPORT_DIR:metrics}});
+  } finally { clearInterval(heartbeat); }
   const log=String(r.stdout??'')+String(r.stderr??'');
   const logName=`tests-${options.label}-${process.platform}-${attempt}.log`;
   fs.writeFileSync(path.join(destination,logName),log);
@@ -62,6 +68,7 @@ for(let attempt=1;attempt<=options.repeat;attempt++) {
     max_concurrent_supervised_commands:peak,commands});
   fs.writeFileSync(path.join(destination,`tests-${options.label}-${process.platform}.json`),JSON.stringify(report,null,2)+'\n');
   process.stdout.write(log);
+  process.stdout.write(`[tests] ${phase}/${options.repeat}: finished in ${Math.round((Date.now()-started)/1000)}s; exit ${r.status}; ${counts.pass} passed, ${counts.fail} failed, ${counts.cancelled} cancelled, ${counts.skipped} skipped\n`);
   if(r.status!==0 || r.error || !counts.tests || counts.fail || counts.cancelled)failed=true;
 }
 process.exitCode=failed?1:0;
