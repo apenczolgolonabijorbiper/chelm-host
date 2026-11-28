@@ -158,11 +158,23 @@ integration('Independent authenticated MCP client completes and reconnects to th
   const f=await setup(t);ingest(f);const task=await f.create();
   const session=mcpSession(t,f.root);await session.connect();useHttp(f,session);
   const w=await f.call('chelm_request_work',{work_kind:'cognitive',request_id:'http-work',task_id:task.task_id,executor});
-  const result=await resultFor(f,w),c=await stage(f,w,result),done=await submit(f,c);
+  // Opt-in investigation only: cross the production keep-alive boundary without
+  // altering server timeouts or retrying a failed request.
+  const edge=process.env.CHELM_MCP_IDLE_EDGE;
+  assert(!edge||['before','after'].includes(edge),'Invalid investigation idle edge');
+  const idle=edge?session.server.keepAliveTimeout+(session.server.keepAliveTimeoutBuffer??0)+(edge==='before'?-50:50):0;
+  if(idle)await session.phase('idle-before-read',()=>new Promise(resolve=>setTimeout(resolve,idle)));
+  const result=await resultFor(f,w),c=await stage(f,w,result);
+  if(idle)await session.phase('idle-before-submit',()=>new Promise(resolve=>setTimeout(resolve,idle)));
+  const done=await submit(f,c);
   await session.close();await session.connect();
   assert.deepEqual((await f.call('chelm_work_status',args(w))).receipt,done.receipt);
   assert.deepEqual(await f.call('chelm_submit_candidate',done.input),done.receipt);
   assert.equal(ok('task','get',f.root,{task_id:task.task_id}).task.state,'completed');
+  await session.close();
+  assert(session.phases.some(p=>p.phase==='tool_finished'&&p.tool==='chelm_submit_candidate'&&p.ok));
+  assert(session.phases.some(p=>p.phase==='shutdown_started'&&p.generation===1));
+  assert(session.phases.some(p=>p.phase==='server_closed'&&p.generation===2));
 });
 integration('MCP response loss after commit is labelled and reconciles one durable result after reconnect',async t=>{
   const f=await setup(t),task=await f.create();let lose=false;
@@ -180,6 +192,15 @@ integration('MCP response loss after commit is labelled and reconciles one durab
   assert.deepEqual(await f.call('chelm_submit_candidate',input),recovered.receipt);
   const final=ok('task','get',f.root,{task_id:task.task_id}).task;
   assert.equal(final.history.length,1);assert.equal(final.state,'completed');
+  await session.close();
+  const events=session.phases;
+  assert(events.some(p=>p.name==='tool chelm_submit_candidate'&&p.ok===false&&p.causes.length));
+  assert(events.some(p=>p.phase==='response_closed'&&p.complete===false),'Lost response must be visible');
+  const submitEvent=events.find(p=>p.phase==='tool_started'&&p.tool==='chelm_submit_candidate');
+  assert(Number.isInteger(submitEvent.socket_id));
+  assert(events.some(p=>p.phase==='socket_closed'&&p.socket_id===submitEvent.socket_id&&p.generation===1));
+  const encoded=JSON.stringify(events);
+  for(const privateValue of ['synthetic-conformance-token-not-a-secret',JSON.stringify(input),'Compare the source declarations.'])assert(!encoded.includes(privateValue));
 });
 
 integration('Read-only/rejected/stale learning and policy drift cannot publish invalid canonical changes',async t=>{

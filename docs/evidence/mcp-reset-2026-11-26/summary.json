@@ -1,0 +1,2498 @@
+{
+  "schema_version": 1,
+  "issue": 51,
+  "tested_head": "38bf2d79d4fdf55303f186341f2960b4abdf604d",
+  "tested_merge": "145f4c1d3f563c94d07c7e0f27db49a7f2d187c5",
+  "reference_harness": {
+    "version": "0.13.0",
+    "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+  },
+  "runs": {
+    "release_validation": 45896467587,
+    "investigation": 45896467652,
+    "compatibility": 45896467540,
+    "extended_windows": 45896467513
+  },
+  "initial_linux_setup_failure": {
+    "job_id": 140171483564,
+    "attempt": 1,
+    "phase": "published Harness download",
+    "error": "HTTP 403",
+    "individual_job_rerun": "passed all targeted sets and source suite"
+  },
+  "development_package": {
+    "published": false,
+    "archive_sha256": "79c819100ad80a6f777bda65f9fc57070d327da701b00422085b1d1825279297",
+    "manifest_sha256": "1c3b78cfd5be8cbc0da295d946dcc34a5f95ce1c66cc14a2092b982348c7fc7c",
+    "inventory_entries": 472,
+    "verified_file_hashes": 471,
+    "node_modules_entries": 0,
+    "changed_packaged_files_match_tested_head": true
+  },
+  "artifacts": [
+    {
+      "artifact_id": 15153274721,
+      "archive_sha256": "f2a6930e6a458561d3de23776201d86d64a39112d171b64805eb362602bcfb79",
+      "reports": [
+        {
+          "file": "tests-supported-linux.json",
+          "sha256": "5380de21050dd982a01e97840f3d45ffedec1518530a93ab5f812023ea40aca6",
+          "platform": "linux",
+          "node": "v24.22.3",
+          "os_release": "7.0.0-1018-aws",
+          "packages": {
+            "host": {
+              "version": "1.4.0",
+              "manifest_sha256": "1c3b78cfd5be8cbc0da295d946dcc34a5f95ce1c66cc14a2092b982348c7fc7c"
+            },
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "/home/runner/work/chelm-host/chelm-host/host/dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 109564,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 177,
+                "pass": 177,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-linux-1.log",
+              "log_sha256": "ef4060d6a6a3f128eda5b6476a1fec922dececf37f42129212122755976a716e"
+            }
+          ]
+        }
+      ],
+      "name": "chelm-evidence-ubuntu-latest-24",
+      "trace_summary": {
+        "count": 2,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 1,
+        "trace_hashes": {
+          "mcp-cognitive-linux-2506-b367ecd2-8177-43d5-9959-600abd08c8ea.json": "6a9c4eb7a48b4ad7cd2657815cc09fe31fba08c03411aff8ce3971abf800654d",
+          "mcp-response-loss-linux-2506-b5e59287-d8a7-405f-8930-1b5eebfff929.json": "6ce59e8ba8ac5746103a7664f2a06ce68d9a02d246cabb05e0ad6abc51c76f73"
+        }
+      }
+    },
+    {
+      "artifact_id": 15153482895,
+      "archive_sha256": "c5d3eccfcbfa71b49b0932f055135e386ceb83aa910564a48fe5c87d9f0a84c6",
+      "reports": [
+        {
+          "file": "0.12.0.json",
+          "sha256": "93f38271de4ae6576982d60ae5788cda2d018588c9ee2ce6d68ed0d3df6236c1",
+          "version": "0.12.0",
+          "status": "fail",
+          "phase": "package verification",
+          "diagnostic": "The read operation timed out",
+          "host_revision": "145f4c1d3f563c94d07c7e0f27db49a7f2d187c5"
+        }
+      ],
+      "name": "harness-compatibility-0.12.0",
+      "trace_summary": {
+        "count": 0,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 0,
+        "trace_hashes": {}
+      }
+    },
+    {
+      "artifact_id": 15153557799,
+      "archive_sha256": "d927808fb70b9195c899f116d04c13ca1e348614e283bfe283ff9e540a2c75f2",
+      "reports": [
+        {
+          "file": "tests-supported-linux.json",
+          "sha256": "c7137e9bb7c131ab797ec6419ac86f61ab5dfd4a82228c77de2c31cdddb1a853",
+          "platform": "linux",
+          "node": "v22.12.0",
+          "os_release": "7.0.0-1020-azure",
+          "packages": {
+            "host": {
+              "version": "1.4.0",
+              "manifest_sha256": "1c3b78cfd5be8cbc0da295d946dcc34a5f95ce1c66cc14a2092b982348c7fc7c"
+            },
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "/home/runner/work/chelm-host/chelm-host/host/dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 178013,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 177,
+                "pass": 177,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-linux-1.log",
+              "log_sha256": "7a70e4d64da6716af2e681e802d92175ae83e96cd65b66c4f1f2a5856b171d27"
+            }
+          ]
+        }
+      ],
+      "name": "chelm-evidence-ubuntu-latest-22.12.0",
+      "trace_summary": {
+        "count": 2,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 1,
+        "trace_hashes": {
+          "mcp-cognitive-linux-2596-a2c4695a-0d28-44bb-adb8-e4c633ed5308.json": "97cd0a4664b69f484bd3fc6008cb05d96ea1bee3e1a136563a7dc27d404a12f1",
+          "mcp-response-loss-linux-2596-0a5dd441-5e9e-470b-930b-9be020e3ad0b.json": "7eb35f2dff1fd5938b5854c05bd7140cd9483163b8b2c5dcfe0e5386c50f1165"
+        }
+      }
+    },
+    {
+      "artifact_id": 15153613653,
+      "archive_sha256": "8469760cd1c821e0878ff07d56aad0e6ce00f1cdc942a1226134a776efa9c081",
+      "reports": [
+        {
+          "file": "0.14.0.json",
+          "sha256": "827b1e96f3e14b310bf0247c34dba694b5491a68ea7de0ba48445e387ccdf568",
+          "version": "0.14.0",
+          "status": "pass",
+          "phase": "complete",
+          "diagnostic": null,
+          "host_revision": "145f4c1d3f563c94d07c7e0f27db49a7f2d187c5"
+        }
+      ],
+      "name": "harness-compatibility-0.14.0",
+      "trace_summary": {
+        "count": 0,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 0,
+        "trace_hashes": {}
+      }
+    },
+    {
+      "artifact_id": 15153852517,
+      "archive_sha256": "c61a067bb9188381194877c55396afcf2526692b8262c4a410419dda704ed71c",
+      "reports": [
+        {
+          "file": "tests-supported-linux.json",
+          "sha256": "5380de21050dd982a01e97840f3d45ffedec1518530a93ab5f812023ea40aca6",
+          "platform": "linux",
+          "node": "v24.22.3",
+          "os_release": "7.0.0-1018-aws",
+          "packages": {
+            "host": {
+              "version": "1.4.0",
+              "manifest_sha256": "1c3b78cfd5be8cbc0da295d946dcc34a5f95ce1c66cc14a2092b982348c7fc7c"
+            },
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "/home/runner/work/chelm-host/chelm-host/host/dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 109564,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 177,
+                "pass": 177,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-linux-1.log",
+              "log_sha256": "ef4060d6a6a3f128eda5b6476a1fec922dececf37f42129212122755976a716e"
+            }
+          ]
+        }
+      ],
+      "name": "chelm-release",
+      "trace_summary": {
+        "count": 2,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 1,
+        "trace_hashes": {
+          "mcp-cognitive-linux-2506-b367ecd2-8177-43d5-9959-600abd08c8ea.json": "6a9c4eb7a48b4ad7cd2657815cc09fe31fba08c03411aff8ce3971abf800654d",
+          "mcp-response-loss-linux-2506-b5e59287-d8a7-405f-8930-1b5eebfff929.json": "6ce59e8ba8ac5746103a7664f2a06ce68d9a02d246cabb05e0ad6abc51c76f73"
+        }
+      }
+    },
+    {
+      "artifact_id": 15154152376,
+      "archive_sha256": "962a9b9a3998083a0b160401341a819df0a0f599c2770c57a1f642eb3cbd4296",
+      "reports": [
+        {
+          "file": "tests-smoke-win32.json",
+          "sha256": "98fc371b5c0b0a5c98be8b5016864bf9ddddb42c30bee07b8e07c401d5f29325",
+          "platform": "win32",
+          "node": "v22.12.0",
+          "os_release": "10.0.20348",
+          "packages": {
+            "host": {
+              "version": "1.4.0",
+              "manifest_sha256": "1c3b78cfd5be8cbc0da295d946dcc34a5f95ce1c66cc14a2092b982348c7fc7c"
+            },
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 2,
+            "repeat": 1,
+            "label": "smoke",
+            "attempt-ms": 180000,
+            "report": "D:\\a\\chelm-host\\chelm-host\\dist\\windows",
+            "name": "^(Independent authenticated MCP client completes and reconnects to the same snapshot/result contract)$",
+            "file": "tests/conformance/cognitive.test.mjs"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 20722,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-smoke-win32-1.log",
+              "log_sha256": "8b7dda2ac48aef34e4f67ece1c87a4ecc6745a6e45c4fbc265d3df222acccf82"
+            }
+          ]
+        }
+      ],
+      "name": "chelm-evidence-windows-2022-22.12.0",
+      "trace_summary": {
+        "count": 0,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 0,
+        "trace_hashes": {}
+      }
+    },
+    {
+      "artifact_id": 15154168160,
+      "archive_sha256": "5edab8f81f3a722f1c9e714862971ab0cecbe8fb575e7776b8a93b2a685ebc2d",
+      "reports": [
+        {
+          "file": "tests-supported-darwin.json",
+          "sha256": "2e692cc958992ed54daa3428ece28b89bd3d2574903864a962c01690ccfa27bb",
+          "platform": "darwin",
+          "node": "v22.12.0",
+          "os_release": "25.6.0",
+          "packages": {
+            "host": {
+              "version": "1.4.0",
+              "manifest_sha256": "1c3b78cfd5be8cbc0da295d946dcc34a5f95ce1c66cc14a2092b982348c7fc7c"
+            },
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "supported",
+            "attempt-ms": 600000,
+            "report": "/Users/runner/work/chelm-host/chelm-host/host/dist"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 351211,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 177,
+                "pass": 177,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-supported-darwin-1.log",
+              "log_sha256": "206bf3a60b530df644b9c96bc58f32875f308c191a0a5d960efdf06570f35a9e"
+            }
+          ]
+        }
+      ],
+      "name": "chelm-evidence-macos-latest-22.12.0",
+      "trace_summary": {
+        "count": 2,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 1,
+        "trace_hashes": {
+          "mcp-cognitive-darwin-5870-653f4065-7cd5-4700-beaf-5cdb166c6e78.json": "3de2e6aa413a497a57b63ecb38f049dd7353eca31692ebf229bee9c48d22e3b8",
+          "mcp-response-loss-darwin-5870-5c0bbdcb-afa6-4e64-b99d-952c73eb3ec9.json": "db7a95bfc40ba5fb5ef9c170d24ce1e2491cfb320b256ae67b2b4500ab4d2e6c"
+        }
+      }
+    },
+    {
+      "artifact_id": 15154177012,
+      "archive_sha256": "ac3831b20e0fbc490350783acb0bc00d3fa49b749c5fb7c2334d8dd211bd52f8",
+      "reports": [
+        {
+          "file": "0.14.0.json",
+          "sha256": "0ad8c3215c6c5988e921a2d2dfe120d32e6b48b084f36e9e8b5d6cd53772f464",
+          "version": "0.14.0",
+          "status": "fail",
+          "phase": "package verification",
+          "diagnostic": "The read operation timed out",
+          "host_revision": "145f4c1d3f563c94d07c7e0f27db49a7f2d187c5"
+        }
+      ],
+      "name": "harness-compatibility-0.14.0",
+      "trace_summary": {
+        "count": 0,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 0,
+        "trace_hashes": {}
+      }
+    },
+    {
+      "artifact_id": 15154303959,
+      "archive_sha256": "a95a51729d2b238e441874b9665eb46edaea8dbbb88849764988ceae41cf60e6",
+      "reports": [
+        {
+          "file": "tests-idle-after-expiry-win32.json",
+          "sha256": "a6588b6c0d600bad7678098621c02edb97090625c159302e317f1c17f775dfce",
+          "platform": "win32",
+          "node": "v24.14.0",
+          "os_release": "10.0.20348",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "idle-after-expiry",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 26305,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-1.log",
+              "log_sha256": "35d69e6df136f1f2842f3e1da792ee1803cfb9c821dbdde77653076b529a0f11"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 26596,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-2.log",
+              "log_sha256": "14b3d0446ff674d331573d5a0f463e249269049fca64f3f5fe53f43ab0598cc9"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 26622,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-3.log",
+              "log_sha256": "89b513b80f7356bf2961dee8143365c38144e6e482d3f1987a89d2b9630abc80"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 26754,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-4.log",
+              "log_sha256": "0adf6303631b4e81a531f1c0b9c5c2fe282f0df48f2d8eac831c9eb26a95fc81"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 26805,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-5.log",
+              "log_sha256": "164bfa338888202d6464450be1cc1e6c99ef90bf85615070f5411eabe9d28f5b"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 26105,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-6.log",
+              "log_sha256": "148c515d07adf7c679f5247d62fd7d8078e13c0992456c46451cbac4bdbf9055"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 26120,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-7.log",
+              "log_sha256": "4fa789e48f71993cd3216ee9a5037c85a36c7da228a118e2e9c235354a5ce672"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 25553,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-8.log",
+              "log_sha256": "69c41958c94d219a08971e1c2ec46f702aa1f552992511b8e8d4b13f87978a2d"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 25838,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-9.log",
+              "log_sha256": "2a2296229a68bbbd77ca3bb0482e7ca6bee046a9a8abf7bc9eb4613528ddda08"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 25877,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-10.log",
+              "log_sha256": "49bfb311f0cd8f40f86d23dd81443bbd634469075ec0d1c40b4af853a662ee2b"
+            }
+          ]
+        },
+        {
+          "file": "tests-idle-before-expiry-win32.json",
+          "sha256": "82fe8d14e111700b7698aa42479270af5a2b292b4498bca56e115a0b536bfb2c",
+          "platform": "win32",
+          "node": "v24.14.0",
+          "os_release": "10.0.20348",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "idle-before-expiry",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 26975,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-1.log",
+              "log_sha256": "47995a2281713913126ffafb51d90247a05e22594f29b9db1733f84744cb6ccd"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 26627,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-2.log",
+              "log_sha256": "1c0e6c189258516401a1c2efeddac28fe6c2edba8a394d1ebeabadf61a465ad5"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 25996,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-3.log",
+              "log_sha256": "eeb7a5c83e1fee0821b91c3333b3baa2209f6a67f220f2f94a73e8db878d56c7"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 25981,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-4.log",
+              "log_sha256": "4ac81ca6168c520e07303ee7726c03db895865b088c0748d9546e1d8bd35ef99"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 26301,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-5.log",
+              "log_sha256": "259110162af263dd84518278aef5f7a9e91444a94ee9ccddf01a7e8e8f3b7e98"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 25870,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-6.log",
+              "log_sha256": "a597b6a8b179beec022bb414ab198c30284390bbd3aa7061a882acbc0b67c156"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 26494,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-7.log",
+              "log_sha256": "8ae7c6c5993044aa8e117c14646cf120ec17f3471c774de1e19d586a3d5db814"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 25794,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-8.log",
+              "log_sha256": "8275856c79ba684315fe99984bb153dda4452fcfcdb7de534292925423ad6a4d"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 26333,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-9.log",
+              "log_sha256": "4c82565f86b71966bf38b30402c82c6227be871780f4bdd913d235ff8626cf8e"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 25860,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-10.log",
+              "log_sha256": "1d50563a32f7d5ce17a4aed36af9a82cd2a545fa5f52bb49007303943a228c9f"
+            }
+          ]
+        },
+        {
+          "file": "tests-standalone-win32.json",
+          "sha256": "4687935f5aeaf77f5f9faa37a8a258b596e773a08f7674ffb68b9a4f2ff96a78",
+          "platform": "win32",
+          "node": "v24.14.0",
+          "os_release": "10.0.20348",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "standalone",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client|MCP response loss after commit"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 23807,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-1.log",
+              "log_sha256": "eb074853d2b26f2f52a5c79450fde38fc1ccb9a6de8b91e7cb4570ea55cb859a"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 21851,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-2.log",
+              "log_sha256": "084b1da6603cf911d996e19d3f07616345699c287dbffad498a51c673273bb73"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 21641,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-3.log",
+              "log_sha256": "870267f3223659cc7759f4c23be435c99c404a6a45f6924177f2837ca0d6db4a"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 20965,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-4.log",
+              "log_sha256": "5a238a67aa71f0417885adf167e09f4e7b9ec2c3c97eebed7cb054e9a8e4c43a"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 21212,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-5.log",
+              "log_sha256": "575543d4c7d1b6af686dba3e4528076fc4e8fba187b93fd861b57495d538dd5d"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 21155,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-6.log",
+              "log_sha256": "e5eb9282e12039202d95e80a59490bcee55a39faaf6797e2c96f1368bd1749a3"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 20350,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-7.log",
+              "log_sha256": "c0191d730e4d3358bad1d19b4bfa7b4a2eb86b3175e2b0a940457408116a19c9"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 20139,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-8.log",
+              "log_sha256": "316d5563545cf3e26b4721005bd07c351a510ba43ba9302ace50bceabc1801aa"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 20230,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-9.log",
+              "log_sha256": "dbd4d578d822c088965a6751f58b745366e600172b80ff894094a5297ee1e5b9"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 20706,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-10.log",
+              "log_sha256": "5e2a86908005a59bc5698caf56cc45d2a5a4c789dbfcec1b18c2be871d0eff94"
+            }
+          ]
+        },
+        {
+          "file": "tests-suite-load-win32.json",
+          "sha256": "6f43ae785391454480cc375ede3e091e267d58fbc8cfa5c460aaf528ff9a37b3",
+          "platform": "win32",
+          "node": "v24.14.0",
+          "os_release": "10.0.20348",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 2,
+            "repeat": 1,
+            "label": "suite-load",
+            "attempt-ms": 600000
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 600313,
+              "exit": 124,
+              "signal": null,
+              "error": "operation_timeout",
+              "counts": {
+                "tests": 0,
+                "pass": 0,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-suite-load-win32-1.log",
+              "log_sha256": "5e584ab58cdaf9d46f535ebd1f11764f08acdee94db0e487d4f2fe768230647b"
+            }
+          ]
+        }
+      ],
+      "name": "mcp-reset-windows-2022-24.14.0",
+      "trace_summary": {
+        "count": 42,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 11,
+        "trace_hashes": {
+          "mcp-cognitive-win32-1004-0ab42fbf-074d-4714-b09f-25dc37f6e75b.json": "6cf5db4eafe7befaf80ac6c954cb71a4b41fbbafb8e24b8e7d8daa9e2cb6c321",
+          "mcp-cognitive-win32-1016-7d5d4efd-ad38-4fac-85eb-715d59540a3e.json": "5c3353365302d4c858b9f99f40dce529ba5ced42243e080ce6d9f30507342acf",
+          "mcp-cognitive-win32-1484-7c995205-8d70-491c-9125-136c240b41b9.json": "f3b22fa1c957c8254c97a00171700b4406ecfdbf42f8dbfab14ad7e2cc91c74a",
+          "mcp-cognitive-win32-1600-2cff3532-9eb4-45bb-bfd6-2da9c6cc9ff4.json": "7df2f4d65ef0d4cda968dc7fa639139130b3918006c1cb70d95958b42e97d4db",
+          "mcp-cognitive-win32-1824-d1f16029-f5c3-4522-a15c-b0c6b4e9c6f8.json": "d199758ef6808d00dd2b5688052ffc818d9128fdcbbc136ec8052f1d6269531a",
+          "mcp-cognitive-win32-1860-9565e9f4-2fad-4c0f-b5d2-dc5f7ddec31d.json": "7a49acabb88c813fd41b00735cf95c527d0d655de7d20229deae4b186f4b1173",
+          "mcp-cognitive-win32-2060-1468e2bd-a1b2-47e0-a38e-c3c0aef93987.json": "35daa62aa8f43999481ffb30bbb5fae0ce4655d15269891d9fc2aad7d90526fb",
+          "mcp-cognitive-win32-2276-a3bf5479-7f0c-4a76-b933-96cd73de3f27.json": "c9b7723695adf6bc17579106383f26b19f5c27ffb9680a058e2e20dfca93b643",
+          "mcp-cognitive-win32-2440-bcc76502-457f-4fcc-8c63-1cab29424346.json": "79c38ec88c5826982342fd5c5ddcfffec0c084c4de45d25784a555ffb0286b16",
+          "mcp-cognitive-win32-2536-43ad8699-6941-4a8c-82d2-4b550644d19d.json": "f1b1f5ea925167788d33bf4907a6818f9d8aaa00f83c5d6f860a4856e928385f",
+          "mcp-cognitive-win32-2820-28ecde37-8419-4a97-8c35-5f08f0314c09.json": "302c3c56b5939380d94ec6423ee75786d2e3f987d32c75a2ac587b7dfbe806e1",
+          "mcp-cognitive-win32-3128-c136a92d-6e69-43c0-be39-095f0944e952.json": "8744b2bd1fcc06c42e2523427125b23703989fa6b5e08b382b196f9557a057be",
+          "mcp-cognitive-win32-3760-e18f86b9-cce2-47bd-99cf-827fce978cfe.json": "03ca77b72f877f9023bd22bb29116097f8f627a89c3a4511da592ad11947b665",
+          "mcp-cognitive-win32-3820-6881e763-f352-4baa-8f2b-1cc8af0dddea.json": "996eb74d707891e2cd1bb2036627b731d3911973c4ff4a240f5992ef430ae90b",
+          "mcp-cognitive-win32-3892-613d8b4c-3e4d-4ff4-a0f2-5a208754d3b7.json": "dcf6358dc53c1e22b750b3b9c7a20b222d6eed49847cc19b99dc7a5becdb5618",
+          "mcp-cognitive-win32-4352-57401bf5-9c77-46cb-b84f-fab979c6d05b.json": "4787c8a5aabbcf7f87a149de61e514b94be0994c44cf9d1f65bcbb9109189e22",
+          "mcp-cognitive-win32-4480-f399a9ca-65e5-4746-868f-e4daa681bf2d.json": "0f93fed9c4eca99d50cc58fc4bf398b0250bb6418b69f84c8d894c14fd0104b5",
+          "mcp-cognitive-win32-5292-dd5bcfd2-78d8-4a3c-9e3c-6ca1bb0967ca.json": "f04190e52ad8f07bc97262782d5bb7dc79a059245749e8153e079d483c59d707",
+          "mcp-cognitive-win32-5676-c1a428e5-c6d1-48d4-8383-85c360f841d4.json": "7328bd75a75550794040f4384210f875a490ed990431e1bc7569fe6b816a294f",
+          "mcp-cognitive-win32-6172-c82ce7f8-adde-48a1-8998-058497c59147.json": "b85aa40534f5d947272fd1a75f36da68e3edad8e25ca0a094b1340b1cfd28a57",
+          "mcp-cognitive-win32-6216-90b7b594-74d6-4eae-b37c-f85e652698a1.json": "93625e09742a1a6fff4d1a593b558816f16281b98ee5ed0d93b0ca95fde2f846",
+          "mcp-cognitive-win32-6312-15de57ac-b6f3-4701-acf8-cb14dbc2a4de.json": "55be03a2cd0253cb372742a562cb6a8df35e9a4ba51b3fbecc4318d3baa7648c",
+          "mcp-cognitive-win32-6464-127bf58a-7f6f-4361-8392-fe0999120203.json": "a20ac5f4d3ee0d1e952952fd672e7321507c770e2e9bd9ea1281b934be025f87",
+          "mcp-cognitive-win32-6944-a1933968-fa4d-4681-8d87-19d959a6ecf2.json": "e581a127874c84844194e7247ab7c4491f2f7513d59960d74cc50da5da8c1ff6",
+          "mcp-cognitive-win32-7052-729428eb-0154-4f08-ab35-60c22ae7871e.json": "80c666e9f869d7e200e770b7a5185f9c127df896cebe8d4366fb8d12f1790c1f",
+          "mcp-cognitive-win32-7360-7487e575-73d1-45e1-bf97-537e17adcad6.json": "00a218ffbdf46f63f4942a9a4d5c66e07ef3c4b89004015ccbb583a8e768910b",
+          "mcp-cognitive-win32-7416-29956e47-a6bb-4128-aa9a-52c6f6d80e63.json": "d12954da261d5ded575568633d65bf80212ffac06818b16ad5759170418a1207",
+          "mcp-cognitive-win32-7636-10208d95-e4dc-4555-b25b-6729695f5d13.json": "8b61d2f6b736aa67e34ef12230c319084a4e4c65fdff8185343256e440806f0d",
+          "mcp-cognitive-win32-7672-e90e4726-4475-43db-8b54-d8bd8f0e6f57.json": "58a8837484d294d680fa7d7aa74b082a18b9fde46c22927ab5c5b37b9e561e26",
+          "mcp-cognitive-win32-7704-8bb29424-a8ac-4db8-bc18-dad63a8d6519.json": "b41c16ba7a386c7b9ee754409d08656e16e6802720cb09924f7fef9f2b981af5",
+          "mcp-cognitive-win32-8124-d0c758af-bc7c-4334-bd30-c3b9c5b3a57f.json": "00b00e2dca5cd14b7ad081edef3b6358a88d753b361c299a6b6fb67c6d8684bc",
+          "mcp-response-loss-win32-1600-6073e755-d46c-4584-ba79-33db8eca550a.json": "75068c504e08a3528111e0c9fd097c33e1d043c183e63af149124165a530e3c0",
+          "mcp-response-loss-win32-1824-b731ebe7-d5d4-478e-af1a-f4e7c6fb1298.json": "a7b783933f460df4afd3871af1c295b0240cced614744d3e08c0315bc2e38b82",
+          "mcp-response-loss-win32-2440-28dbe496-4c73-4d4b-88f6-a2fba171793f.json": "eafb307cc3ad02e4b57fd169e94292a75b5e2216b5c68f389053281e078cafea",
+          "mcp-response-loss-win32-2536-986d35b5-7feb-4b11-800e-45ee6c762889.json": "4e93fe38aa93333b87609d2ea9011b5534a355df7888c0d83885f5eda6dfe8e5",
+          "mcp-response-loss-win32-3760-0a353fcf-c9cd-44ef-b76f-01e050911b37.json": "05194464fcf4d0b447e2b7f7013962c08c185ad10e77d3dd4a6bdf3eaa879eab",
+          "mcp-response-loss-win32-4480-0e5bb7c5-b39d-4132-9a62-f797f8f2694f.json": "03aeab5a84eaa986f8a058ad65fc4c9f7ee23bd5ba6328ceb95233cf7c8ac5ce",
+          "mcp-response-loss-win32-5292-ed9bad94-2b96-44f3-a937-e570600dfb9d.json": "b8863a81a3f2480682eb5f3eb1a0da1327f8860f79917a8a390cf79b13a325cc",
+          "mcp-response-loss-win32-7052-10903dff-8a2e-45ba-9014-cb38edfc44a7.json": "b1576b1badd5a960dded713a4fd0cafccdec587d61a89040776c2bb0a3ff7afd",
+          "mcp-response-loss-win32-7360-79e4333d-6b6b-4902-8949-e426f51eb76e.json": "7db58f78bde1fb2e083809fbe7b67b1d99c2ef39450459096451f89c326283b5",
+          "mcp-response-loss-win32-7416-8eeee806-165f-47f3-aa1e-3966f21fb7fa.json": "066c131718e881096ca1cf6431b65c27d0ca7c3922cd0ff7b191e5297e212225",
+          "mcp-response-loss-win32-7636-cc9c77e9-0484-4612-9919-ab09b96024a9.json": "8e35caeb9dc9ed77d00526b24795b5f382a7493e9a3942718497ca49dc825e69"
+        }
+      }
+    },
+    {
+      "artifact_id": 15154351997,
+      "archive_sha256": "2dfe64971c5bf4acdda4d656bec98a93aefb739d2159213c651cae934eb1dad2",
+      "reports": [
+        {
+          "file": "tests-focused-win32.json",
+          "sha256": "bd1926f0dbfd694c82a6cc3bc0ad31f655ccc8bcd8ca03b992b9ca398e3a60a4",
+          "platform": "win32",
+          "node": "v24.22.3",
+          "os_release": "10.0.20348",
+          "packages": {
+            "host": {
+              "version": "1.4.0",
+              "manifest_sha256": "1c3b78cfd5be8cbc0da295d946dcc34a5f95ce1c66cc14a2092b982348c7fc7c"
+            },
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 2,
+            "repeat": 1,
+            "label": "focused",
+            "attempt-ms": 180000,
+            "report": "D:\\a\\chelm-host\\chelm-host\\dist\\windows",
+            "name": "^(Independent authenticated MCP client completes and reconnects to the same snapshot/result contract|MCP response loss after commit is labelled and reconciles one durable result after reconnect|VF-6: bounded Windows sharing retries preserve atomic replacement and propagate other failures|Owned timeout occurs after child startup, kills descendants, preserves unrelated sentinel|Abrupt caller termination leaves supervisor able to clean its owned child tree|Owned normal success and thrown error preserve exit/output and remove descendants|SEC-2: paths reject traversal, drives, reserved Git and links|CON-2: launching a CLI through an OS path alias still emits JSON|NFR-1: unloaded Windows profiles use the actual OS SID and fail closed on lookup errors|Config-2 local/file/stdio and remote queue enforce preference, retain owner retry and allow submission after a switch|Runtime schema seed, local preferred registration and reserved-principal refusal are explicit)$"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 27552,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 36,
+                "pass": 36,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-focused-win32-1.log",
+              "log_sha256": "5760795cd239f0535752e205617a159e64e659db642f328eb281d583a629c628"
+            }
+          ]
+        }
+      ],
+      "name": "chelm-evidence-windows-2022-24",
+      "trace_summary": {
+        "count": 0,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 0,
+        "trace_hashes": {}
+      }
+    },
+    {
+      "artifact_id": 15154459419,
+      "archive_sha256": "cf319d8e729a0c032ec905b714a7faa4727f68cca4e68aabf80b87882c9f520a",
+      "reports": [
+        {
+          "file": "tests-idle-after-expiry-win32.json",
+          "sha256": "3dc9378f4693e76ab35783087a17bdafa1af7f04cb13dc550f5d4540505be55d",
+          "platform": "win32",
+          "node": "v24.22.3",
+          "os_release": "10.0.20348",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "idle-after-expiry",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 28750,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-1.log",
+              "log_sha256": "97818ca16e4dc4390c8b35018d486571f60ce57c2f2d037d9cdada6f6d940071"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 28821,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-2.log",
+              "log_sha256": "55f1c137e4f46a96490e32ae80e147fa7250134e519e0dd238a4fbda170caf7f"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 29298,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-3.log",
+              "log_sha256": "649ab071fadc8c4cae61acf1a70868f362cfda57955bd08e37e142fa9fb63b30"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 28946,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-4.log",
+              "log_sha256": "65a2a3ac0672f214ae7ffe9c29682da3048c0303c4fac1696560aed966a74d64"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 28988,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-5.log",
+              "log_sha256": "ab31709dee45951325e7639099b21f13937a452a5afc08533d0721276d5ffbd6"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 28682,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-6.log",
+              "log_sha256": "f661288cf3f11f8701e1d05db55aca34f2616344a034651cbb462b6cca4ee67a"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 29223,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-7.log",
+              "log_sha256": "6516dc185378246ee252b994906cf24f9a7f8392dcca1e2107d060b9643bddac"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 29204,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-8.log",
+              "log_sha256": "4c23d39fcc76542fbddc3eeb668becff34733ca62765ef9464d9f97b175f567d"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 28998,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-9.log",
+              "log_sha256": "345fb62e244863a916e0f53f1aa7b32cf64a04cfe2062f9903133c40940aa076"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 29157,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-win32-10.log",
+              "log_sha256": "a6c3216772dd3a5474e4a673b50e1223225c0da74e152702bd5a1723097d0a24"
+            }
+          ]
+        },
+        {
+          "file": "tests-idle-before-expiry-win32.json",
+          "sha256": "680205e30797ffb49ff6875433bb9d2c773caee621adfb44f05073325f475408",
+          "platform": "win32",
+          "node": "v24.22.3",
+          "os_release": "10.0.20348",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "idle-before-expiry",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 28596,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-1.log",
+              "log_sha256": "40b79070cc552c5b06383fa9d1853a65c9ae619dbf218c9f82068ae4ed77c9bc"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 28614,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-2.log",
+              "log_sha256": "09f5358ac44d3b5f76c519d5e36d0a4e14e197216c0611447791a291d7b2b831"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 28799,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-3.log",
+              "log_sha256": "f281400351bbd14aec83b9a7a17f0fe686486766a15b44f309bd603dcc64cd08"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 28620,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-4.log",
+              "log_sha256": "afe1d6b56f0c01d9cfbfff9be5988cd3a7ca611a0a43122ad8c62e22bfaa7a60"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 28635,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-5.log",
+              "log_sha256": "23bcf3446459dee37a121f624909f579bc1303b32a5f4c564a9796a7fe380913"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 28431,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-6.log",
+              "log_sha256": "cdc2678d0bbb4a50d36c34ef510603f592c8976767cda51de50ec9d8cfb01b67"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 28610,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-7.log",
+              "log_sha256": "d79e3f481ed4aea16ca9d14324c72d4e66d826ccd3c424c674bfb28d744b4f15"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 28574,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-8.log",
+              "log_sha256": "80db1eb32d1779ec36600c6df9144b324974b80c9db1db5ee7e429be28b6a1e8"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 28554,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-9.log",
+              "log_sha256": "abf9e813eac6f57f322de41c898a13e3ca0e99a43d3730c66a6c5cdec18a0ba8"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 28602,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-win32-10.log",
+              "log_sha256": "5dee86e0fa942db4f950c355017b2a4ce25b6ae9a64fd10b5297f481dfa0e94c"
+            }
+          ]
+        },
+        {
+          "file": "tests-standalone-win32.json",
+          "sha256": "782c50a7c26321ab1fb932a8bd37c23ca30432c0e54d63f72aa8edcc5b46bfb8",
+          "platform": "win32",
+          "node": "v24.22.3",
+          "os_release": "10.0.20348",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "standalone",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client|MCP response loss after commit"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 25728,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-1.log",
+              "log_sha256": "8d2e1d0cdb1f16373a575cc0b169fd867697d4467386254835dfb74796062900"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 21931,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-2.log",
+              "log_sha256": "a92598cf4a74dc992acaf97021aaf5484c127d03419d6fa5c28979f9851983d1"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 28787,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-3.log",
+              "log_sha256": "2db0cd19e2fe53b770d11aa4d31d49b2b04be6c36f822fbdb504dc826614a00e"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 21832,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-4.log",
+              "log_sha256": "b20bfe187350d8a7e20b8f8305f711aedbe40dc612d2b389cf4b9d5e3a286764"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 22312,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-5.log",
+              "log_sha256": "b48175b35008a96ba79671ae1e699b2932017b443f64c8e168baf0bbf992c603"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 22086,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-6.log",
+              "log_sha256": "21f8a05b509b287e4267c357a3fa4d8ed43ccbbb4b3098b8487dfdee2959b3e9"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 22392,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-7.log",
+              "log_sha256": "cdffbada33755e6e14978b40e77bc375c08cc23ab63f7141f5711bb8e078398e"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 23183,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-8.log",
+              "log_sha256": "737290c5e3b0d375a03c1672077261be3e41c98fb97bad859f4d883550fc27d5"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 22088,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-9.log",
+              "log_sha256": "4ac2546ebe05cef2bf864b29c5e35a8d50349897c6874c0f04996195955675d9"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 22647,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-win32-10.log",
+              "log_sha256": "0fdf83e033b5cd79cbb8890e4e75554c036bce57535ca055760c340acaba9cc4"
+            }
+          ]
+        },
+        {
+          "file": "tests-suite-load-win32.json",
+          "sha256": "d2aa214bcb161f501b5523d2b8a7f0cd8df02f217e1655fbe52e235198a10903",
+          "platform": "win32",
+          "node": "v24.22.3",
+          "os_release": "10.0.20348",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 2,
+            "repeat": 1,
+            "label": "suite-load",
+            "attempt-ms": 600000
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 600295,
+              "exit": 125,
+              "signal": null,
+              "error": "tree_cleanup_failed",
+              "counts": {
+                "tests": 0,
+                "pass": 0,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-suite-load-win32-1.log",
+              "log_sha256": "0924c85f5c5c12a9d6a06c775d8957272cbe232645fbf544ecc112e133083944"
+            }
+          ]
+        }
+      ],
+      "name": "mcp-reset-windows-2022-24",
+      "trace_summary": {
+        "count": 42,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 11,
+        "trace_hashes": {
+          "mcp-cognitive-win32-1256-faaca162-a639-459b-b962-c44ef8b527ec.json": "9d415c54a9aa31b4efb65e9ac28a49e89b98742a5b7075fe15dd00278e72b3dd",
+          "mcp-cognitive-win32-1432-3027f9e9-94ba-4105-b3b1-ff12738b5cdb.json": "c1e13e55ffb6c2372561882c789a02f1b09f20a413e0a262d2eeec41df826424",
+          "mcp-cognitive-win32-1432-a5e6a502-a0e0-43c8-9044-f6c666009e79.json": "d2522fdb129f0341102842a03c622e991e4f9d66c25c913a2805690524929b57",
+          "mcp-cognitive-win32-1436-6765da6a-540c-4fbc-803f-972755075541.json": "d727e1024b2cd902d4bc76ac865278233bfbe62c79d87cd3c9c2877fc7971407",
+          "mcp-cognitive-win32-1688-7e55fd51-5eaa-4e4b-b02c-bc0617530848.json": "c86c6839a9c4b5b0f4ce7f3c2d3f487d9139904ee3ea02180b49c32447211e44",
+          "mcp-cognitive-win32-1724-452a01bb-2e6e-4631-ab56-8cd7ae788cc5.json": "f5eca797613d083c27242dd3676b02a0890a998915c576f90abb120fdff574e5",
+          "mcp-cognitive-win32-1832-bc5c923a-261c-484b-b01d-db1afddfa04d.json": "e58f9c79971b201fe17eba05ef30f4d8550da0621b49f1e6519376fb5798b673",
+          "mcp-cognitive-win32-1948-598b8cee-0545-4583-855b-2d653d14aa5a.json": "df0a5b2309b3bc7fd722da83addd6143f75450a2deea607d0ec47a00bf20385f",
+          "mcp-cognitive-win32-2428-8c9261b7-c9a5-4d55-a34e-01b3fcd37f91.json": "1334416cedbd8c7c82f9f63dc6991ce10a72e6d34501a93d1d99a3c962364616",
+          "mcp-cognitive-win32-3092-a62cf726-a8ed-4e0c-a94c-23990c101120.json": "fdba91b14bb7c1986839f590ba9cd8ea88865d8d09b73aba44e3fe4304fbba7f",
+          "mcp-cognitive-win32-3364-477ceb5a-b595-49d0-9c30-854f792d048f.json": "21ad43efef9cf11abf8883f8a9f8e3c2b55569354a33d61d7b242ccbd7e55c22",
+          "mcp-cognitive-win32-3424-6194a5af-342a-4a38-8a5d-a59bce7a786a.json": "bb8e254ce571799fe64fff171dfc0bcb35d520bcb2ce3d2564339f687702fd2c",
+          "mcp-cognitive-win32-3996-51010256-c3fc-4169-a3b5-d020c8562fac.json": "3c972aab93775e5f7aadf3b9609aadbf3fef9d81d4c98fe58397b46676b86cdd",
+          "mcp-cognitive-win32-4252-9c4ae9f7-be7d-4191-a8a1-a91652f6c25f.json": "e686fa21d3d6bee6afd9ff7162ad7b45e95b18054d0c3e3f57f3156199b7160e",
+          "mcp-cognitive-win32-4280-ead67abf-4e3a-4fb8-b291-3a956f81ff5d.json": "209872f9b47cbfb25428b3626ec10a55c55a388dcc991ebea8c75559a08520f3",
+          "mcp-cognitive-win32-4328-e72b16aa-354a-49b7-8cea-f0ef623ca2bd.json": "7b44e771aa209607dc2af7da2972cf752300686e6be6ac3fe483302fdf3c2a01",
+          "mcp-cognitive-win32-4564-0c622f64-c9d8-4db9-9d58-7ca2d0be4286.json": "3c545aaddac517489daa675f8475ea0ce083ddc8261f7e7e75f40be0b7ccd504",
+          "mcp-cognitive-win32-4600-9cec1408-0392-4050-99ef-60f1ed282899.json": "35769d14f352f87930d55bd296776e4a4984192cdc922874abdcbaca98f09fcf",
+          "mcp-cognitive-win32-4664-e2be2283-003d-4a63-8d69-8c2168055e1d.json": "7072e2603de320f4101882b4457cb3dc0f5f602e1078aa70a4c7f9e553848147",
+          "mcp-cognitive-win32-5664-854e77d7-5410-4e86-bde3-7a14616b4c16.json": "85133cb695f459371f0527e0bfbdbbfdc82af322445e37cdcbb9644490148d33",
+          "mcp-cognitive-win32-6120-5e1c7ba1-f65a-4878-aace-69d22b11c548.json": "6b8fac510755feeae1d5c891ad235c7467ad6dde78494eac9db661812a6dbdce",
+          "mcp-cognitive-win32-6148-599d961d-c169-4dae-88b1-705d3954d5a0.json": "1d973e871370c5b61e119de951d8d412e1e264b21c17cea516e773f3a7994212",
+          "mcp-cognitive-win32-6504-6a2e1a99-d916-4485-b93e-e6aa255df6d4.json": "4f2b6dc70cd8039f23d7a74ffa18f465bd96eed943699b218e4627ac01bb09e1",
+          "mcp-cognitive-win32-6720-c01999c1-1c54-43c5-a174-dcad0cbf451e.json": "e2e2fb19a4ac6c2bb79707213a6eff6723f73fb669bcf9a5041e665fdcd8cafd",
+          "mcp-cognitive-win32-6948-acea3a86-4b1c-47e1-b6f0-3602a2eeb113.json": "8e7e2918cd0bce5c22d51ec7b337d3203485d695de3410ba63f4f7a8f38ec5b7",
+          "mcp-cognitive-win32-6992-860732a9-cff8-48a3-88be-a82c71ebb3b4.json": "73a2460f4d6bba4dad6337f1a340c663843f38f02ee8bd4462924ff352a7b85c",
+          "mcp-cognitive-win32-7172-680862c2-dbe1-4631-af5b-64361c2daed8.json": "d106f314eae5ee5d0cfb9ca8a3d760e4abf448d6a4da0f98933fc1968b1b492e",
+          "mcp-cognitive-win32-7556-ee9f0cf3-c918-4462-b885-6c73561600a6.json": "5001838f258a190336e2d4f4d920dfe88afae859187167f851ba5ac0bd1683a1",
+          "mcp-cognitive-win32-7564-cdf6b46a-819b-40e7-94a6-aeb0ba45876c.json": "43680c8a1e92a8ba4a39efa4da00c4693ce5828c2c71b883b18971d945331a83",
+          "mcp-cognitive-win32-7820-3958ccaa-4d2e-48be-be0b-3cf3697ddf35.json": "3d4d1fcca87f6159ac6803ba90c3ea4bf1cb872fb36446282af79c8be4b2d9fa",
+          "mcp-cognitive-win32-7880-afa0fd6e-a38f-48d9-93a8-879f0b94c2a0.json": "490302c50453417d9bfbd3fcadb9e49e72d4dc234ad7450d6821d19900f3d269",
+          "mcp-response-loss-win32-1436-39e1cbab-1e06-40fc-89c8-7bcb44957834.json": "fbb262e2677cdbb5027dfb6f1e426119b0aacf77edc577ee61c6be10bfd98458",
+          "mcp-response-loss-win32-1832-379c7227-20ac-41d8-ba77-d86516155ffb.json": "c3f931e0b0d4949d3f28b4c97c0d4a74c78b333c441a70c755394a914c50e874",
+          "mcp-response-loss-win32-1948-679d1b43-0ff2-4cc8-8ae2-b4f62a2bf86b.json": "1301ddf8c400154c488c273dbbac9dbc8225ad4007e64f774c0aaf874da86c45",
+          "mcp-response-loss-win32-4252-9e4562b1-0727-45c9-8b81-fcecd08c3b41.json": "179d832e4e09e45d81ecb8b2f87af1900ffbb3a6602125de9f32472b42c8b72b",
+          "mcp-response-loss-win32-4328-7c415ac2-fbfa-42ed-a871-90d7fc741847.json": "df91f2834b78a10328754ad21a91b57876df64f837ad2d7b7cab2dc2164315ac",
+          "mcp-response-loss-win32-5664-df515372-01a3-4e1d-9cb8-55c85e712b22.json": "ed764f9704b910dc09494d68aeb2078b5dffb16a6ebd50a15a746814117e33bd",
+          "mcp-response-loss-win32-6148-5c8e3604-4a74-41f6-8b5a-e7ec34758fbe.json": "215e547a613a3173beb0caf8676fab3171f39233a08e2205d15ac653841cc8ba",
+          "mcp-response-loss-win32-6948-3dd913a6-502c-420b-8437-23972326c293.json": "30c4a48bad1be3d4bb4343b2f87177509bd7372169cdfe7ce129213616fc9976",
+          "mcp-response-loss-win32-6992-8b6971ba-8181-4b3c-adc0-d3004b36d460.json": "64ff4e2ffd8851f1c24c8b64dceb916bc7035025deded21d79fba0f623349c34",
+          "mcp-response-loss-win32-7556-2e6fdf79-00ae-47e8-ba2a-6b9881307281.json": "23f25881c9509d52cc6b5c5c8af6df1ceb7c63bac4ce7a1c0c058cfcada464fb",
+          "mcp-response-loss-win32-7880-755bc909-a153-4286-9ba5-25f5588c5963.json": "3eb80c2c9425105ea78733c04a81e2f3fdeae8410d4476b86575cf6ad51561eb"
+        }
+      }
+    },
+    {
+      "artifact_id": 15154855418,
+      "archive_sha256": "399491cfe5def5c31267a2b2efc8ef9254d025a112322e3d118e90816a1e447c",
+      "reports": [
+        {
+          "file": "0.12.0.json",
+          "sha256": "2b685dc227fcc11fcc2f23c230690b980cf72f961a2548e23d505adae84b8c71",
+          "version": "0.12.0",
+          "status": "pass",
+          "phase": "complete",
+          "diagnostic": null,
+          "host_revision": "145f4c1d3f563c94d07c7e0f27db49a7f2d187c5"
+        }
+      ],
+      "name": "harness-compatibility-0.12.0",
+      "trace_summary": {
+        "count": 0,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 0,
+        "trace_hashes": {}
+      }
+    },
+    {
+      "artifact_id": 15155462117,
+      "archive_sha256": "87fc4f235e4a11353efdf964a3af502df492cff6c9cdfbb8fb82bce69034d24d",
+      "reports": [
+        {
+          "file": "tests-idle-after-expiry-linux.json",
+          "sha256": "1cb7550aed56a57fee5b90742b1bb44e4146dc17a82e0a1d2d5117cdb1b879e9",
+          "platform": "linux",
+          "node": "v24.14.0",
+          "os_release": "7.0.0-1020-azure",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "idle-after-expiry",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 16426,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-1.log",
+              "log_sha256": "d3f43dd561815730c89003edb14c5fb940609a7d6de57b0f2b0c3cbcd370c902"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 16376,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-2.log",
+              "log_sha256": "5e6f0595b5563a3cc57c6cf985dfa3923ea66a72fc86753cc11a4fac67a63b0c"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 16597,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-3.log",
+              "log_sha256": "c791753de7cbefe2a084fa810fe2bf0e3e2cc6415f04c28d1a3ff83f9ab4d288"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 16672,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-4.log",
+              "log_sha256": "bc3b311c3ac4f66e0c1a535f3ca974b75c0efb4cfe6e413108fffe0fdd04aaf2"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 16456,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-5.log",
+              "log_sha256": "5fb418455943816e80256efeaa195f97154c9b690779ef1eada9c2ec171e8572"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 16659,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-6.log",
+              "log_sha256": "44db25ac2fd95a0cbbf6e9f5219fee4405e3d3bddca557a31bfd89a43eff8673"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 16762,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-7.log",
+              "log_sha256": "e3e2461c5bbfd5882a79f941187e7ad78114c103f095bf0acfa0de48714513d0"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 16831,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-8.log",
+              "log_sha256": "6af05ccba2cc4f8477819ab8f510c0190326ff65bcc517b27385c9356741a1d6"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 17257,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-9.log",
+              "log_sha256": "f7ee554498c2a3c3d4edd5543e228b02caf4ba58883793fca53ce6bcc45f55f5"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 16801,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-after-expiry-linux-10.log",
+              "log_sha256": "0e65f6f51b78abd525be43a73fc8a3adb04635e8855491cf22927e7c01fd34db"
+            }
+          ]
+        },
+        {
+          "file": "tests-idle-before-expiry-linux.json",
+          "sha256": "341bcbc0d98d83263dbb04be29533b4e7c6ef3cfd7f665f6daa13389a5c4f0db",
+          "platform": "linux",
+          "node": "v24.14.0",
+          "os_release": "7.0.0-1020-azure",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "idle-before-expiry",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 16373,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-1.log",
+              "log_sha256": "1ace5fe7b450a7b178539e4612094b0b3952f83aca4bf5ab995644f23b658bcf"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 16322,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-2.log",
+              "log_sha256": "9b701a667abdedb34e78b111e93d42db9df05848926c3e832fb9fa60fe14acb3"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 16260,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-3.log",
+              "log_sha256": "de2d9833c7282f4cc649be2e0f308b102bcd10c038b3206c35fea84cc8a16d27"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 16339,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-4.log",
+              "log_sha256": "c9287427dcad6cc82cc42195da1ad9536c9b16041ebff61bf0ee4aeff5ea26e5"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 16304,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-5.log",
+              "log_sha256": "ba8005dc6220933a14aa4c40438458288850daa3deb82ec347b503707be17ff2"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 16571,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-6.log",
+              "log_sha256": "ce08ee6b0114e2a40eae3ee550ee7c342d9a5fc94adb050b8b27651e6b1f502a"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 16319,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-7.log",
+              "log_sha256": "d74299bef9bcaca7402396a7380c691c78ab76c871f489f486627fe1edde1890"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 16283,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-8.log",
+              "log_sha256": "a3b3baabd281f133c437f4be57d7c1dd7362dfacf004909153665a15eb3e38ad"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 16400,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-9.log",
+              "log_sha256": "9a0adef739670c8b660efd6aca6562f569919aed60136fec770ae805f8a29344"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 16300,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 1,
+                "pass": 1,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-idle-before-expiry-linux-10.log",
+              "log_sha256": "6a3120aec8adaea44193b17bef8f8c92c60b5405c97ddaa9d805f17e9e4699bc"
+            }
+          ]
+        },
+        {
+          "file": "tests-standalone-linux.json",
+          "sha256": "0c1f51f9b12a67eb6015f232cbf7c74934f913f6670c0aad723d0ccfc69b01c5",
+          "platform": "linux",
+          "node": "v24.14.0",
+          "os_release": "7.0.0-1020-azure",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 1,
+            "repeat": 10,
+            "label": "standalone",
+            "attempt-ms": 180000,
+            "file": "tests/conformance/cognitive.test.mjs",
+            "name": "Independent authenticated MCP client|MCP response loss after commit"
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 5702,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-1.log",
+              "log_sha256": "7b4944dd052c5d654794a47422e171ccd32128c92c8bf10c57883a22bfc26d06"
+            },
+            {
+              "attempt": 2,
+              "elapsed_ms": 5696,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-2.log",
+              "log_sha256": "c463e1fe1606cee1084b0c66b1af1e444bd30330b770079e43442376d725d803"
+            },
+            {
+              "attempt": 3,
+              "elapsed_ms": 5731,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-3.log",
+              "log_sha256": "576da14f7e8bde885b6371eeee94addfc3a3e405286c5b2f38846e5966c64134"
+            },
+            {
+              "attempt": 4,
+              "elapsed_ms": 5907,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-4.log",
+              "log_sha256": "c3d23323c3ee04107452930ec0cb9b748e7713c890305dadfaebde80b30befbd"
+            },
+            {
+              "attempt": 5,
+              "elapsed_ms": 6932,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-5.log",
+              "log_sha256": "5c9b0b04e747758b14ed00c914651d8876071c7095f759c13d96bb35ab411989"
+            },
+            {
+              "attempt": 6,
+              "elapsed_ms": 5927,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-6.log",
+              "log_sha256": "803a7f53bbd160753ab09233dfa00ed673df79deef52198530265fb4bd7a6eee"
+            },
+            {
+              "attempt": 7,
+              "elapsed_ms": 5965,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-7.log",
+              "log_sha256": "496a66b6b2e004fbad108b557ad195f8722d0b167ed669e3c6638bc5ea41ec37"
+            },
+            {
+              "attempt": 8,
+              "elapsed_ms": 6094,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-8.log",
+              "log_sha256": "15a214bda39f467fe3be2851e12fd8f3a42439a21cc901aa8f699eacc857dfe8"
+            },
+            {
+              "attempt": 9,
+              "elapsed_ms": 5835,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-9.log",
+              "log_sha256": "896104781373bc87ea93769af6d3d05c901338e605ca443fa806b438c3d91724"
+            },
+            {
+              "attempt": 10,
+              "elapsed_ms": 6158,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 2,
+                "pass": 2,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0
+              },
+              "log": "tests-standalone-linux-10.log",
+              "log_sha256": "c2ac1076fb40fc7de44b1ea8a02de7fd3e86fc5ca768571cd296f4593ba18020"
+            }
+          ]
+        },
+        {
+          "file": "tests-suite-load-linux.json",
+          "sha256": "04ccc77edd56fa8d4431fa433d73164e7f8e50c83905ed0931b7eb576cabfe1a",
+          "platform": "linux",
+          "node": "v24.14.0",
+          "os_release": "7.0.0-1020-azure",
+          "packages": {
+            "harness": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            },
+            "provider": {
+              "version": "0.13.0",
+              "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+            }
+          },
+          "policy": {
+            "concurrency": 4,
+            "repeat": 1,
+            "label": "suite-load",
+            "attempt-ms": 600000
+          },
+          "attempts": [
+            {
+              "attempt": 1,
+              "elapsed_ms": 136723,
+              "exit": 0,
+              "signal": null,
+              "error": null,
+              "counts": {
+                "tests": 177,
+                "pass": 170,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 7
+              },
+              "log": "tests-suite-load-linux-1.log",
+              "log_sha256": "c7ecb8ee0fbd004e579990e6640ec2a4c56dc6a27ef32835cc7c62f35994f34b"
+            }
+          ]
+        }
+      ],
+      "name": "mcp-reset-ubuntu-latest-24.14.0",
+      "trace_summary": {
+        "count": 42,
+        "dropped_events": 0,
+        "socket_timeouts": 0,
+        "unexpected_failed_traces": [],
+        "deliberate_response_loss_failed_calls": 11,
+        "trace_hashes": {
+          "mcp-cognitive-linux-10274-4487e847-8008-400f-b169-33c42f1b589d.json": "d064b4d649dd5d7e8b6167c0f9582a5ac6427ad1a10cc15d1b55b61afead1f1e",
+          "mcp-cognitive-linux-10861-405f8591-68fa-4c6b-a9e4-730fd02140e6.json": "715502b8bb1f819427816a05607a079415ba9532e853a2e69d77dfca07e8c798",
+          "mcp-cognitive-linux-11525-ef67f249-158b-4ec0-8400-84fb88d70f75.json": "8089ffbb5d394b8b87e47d4349b9de6cd21baecdef868d969ab4cab1b9f0a4c4",
+          "mcp-cognitive-linux-12113-9e11f975-61fd-4366-b9bc-45f468e268cb.json": "2034fef274101f29573ae84657bb994faad3ee406580ac336eb7e8709a92f045",
+          "mcp-cognitive-linux-12700-53298d3d-66e3-4573-b296-6a0886dbf987.json": "a3fbcd7080e52b9d556ec5400fe8e52eefc9cacc112671318be0131484c7a391",
+          "mcp-cognitive-linux-13288-a66a5424-2a2c-45f1-902a-04734bdc7ba8.json": "0004fbad1b587fee62560b3143fef545c4f2eec5e2ba5c740711d6670a6a176b",
+          "mcp-cognitive-linux-13878-34174d26-a6d5-4141-9e43-2a526f36c143.json": "28ed999bf4ae2dabd322ece709dc75e6287665feedfa947d4f50c846953b3600",
+          "mcp-cognitive-linux-14466-8b27c243-17e2-4b94-9437-523b33592059.json": "4a8c56f309a9b13f70afcfc1c05259f396a0299100590309485b86d5d672e758",
+          "mcp-cognitive-linux-15055-508b65be-4bf2-4477-b806-cefb0151a582.json": "dd5be5b3b00aa16ffaba2d33c5ca4b3967755e25ad501d5cdfa32c22fb65ede6",
+          "mcp-cognitive-linux-15641-7651fd1c-b934-4b0b-baea-3b044da9895f.json": "8324bef4aef8708944475983752f294c833d22574218ca09455d00c9f9786874",
+          "mcp-cognitive-linux-16237-7b7bda5d-81be-481c-9de7-a547c397ef9f.json": "348e993cad30eaf745afd6720689b7544939f08cd26c745edbfef39c40d542ef",
+          "mcp-cognitive-linux-16826-06e746e5-f9ce-4a19-a5cd-492f560430a7.json": "2f37a4e67b7605f57601ee1fd551d38d273e3dd21d8ffc76038c124814e6400e",
+          "mcp-cognitive-linux-17414-7d82b24d-7355-4229-9e7d-98dd09b49637.json": "212ad3883f96311bffbe40daa275ae7799febafa51919e67ce26e8cb9a2556a3",
+          "mcp-cognitive-linux-18032-e7122085-efd4-4d27-a52a-6eebc1a27045.json": "0e8241a7838b82ff4c54deac7e73094ff8ed749294a774d62a56323132873a77",
+          "mcp-cognitive-linux-18622-25cf043a-e8ef-4fa0-83a5-bf54d9f8247a.json": "b37271336a26a64dd703573b3c10271e1f659f53bd2df445814c854d1e84daaa",
+          "mcp-cognitive-linux-19214-559e8d39-7884-499a-926a-6b0209de9f34.json": "11e5ba4dfd1719d06bbfed48c950f6dea72c23544c28fb47ee96e4a808314f0e",
+          "mcp-cognitive-linux-19799-a538d52f-bb1b-4f05-9310-f5aba91f2e86.json": "58757f537d565c53e0b47f24a6287835f497f49f022e9644789b5f20dbabd4ee",
+          "mcp-cognitive-linux-20383-dd43fef6-d41a-4fd8-8ab2-74aad3f4c790.json": "8ed9e4d8ed98af6470d74607d219a7e3265ced366acc09a10b821bda6b7ba995",
+          "mcp-cognitive-linux-20972-533a3496-5092-4ad4-b83b-0c298f570861.json": "4ecfcf04ee33e4377f0fb0b258ab0296b30486f80200da81f70da5991c488c04",
+          "mcp-cognitive-linux-21557-b4ef917d-f74f-4fde-8331-e753db2879e1.json": "891da5c460d775b4b88ce80cc889b2517c481d1971c3469d2991adaa4e25d186",
+          "mcp-cognitive-linux-22164-b9ea3c71-f990-40b6-946e-59a505533f34.json": "ed951ce602c1342c44405693748cf9fe8f05cc32659d61553da5b3f1928fbc60",
+          "mcp-cognitive-linux-2382-55dacbb3-437f-43a6-a216-f3b71e9f81ba.json": "89781b4266961eef879e5cefe90c70f14d95d871b42e8e89dec18718e4b11b5d",
+          "mcp-cognitive-linux-3172-49399eb2-0fbb-4340-9569-5f50c232d734.json": "a2f0f81e31c0745cf4a0db6acb75c22fe7dc9b78454b56c87176b4d527e5e596",
+          "mcp-cognitive-linux-3960-7c944fa6-8b3a-4141-a51b-297e16cb1f5c.json": "96185bbdd146558e4162b390fc00d50cca97e028c05e70ca891283977864d51d",
+          "mcp-cognitive-linux-4747-c337e3a9-2bd5-4533-ba27-889bc07ca315.json": "5faad595b58f25e6f3dbda7faf0acf7a7bb089e9f7d52d9af819fa216a0cd396",
+          "mcp-cognitive-linux-5538-2cc5d2a4-bce2-433c-80c5-f28ed2bb2c60.json": "01a822b2d2b24102589b00c4dcf35be93d2d691e2495bf4a5065abfe21df08b3",
+          "mcp-cognitive-linux-6326-df42042e-1703-4dad-b334-85e5b2f47e70.json": "ec2fbb24f698ceab2085c581dae0f0ee28136d9a7820304b548d8df88f0427fa",
+          "mcp-cognitive-linux-7114-a6a86091-330d-486e-94bd-4eb2376c383f.json": "5bfa2543fe59a166489ccae4c2a3d5f54b0048834c3d8670e97688760040ae3e",
+          "mcp-cognitive-linux-7902-2d64dcf0-9d5f-4e0d-8b19-7646640e7fa0.json": "da4a3ebb56fa9fa76903606249970461c86d5921fe3ad3e5917593532b8bfa16",
+          "mcp-cognitive-linux-8691-e23cc379-4c11-44c4-931b-969d5688d476.json": "3d39fb00fb263c8855a88f8c909ee6e72c1c33568db779782f6f73ebfb800950",
+          "mcp-cognitive-linux-9479-e0f6a73a-4608-4bba-8a88-dbb6f66ea613.json": "2f6baf1756178882be5812074db52903f355c4085b224a59e47fb4fe3f47d02c",
+          "mcp-response-loss-linux-22164-85055770-ad3f-4377-8752-8b07a09002c7.json": "a286fab113994eef8235a8ee9812a966814dc3b9e5f283118c1d1594491848ae",
+          "mcp-response-loss-linux-2382-e5dbb1d1-1f5b-4088-8238-be54c745708b.json": "052d603524f961bf1902e489ff201c5a03899da486373c102b1f507a5894b798",
+          "mcp-response-loss-linux-3172-9bfdcbac-a951-46d8-9028-d70583b3aca9.json": "00f7ffdb2bd23fb91bc47de4ec09ec4f6ea4715abccbc6381e9bb975a34a01e9",
+          "mcp-response-loss-linux-3960-585fd559-8fea-49b8-9643-e7ff12e1b250.json": "c8b529ec2f224e96a293888350da02a5a6616b54ce616240b9fbcff48ce49351",
+          "mcp-response-loss-linux-4747-a15dbca5-ea7b-4dc7-a0b8-ed8708ec86a9.json": "998f147e68aa5ddb4aafcdf0ab45417f2000d63407d9fbf714ea4513b0c0c6be",
+          "mcp-response-loss-linux-5538-0692f4b3-1e06-4a16-98fa-ec26bbef4216.json": "f292988064569061cbd339d3add1b296bc484b5412ac57e6e9278e03c7487bc5",
+          "mcp-response-loss-linux-6326-84a6157c-13c9-4ebe-9e5c-fd3c17861fdf.json": "8a10f32a13a027fa23918c92b5c8cbdba93e57e3b91bc2f048c890ccd63febbc",
+          "mcp-response-loss-linux-7114-91c4d734-1146-4bd0-bc71-10b43fdaf3c5.json": "714999e89e96724d3e9e5c1ed232a8ec8c0c1fa08301f6d2c37a71d45c2850f8",
+          "mcp-response-loss-linux-7902-482c965c-68f4-4464-926c-cf719a868910.json": "9cd5f9e76aebcc5039186d1d4ed760f6584d3ea842fb9c4ff24ae7679270ba71",
+          "mcp-response-loss-linux-8691-ad754a65-ced5-4eb0-ace7-ccdb528962d3.json": "1e59a990b9d9e821ec062e06ac8535c559b53ea8366a4ac814f1bc2d2ebf503b",
+          "mcp-response-loss-linux-9479-022e4f11-2b05-41a9-af3d-bbc3479c88ad.json": "d38347183a7bb7aaebd182b2af63c07c261fc8165c4db50b0e4083f009abcb10"
+        }
+      }
+    }
+  ],
+  "closure": {
+    "original_windows_10_reset_reproduced": false,
+    "root_cause_confirmed": false,
+    "windows_source_load_attempts": "both failed at 600-second bound; current Node also reported tree_cleanup_failed",
+    "original_machine_trace_required": true
+  },
+  "merge_review_supplement": "merge-review.json"
+}
