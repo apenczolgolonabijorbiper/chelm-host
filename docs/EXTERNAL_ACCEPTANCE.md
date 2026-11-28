@@ -39,6 +39,13 @@ Do not put tokens in service JSON or SudoLang prompts.
 
 ## E-2: Reference workstation performance
 
+Use [the issue #3 runbook](ISSUE_3_ACCEPTANCE.md) to collect a fresh, checksummed
+bundle with repeated timings, complete staged suite reports, machine/load and
+package identities. Its service command can be launched by the actual consuming
+service to measure operations under that account. A declared context or matching
+account does not by itself prove reference-machine or service invocation provenance.
+The individual benchmark commands below remain available for diagnostics.
+
 On the reference Windows workstation, use the exact supported, verified harness 0.13.0:
 
 ```powershell

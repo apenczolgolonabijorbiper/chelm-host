@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "kind": "issue3-service",
+  "started_at": "2026-11-28T09:34:41.107Z",
+  "context": "local",
+  "machine_label": "Work Linux process identity simulation",
+  "operator_load_note": "Synthetic local verification only",
+  "samples": 5,
+  "suite_repeat": 1,
+  "phases": [
+    {
+      "name": "service",
+      "elapsed_ms": 7367.248216,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "ok": true
+    }
+  ],
+  "load_before": {
+    "at": "2026-11-28T09:34:41.108Z",
+    "free_memory_bytes": 9689284608,
+    "load_average": [
+      3.14,
+      1.66,
+      0.64
+    ],
+    "cpu_times": [
+      {
+        "user": 37970,
+        "nice": 0,
+        "sys": 19150,
+        "idle": 1040590,
+        "irq": 0
+      },
+      {
+        "user": 40410,
+        "nice": 0,
+        "sys": 18140,
+        "idle": 1038970,
+        "irq": 0
+      },
+      {
+        "user": 38140,
+        "nice": 0,
+        "sys": 17020,
+        "idle": 1042570,
+        "irq": 0
+      },
+      {
+        "user": 40570,
+        "nice": 0,
+        "sys": 17210,
+        "idle": 1040040,
+        "irq": 0
+      },
+      {
+        "user": 43870,
+        "nice": 0,
+        "sys": 20600,
+        "idle": 1032760,
+        "irq": 0
+      },
+      {
+        "user": 40190,
+        "nice": 0,
+        "sys": 17840,
+        "idle": 1039550,
+        "irq": 0
+      },
+      {
+        "user": 37160,
+        "nice": 0,
+        "sys": 16450,
+        "idle": 1044180,
+        "irq": 0
+      },
+      {
+        "user": 38220,
+        "nice": 0,
+        "sys": 17180,
+        "idle": 1042110,
+        "irq": 0
+      },
+      {
+        "user": 38870,
+        "nice": 0,
+        "sys": 17980,
+        "idle": 1040650,
+        "irq": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Synthetic disposable runtimes; no inference or consuming-application HTTP/export acceptance.",
+    "Context and load note are operator declarations; CI/local results do not certify a reference workstation.",
+    "This process probe does not verify IIS HTTPS/ARR or prove how the operator launched it."
+  ],
+  "complete": true,
+  "environment": {
+    "platform": "linux",
+    "os_release": "6.18.57",
+    "windows_os": null,
+    "arch": "x64",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "cpus": 9,
+    "total_memory_bytes": 10451427328,
+    "node": "v24.22.3",
+    "python": "Python 3.12.14",
+    "git": "git version 2.56.1",
+    "identity": {
+      "name": "agent",
+      "sid": null
+    },
+    "detected_ci": false
+  },
+  "host": {
+    "version": "1.4.0",
+    "manifest_sha256": "125e36293fe31aec75304b83391cb5ff3b84945e8df97f106703bb0f41507e3f",
+    "integrity": "verified"
+  },
+  "harness": {
+    "version": "0.13.0",
+    "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+  },
+  "service": {
+    "expected_identity": "agent",
+    "actual_identity": {
+      "name": "agent",
+      "sid": null
+    },
+    "launch_context": "Local process simulation; no consuming Windows service",
+    "invocation_evidence": "operator-declared; independently confirm this command was launched by the consuming service",
+    "identity_match": true,
+    "result": {
+      "passed": true,
+      "actor": "agent",
+      "node": "v24.22.3",
+      "platform": "linux",
+      "os_release": "6.18.57",
+      "operations": [
+        "init",
+        "verify",
+        "submit",
+        "index",
+        "worker next",
+        "worker validate",
+        "worker submit",
+        "read summary",
+        "ask",
+        "task create",
+        "cognitive-worker next/read/stage/validate/submit",
+        "task get"
+      ],
+      "packages": {
+        "host_version": "1.4.0",
+        "host_manifest_sha256": "125e36293fe31aec75304b83391cb5ff3b84945e8df97f106703bb0f41507e3f",
+        "harness_version": "0.13.0",
+        "harness_manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+      },
+      "cognitive_task": {
+        "task_id": "18294721-9c08-4994-a2c3-fa10818d4d10",
+        "work_id": "a46d7670-5d83-411b-aaa8-859fbf6b6596",
+        "state": "completed",
+        "receipt": {
+          "status": "committed",
+          "task_state": "completed",
+          "task_id": "18294721-9c08-4994-a2c3-fa10818d4d10",
+          "work_id": "a46d7670-5d83-411b-aaa8-859fbf6b6596",
+          "attempt": 1,
+          "task_revision": 1,
+          "submission_id": "iis-result",
+          "candidate_digest": "c82991b74aa4e922cb7c14017ce374e3aeb152079c5bd1ff23507b16d3d34481",
+          "binding": {
+            "instance_id": "6e1475aa-51a7-461f-8337-08d13cf293b0",
+            "snapshot_id": "d1e27c616afe09585fb28d63cbbff96ebef14b8a",
+            "guidance_id": "7f6368d112d1dd79de750db8b9c5e2ff710abda9baeff062b8b2c462aa6dbcf3"
+          },
+          "published_at": "2026-11-28T09:34:48.085Z"
+        },
+        "read_only_preserved": true
+      },
+      "memory_provider": null,
+      "processed": 1,
+      "claims": 1
+    }
+  },
+  "package_inputs_unchanged": true,
+  "finished_at": "2026-11-28T09:34:48.802Z",
+  "load_after": {
+    "at": "2026-11-28T09:34:48.802Z",
+    "free_memory_bytes": 9551855616,
+    "load_average": [
+      2.89,
+      1.66,
+      0.65
+    ],
+    "cpu_times": [
+      {
+        "user": 38580,
+        "nice": 0,
+        "sys": 19450,
+        "idle": 1047350,
+        "irq": 0
+      },
+      {
+        "user": 40790,
+        "nice": 0,
+        "sys": 18340,
+        "idle": 1046010,
+        "irq": 0
+      },
+      {
+        "user": 39480,
+        "nice": 0,
+        "sys": 17480,
+        "idle": 1048380,
+        "irq": 0
+      },
+      {
+        "user": 40970,
+        "nice": 0,
+        "sys": 17500,
+        "idle": 1046970,
+        "irq": 0
+      },
+      {
+        "user": 44300,
+        "nice": 0,
+        "sys": 20850,
+        "idle": 1039730,
+        "irq": 0
+      },
+      {
+        "user": 41470,
+        "nice": 0,
+        "sys": 18410,
+        "idle": 1045310,
+        "irq": 0
+      },
+      {
+        "user": 37950,
+        "nice": 0,
+        "sys": 16790,
+        "idle": 1050730,
+        "irq": 0
+      },
+      {
+        "user": 38430,
+        "nice": 0,
+        "sys": 17280,
+        "idle": 1049450,
+        "irq": 0
+      },
+      {
+        "user": 39270,
+        "nice": 0,
+        "sys": 18190,
+        "idle": 1047740,
+        "irq": 0
+      }
+    ]
+  }
+}

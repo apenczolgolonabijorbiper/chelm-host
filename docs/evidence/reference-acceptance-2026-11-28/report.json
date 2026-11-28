@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "kind": "issue3-performance",
+  "started_at": "2026-11-28T09:31:41.138Z",
+  "context": "local",
+  "machine_label": "Work Linux executor",
+  "operator_load_note": "Local validation; shared executor background load uncontrolled",
+  "samples": 3,
+  "suite_repeat": 1,
+  "phases": [
+    {
+      "name": "latency",
+      "elapsed_ms": 4616.107118,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "ok": true
+    },
+    {
+      "name": "capacity",
+      "elapsed_ms": 27061.321821,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "ok": true
+    },
+    {
+      "name": "build-1",
+      "elapsed_ms": 136588.97839899999,
+      "exit": 0,
+      "signal": null,
+      "error": null,
+      "ok": true
+    }
+  ],
+  "load_before": {
+    "at": "2026-11-28T09:31:41.138Z",
+    "free_memory_bytes": 9753194496,
+    "load_average": [
+      0,
+      0.03,
+      0
+    ],
+    "cpu_times": [
+      {
+        "user": 360,
+        "nice": 0,
+        "sys": 960,
+        "idle": 918800,
+        "irq": 0
+      },
+      {
+        "user": 400,
+        "nice": 0,
+        "sys": 570,
+        "idle": 919260,
+        "irq": 0
+      },
+      {
+        "user": 470,
+        "nice": 0,
+        "sys": 570,
+        "idle": 919310,
+        "irq": 0
+      },
+      {
+        "user": 550,
+        "nice": 0,
+        "sys": 590,
+        "idle": 919090,
+        "irq": 0
+      },
+      {
+        "user": 460,
+        "nice": 0,
+        "sys": 450,
+        "idle": 919380,
+        "irq": 0
+      },
+      {
+        "user": 340,
+        "nice": 0,
+        "sys": 650,
+        "idle": 919290,
+        "irq": 0
+      },
+      {
+        "user": 720,
+        "nice": 0,
+        "sys": 570,
+        "idle": 918980,
+        "irq": 0
+      },
+      {
+        "user": 420,
+        "nice": 0,
+        "sys": 860,
+        "idle": 918720,
+        "irq": 0
+      },
+      {
+        "user": 1060,
+        "nice": 0,
+        "sys": 1450,
+        "idle": 917750,
+        "irq": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Synthetic disposable runtimes; no inference or consuming-application HTTP/export acceptance.",
+    "Context and load note are operator declarations; CI/local results do not certify a reference workstation."
+  ],
+  "complete": true,
+  "environment": {
+    "platform": "linux",
+    "os_release": "6.18.57",
+    "windows_os": null,
+    "arch": "x64",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "cpus": 9,
+    "total_memory_bytes": 10451427328,
+    "node": "v24.22.3",
+    "python": "Python 3.12.14",
+    "git": "git version 2.56.1",
+    "identity": {
+      "name": "agent",
+      "sid": null
+    },
+    "detected_ci": false
+  },
+  "host": {
+    "version": "1.4.0",
+    "git_head": "7a92c971b10b42fd2d751f10c5556aec1c64ee20",
+    "source_sha256": "dd3c7866d7f3fdc089bbfefd17b3029aa557aecf06c9859d296843406266e5d2",
+    "integrity": "source snapshot; staged build verifies release"
+  },
+  "harness": {
+    "version": "0.13.0",
+    "manifest_sha256": "fa8ae35da38a1f64e82336ef99c46fdce35a502c2ff5ebf197e618f10e76e17b"
+  },
+  "performance": {
+    "checks": [
+      {
+        "requirement": "TST-9",
+        "name": "Node process startup",
+        "state": "measured",
+        "samples_ms": [
+          57.827392000000145,
+          55.85367000000042,
+          59.73325499999919
+        ],
+        "target_ms": null
+      },
+      {
+        "requirement": "NFR-4",
+        "name": "submit",
+        "state": "met",
+        "target_ms": 2000,
+        "samples_ms": [
+          274.9916219999999,
+          294.9262830000001,
+          317.5718650000001
+        ],
+        "max_ms": 317.5718650000001
+      },
+      {
+        "requirement": "NFR-4",
+        "name": "ask",
+        "state": "met",
+        "target_ms": 3000,
+        "samples_ms": [
+          368.965965,
+          402.4776750000004,
+          378.42458199999936
+        ],
+        "max_ms": 402.4776750000004
+      },
+      {
+        "requirement": "NFR-4",
+        "name": "status",
+        "state": "met",
+        "target_ms": 1000,
+        "samples_ms": [
+          90.13482399999998,
+          84.65391899999986,
+          95.44068299999981
+        ],
+        "max_ms": 95.44068299999981
+      },
+      {
+        "requirement": "RM-6",
+        "name": "Capacity regeneration",
+        "state": "met",
+        "target_ms": 3000,
+        "samples_ms": [
+          1248.5384119999999,
+          1367.9504080000006,
+          1223.3809250000013
+        ],
+        "max_ms": 1367.9504080000006
+      },
+      {
+        "requirement": "NFR-5",
+        "name": "Capacity and committed-tree boundaries",
+        "state": "measured"
+      },
+      {
+        "requirement": "TST-9",
+        "name": "Full staged build and suites (includes setup)",
+        "state": "met",
+        "target_ms": 600000,
+        "samples_ms": [
+          128605.58447400012
+        ],
+        "max_ms": 128605.58447400012
+      }
+    ],
+    "measurements_complete": true,
+    "unmet_targets": []
+  },
+  "package_inputs_unchanged": true,
+  "finished_at": "2026-11-28T09:34:29.935Z",
+  "load_after": {
+    "at": "2026-11-28T09:34:29.935Z",
+    "free_memory_bytes": 9585659904,
+    "load_average": [
+      3.63,
+      1.7,
+      0.65
+    ],
+    "cpu_times": [
+      {
+        "user": 37890,
+        "nice": 0,
+        "sys": 19110,
+        "idle": 1029550,
+        "irq": 0
+      },
+      {
+        "user": 40320,
+        "nice": 0,
+        "sys": 18040,
+        "idle": 1027990,
+        "irq": 0
+      },
+      {
+        "user": 38130,
+        "nice": 0,
+        "sys": 16940,
+        "idle": 1031530,
+        "irq": 0
+      },
+      {
+        "user": 39930,
+        "nice": 0,
+        "sys": 16740,
+        "idle": 1030000,
+        "irq": 0
+      },
+      {
+        "user": 43810,
+        "nice": 0,
+        "sys": 20530,
+        "idle": 1021750,
+        "irq": 0
+      },
+      {
+        "user": 40170,
+        "nice": 0,
+        "sys": 17800,
+        "idle": 1028490,
+        "irq": 0
+      },
+      {
+        "user": 37100,
+        "nice": 0,
+        "sys": 16450,
+        "idle": 1033090,
+        "irq": 0
+      },
+      {
+        "user": 38160,
+        "nice": 0,
+        "sys": 17090,
+        "idle": 1031100,
+        "irq": 0
+      },
+      {
+        "user": 38840,
+        "nice": 0,
+        "sys": 17910,
+        "idle": 1029630,
+        "irq": 0
+      }
+    ]
+  }
+}

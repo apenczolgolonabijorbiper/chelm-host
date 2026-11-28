@@ -1,3 +1,16 @@
+# Reference-machine acceptance collection (#3)
+
+The collector and [operator runbook](ISSUE_3_ACCEPTANCE.md) now retain repeated
+latency/capacity measurements, complete staged suite timing, package identities,
+machine/load inventory and actual process-identity checks. Target misses and
+incomplete execution remain explicit; no evidence is overwritten. See
+[observed Linux implementation validation](evidence/reference-acceptance-2026-11-28/README.md).
+The reference Windows workstation and actual consuming Windows service remain
+external acceptance requirements. A matching account or a declared context alone
+is not evidence of consuming-service invocation. No new Windows guarantee is made.
+
+---
+
 # Windows reliability scheduling correction — 2026-11-28
 
 Supplemental run [45960060522](https://github.com/apenczolgolonabijorbiper/chelm-host/actions/runs/45960060522)
